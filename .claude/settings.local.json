@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -r ' *)",
+      "Bash(mysql -h 127.0.0.1 -P 3306 -u admdeyfm_mohamed_othman -p'PWmyphF{+7v@J-2+' admdeyfm_maroc_polysytrene -e \"DESCRIBE payments;\")",
+      "Bash(php artisan tinker '--execute= *)",
+      "Bash(grep -v \"WARNING\\\\|DEPRECATED\\\\|Unsuccessful stat\\\\|^$\")",
+      "Bash(gs -sDEVICE=png16m -r150 -dFirstPage=1 -dLastPage=1 -o devis2.png devis2.pdf)",
+      "Bash(convert devis2.png -crop 1240x350+0+150 +repage header_crop2.png)"
+    ]
+  }
+}

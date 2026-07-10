@@ -1,0 +1,641 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ProductionOrder;
+use App\Models\ProductionOutput;
+use App\Models\Product;
+use App\Models\RawMaterial;
+use App\Models\StockMovementDetail;
+use App\Models\SalesOrder;
+use App\Models\SalesOrderItem;
+use App\Models\Client;
+use App\Models\Expense;
+use App\Models\Payment;
+use App\Models\Check;
+use App\Models\Supplier;
+use App\Models\Employee;
+use App\Models\Machine;
+use App\Models\SalesOrderPayment;
+use App\Models\PurchasePaymentDocument;
+use App\Models\RawMaterialPurchase;
+use App\Models\ProductStock;
+use App\Models\ProductFamilleStock;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+class DashboardController extends Controller
+{
+    public function index()
+    {
+        $user = Auth::user();
+
+        // ── Client stats ──────────────────────────────────────────────────────
+        $clientTypeStats = collect([
+            ['type' => 'client',      'label' => 'Clients',      'color' => '#0d6efd'],
+            ['type' => 'commerciale', 'label' => 'Commerciales', 'color' => '#198754'],
+            ['type' => 'grossiste',   'label' => 'Grossistes',   'color' => '#ffc107'],
+            ['type' => 'special',     'label' => 'Spéciaux',     'color' => '#fd7e14'],
+        ])->map(function ($item) {
+            $item['count'] = Client::where('client_type', $item['type'])->where('is_active', true)->count();
+            return $item;
+        });
+
+        $totalClients = $clientTypeStats->sum('count');
+        $clientTypeStats = $clientTypeStats->map(function ($item) use ($totalClients) {
+            $item['percentage'] = $totalClients > 0 ? round(($item['count'] / $totalClients) * 100) : 0;
+            return $item;
+        });
+
+        $clientMonthlyGrowth = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $clientMonthlyGrowth[] = Client::whereYear('created_at', $month->year)
+                ->whereMonth('created_at', $month->month)
+                ->count();
+        }
+
+        // ── Monthly sales (12 months) ─────────────────────────────────────────
+        $monthlySalesData = [];
+        $monthsLabels = [];
+        for ($i = 0; $i < 12; $i++) {
+            $month = now()->subMonths(11 - $i);
+            $monthsLabels[] = $month->format('M');
+            $monthlySalesData[] = (float) SalesOrder::whereYear('order_date', $month->year)
+                ->whereMonth('order_date', $month->month)
+                ->sum('final_amount');
+        }
+
+        // ── Monthly expenses (12 months) ──────────────────────────────────────
+        $monthlyExpensesData = [];
+        for ($i = 0; $i < 12; $i++) {
+            $month = now()->subMonths(11 - $i);
+            $monthlyExpensesData[] = (float) Expense::whereYear('expense_date', $month->year)
+                ->whereMonth('expense_date', $month->month)
+                ->sum('amount');
+        }
+
+        // ── Payment stats ─────────────────────────────────────────────────────
+        $paymentStatusStats = [
+            'paid'    => ['count' => SalesOrder::where('payment_status', 'paid')->count(),    'amount' => SalesOrder::where('payment_status', 'paid')->sum('final_amount')],
+            'pending' => ['count' => SalesOrder::where('payment_status', 'pending')->count(), 'amount' => SalesOrder::where('payment_status', 'pending')->sum('final_amount')],
+            'partial' => ['count' => SalesOrder::where('payment_status', 'partial')->count(), 'amount' => SalesOrder::where('payment_status', 'partial')->sum('final_amount')],
+            'overdue' => ['count' => SalesOrder::where('payment_status', 'overdue')->count(), 'amount' => SalesOrder::where('payment_status', 'overdue')->sum('final_amount')],
+        ];
+
+        $paymentMethods = [
+            ['method' => 'cash',          'label' => 'Espèces',  'color' => '#198754'],
+            ['method' => 'check',         'label' => 'Chèque',   'color' => '#0d6efd'],
+            ['method' => 'bank_transfer', 'label' => 'Virement', 'color' => '#0dcaf0'],
+            ['method' => 'credit_card',   'label' => 'Carte',    'color' => '#ffc107'],
+        ];
+
+        $paymentMethodStats = collect($paymentMethods)->map(function ($item) {
+            $total = SalesOrderPayment::where('payment_method', $item['method'])->sum('amount');
+            $item['total'] = (float) $total;
+            return $item;
+        });
+
+        $totalPayments = $paymentMethodStats->sum('total');
+        $paymentMethodStats = $paymentMethodStats->map(function ($item) use ($totalPayments) {
+            $item['percentage'] = $totalPayments > 0 ? round(($item['total'] / $totalPayments) * 100) : 0;
+            return $item;
+        });
+
+        // ── Top & low selling products ────────────────────────────────────────
+        $topSellingProducts = $this->getTopSellingProducts();
+        $lowSellingProducts = $this->getLowSellingProducts();
+
+        $topClients = Client::select(
+                'clients.*',
+                DB::raw('SUM(sales_orders.final_amount) as total_purchases'),
+                DB::raw('COUNT(sales_orders.order_id) as orders_count')
+            )
+            ->join('sales_orders', 'clients.client_id', '=', 'sales_orders.client_id')
+            ->where('clients.is_active', true)
+            ->groupBy('clients.client_id')
+            ->orderBy('total_purchases', 'desc')
+            ->limit(5)
+            ->get()
+            ->map(function ($client) {
+                $client->display_name       = $client->display_name;
+                $client->client_type_label  = $client->client_type_label;
+                $client->person_type_label  = $client->person_type_label;
+                return $client;
+            });
+
+        // ── Stock ─────────────────────────────────────────────────────────────
+        $lowStockMaterials = $this->getLowStockMaterials();
+        $lowStockProducts  = $this->getLowStockProducts();
+
+        $totalMaterialValue = StockMovementDetail::where('remaining_quantity', '>', 0)
+            ->sum(DB::raw('remaining_quantity * unit_price'));
+
+        // ── Production ────────────────────────────────────────────────────────
+        $recentProductionOrders = ProductionOrder::with(['product', 'creator'])
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get()
+            ->map(function ($order) {
+                $order->status_badge = $this->getProductionStatusBadge($order->status);
+                return $order;
+            });
+
+        // Today's production output
+        $todayQtyProduced  = ProductionOutput::whereDate('production_date', today())->sum('quantity_produced');
+        $todayVolumeM3     = ProductionOutput::whereDate('production_date', today())->sum('total_volume_m3');
+        $todayDefective    = ProductionOutput::whereDate('production_date', today())->sum('quantity_defective');
+        $productionYield   = $todayQtyProduced > 0
+            ? round((($todayQtyProduced - $todayDefective) / $todayQtyProduced) * 100, 1)
+            : 0;
+
+        // Objective = total quantity to produce across in_progress orders
+        $productionObjective = ProductionOrder::where('status', 'in_progress')->sum('quantity_to_produce');
+        $productionProgress  = $productionObjective > 0
+            ? min(100, round(($todayQtyProduced / $productionObjective) * 100))
+            : 0;
+
+        // Late production orders
+        $lateProductionOrders = ProductionOrder::whereNotIn('status', ['completed', 'cancelled'])
+            ->whereNotNull('expected_completion_date')
+            ->whereDate('expected_completion_date', '<', today())
+            ->count();
+
+        // ── Sales orders ──────────────────────────────────────────────────────
+        $recentSalesOrders = SalesOrder::with(['client', 'creator'])
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get()
+            ->map(function ($order) {
+                $order->status_badge = $this->getSalesStatusBadge($order->status);
+                return $order;
+            });
+
+        $pendingSalesOrders = SalesOrder::where('payment_status', 'pending')->count();
+        $overdueSalesOrders = $paymentStatusStats['overdue']['count'];
+
+        // ── Finance ───────────────────────────────────────────────────────────
+        $todaySales    = SalesOrder::whereDate('order_date', today())->sum('final_amount');
+        $monthSales    = SalesOrder::whereYear('order_date', now()->year)
+                            ->whereMonth('order_date', now()->month)->sum('final_amount');
+        $todayExpenses = Expense::whereDate('expense_date', today())->sum('amount');
+        $monthExpenses = Expense::whereYear('expense_date', now()->year)
+                            ->whereMonth('expense_date', now()->month)->sum('amount');
+        $profitMonth   = $monthSales - $monthExpenses;
+        $marginPct     = $monthSales > 0 ? round(($profitMonth / $monthSales) * 100, 1) : 0;
+
+        // ── Machines ──────────────────────────────────────────────────────────
+        $machinesBreakdown = Machine::where('status', '!=', 'active')->count();
+        $machinesInMaint   = Machine::where('status', 'maintenance')->with('documents')->get();
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // ÉTAT DE TRÉSORERIE (Cash Flow Statement)
+        // Formule:
+        // Résultat NET = (Crédit Fournisseur + Charges Fixes)
+        //               - (Crédit Client + La Caisse + Stock MP + Stock Produit)
+        //
+        // Taux de couverture = (Résultat NET / (Crédit Client + La Caisse + Stock MP + Stock Produit)) × 100
+        // ═══════════════════════════════════════════════════════════════════════
+
+        // Get current month and year
+        $currentMonth = now()->month;
+        $currentYear = now()->year;
+        $dateFrom = now()->startOfMonth();
+        $dateTo = now()->endOfMonth();
+
+        // 1. CRÉDIT FOURNISSEUR (Supplier Credit - Amount we owe to suppliers)
+        // Get all raw material purchases that are not fully paid
+        $creditFournisseur = RawMaterialPurchase::whereYear('purchase_date', $currentYear)
+            ->whereMonth('purchase_date', $currentMonth)
+            ->where(function($query) {
+                $query->where('payment_status', 'pending')
+                    ->orWhere('payment_status', 'partial');
+            })
+            ->sum(DB::raw('final_amount - paid_amount'));
+
+        // 2. CHARGES FIXES (Fixed Expenses - All expenses)
+        $chargesFixes = Expense::whereYear('expense_date', $currentYear)
+            ->whereMonth('expense_date', $currentMonth)
+            ->sum('amount');
+
+        // 3. CRÉDIT CLIENT (Client Credit - Unpaid sales/ventes impayé)
+        $creditClient = SalesOrder::whereYear('order_date', $currentYear)
+            ->whereMonth('order_date', $currentMonth)
+            ->sum(DB::raw('final_amount - paid_amount'));
+
+        // 4. LA CAISSE (Sales Payments received - encaissements)
+        $laCaisse = SalesOrderPayment::whereYear('payment_date', $currentYear)
+            ->whereMonth('payment_date', $currentMonth)
+            ->sum('amount');
+
+        // 5. STOCK MP (Raw Material Stock Value with Weighted Average Cost)
+        $stockMPData = $this->calculateRawMaterialStockValue();
+        $stockMP = $stockMPData['total_value'];
+        $stockMPDetails = $stockMPData['details'];
+
+        // 6. STOCK PRODUIT (Finished Product Stock Value)
+        $stockProduitData = $this->calculateProductStockValue();
+        $stockProduit = $stockProduitData['total_value'];
+        $stockProduitDetails = $stockProduitData['details'];
+
+        // Calculate DÉNOMINATEUR for Taux de couverture
+        $denominateur = $creditClient + $laCaisse + $stockMP + $stockProduit;
+
+        // Calculate Résultat NET
+        $totalPositif = $creditFournisseur + $chargesFixes;
+        $totalNegatif = $denominateur;
+        $resultatNet = $totalPositif - $totalNegatif;
+
+        // Calculate Taux de couverture
+        $tauxCouverture = $denominateur > 0 ? round(($resultatNet / $denominateur) * 100, 2) : 0;
+
+        // Prepare cash flow data for view
+        $cashFlowData = [
+            // Positives (Income/Sources)
+            'credit_fournisseur' => $creditFournisseur,
+            'charges_fixes' => $chargesFixes,
+            'total_positif' => $totalPositif,
+
+            // Negatives (Expenses/Uses)
+            'credit_client' => $creditClient,
+            'la_caisse' => $laCaisse,
+            'stock_mp' => $stockMP,
+            'stock_produit' => $stockProduit,
+            'total_negatif' => $totalNegatif,
+            'denominateur' => $denominateur,
+
+            // Stock details for display
+            'stock_mp_details' => $stockMPDetails,
+            'stock_produit_details' => $stockProduitDetails,
+
+            // Result
+            'resultat_net' => $resultatNet,
+            'taux_couverture' => $tauxCouverture,
+            'taux_couverture_class' => $this->getCoverageRateClass($tauxCouverture),
+
+            // Period info
+            'month' => now()->format('F Y'),
+            'date_from' => $dateFrom->format('d/m/Y'),
+            'date_to' => $dateTo->format('d/m/Y'),
+        ];
+
+        // ── Alerts ────────────────────────────────────────────────────────────
+        $totalAlerts = $lowStockProducts->count()
+            + $lowStockMaterials->count()
+            + $lateProductionOrders
+            + $overdueSalesOrders
+            + $machinesBreakdown;
+
+        // ── Stats compact ─────────────────────────────────────────────────────
+        $stats = [
+            'user'                       => $user,
+            // Clients
+            'total_clients'              => Client::count(),
+            'new_clients_this_month'     => Client::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count(),
+            'active_clients'             => Client::where('is_active', true)->count(),
+            // Production
+            'total_production_orders'    => ProductionOrder::count(),
+            'in_progress_orders'         => ProductionOrder::where('status', 'in_progress')->count(),
+            'completed_production_orders'=> ProductionOrder::where('status', 'completed')->count(),
+            'pending_production_orders'  => ProductionOrder::whereIn('status', ['pending', 'approved'])->count(),
+            'late_production_orders'     => $lateProductionOrders,
+            'today_qty_produced'         => $todayQtyProduced,
+            'today_volume_m3'            => round($todayVolumeM3, 2),
+            'production_objective'       => $productionObjective,
+            'production_progress'        => $productionProgress,
+            'production_yield'           => $productionYield,
+            // Sales
+            'total_sales_orders'         => SalesOrder::count(),
+            'total_sales_amount'         => SalesOrder::sum('final_amount'),
+            'pending_sales_orders'       => $pendingSalesOrders,
+            'overdue_sales_orders'       => $overdueSalesOrders,
+            // Finance
+            'today_sales'                => (float) $todaySales,
+            'month_sales'                => (float) $monthSales,
+            'today_expenses'             => (float) $todayExpenses,
+            'month_expenses'             => (float) $monthExpenses,
+            'profit_month'               => (float) $profitMonth,
+            'margin_pct'                 => $marginPct,
+            'total_expenses'             => Expense::sum('amount'),
+            // Payments
+            'completed_payments' => SalesOrderPayment::sum('amount'),
+            // Machines
+            'machines_breakdown'         => $machinesBreakdown,
+            // Alerts
+            'total_alerts'               => $totalAlerts,
+            // Material stock value
+            'total_material_value'       => (float) $totalMaterialValue,
+        ];
+
+        return view('pages.dashboard.index', compact(
+            'stats',
+            'clientTypeStats',
+            'clientMonthlyGrowth',
+            'monthlySalesData',
+            'monthlyExpensesData',
+            'monthsLabels',
+            'paymentStatusStats',
+            'paymentMethodStats',
+            'topSellingProducts',
+            'lowSellingProducts',
+            'topClients',
+            'recentProductionOrders',
+            'recentSalesOrders',
+            'lowStockProducts',
+            'lowStockMaterials',
+            'machinesInMaint',
+            'cashFlowData'
+        ));
+    }
+
+    /**
+     * Calculate Raw Material Stock Value with Weighted Average Cost
+     *
+     * Weighted Average Cost = (Sum of (Quantity × Unit Price)) / Total Quantity
+     * Then Stock Value = Total Quantity × Weighted Average Cost
+     *
+     * Example:
+     * - Lot 1: 100 q × 10 DH = 1000 DH
+     * - Lot 2: 20 q × 5 DH = 100 DH
+     * - Total: 120 q, Total Value = 1100 DH
+     * - Weighted Average = 1100 / 120 = 9.17 DH
+     *
+     * If Lot 2 is sold out, then remaining stock is 100 q × 10 DH = 1000 DH
+     * Weighted Average = 1000 / 100 = 10 DH
+     */
+    private function calculateRawMaterialStockValue()
+    {
+        $stockDetails = StockMovementDetail::where('remaining_quantity', '>', 0)
+            ->with('rawMaterial')
+            ->get()
+            ->groupBy('material_id');
+
+        $totalValue = 0;
+        $details = [];
+
+        foreach ($stockDetails as $materialId => $detailsList) {
+            $material = $detailsList->first()->rawMaterial;
+            $materialName = $material ? $material->material_name : 'Unknown';
+            $materialCode = $material ? $material->material_code : 'N/A';
+
+            $totalQuantity = 0;
+            $totalCost = 0;
+            $lots = [];
+
+            foreach ($detailsList as $detail) {
+                $quantity = (float) $detail->remaining_quantity;
+                $unitPrice = (float) $detail->unit_price;
+                $totalCost += $quantity * $unitPrice;
+                $totalQuantity += $quantity;
+
+                $lots[] = [
+                    'quantity' => $quantity,
+                    'unit_price' => $unitPrice,
+                    'total' => $quantity * $unitPrice,
+                ];
+            }
+
+            $weightedAverageCost = $totalQuantity > 0 ? $totalCost / $totalQuantity : 0;
+            $materialValue = $totalQuantity * $weightedAverageCost;
+            $totalValue += $materialValue;
+
+            $details[] = [
+                'material_id' => $materialId,
+                'material_name' => $materialName,
+                'material_code' => $materialCode,
+                'total_quantity' => $totalQuantity,
+                'weighted_average_cost' => $weightedAverageCost,
+                'total_value' => $materialValue,
+                'lots' => $lots,
+            ];
+        }
+
+        return [
+            'total_value' => $totalValue,
+            'details' => $details,
+        ];
+    }
+
+    /**
+     * Calculate Finished Product Stock Value
+     * Uses the appropriate price from the pivot table for family products
+     * For simple products (without families), uses product.price_client
+     */
+    private function calculateProductStockValue()
+    {
+        $totalValue = 0;
+        $details = [];
+
+        // Products with families (variant stock)
+        // For these, we need to get the price from the pivot table
+        $familyStocks = ProductFamilleStock::with(['product', 'famille'])
+            ->where('current_quantity', '>', 0)
+            ->get();
+
+        foreach ($familyStocks as $familyStock) {
+            if ($familyStock->product) {
+                $quantity = (float) $familyStock->current_quantity;
+
+                // Get the price from the pivot table for this specific famille
+                $unitPrice = 0;
+                $priceType = 'prix_client'; // Default to client price
+
+                // Find the pivot relationship for this product and famille
+                // Specify the table name to avoid ambiguity
+                $pivot = $familyStock->product->familles()
+                    ->where('product_famille.famille_id', $familyStock->famille_id)
+                    ->first();
+
+                if ($pivot) {
+                    // Get price from pivot table
+                    $unitPrice = (float) ($pivot->pivot->prix_client ?? 0);
+                    $priceType = 'prix_client';
+                } else {
+                    // Fallback to product price if no pivot found
+                    $unitPrice = (float) ($familyStock->product->price_client ?? 0);
+                    $priceType = 'product_price_client';
+                }
+
+                $productValue = $quantity * $unitPrice;
+                $totalValue += $productValue;
+
+                $details[] = [
+                    'product_id' => $familyStock->product->product_id,
+                    'product_name' => $familyStock->product->product_name,
+                    'product_code' => $familyStock->product->product_code,
+                    'famille_id' => $familyStock->famille_id,
+                    'famille_name' => $familyStock->famille_name,
+                    'quantity' => $quantity,
+                    'unit_price' => $unitPrice,
+                    'price_type' => $priceType,
+                    'total_value' => $productValue,
+                    'type' => 'family_stock',
+                ];
+            }
+        }
+
+        // Products without families (simple stock)
+        // Use product.price_client directly
+        $productStocks = ProductStock::with('product')
+            ->where('current_quantity', '>', 0)
+            ->get();
+
+        foreach ($productStocks as $productStock) {
+            if ($productStock->product && !$productStock->product->familles()->exists()) {
+                $quantity = (float) $productStock->current_quantity;
+                $unitPrice = (float) ($productStock->product->price_client ?? 0);
+                $productValue = $quantity * $unitPrice;
+                $totalValue += $productValue;
+
+                $details[] = [
+                    'product_id' => $productStock->product->product_id,
+                    'product_name' => $productStock->product->product_name,
+                    'product_code' => $productStock->product->product_code,
+                    'famille_name' => null,
+                    'quantity' => $quantity,
+                    'unit_price' => $unitPrice,
+                    'price_type' => 'product_price_client',
+                    'total_value' => $productValue,
+                    'type' => 'simple_stock',
+                ];
+            }
+        }
+
+        return [
+            'total_value' => $totalValue,
+            'details' => $details,
+        ];
+    }
+
+    /**
+     * Get coverage rate CSS class
+     */
+    private function getCoverageRateClass($rate)
+    {
+        if ($rate >= 70) return 'success';
+        if ($rate >= 50) return 'warning';
+        if ($rate >= 30) return 'info';
+        return 'danger';
+    }
+
+    private function getLowStockProducts()
+    {
+        $products = Product::with(['familleStocks', 'stock'])->active()->get();
+        $lowStockProducts = collect();
+
+        foreach ($products as $product) {
+            if ($product->familleStocks()->exists()) {
+                foreach ($product->familleStocks as $familleStock) {
+                    if ($familleStock->available_quantity <= $product->min_stock_level) {
+                        $copy = clone $product;
+                        $copy->current_stock   = $familleStock->current_quantity;
+                        $copy->available_stock = $familleStock->available_quantity;
+                        $copy->famille_name    = $familleStock->famille_name;
+                        $copy->famille_id      = $familleStock->famille_id;
+                        $lowStockProducts->push($copy);
+                    }
+                }
+            } else {
+                if ($product->stock && $product->stock->available_quantity <= $product->min_stock_level) {
+                    $product->current_stock   = $product->stock->current_quantity;
+                    $product->available_stock = $product->stock->available_quantity;
+                    $lowStockProducts->push($product);
+                }
+            }
+        }
+
+        return $lowStockProducts->sortBy('available_stock')->take(5);
+    }
+
+    private function getLowStockMaterials()
+    {
+        $materials = RawMaterial::where('is_active', true)->get();
+        $lowStockMaterials = collect();
+
+        foreach ($materials as $material) {
+            $currentStock = StockMovementDetail::where('material_id', $material->material_id)
+                ->sum('remaining_quantity');
+            if ($currentStock <= $material->min_stock_level) {
+                $material->current_stock = $currentStock;
+                $lowStockMaterials->push($material);
+            }
+        }
+
+        return $lowStockMaterials->sortBy('current_stock')->take(5);
+    }
+
+
+    private function getProductSalesStats()
+    {
+        return SalesOrderItem::whereIn('item_type', ['production', 'decoupage', 'finale'])
+            ->select(
+                'item_id',
+                'item_name',
+                DB::raw('SUM(quantity) as total_quantity'),
+                DB::raw('SUM(total_price) as total_revenue')
+            )
+            ->groupBy('item_id', 'item_name')
+            ->get();
+    }
+
+    private function getTopSellingProducts($limit = 5)
+    {
+        $stats = $this->getProductSalesStats();
+
+        if ($stats->isEmpty()) {
+            return collect();
+        }
+
+        $topProducts = $stats->sortByDesc('total_revenue')->take($limit);
+
+        // Enrich with product codes
+        $productIds = $stats->pluck('item_id')->unique()->toArray();
+        $products = Product::whereIn('product_id', $productIds)->get()->keyBy('product_id');
+
+        return $topProducts->map(function($item) use ($products) {
+            $product = $products->get($item->item_id);
+            $item->product_id = $item->item_id;
+            $item->product_name = $item->item_name;
+            $item->product_code = $product ? $product->product_code : $item->item_name;
+            return $item;
+        });
+    }
+
+    private function getLowSellingProducts($limit = 5)
+    {
+        $stats = $this->getProductSalesStats();
+
+        if ($stats->isEmpty()) {
+            return collect();
+        }
+
+        $lowProducts = $stats->sortBy('total_revenue')->take($limit);
+
+        // Enrich with product codes
+        $productIds = $stats->pluck('item_id')->unique()->toArray();
+        $products = Product::whereIn('product_id', $productIds)->get()->keyBy('product_id');
+
+        return $lowProducts->map(function($item) use ($products) {
+            $product = $products->get($item->item_id);
+            $item->product_id = $item->item_id;
+            $item->product_name = $item->item_name;
+            $item->product_code = $product ? $product->product_code : $item->item_name;
+            return $item;
+        });
+    }
+
+    private function getProductionStatusBadge($status)
+    {
+        $badges = ['draft' => 'secondary', 'pending' => 'warning', 'approved' => 'info', 'in_progress' => 'primary', 'completed' => 'success', 'cancelled' => 'danger'];
+        $labels = ['draft' => 'Brouillon', 'pending' => 'En attente', 'approved' => 'Approuvé', 'in_progress' => 'En cours', 'completed' => 'Terminé', 'cancelled' => 'Annulé'];
+        return '<span class="badge bg-' . ($badges[$status] ?? 'secondary') . '">' . ($labels[$status] ?? $status) . '</span>';
+    }
+
+    private function getSalesStatusBadge($status)
+    {
+        $badges = ['draft' => 'secondary', 'pending' => 'warning', 'confirmed' => 'info', 'processing' => 'primary', 'completed' => 'success', 'cancelled' => 'danger'];
+        $labels = ['draft' => 'Brouillon', 'pending' => 'En attente', 'confirmed' => 'Confirmé', 'processing' => 'En traitement', 'completed' => 'Payé', 'cancelled' => 'Annulé'];
+        return '<span class="badge bg-' . ($badges[$status] ?? 'secondary') . '">' . ($labels[$status] ?? $status) . '</span>';
+    }
+}
