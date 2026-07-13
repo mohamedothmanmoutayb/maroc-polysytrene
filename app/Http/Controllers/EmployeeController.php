@@ -522,6 +522,116 @@ class EmployeeController extends Controller
         ]);
     }
 
+    public function productionStatistics(Request $request)
+    {
+        $this->authorize('view_employees');
+
+        $year = (int) $request->input('year', now()->year);
+        $type = $request->input('type', 'all');
+
+        $typeColumns = [
+            'type2' => 'sous_bloc',
+            'type3' => 'produit_fini',
+            'type5' => 'chute',
+        ];
+
+        $availableYears = DB::table('production_output')
+            ->selectRaw('DISTINCT YEAR(production_date) as year')
+            ->whereNotNull('production_date')
+            ->orderByDesc('year')
+            ->pluck('year')
+            ->toArray();
+
+        if (empty($availableYears)) {
+            $availableYears = [now()->year];
+        }
+        if (!in_array($year, $availableYears)) {
+            $availableYears[] = $year;
+            rsort($availableYears);
+        }
+
+        $rows = DB::table('production_output as po')
+            ->join('production_orders as ord', 'po.production_order_id', '=', 'ord.order_id')
+            ->join('employees as e', 'ord.responsible_employee_id', '=', 'e.employee_id')
+            ->whereYear('po.production_date', $year)
+            ->whereIn('po.output_type', array_keys($typeColumns))
+            ->when($type !== 'all', function ($q) use ($type) {
+                return $q->where('po.output_type', $type);
+            })
+            ->groupBy('e.employee_id', 'e.full_name', 'month', 'po.output_type')
+            ->selectRaw('e.employee_id, e.full_name, MONTH(po.production_date) as month, po.output_type, SUM(po.total_volume_m3) as volume')
+            ->get();
+
+        $employees = [];
+        foreach ($rows as $row) {
+            if (!isset($employees[$row->employee_id])) {
+                $employees[$row->employee_id] = [
+                    'employee_id' => $row->employee_id,
+                    'full_name' => $row->full_name,
+                    'months' => array_fill(1, 12, [
+                        'sous_bloc' => 0.0,
+                        'produit_fini' => 0.0,
+                        'chute' => 0.0,
+                        'total' => 0.0,
+                    ]),
+                    'totals' => [
+                        'sous_bloc' => 0.0,
+                        'produit_fini' => 0.0,
+                        'chute' => 0.0,
+                        'total' => 0.0,
+                    ],
+                ];
+            }
+
+            $key = $typeColumns[$row->output_type];
+            $volume = (float) $row->volume;
+
+            $employees[$row->employee_id]['months'][$row->month][$key] += $volume;
+            $employees[$row->employee_id]['months'][$row->month]['total'] += $volume;
+            $employees[$row->employee_id]['totals'][$key] += $volume;
+            $employees[$row->employee_id]['totals']['total'] += $volume;
+        }
+
+        usort($employees, function ($a, $b) {
+            return $b['totals']['total'] <=> $a['totals']['total'];
+        });
+
+        $monthlyTotals = array_fill(1, 12, [
+            'sous_bloc' => 0.0,
+            'produit_fini' => 0.0,
+            'chute' => 0.0,
+            'total' => 0.0,
+        ]);
+        $grandTotals = ['sous_bloc' => 0.0, 'produit_fini' => 0.0, 'chute' => 0.0, 'total' => 0.0];
+
+        foreach ($employees as $employee) {
+            foreach ($employee['months'] as $m => $vals) {
+                foreach ($vals as $k => $v) {
+                    $monthlyTotals[$m][$k] += $v;
+                }
+            }
+            foreach ($employee['totals'] as $k => $v) {
+                $grandTotals[$k] += $v;
+            }
+        }
+
+        $months = [
+            1 => 'Janvier', 2 => 'Février', 3 => 'Mars', 4 => 'Avril',
+            5 => 'Mai', 6 => 'Juin', 7 => 'Juillet', 8 => 'Août',
+            9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre',
+        ];
+
+        return view('pages.employees.production-statistics', compact(
+            'employees',
+            'monthlyTotals',
+            'grandTotals',
+            'months',
+            'year',
+            'type',
+            'availableYears'
+        ));
+    }
+
     public function getStatistics()
     {
         $this->authorize('view_employees');

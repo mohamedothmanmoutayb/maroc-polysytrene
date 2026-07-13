@@ -660,6 +660,12 @@
                                         </a>
                                     </li>
                                 @endcan
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('employees.production-statistics') }}">
+                                        <span class="icon-small"></span>
+                                        <span class="hide-menu">Statistiques Production</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     @endcan

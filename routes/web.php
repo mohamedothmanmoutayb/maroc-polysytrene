@@ -510,6 +510,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Employee Routes
+    Route::get('employees/production-statistics', [EmployeeController::class, 'productionStatistics'])
+        ->name('employees.production-statistics')->middleware(['admin']);
     Route::resource('employees', EmployeeController::class)->middleware(['admin']);
     Route::post('/{id}/create-user', [EmployeeController::class, 'createUser'])->name('employees.create-user')->middleware(['admin']);
 
