@@ -204,6 +204,9 @@
                             <a href="{{ route('production-orders.create') }}" class="btn btn-light btn-sm">
                                 <i class="fas fa-plus me-1"></i> Nouvel Ordre
                             </a>
+                            <button type="button" class="btn btn-success btn-sm" id="employeeReportBtn" style="display:none;">
+                                <i class="fas fa-file-pdf me-1"></i> Rapport Employé
+                            </button>
                         </div>
                         @endcan
                     </div>
@@ -1210,6 +1213,40 @@
                 $('#filterResponsibleEmployeeId').val('').trigger('change');
                 $('#filterDateRange').val('');
                 table.draw();
+            });
+
+            // Toggle employee report button based on employee filter
+            function toggleEmployeeReportBtn() {
+                var employeeId = $('#filterResponsibleEmployeeId').val();
+                if (employeeId) {
+                    $('#employeeReportBtn').show();
+                } else {
+                    $('#employeeReportBtn').hide();
+                }
+            }
+
+            $('#filterResponsibleEmployeeId').on('change', function() {
+                toggleEmployeeReportBtn();
+            });
+
+            toggleEmployeeReportBtn();
+
+            // Employee report button click
+            $('#employeeReportBtn').click(function() {
+                var employeeId = $('#filterResponsibleEmployeeId').val();
+                if (!employeeId) {
+                    showToast('warning', 'Veuillez sélectionner un employé');
+                    return;
+                }
+                var params = new URLSearchParams();
+                params.append('employee_id', employeeId);
+                var status = $('#filterStatus').val();
+                if (status) params.append('status', status);
+                var productionType = $('#filterProductionType').val();
+                if (productionType) params.append('production_type', productionType);
+                var dateRange = $('#filterDateRange').val();
+                if (dateRange) params.append('date_range', dateRange);
+                window.open("{{ route('production-orders.employee-report') }}?" + params.toString(), '_blank');
             });
 
             // Load statistics

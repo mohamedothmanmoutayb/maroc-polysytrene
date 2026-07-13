@@ -1888,6 +1888,99 @@ class ProductionOrderController extends Controller
         return $pdf->stream('ordre-production-' . $data['order']->order_number . '.pdf');
     }
 
+    public function employeeReport(Request $request)
+    {
+        $employeeId = $request->input('employee_id');
+        if (!$employeeId) {
+            return response()->json(['success' => false, 'message' => 'Employé requis'], 400);
+        }
+
+        $employee = Employee::findOrFail($employeeId);
+
+        $orders = ProductionOrder::with(['product', 'outputs', 'wastes', 'consumptions.rawMaterial'])
+            ->select('production_orders.*')
+            ->where('responsible_employee_id', $employeeId)
+            ->when($request->filled('status'), function ($query) use ($request) {
+                return $query->where('status', $request->status);
+            })
+            ->when($request->filled('production_type'), function ($query) use ($request) {
+                return $query->where('production_type', $request->production_type);
+            })
+            ->when($request->filled('date_range'), function ($query) use ($request) {
+                $dates = array_map('trim', explode(' - ', $request->date_range));
+                if (count($dates) == 2) {
+                    $start = \Carbon\Carbon::createFromFormat('d/m/Y', $dates[0])->startOfDay();
+                    $end = \Carbon\Carbon::createFromFormat('d/m/Y', $dates[1])->endOfDay();
+                    return $query->whereBetween('start_date', [$start, $end]);
+                }
+                return $query->whereDate('start_date', \Carbon\Carbon::createFromFormat('d/m/Y', $dates[0]));
+            })
+            ->orderBy('start_date', 'desc')
+            ->orderBy('order_id', 'desc')
+            ->get();
+
+        $totalOrders = $orders->count();
+        $completedOrders = $orders->where('status', 'completed')->count();
+        $inProgressOrders = $orders->where('status', 'in_progress')->count();
+        $pendingOrders = $orders->where('status', 'pending')->count();
+        $cancelledOrders = $orders->where('status', 'cancelled')->count();
+
+        $totalQuantityToProduce = $orders->sum('quantity_to_produce');
+        $totalProduced = 0;
+        $totalDefective = 0;
+        $totalVolume = 0;
+        $totalWasteVolume = 0;
+        $totalRecyclableVolume = 0;
+
+        foreach ($orders as $order) {
+            $totalProduced += $order->outputs->sum('quantity_produced');
+            $totalDefective += $order->outputs->sum('quantity_defective');
+            $totalVolume += $order->outputs->sum('total_volume_m3');
+            $totalWasteVolume += $order->wastes->where('waste_type', 'waste')->sum('volume_m3');
+            $totalRecyclableVolume += $order->wastes->where('waste_type', 'recyclable')->sum('volume_m3');
+        }
+
+        foreach ($orders as $order) {
+            if ($order->production_type === 'decoupage') {
+                $order->progress = $this->calculateDecoupageProgress($order);
+            } else {
+                $produced = $order->outputs->sum('quantity_produced');
+                $order->progress = $order->quantity_to_produce > 0 ? ($produced / $order->quantity_to_produce) * 100 : 0;
+            }
+            $order->produced_qty = $order->outputs->sum('quantity_produced');
+            $order->defective_qty = $order->outputs->sum('quantity_defective');
+            $order->output_volume = $order->outputs->sum('total_volume_m3');
+            $order->waste_total = $order->wastes->sum('volume_m3');
+        }
+
+        $dateRange = $request->input('date_range', 'Toutes les dates');
+
+        $data = [
+            'employee' => $employee,
+            'orders' => $orders,
+            'dateRange' => $dateRange,
+            'totalOrders' => $totalOrders,
+            'completedOrders' => $completedOrders,
+            'inProgressOrders' => $inProgressOrders,
+            'pendingOrders' => $pendingOrders,
+            'cancelledOrders' => $cancelledOrders,
+            'totalQuantityToProduce' => $totalQuantityToProduce,
+            'totalProduced' => $totalProduced,
+            'totalDefective' => $totalDefective,
+            'totalVolume' => $totalVolume,
+            'totalWasteVolume' => $totalWasteVolume,
+            'totalRecyclableVolume' => $totalRecyclableVolume,
+            'date' => now()->format('d/m/Y'),
+            'time' => now()->format('H:i'),
+            'username' => auth()->user()->name ?? auth()->user()->username,
+        ];
+
+        $pdf = Pdf::loadView('pdf.employee-production-report', $data);
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->stream('rapport-employe-' . $employee->full_name . '.pdf');
+    }
+
     private function prepareOrderShowData($id)
     {
         $order = ProductionOrder::with([

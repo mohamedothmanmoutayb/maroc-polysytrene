@@ -321,7 +321,7 @@
                                         <th>Date</th>
                                         <th>Client</th>
                                         <th class="text-center">Solde Client</th>
-                                        <th>Volume (m³)</th>
+                                        <th>Volume / Qté</th>
                                         <th>Paiement</th>
                                         <th>Montant Final</th>
                                         <th width="10%">Actions</th>

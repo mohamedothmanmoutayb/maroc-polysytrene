@@ -27,7 +27,6 @@
             align-items: flex-start;
             margin-bottom: 12px;
             padding-bottom: 8px;
-            border-bottom: 2px solid #000;
         }
 
         .logo {
@@ -70,7 +69,7 @@
             font-size: 10px;
             font-weight: bold;
             text-transform: uppercase;
-            border-bottom: 1px solid #000;
+            text-decoration: underline;
             padding-bottom: 2px;
             margin: 14px 0 6px 0;
         }
@@ -114,7 +113,7 @@
 
         table.data-table tfoot td {
             font-weight: bold;
-            border-top: 2px solid #000;
+            border-top: 1px solid #000;
         }
 
         .text-center {
@@ -672,7 +671,7 @@
     @endif
 
     {{-- Signatures --}}
-    <table class="signature-table">
+    {{-- <table class="signature-table">
         <tr>
             <td>
                 <div class="sig-label">Responsable Production</div>
@@ -684,11 +683,8 @@
                 <div class="sig-label">Direction</div>
             </td>
         </tr>
-    </table>
+    </table> --}}
 
-    <div class="page-footer">
-        Document généré automatiquement — Ordre de Production N° {{ $order->order_number }}
-    </div>
 </body>
 
 </html>

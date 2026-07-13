@@ -91,6 +91,16 @@ class SalesOrderItem extends Model
         return $labels[$this->item_type] ?? $this->item_type;
     }
 
+    public function getUnitOfMeasureAttribute()
+    {
+        if ($this->item_type == 'raw_material') {
+            $rawMaterial = RawMaterial::find($this->item_id);
+            return $rawMaterial ? $rawMaterial->unit_of_measure : null;
+        }
+        $product = Product::find($this->item_id);
+        return $product ? $product->unit_of_measure : null;
+    }
+
     /**
      * Get the item type label with badge
      */

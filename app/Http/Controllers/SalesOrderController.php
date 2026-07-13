@@ -75,8 +75,16 @@ class SalesOrderController extends Controller
                 })
                 ->addColumn('total_volume', function ($row) {
                     $totalVolume = 0;
+                    $rawMaterialQtys = [];
                     foreach ($row->items as $item) {
-                        if ($item->item_type != 'raw_material') {
+                        if ($item->item_type == 'raw_material') {
+                            $rawMaterial = \App\Models\RawMaterial::find($item->item_id);
+                            $unit = $rawMaterial ? $rawMaterial->unit_of_measure : 'U';
+                            if (!isset($rawMaterialQtys[$unit])) {
+                                $rawMaterialQtys[$unit] = 0;
+                            }
+                            $rawMaterialQtys[$unit] += $item->quantity;
+                        } else {
                             $product = \App\Models\Product::find($item->item_id);
                             if ($product) {
                                 $volumePerUnit = $product->getVolumePerUnitInM3();
@@ -84,7 +92,18 @@ class SalesOrderController extends Controller
                             }
                         }
                     }
-                    return '<span class="badge bg-info">' . number_format($totalVolume, 4) . ' m³</span>';
+
+                    $parts = [];
+                    if ($totalVolume > 0) {
+                        $parts[] = '<span class="badge bg-info">' . number_format($totalVolume, 4) . ' m³</span>';
+                    }
+                    foreach ($rawMaterialQtys as $unit => $qty) {
+                        $parts[] = '<span class="badge bg-warning text-dark">' . number_format($qty, 2) . ' ' . strtoupper($unit) . '</span>';
+                    }
+                    if (empty($parts)) {
+                        return '<span class="badge bg-secondary">-</span>';
+                    }
+                    return implode(' ', $parts);
                 })
                 ->addColumn('action', function ($order) {
                     $user = auth()->user();
@@ -2196,6 +2215,11 @@ class SalesOrderController extends Controller
                         $totalVolume = $item->quantity * $volumePerUnit;
                         $displayName = $item->item_name;
                     }
+                } elseif ($item->item_type == 'raw_material') {
+                    $rawMaterial = \App\Models\RawMaterial::find($item->item_id);
+                    if ($rawMaterial) {
+                        $productUnit = $rawMaterial->unit_of_measure;
+                    }
                 }
 
                 $unitPriceTTC = $item->unit_price;
@@ -2320,6 +2344,11 @@ class SalesOrderController extends Controller
                         $volumePerUnit = $product->volume_per_unit ?? ($product->total_volume ?? 0);
                         $totalVolume = $item->quantity * $volumePerUnit;
                         $displayName = $item->item_name;
+                    }
+                } elseif ($item->item_type == 'raw_material') {
+                    $rawMaterial = \App\Models\RawMaterial::find($item->item_id);
+                    if ($rawMaterial) {
+                        $productUnit = $rawMaterial->unit_of_measure;
                     }
                 }
 

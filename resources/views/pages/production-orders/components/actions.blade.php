@@ -58,12 +58,12 @@
         </li>
 
         <!-- Print -->
-        {{-- <li>
+        <li>
             <a class="dropdown-item d-flex align-items-center gap-3"
                 href="{{ route('production-orders.print', $order->order_id) }}" target="_blank">
                 <i class="fs-4 ti ti-printer"></i>Imprimer
             </a>
-        </li> --}}
+        </li>
 
         <!-- Edit -->
         @can('edit_production_orders')

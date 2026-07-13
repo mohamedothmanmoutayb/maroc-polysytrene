@@ -252,6 +252,7 @@
                                                     <tr>
                                                         <th>Produit</th>
                                                         <th class="text-center">Qté</th>
+                                                        <th class="text-center">Unité</th>
                                                         <th class="text-end">Prix Unitaire</th>
                                                         <th class="text-end">Total</th>
                                                     </tr>
@@ -269,6 +270,7 @@
                                                             </td>
                                                             <td class="text-center">{{ number_format($item->quantity, 2, ',', '.') }}
                                                             </td>
+                                                            <td class="text-center text-uppercase">{{ $item->unit_of_measure ?? '-' }}</td>
                                                             <td class="text-end">{{ number_format($item->unit_price, 2, ',', '.') }}
                                                                 DH</td>
                                                             <td class="text-end">{{ number_format($item->total_price, 2, ',', '.') }}

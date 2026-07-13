@@ -192,6 +192,7 @@ Route::middleware(['auth'])->group(function () {
          ->name('get-familles');
 
         Route::get('/statistics', [ProductionOrderController::class, 'getStatistics'])->name('statistics');
+        Route::get('/employee-report', [ProductionOrderController::class, 'employeeReport'])->name('employee-report');
         Route::get('/{id}', [ProductionOrderController::class, 'show'])->name('show');
         Route::get('/{id}/print', [ProductionOrderController::class, 'printOrder'])->name('print');
         Route::get('/{id}/edit', [ProductionOrderController::class, 'edit'])->name('edit');
