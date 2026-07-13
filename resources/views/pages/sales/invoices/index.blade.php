@@ -253,6 +253,30 @@
                                 <span id="displayTypeHelp">Unité: Affiche l'unité de mesure standard</span>
                             </small>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cachet / Signature</label>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="show_cacher"
+                                            id="showCacherYes" value="1" checked>
+                                        <label class="form-check-label" for="showCacherYes">
+                                            <i class="fas fa-stamp text-info me-1"></i>Avec cachet
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="show_cacher"
+                                            id="showCacherNo" value="0">
+                                        <label class="form-check-label" for="showCacherNo">
+                                            <i class="fas fa-ban text-secondary me-1"></i>Sans cachet
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -471,9 +495,8 @@
                     success: function(response) {
                         if (response.success) {
                             $('#totalInvoices').text(response.data.total);
-                            $('#pendingInvoices').text(response.data.sent || 0);
+                            $('#pendingInvoices').text(response.data.unpaid || 0);
                             $('#paidInvoices').text(response.data.paid || 0);
-                            $('#draftInvoices').text(response.data.draft || 0);
                             $('#totalPaidAmount').text(formatCurrency(response.data.amount_paid || 0));
                             $('#pendingAmount').text(formatCurrency(response.data.pending_amount || 0));
                         }
@@ -482,7 +505,6 @@
                         $('#totalInvoices').text('0');
                         $('#pendingInvoices').text('0');
                         $('#paidInvoices').text('0');
-                        $('#draftInvoices').text('0');
                         $('#totalPaidAmount').text('0 DH');
                         $('#pendingAmount').text('0 DH');
                     }
@@ -504,9 +526,10 @@
             function buildPdfUrl(extraParams = '') {
                 const showPrices = $('input[name="show_prices"]:checked').val();
                 const showLogo = $('input[name="show_logo"]:checked').val();
+                const showCacher = $('input[name="show_cacher"]:checked').val();
                 const displayType = $('input[name="display_type"]:checked').val();
 
-                return `/sales/invoices/${currentInvoiceId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}${extraParams}`;
+                return `/sales/invoices/${currentInvoiceId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&show_cacher=${showCacher}&display_type=${displayType}${extraParams}`;
             }
 
             $('#downloadPdfBtn').click(function() {

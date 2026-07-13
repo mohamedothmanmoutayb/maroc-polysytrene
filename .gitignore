@@ -5,6 +5,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/zk-agent/vendor
+/zk-agent/composer.lock
 .env
 .env.backup
 .env.production

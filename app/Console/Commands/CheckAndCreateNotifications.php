@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Driver;
 use App\Models\Machine;
+use App\Models\MachineMaintenanceSchedule;
 use App\Models\Notification;
 use App\Models\ProductStock;
 use App\Models\RawMaterial;
@@ -30,6 +31,7 @@ class CheckAndCreateNotifications extends Command
 
         $this->checkVehicleDocuments($admins);
         $this->checkMachineDocuments($admins);
+        $this->checkMachineMaintenanceSchedules($admins);
         $this->checkDriverLicenses($admins);
         $this->checkDriverMedicalVisits($admins);
         $this->checkRawMaterialStock($admins);
@@ -153,6 +155,59 @@ class CheckAndCreateNotifications extends Command
             $this->pruneResolved($admins, ['machine_document_expired', 'machine_document_expiring'], $activeRefs);
         } catch (\Exception $e) {
             Log::warning('CheckNotifications::checkMachineDocuments — ' . $e->getMessage());
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Machine preventive maintenance
+    // -------------------------------------------------------------------------
+    private function checkMachineMaintenanceSchedules(Collection $admins): void
+    {
+        try {
+            $activeRefs = [];
+
+            $schedules = MachineMaintenanceSchedule::active()->with('machine')->get();
+
+            foreach ($schedules as $schedule) {
+                if (!$schedule->machine) {
+                    continue;
+                }
+
+                $daysLeft = $schedule->days_left;
+
+                if ($daysLeft >= 0 && $daysLeft > $schedule->reminder_days_before) {
+                    continue;
+                }
+
+                $refKey   = "machine_maintenance_{$schedule->id}";
+                $activeRefs[] = $refKey;
+                $overdue  = $daysLeft < 0;
+                $color    = $overdue ? 'danger' : ($daysLeft <= 2 ? 'danger' : 'warning');
+
+                $payload = [
+                    'type'          => $overdue ? 'machine_maintenance_overdue' : 'machine_maintenance_due',
+                    'title'         => $overdue
+                        ? "Maintenance en retard – {$schedule->label}"
+                        : "Maintenance à prévoir – {$schedule->label}",
+                    'message'       => $overdue
+                        ? "La maintenance {$schedule->label} de la machine {$schedule->machine->name} est en retard de " . abs((int) $daysLeft) . " jours."
+                        : "La maintenance {$schedule->label} de la machine {$schedule->machine->name} est prévue dans {$daysLeft} jours.",
+                    'link'          => route('machines.show', $schedule->machine_id),
+                    'data'          => ['category' => 'machine', 'color' => $color, 'icon' => 'fas fa-tools'],
+                    'expires_at'    => null,
+                ];
+
+                foreach ($admins as $admin) {
+                    Notification::firstOrCreate(
+                        ['user_id' => $admin->id, 'reference_key' => $refKey],
+                        $payload
+                    );
+                }
+            }
+
+            $this->pruneResolved($admins, ['machine_maintenance_overdue', 'machine_maintenance_due'], $activeRefs);
+        } catch (\Exception $e) {
+            Log::warning('CheckNotifications::checkMachineMaintenanceSchedules — ' . $e->getMessage());
         }
     }
 

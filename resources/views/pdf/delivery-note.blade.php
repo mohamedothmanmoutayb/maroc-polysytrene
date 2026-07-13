@@ -287,7 +287,7 @@
             @php
                 // Group items by famille, preserving insertion order
                 $groupedItems = collect($itemsData)->groupBy(function ($item) {
-                    return !empty($item['familleName']) ? $item['familleName'] : 'Sans Famille';
+                    return !empty($item['familleName']) ? $item['familleName'] : '-';
                 });
 
                 $itemCount = count($itemsData);
@@ -299,12 +299,18 @@
                 @foreach ($groupItems as $itemData)
                     <tr>
                         <td style="border-bottom: none; border-top: none;" class="text-center">
-                            {{ number_format($itemData['item']->quantity, 0) }}
+                            {{ number_format($itemData['item']->quantity, 2, '.', '') }}
                         </td>
                         <td style="border-bottom: none; border-top: none;">
-                            <span
-                                class="item-code">{{ $itemData['productCode'] ?: $itemData['item']->item_code ?? '' }}</span>
-                            <span class="item-name-small">{{ $itemData['displayName'] }}</span>
+                            @if ($itemData['item']->item_type == 'raw_material')
+                                <!-- For raw materials: show only the name -->
+                                <span class="item-name-small">{{ $itemData['displayName'] }}</span>
+                            @else
+                                <!-- For products: show code -->
+                                <span
+                                    class="item-code">{{ $itemData['productCode'] ?: $itemData['item']->item_code ?? '' }}</span>
+                                {{-- <span class="item-name-small">{{ $itemData['displayName'] }}</span> --}}
+                            @endif
                         </td>
 
                         {{-- Famille cell spans all rows of this groupe --}}
@@ -320,7 +326,7 @@
                             </td>
                         @else
                             <td style="border-bottom: none; border-top: none;" class="text-center unit-uppercase">
-                                {{ strtoupper($itemData['productUnit']) }}
+                                {{ $itemData['productUnit'] ? strtoupper($itemData['productUnit']) : '-' }}
                             </td>
                         @endif
 

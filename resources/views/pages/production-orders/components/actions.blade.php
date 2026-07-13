@@ -57,6 +57,14 @@
             </a>
         </li>
 
+        <!-- Print -->
+        {{-- <li>
+            <a class="dropdown-item d-flex align-items-center gap-3"
+                href="{{ route('production-orders.print', $order->order_id) }}" target="_blank">
+                <i class="fs-4 ti ti-printer"></i>Imprimer
+            </a>
+        </li> --}}
+
         <!-- Edit -->
         @can('edit_production_orders')
             @if ($order->status === 'pending' || $order->status === 'approved')

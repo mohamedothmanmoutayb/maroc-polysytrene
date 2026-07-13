@@ -315,7 +315,7 @@
                         @endphp
                         <tr>
                             <td class="text-center">
-                                {{ number_format($item->quantity, 0) }}
+                                {{ number_format($item->quantity, 2, '.', '') }}
                             </td>
                             <td class="text-left">
                                 <span class="item-code">{{ $productCode ?: $item->item_name }}</span>

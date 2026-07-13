@@ -10,7 +10,6 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Rats\Zkteco\Lib\ZKTeco;
 
 class AttendanceController extends Controller
 {
@@ -362,11 +361,6 @@ class AttendanceController extends Controller
      */
     public function monthlyCalendar(Request $request)
     {
-
-        $zk = new ZKTeco('192.168.1.13');
-        $zk->connect();
-        dd($zk);
-        
         $year  = (int) $request->get('year',  Carbon::now()->year);
         $month = (int) $request->get('month', Carbon::now()->month);
 

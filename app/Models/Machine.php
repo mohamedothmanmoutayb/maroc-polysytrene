@@ -48,6 +48,16 @@ class Machine extends Model
             ->first();
     }
 
+    public function maintenanceSchedules()
+    {
+        return $this->hasMany(MachineMaintenanceSchedule::class, 'machine_id')->orderBy('next_due_at');
+    }
+
+    public function activeMaintenanceSchedules()
+    {
+        return $this->maintenanceSchedules()->where('is_active', true);
+    }
+
     public function getStatusLabelAttribute()
     {
         $labels = [

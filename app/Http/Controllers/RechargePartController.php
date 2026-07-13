@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RechargePart;
+use App\Models\RechargePartStockMovement;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -10,7 +11,7 @@ class RechargePartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:view_recharge_parts')->only(['index', 'show', 'getStatistics', 'getLowStock']);
+        $this->middleware('can:view_recharge_parts')->only(['index', 'show', 'getStatistics', 'getLowStock', 'history']);
         $this->middleware('can:create_recharge_parts')->only(['create', 'store']);
         $this->middleware('can:edit_recharge_parts')->only(['edit', 'update']);
         $this->middleware('can:delete_recharge_parts')->only(['destroy']);
@@ -43,8 +44,16 @@ class RechargePartController extends Controller
                                 </a></li>';
                     }
                     if ($user->can('adjust_recharge_parts_stock')) {
-                        $btn .= '<li><a class="dropdown-item" href="javascript:void(0)" onclick="adjustStock(' . $row->id . ', \'' . $row->name . '\')">
-                                    <i class="fas fa-plus-circle me-2"></i>Ajuster Stock
+                        $btn .= '<li><a class="dropdown-item" href="javascript:void(0)" onclick="adjustStock(' . $row->id . ', \'' . $row->name . '\', \'in\')">
+                                    <i class="fas fa-plus-circle me-2 text-success"></i>Ajouter Stock
+                                </a></li>';
+                        $btn .= '<li><a class="dropdown-item" href="javascript:void(0)" onclick="adjustStock(' . $row->id . ', \'' . $row->name . '\', \'out\')">
+                                    <i class="fas fa-minus-circle me-2 text-danger"></i>Retirer Stock
+                                </a></li>';
+                    }
+                    if ($user->can('view_recharge_parts')) {
+                        $btn .= '<li><a class="dropdown-item" href="javascript:void(0)" onclick="showHistory(' . $row->id . ', \'' . $row->name . '\')">
+                                    <i class="fas fa-history me-2"></i>Historique
                                 </a></li>';
                     }
                     if ($user->can('delete_recharge_parts')) {
@@ -166,14 +175,17 @@ class RechargePartController extends Controller
     public function adjustStock(Request $request, $id)
     {
         $request->validate([
-            'adjustment' => 'required|integer',
+            'movement_type' => 'required|in:in,out',
+            'quantity' => 'required|integer|min:1',
             'reason' => 'nullable|string|max:500',
         ]);
 
         try {
             $part = RechargePart::findOrFail($id);
             $oldStock = $part->current_stock;
-            $newStock = $oldStock + $request->adjustment;
+            $newStock = $request->movement_type === 'in'
+                ? $oldStock + $request->quantity
+                : $oldStock - $request->quantity;
 
             if ($newStock < 0) {
                 return response()->json([
@@ -185,13 +197,22 @@ class RechargePartController extends Controller
             $part->current_stock = $newStock;
             $part->save();
 
+            RechargePartStockMovement::create([
+                'part_id' => $part->id,
+                'movement_type' => $request->movement_type,
+                'quantity' => $request->quantity,
+                'previous_stock' => $oldStock,
+                'new_stock' => $newStock,
+                'reason' => $request->reason,
+                'performed_by' => auth()->id(),
+            ]);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Stock ajusté avec succès!',
                 'data' => [
                     'old_stock' => $oldStock,
                     'new_stock' => $newStock,
-                    'adjustment' => $request->adjustment
                 ]
             ]);
 
@@ -200,6 +221,42 @@ class RechargePartController extends Controller
                 'success' => false,
                 'message' => 'Erreur: ' . $e->getMessage()
             ], 500);
+        }
+    }
+
+    /**
+     * Get stock movement history for a part
+     */
+    public function history($id)
+    {
+        try {
+            $part = RechargePart::findOrFail($id);
+
+            $movements = $part->movements()
+                ->with('performer:id,username')
+                ->get()
+                ->map(function ($movement) {
+                    return [
+                        'date' => $movement->created_at->format('d/m/Y H:i'),
+                        'movement_type' => $movement->movement_type,
+                        'quantity' => $movement->quantity,
+                        'previous_stock' => $movement->previous_stock,
+                        'new_stock' => $movement->new_stock,
+                        'reason' => $movement->reason,
+                        'performed_by' => $movement->performer->username ?? '-',
+                    ];
+                });
+
+            return response()->json([
+                'success' => true,
+                'part_name' => $part->name,
+                'data' => $movements,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pièce non trouvée'
+            ], 404);
         }
     }
 

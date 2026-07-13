@@ -24,6 +24,11 @@ class RechargePart extends Model
         'max_stock' => 'integer',
     ];
 
+    public function movements()
+    {
+        return $this->hasMany(RechargePartStockMovement::class, 'part_id')->latest();
+    }
+
     public function isLowStock()
     {
         return $this->current_stock <= $this->min_stock;

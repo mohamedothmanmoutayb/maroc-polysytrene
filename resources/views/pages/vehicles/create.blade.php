@@ -108,12 +108,14 @@
                                             <div class="col-md-4 mb-2">
                                                 <label class="form-label small">Date de début</label>
                                                 <input type="date" class="form-control start-date"
-                                                    name="documents[{{ $type->document_type_id }}][start_date]">
+                                                    name="documents[{{ $type->document_type_id }}][start_date]"
+                                                    data-default-duration="{{ $type->default_duration_days }}"
+                                                    data-reminder-days="{{ $type->reminder_days_before }}">
                                             </div>
                                             <div class="col-md-4 mb-2">
-                                                <label class="form-label small">Date de fin *</label>
+                                                <label class="form-label small">Date de fin</label>
                                                 <input type="date" class="form-control end-date"
-                                                    name="documents[{{ $type->document_type_id }}][end_date]" required>
+                                                    name="documents[{{ $type->document_type_id }}][end_date]">
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <label class="form-label small">Autorité émettrice</label>
@@ -124,6 +126,9 @@
                                                 <label class="form-label small">Notes</label>
                                                 <input type="text" class="form-control"
                                                     name="documents[{{ $type->document_type_id }}][notes]">
+                                            </div>
+                                            <div class="col-12">
+                                                <small class="text-muted duration-note"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -158,17 +163,36 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            // Set default end dates (1 year from now for insurance, registration, technical control; 6 months for maintenance)
-            @foreach ($documentTypes as $type)
-                var defaultDate = new Date();
-                @if ($type->type_code == 'maintenance')
-                    defaultDate.setMonth(defaultDate.getMonth() + 6);
-                @else
-                    defaultDate.setFullYear(defaultDate.getFullYear() + 1);
-                @endif
-                $('input[name="documents[{{ $type->document_type_id }}][end_date]"]').val(defaultDate.toISOString()
-                    .split('T')[0]);
-            @endforeach
+            // Only calculate the end date once a start date is chosen for that
+            // document row; otherwise just show the type's duration/reminder as a note.
+            $('#documentsContainer').on('change', '.start-date', function() {
+                const row = $(this).closest('.document-row');
+                const defaultDuration = $(this).data('default-duration');
+                const reminderDays = $(this).data('reminder-days');
+                const startDateVal = $(this).val();
+                let infoParts = [];
+
+                if (defaultDuration && defaultDuration > 0 && startDateVal) {
+                    const start = new Date(startDateVal);
+                    const end = new Date(start);
+                    end.setDate(end.getDate() + parseInt(defaultDuration));
+
+                    const year = end.getFullYear();
+                    const month = String(end.getMonth() + 1).padStart(2, '0');
+                    const day = String(end.getDate()).padStart(2, '0');
+                    row.find('.end-date').val(`${year}-${month}-${day}`);
+
+                    infoParts.push(`Durée: ${defaultDuration} jours (fin estimée le ${day}/${month}/${year})`);
+                } else if (defaultDuration && defaultDuration > 0) {
+                    infoParts.push(`Durée par défaut: ${defaultDuration} jours — sélectionnez une date de début pour calculer la date de fin`);
+                }
+
+                if (reminderDays) {
+                    infoParts.push(`Rappel programmé ${reminderDays} jours avant expiration`);
+                }
+
+                row.find('.duration-note').text(infoParts.join(' — '));
+            });
 
             $('#vehicleForm').submit(function(e) {
                 e.preventDefault();

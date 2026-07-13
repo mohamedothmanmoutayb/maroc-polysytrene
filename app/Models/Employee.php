@@ -18,6 +18,7 @@ class Employee extends Model
         'full_name',
         'cin',
         'cnss',
+        'zk_uid',
         'phone',
         'email',
         'address',

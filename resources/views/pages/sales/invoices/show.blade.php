@@ -59,17 +59,13 @@
                         <div class="row mb-4">
                             <div class="col-12">
                                 @php
-                                    $statusLabels = [
-                                        'draft' => ['label' => 'Brouillon', 'class' => 'bg-secondary'],
-                                        'sent' => ['label' => 'Envoyé', 'class' => 'bg-primary'],
-                                        'paid' => ['label' => 'Payé', 'class' => 'bg-success'],
-                                        'cancelled' => ['label' => 'Annulé', 'class' => 'bg-danger'],
-                                    ];
-                                    $status = $statusLabels[$invoice->status] ?? [
-                                        'label' => $invoice->status,
-                                        'class' => 'bg-info',
-                                    ];
-
+                                    if ($invoice->amount_paid >= $invoice->final_amount) {
+                                        $status = ['label' => 'Payé', 'class' => 'bg-success'];
+                                    } elseif ($invoice->amount_paid > 0) {
+                                        $status = ['label' => 'Partiellement payé', 'class' => 'bg-primary'];
+                                    } else {
+                                        $status = ['label' => 'Impayé', 'class' => 'bg-secondary'];
+                                    }
                                 @endphp
                                 <span class="badge {{ $status['class'] }} p-3 fs-6">Statut:
                                     {{ $status['label'] }}</span>
@@ -336,6 +332,30 @@
                                 <span id="displayTypeHelp">Unité: Affiche l'unité de mesure standard</span>
                             </small>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cachet / Signature</label>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="show_cacher"
+                                            id="showCacherYes" value="1" checked>
+                                        <label class="form-check-label" for="showCacherYes">
+                                            <i class="fas fa-stamp text-info me-1"></i>Avec cachet
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="show_cacher"
+                                            id="showCacherNo" value="0">
+                                        <label class="form-check-label" for="showCacherNo">
+                                            <i class="fas fa-ban text-secondary me-1"></i>Sans cachet
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -359,9 +379,10 @@
         function buildPdfUrl(invoiceId, extraParams = '') {
             const showPrices = $('input[name="show_prices"]:checked').val();
             const showLogo = $('input[name="show_logo"]:checked').val();
+            const showCacher = $('input[name="show_cacher"]:checked').val();
             const displayType = $('input[name="display_type"]:checked').val();
 
-            return `/sales/invoices/${invoiceId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}${extraParams}`;
+            return `/sales/invoices/${invoiceId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&show_cacher=${showCacher}&display_type=${displayType}${extraParams}`;
         }
 
         function openPdfOptions(invoiceId) {

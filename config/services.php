@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'zkteco' => [
+        'agent_key' => env('ZK_AGENT_API_KEY'),
+    ],
+
 ];

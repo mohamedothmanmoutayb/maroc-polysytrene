@@ -95,6 +95,12 @@
                                         </div>
 
                                         <div class="col-md-6 mb-3">
+                                            <label class="form-label">ID Pointeuse (ZKTeco)</label>
+                                            <input type="text" class="form-control" name="zk_uid"
+                                                value="{{ $employee->zk_uid }}" placeholder="ID utilisateur sur la pointeuse">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
                                             <label class="form-label">Email</label>
                                             <input type="email" class="form-control" name="email"
                                                 value="{{ $employee->email }}" placeholder="exemple@email.com">

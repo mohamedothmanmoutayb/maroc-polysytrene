@@ -270,34 +270,41 @@ class SituationController extends Controller
             $amount = (float) $model->final_amount;
             $paid   = (float) $model->paid_amount;
             $status = $model->payment_status;
-            $dateValue = $model->order_date;
-            $number = $model->order_number;
-            $showUrl = route('sales.orders.show', $model->order_id);
-        } else {
-            $amount = (float) $model->final_amount;
-            $paid   = (float) $model->amount_paid;
-            $status = $paid <= 0 ? 'pending' : ($paid >= $amount - 0.01 ? 'paid' : 'partial');
-            $dateValue = $model->invoice_date;
-            $number = $model->invoice_number;
-            $showUrl = route('sales.invoices.show', $model->invoice_id);
+            $reste  = $amount - $paid;
+
+            return [
+                'type'         => $type,
+                'type_label'   => 'Vente',
+                'type_badge'   => 'secondary',
+                'date_raw'     => $model->order_date,
+                'date'         => $model->order_date->format('d/m/Y'),
+                'number'       => $model->order_number,
+                'amount'       => number_format($amount, 2, ',', '.') . ' DH',
+                'paid'         => number_format($paid, 2, ',', '.') . ' DH',
+                'reste'        => number_format($reste, 2, ',', '.') . ' DH',
+                'reste_class'  => $reste > 0 ? 'text-danger' : 'text-success',
+                'status_badge' => $badges[$status] ?? 'secondary',
+                'status_label' => $labels[$status] ?? $status,
+                'show_url'     => route('sales.orders.show', $model->order_id),
+            ];
         }
 
-        $reste = $amount - $paid;
-
+        // Factures aren't paid individually — payment is tracked against the
+        // vente they're billing for, so Payé/Reste/Statut don't apply here.
         return [
             'type'         => $type,
-            'type_label'   => $type === 'vente' ? 'Vente' : 'Facture',
-            'type_badge'   => $type === 'vente' ? 'secondary' : 'primary',
-            'date_raw'     => $dateValue,
-            'date'         => $dateValue->format('d/m/Y'),
-            'number'       => $number,
-            'amount'       => number_format($amount, 2, ',', '.') . ' DH',
-            'paid'         => number_format($paid, 2, ',', '.') . ' DH',
-            'reste'        => number_format($reste, 2, ',', '.') . ' DH',
-            'reste_class'  => $reste > 0 ? 'text-danger' : 'text-success',
-            'status_badge' => $badges[$status] ?? 'secondary',
-            'status_label' => $labels[$status] ?? $status,
-            'show_url'     => $showUrl,
+            'type_label'   => 'Facture',
+            'type_badge'   => 'primary',
+            'date_raw'     => $model->invoice_date,
+            'date'         => $model->invoice_date->format('d/m/Y'),
+            'number'       => $model->invoice_number,
+            'amount'       => number_format((float) $model->final_amount, 2, ',', '.') . ' DH',
+            'paid'         => '-',
+            'reste'        => '-',
+            'reste_class'  => '',
+            'status_badge' => 'secondary',
+            'status_label' => '-',
+            'show_url'     => route('sales.invoices.show', $model->invoice_id),
         ];
     }
 

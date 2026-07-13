@@ -218,7 +218,7 @@ class MachineController extends Controller
     {
         $machine = Machine::with(['documents' => function($query) {
             $query->with('documentType')->orderBy('created_at', 'desc');
-        }])->findOrFail($id);
+        }, 'maintenanceSchedules'])->findOrFail($id);
 
         return view('pages.machines.show', compact('machine'));
     }

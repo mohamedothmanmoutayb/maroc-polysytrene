@@ -412,7 +412,7 @@
 
         <!-- Signature, right below "Arrêtée la présente..." -->
         <div class="signature-section">
-            @if ($cacherBase64)
+            @if ($showCacher && $cacherBase64)
                 <img src="{{ $cacherBase64 }}" alt="Signature"
                     style="height: 200px; width: auto; max-width: 200px; object-fit: contain;"
                     onerror="this.style.display='none'">

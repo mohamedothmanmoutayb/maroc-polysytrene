@@ -91,6 +91,15 @@ class ProductionConsumptionController extends Controller
                     </div>';
                     return $dropdown;
                 })
+                ->addColumn('consumption_date', function($row){
+                    // production_consumption.created_at is stamped by MySQL's CURRENT_TIMESTAMP,
+                    // which uses the DB server's system timezone (America/New_York), not UTC.
+                    return $row->created_at
+                        ? Carbon::parse($row->created_at, 'America/New_York')
+                            ->setTimezone('Africa/Casablanca')
+                            ->format('d/m/Y H:i')
+                        : 'N/A';
+                })
                 ->addColumn('order_number', function($row){
                     return $row->productionOrder ? $row->productionOrder->order_number : 'N/A';
                 })

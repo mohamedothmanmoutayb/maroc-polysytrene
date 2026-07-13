@@ -266,6 +266,10 @@
             background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
         }
 
+        .bg-welcome-gt {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        }
+
         /* ── Hover Effects for Desktop Only ────────────────────────── */
         @media (min-width: 768px) {
             .card-hover:hover {
@@ -361,10 +365,10 @@
                         <span class="badge bg-warning text-dark">{{ $lowStockMaterials->count() }} matière(s)</span>
                     @endif
                     @if ($stats['late_production_orders'] > 0)
-                        <span class="badge bg-danger">{{ $stats['late_production_orders'] }} prod. retard</span>
+                        <span class="badge bg-danger">{{ $stats['late_production_orders'] }} retard production</span>
                     @endif
                     @if ($stats['overdue_sales_orders'] > 0)
-                        <span class="badge bg-danger">{{ $stats['overdue_sales_orders'] }} paiements</span>
+                        <span class="badge bg-danger">{{ $stats['overdue_sales_orders'] }} retard cmd. client</span>
                     @endif
                     @if ($stats['machines_breakdown'] > 0)
                         <span class="badge bg-warning text-dark">{{ $stats['machines_breakdown'] }} machines</span>
@@ -403,7 +407,7 @@
                     <div class="card-body p-2 p-md-3">
                         <div class="d-flex align-items-center gap-2 gap-md-3 mb-2">
                             <div class="kpi-icon bg-success-subtle">
-                                <iconify-icon icon="solar:factory-bold" class="text-success fs-5"></iconify-icon>
+                                <iconify-icon icon="solar:box-bold" class="text-success fs-5"></iconify-icon>
                             </div>
                             <span class="kpi-label">Production</span>
                         </div>
@@ -484,8 +488,9 @@
              2. WELCOME + PRODUCTION ORDERS + PAYMENTS - Responsive Stack
         ═══════════════════════════════════════════════════════════════════════ --}}
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
+            {{-- Bloc 1 : Carte de bienvenue --}}
             <div class="col-lg-6">
-                <div class="card text-white bg-primary-gt overflow-hidden h-100">
+                <div class="card text-white bg-welcome-gt overflow-hidden h-100">
                     <div class="card-body p-3 p-md-4">
                         <span class="badge bg-white bg-opacity-25 d-inline-flex align-items-center gap-2 mb-3">
                             <iconify-icon icon="solar:check-circle-outline" class="fs-5"></iconify-icon>
@@ -499,7 +504,7 @@
                         </h4>
                         <h6 class="opacity-75 fw-normal text-white mb-3 mb-md-4">
                             @if ($stats['user']->role)
-                                <span class="badge bg-white text-primary">{{ ucfirst($stats['user']->role) }}</span>
+                                <span style="color:black !important;" class="badge bg-white">{{ ucfirst($stats['user']->role) }}</span>
                             @endif
                             · {{ date('l d F Y') }}
                         </h6>
@@ -521,48 +526,49 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card bg-danger-subtle overflow-hidden shadow-none h-100">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div>
-                                <span class="text-dark fw-semibold" style="font-size: 0.8rem;">Ordres Production</span>
-                                <div class="d-flex align-items-center gap-2 mt-1">
-                                    <h5 class="fw-semibold mb-0">{{ number_format($stats['total_production_orders']) }}
-                                    </h5>
-                                    <span class="fs-11 text-muted">{{ $stats['in_progress_orders'] }} en cours</span>
+            {{-- Bloc 2 : Ordres Production + Total Paiements (empilés, pleine largeur) --}}
+            <div class="col-lg-6">
+                <div class="d-flex flex-column gap-2 gap-md-3 h-100">
+                    <div class="card bg-info-subtle overflow-hidden shadow-none flex-fill mb-0">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div>
+                                    <span class="text-dark fw-semibold" style="font-size: 0.8rem;">Ordres
+                                        Production</span>
+                                    <div class="d-flex align-items-center gap-2 mt-1">
+                                        <h5 class="fw-semibold mb-0">
+                                            {{ number_format($stats['total_production_orders']) }}
+                                        </h5>
+                                        <span class="fs-11 text-muted">{{ $stats['in_progress_orders'] }} en
+                                            cours</span>
+                                    </div>
                                 </div>
+                                <span class="round-48 d-flex align-items-center justify-content-center bg-white rounded">
+                                    <iconify-icon icon="solar:box-linear" class="text-info"></iconify-icon>
+                                </span>
                             </div>
-                            <span class="round-48 d-flex align-items-center justify-content-center bg-white rounded">
-                                <iconify-icon icon="solar:box-linear" class="text-danger"></iconify-icon>
-                            </span>
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-between gap-1">
-                            <span class="badge bg-success">{{ $stats['completed_production_orders'] }} term.</span>
-                            <span class="badge bg-warning text-dark">{{ $stats['pending_production_orders'] }}
-                                attente</span>
-                            @if ($stats['late_production_orders'] > 0)
-                                <span class="badge bg-danger">{{ $stats['late_production_orders'] }} retard</span>
-                            @endif
+                            <div class="d-flex flex-wrap justify-content-between gap-1">
+                                <span class="badge bg-success">{{ $stats['completed_production_orders'] }} term.</span>
+                                <span class="badge bg-warning text-dark">{{ $stats['pending_production_orders'] }}
+                                    attente</span>
+                                @if ($stats['late_production_orders'] > 0)
+                                    <span class="badge bg-danger">{{ $stats['late_production_orders'] }} retard</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card h-100">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center gap-2 gap-md-3 mb-3">
-                            <span
-                                class="round-48 d-flex align-items-center justify-content-center rounded bg-danger-subtle">
-                                <iconify-icon icon="solar:wallet-linear" class="fs-7 text-danger"></iconify-icon>
-                            </span>
-                            <h6 class="mb-0 fw-medium">Total Paiements</h6>
-                        </div>
-                        <h4 class="mb-2">{{ number_format($stats['completed_payments'], 0) }} <small
-                                class="fs-12 text-muted">DH</small></h4>
-                        <div class="mt-2">
-                            <div id="total-income" style="min-height:40px;"></div>
+                    <div class="card bg-success-subtle overflow-hidden shadow-none flex-fill mb-0">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center gap-2 gap-md-3 mb-3">
+                                <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-white">
+                                    <iconify-icon icon="solar:wallet-linear" class="fs-7 text-success"></iconify-icon>
+                                </span>
+                                <h6 class="mb-0 fw-medium">Total Paiements</h6>
+                            </div>
+                            <h4 class="mb-2">{{ number_format($stats['completed_payments'], 0) }} <small
+                                    class="fs-12 text-muted">DH</small></h4>
                         </div>
                     </div>
                 </div>
@@ -570,7 +576,7 @@
         </div>
 
         {{-- ═══════════════════════════════════════════════════════════════════════
-             3. GRAPHIQUE VENTES + RÉSUMÉ FINANCE - Mobile Responsive Charts
+             3. GRAPHIQUE VENTES + RÉSUMÉ FINANCE - Mobile Responsive Charts    
         ═══════════════════════════════════════════════════════════════════════ --}}
         <p class="section-title">Finance</p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
@@ -579,17 +585,25 @@
                     <div class="card-body p-2 p-md-3">
                         <div class="d-md-flex align-items-center justify-content-between mb-3">
                             <div>
-                                <h5 class="card-title mb-0">Ventes & Dépenses</h5>
-                                <p class="card-subtitle mb-0 text-muted">{{ date('Y') }}</p>
+                                <h5 class="card-title mb-0">Chiffre d'Affaires &amp; Dépenses</h5>
+                                <p class="card-subtitle mb-0 text-muted">Ventes vs Dépenses</p>
                             </div>
-                            <div class="d-flex gap-3 mt-2 mt-md-0">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="round-10 bg-primary rounded-circle d-block"></span>
-                                    <span class="text-muted" style="font-size:.75rem;">Ventes</span>
+                            <div class="d-flex align-items-center gap-3 mt-2 mt-md-0">
+                                <div class="d-flex gap-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="round-10 bg-primary rounded-circle d-block"></span>
+                                        <span class="text-muted" style="font-size:.75rem;">Ventes</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="round-10 bg-danger rounded-circle d-block"></span>
+                                        <span class="text-muted" style="font-size:.75rem;">Dépenses</span>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="round-10 bg-danger rounded-circle d-block"></span>
-                                    <span class="text-muted" style="font-size:.75rem;">Dépenses</span>
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Période CA">
+                                    <button type="button" class="btn btn-outline-primary active" id="caModeMonth"
+                                        data-mode="month">Mois</button>
+                                    <button type="button" class="btn btn-outline-primary" id="caModeDay"
+                                        data-mode="day">Jour</button>
                                 </div>
                             </div>
                         </div>
@@ -711,6 +725,246 @@
                                 <div class="kpi-label" style="font-size: 0.65rem;">Dép:
                                     {{ number_format($stats['today_expenses'], 0) }} DH</div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ═══════════════════════════════════════════════════════════════════════
+             RÈGLEMENTS PAR JOUR (espèce / chèque / traite / virement)
+        ═══════════════════════════════════════════════════════════════════════ --}}
+        <p class="section-title">Règlements par Jour</p>
+        <div class="row g-2 g-md-3 mb-3 mb-md-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="font-size:.75rem;">Date</th>
+                                        <th class="text-end" style="font-size:.75rem;">Espèces</th>
+                                        <th class="text-end" style="font-size:.75rem;">Chèque</th>
+                                        <th class="text-end" style="font-size:.75rem;">Traite</th>
+                                        <th class="text-end" style="font-size:.75rem;">Virement</th>
+                                        <th class="text-end" style="font-size:.75rem;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $sumCash = 0; $sumCheck = 0; $sumTraite = 0; $sumTransfer = 0; $sumTotal = 0;
+                                    @endphp
+                                    @foreach ($dailyPayments as $row)
+                                        @php
+                                            $sumCash += $row['cash']; $sumCheck += $row['check'];
+                                            $sumTraite += $row['traite']; $sumTransfer += $row['transfer'];
+                                            $sumTotal += $row['total'];
+                                        @endphp
+                                        <tr class="{{ $row['is_today'] ? 'table-primary' : '' }}">
+                                            <td class="fw-semibold">{{ $row['date'] }}
+                                                @if ($row['is_today'])
+                                                    <span class="badge bg-primary ms-1"
+                                                        style="font-size:.6rem;">Aujourd'hui</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-end">{{ number_format($row['cash'], 0, ',', ' ') }}</td>
+                                            <td class="text-end">{{ number_format($row['check'], 0, ',', ' ') }}</td>
+                                            <td class="text-end">{{ number_format($row['traite'], 0, ',', ' ') }}</td>
+                                            <td class="text-end">{{ number_format($row['transfer'], 0, ',', ' ') }}</td>
+                                            <td class="text-end fw-bold">{{ number_format($row['total'], 0, ',', ' ') }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot class="table-light">
+                                    <tr class="fw-bold">
+                                        <td>Total 7 jours</td>
+                                        <td class="text-end text-success">{{ number_format($sumCash, 0, ',', ' ') }}</td>
+                                        <td class="text-end">{{ number_format($sumCheck, 0, ',', ' ') }}</td>
+                                        <td class="text-end">{{ number_format($sumTraite, 0, ',', ' ') }}</td>
+                                        <td class="text-end">{{ number_format($sumTransfer, 0, ',', ' ') }}</td>
+                                        <td class="text-end text-primary">{{ number_format($sumTotal, 0, ',', ' ') }} DH</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ═══════════════════════════════════════════════════════════════════════
+             COÛT DE PRODUCTION (jour / mois) + Qté produite m³ · Matière première
+        ═══════════════════════════════════════════════════════════════════════ --}}
+        <p class="section-title">Coût de Production</p>
+        <div class="row g-2 g-md-3 mb-3 mb-md-4">
+            {{-- KPIs coût de production --}}
+            <div class="col-lg-3">
+                <div class="d-flex flex-column gap-2 gap-md-3 h-100">
+                    <div class="card kpi-card card-hover flex-fill">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <div class="kpi-icon bg-info-subtle">
+                                    <iconify-icon icon="solar:calendar-bold" class="text-info fs-5"></iconify-icon>
+                                </div>
+                                <span class="kpi-label">Coût Production Jour</span>
+                            </div>
+                            <div class="kpi-value text-info mb-0">{{ number_format($prodCostToday, 0, ',', ' ') }}<small
+                                    class="fs-11 fw-normal text-muted"> DH</small></div>
+                        </div>
+                    </div>
+                    <div class="card kpi-card card-hover flex-fill">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <div class="kpi-icon bg-primary-subtle">
+                                    <iconify-icon icon="solar:calendar-mark-bold" class="text-primary fs-5"></iconify-icon>
+                                </div>
+                                <span class="kpi-label">Coût Production Mois</span>
+                            </div>
+                            <div class="kpi-value text-primary mb-0">{{ number_format($prodCostMonth, 0, ',', ' ') }}<small
+                                    class="fs-11 fw-normal text-muted"> DH</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Qté produite en m³ par article --}}
+            <div class="col-lg-5">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <h5 class="card-title mb-3" style="font-size:1rem;">
+                            <iconify-icon icon="solar:box-bold" class="text-success me-1"></iconify-icon>
+                            Qté Produite en m³ par Article <small class="text-muted fw-normal">· ce mois</small>
+                        </h5>
+                        <div class="table-responsive-stack">
+                            <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
+                                <thead>
+                                    <tr>
+                                        <th class="fw-normal ps-0" style="font-size:.75rem;">Article</th>
+                                        <th class="fw-normal text-end" style="font-size:.75rem;">Qté</th>
+                                        <th class="fw-normal text-end" style="font-size:.75rem;">Volume (m³)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($productionByProduct as $p)
+                                        <tr>
+                                            <td class="ps-0">
+                                                <div class="fw-semibold" style="font-size:.8rem;">
+                                                    {{ $p->product_name }}</div>
+                                                <small class="text-muted"
+                                                    style="font-size:.65rem;">{{ $p->product_code }}</small>
+                                            </td>
+                                            <td class="text-end">{{ number_format($p->qty_produced, 0, ',', ' ') }}</td>
+                                            <td class="text-end fw-bold text-info">
+                                                {{ number_format($p->volume_m3, 3, ',', ' ') }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune production ce
+                                                mois</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Qté matière première consommée --}}
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <h5 class="card-title mb-3" style="font-size:1rem;">
+                            <iconify-icon icon="solar:test-tube-bold" class="text-warning me-1"></iconify-icon>
+                            Matière Première Consommée <small class="text-muted fw-normal">· ce mois</small>
+                        </h5>
+                        <div class="table-responsive-stack">
+                            <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
+                                <thead>
+                                    <tr>
+                                        <th class="fw-normal ps-0" style="font-size:.75rem;">Matière</th>
+                                        <th class="fw-normal text-end" style="font-size:.75rem;">Qté</th>
+                                        <th class="fw-normal text-end" style="font-size:.75rem;">Coût (DH)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($materialConsumption as $m)
+                                        <tr>
+                                            <td class="ps-0">
+                                                <div class="fw-semibold" style="font-size:.8rem;">
+                                                    {{ $m->material_name }}</div>
+                                                <small class="text-muted"
+                                                    style="font-size:.65rem;">{{ $m->material_code }}</small>
+                                            </td>
+                                            <td class="text-end">
+                                                {{ number_format($m->qty_used ?: $m->qty_planned, 2, ',', ' ') }}
+                                                <small class="text-muted">{{ $m->unit_of_measure }}</small>
+                                            </td>
+                                            <td class="text-end fw-bold">
+                                                {{ number_format($m->total_cost, 0, ',', ' ') }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune consommation ce
+                                                mois</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ═══════════════════════════════════════════════════════════════════════
+             CAPACITÉ DE PRODUCTION PAR ÉQUIPE (production / découpage) + rendement
+        ═══════════════════════════════════════════════════════════════════════ --}}
+        <p class="section-title">Capacité de Production par Équipe · Rendement</p>
+        <div class="row g-2 g-md-3 mb-3 mb-md-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="font-size:.75rem;">Équipe / Type</th>
+                                        <th class="text-end" style="font-size:.75rem;">Produites</th>
+                                        <th class="text-end" style="font-size:.75rem;">Défectueuses</th>
+                                        <th class="text-end" style="font-size:.75rem;">Volume (m³)</th>
+                                        <th style="font-size:.75rem; min-width:140px;">Rendement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($capacityByType as $c)
+                                        <tr>
+                                            <td class="fw-semibold">{{ $c->label }}</td>
+                                            <td class="text-end">{{ number_format($c->qty_produced, 0, ',', ' ') }}</td>
+                                            <td class="text-end text-danger">
+                                                {{ number_format($c->qty_defective, 0, ',', ' ') }}</td>
+                                            <td class="text-end text-info">
+                                                {{ number_format($c->volume_m3, 3, ',', ' ') }}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="progress progress-sm flex-grow-1">
+                                                        <div class="progress-bar {{ $c->yield >= 90 ? 'bg-success' : ($c->yield >= 70 ? 'bg-warning' : 'bg-danger') }}"
+                                                            style="width:{{ $c->yield }}%"></div>
+                                                    </div>
+                                                    <span
+                                                        class="fw-bold small {{ $c->yield >= 90 ? 'text-success' : ($c->yield >= 70 ? 'text-warning' : 'text-danger') }}">{{ $c->yield }}%</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center py-3 text-muted small">Aucune production ce
+                                                mois</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -1012,9 +1266,75 @@
             </script>
         @endpush
         {{-- ═══════════════════════════════════════════════════════════════════════
+             ÉCHÉANCES : Chèques / Traites / Virements (fournisseur / client) avec dates
+        ═══════════════════════════════════════════════════════════════════════ --}}
+        <p class="section-title">Chèques / Traites / Virements · Échéances</p>
+        <div class="row g-2 g-md-3 mb-3 mb-md-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="font-size:.75rem;">Instrument</th>
+                                        <th style="font-size:.75rem;">Sens</th>
+                                        <th style="font-size:.75rem;">Tiers</th>
+                                        <th style="font-size:.75rem;">Référence</th>
+                                        <th class="text-end" style="font-size:.75rem;">Montant (DH)</th>
+                                        <th style="font-size:.75rem;">Échéance</th>
+                                        <th style="font-size:.75rem;">Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($echeances as $e)
+                                        @php
+                                            $isOverdue = $e['date'] && $e['date']->isPast() && !$e['date']->isToday();
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                <span class="badge {{ $e['instrument'] === 'Chèque' ? 'bg-primary' : 'bg-info' }}"
+                                                    style="font-size:.65rem;">{{ $e['instrument'] }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge {{ $e['sens'] === 'Client' ? 'bg-success text-success' : 'bg-danger text-danger' }}"
+                                                    style="font-size:.65rem;">{{ $e['sens'] }}</span>
+                                            </td>
+                                            <td class="fw-semibold">{{ $e['party'] }}</td>
+                                            <td class="text-muted" style="font-size:.72rem;">{{ $e['reference'] }}</td>
+                                            <td class="text-end fw-bold">{{ number_format($e['amount'], 2, ',', ' ') }}</td>
+                                            <td class="{{ $isOverdue ? 'text-danger fw-bold' : '' }}">
+                                                @if ($e['date'])
+                                                    {{ $e['date']->format('d/m/Y') }}
+                                                    @if ($isOverdue)
+                                                        <iconify-icon icon="solar:danger-triangle-bold"
+                                                            class="ms-1"></iconify-icon>
+                                                    @endif
+                                                @else
+                                                    —
+                                                @endif
+                                            </td>
+                                            <td><span class="badge bg-secondary"
+                                                    style="font-size:.65rem;">{{ ucfirst($e['status']) }}</span></td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7" class="text-center py-3 text-muted small">Aucune échéance en
+                                                attente</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ═══════════════════════════════════════════════════════════════════════
              4. STOCK CRITIQUE - Mobile Responsive
         ═══════════════════════════════════════════════════════════════════════ --}}
-        <p class="section-title">Gestion du Stock</p>
+        <p class="section-title">Stock Actuel · Matière Première / Produit Fini</p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
             <div class="col-lg-6">
                 <div class="card h-100">
@@ -1094,8 +1414,8 @@
                                         <small class="d-block text-muted"
                                             style="font-size: 0.7rem;">{{ $product->product_code }}</small>
                                         @if (isset($product->famille_name))
-                                            <span class="badge bg-light text-dark"
-                                                style="font-size:.6rem;">{{ $product->famille_name }}</span>
+                                            <span class="badge bg-light"
+                                                style="font-size:.6rem;color:black !important;">{{ $product->famille_name }}</span>
                                         @endif
                                     </div>
                                     <div class="text-end">
@@ -1128,7 +1448,7 @@
                     class="card text-center kpi-card h-100 {{ $stats['production_yield'] < 80 ? 'border-warning' : '' }}">
                     <div class="card-body p-3 py-md-4">
                         <div class="bg-success-subtle rounded-circle p-2 d-inline-flex mb-2">
-                            <iconify-icon icon="solar:factory-bold" class="text-success"></iconify-icon>
+                            <iconify-icon icon="solar:box-bold" class="text-success"></iconify-icon>
                         </div>
                         <h5 class="mb-2" style="font-size: 1rem;">Production du Jour</h5>
                         <div class="row g-0 mt-2">
@@ -1349,7 +1669,7 @@
         {{-- ═══════════════════════════════════════════════════════════════════════
              7. ANALYSE PRODUITS - Responsive Tabs
         ═══════════════════════════════════════════════════════════════════════ --}}
-        <p class="section-title">Analyse Produits</p>
+        <p class="section-title">Analyse Produits · Rotation / Stock Mort</p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
             <div class="col-lg-8">
                 <div class="card">
@@ -1364,8 +1684,8 @@
                                 <a class="nav-link active" data-bs-toggle="tab" href="#tab-top-products" role="tab">
                                     <div class="d-flex align-items-center gap-1 gap-md-2">
                                         <iconify-icon icon="solar:trending-up-bold" class="fs-6"></iconify-icon>
-                                        <span class="d-none d-sm-inline">Top Produits</span>
-                                        <span class="d-inline d-sm-none">Top</span>
+                                        <span class="d-none d-sm-inline">Plus Vendus · Rotation</span>
+                                        <span class="d-inline d-sm-none">Rotation</span>
                                     </div>
                                 </a>
                             </li>
@@ -1373,8 +1693,8 @@
                                 <a class="nav-link" data-bs-toggle="tab" href="#tab-low-products" role="tab">
                                     <div class="d-flex align-items-center gap-1 gap-md-2">
                                         <iconify-icon icon="solar:trending-down-bold" class="fs-6"></iconify-icon>
-                                        <span class="d-none d-sm-inline">Moins Vendus</span>
-                                        <span class="d-inline d-sm-none">Flop</span>
+                                        <span class="d-none d-sm-inline">Moins Vendus · Stock Mort</span>
+                                        <span class="d-inline d-sm-none">Stock Mort</span>
                                     </div>
                                 </a>
                             </li>
@@ -1573,7 +1893,9 @@
                             @foreach ($recentProductionOrders->take(3) as $order)
                                 <li class="timeline-item d-flex position-relative overflow-hidden">
                                     <div class="text-muted flex-shrink-0 text-end me-2"
-                                        style="min-width:40px;font-size:.7rem;">{{ $order->created_at->format('H:i') }}
+                                        style="min-width:52px;font-size:.7rem;">
+                                        <div class="fw-semibold text-dark">{{ $order->created_at->format('d/m') }}</div>
+                                        {{ $order->created_at->format('H:i') }}
                                     </div>
                                     <div class="timeline-badge-wrap d-flex flex-column align-items-center">
                                         <span class="timeline-badge bg-primary flex-shrink-0 mt-1"></span>
@@ -1587,7 +1909,9 @@
                             @forelse($recentSalesOrders->take(4) as $order)
                                 <li class="timeline-item d-flex position-relative overflow-hidden">
                                     <div class="text-muted flex-shrink-0 text-end me-2"
-                                        style="min-width:40px;font-size:.7rem;">{{ $order->created_at->format('H:i') }}
+                                        style="min-width:52px;font-size:.7rem;">
+                                        <div class="fw-semibold text-dark">{{ $order->created_at->format('d/m') }}</div>
+                                        {{ $order->created_at->format('H:i') }}
                                     </div>
                                     <div class="timeline-badge-wrap d-flex flex-column align-items-center">
                                         <span class="timeline-badge bg-success flex-shrink-0 mt-1"></span>
@@ -1672,15 +1996,27 @@
             // Function to check if mobile
             const isMobile = window.innerWidth < 768;
 
-            // ── Revenue + Expenses chart ─────────────────────────────────────────
-            new ApexCharts(document.querySelector("#revenue-chart"), {
+            // ── Revenue + Expenses chart (bascule Mois / Jour) ───────────────────
+            const caData = {
+                month: {
+                    sales: @json($monthlySalesData),
+                    expenses: @json($monthlyExpensesData),
+                    labels: @json($monthsLabels)
+                },
+                day: {
+                    sales: @json($dailySalesData),
+                    expenses: @json($dailyExpensesData),
+                    labels: @json($dailyLabels)
+                }
+            };
+            const revenueChart = new ApexCharts(document.querySelector("#revenue-chart"), {
                 series: [{
                         name: 'Ventes (DH)',
-                        data: @json($monthlySalesData)
+                        data: caData.month.sales
                     },
                     {
                         name: 'Dépenses (DH)',
-                        data: @json($monthlyExpensesData)
+                        data: caData.month.expenses
                     }
                 ],
                 chart: {
@@ -1728,7 +2064,7 @@
                     }
                 },
                 xaxis: {
-                    categories: @json($monthsLabels),
+                    categories: caData.month.labels,
                     axisBorder: {
                         show: false
                     },
@@ -1755,7 +2091,31 @@
                         formatter: val => val.toFixed(0) + ' DH'
                     }
                 }
-            }).render();
+            });
+            revenueChart.render();
+
+            // Toggle Mois / Jour
+            document.querySelectorAll('#caModeMonth, #caModeDay').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const mode = this.dataset.mode;
+                    document.getElementById('caModeMonth').classList.toggle('active', mode === 'month');
+                    document.getElementById('caModeDay').classList.toggle('active', mode === 'day');
+                    revenueChart.updateOptions({
+                        series: [{
+                                name: 'Ventes (DH)',
+                                data: caData[mode].sales
+                            },
+                            {
+                                name: 'Dépenses (DH)',
+                                data: caData[mode].expenses
+                            }
+                        ],
+                        xaxis: {
+                            categories: caData[mode].labels
+                        }
+                    });
+                });
+            });
 
             // ── Client distribution sparkline ────────────────────────────────────
             new ApexCharts(document.querySelector("#client-distribution-chart"), {

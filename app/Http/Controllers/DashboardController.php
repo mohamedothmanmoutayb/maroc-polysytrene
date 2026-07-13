@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductionOrder;
 use App\Models\ProductionOutput;
+use App\Models\ProductionConsumption;
 use App\Models\Product;
 use App\Models\RawMaterial;
 use App\Models\StockMovementDetail;
@@ -13,6 +14,7 @@ use App\Models\Client;
 use App\Models\Expense;
 use App\Models\Payment;
 use App\Models\Check;
+use App\Models\Traite;
 use App\Models\Supplier;
 use App\Models\Employee;
 use App\Models\Machine;
@@ -280,6 +282,143 @@ class DashboardController extends Controller
             'date_to' => $dateTo->format('d/m/Y'),
         ];
 
+        // ═══════════════════════════════════════════════════════════════════════
+        // DONNÉES POUR LE TABLEAU DE BORD (checklist métier)
+        // ═══════════════════════════════════════════════════════════════════════
+
+        // 1. CHIFFRE D'AFFAIRES PAR JOUR (mois courant) — pour bascule Mois / Jour
+        $daysInMonth   = now()->daysInMonth;
+        $dailyLabels   = [];
+        $dailySalesData    = [];
+        $dailyExpensesData = [];
+        for ($d = 1; $d <= $daysInMonth; $d++) {
+            $day = now()->startOfMonth()->addDays($d - 1);
+            $dailyLabels[]        = $day->format('d');
+            $dailySalesData[]     = (float) SalesOrder::whereDate('order_date', $day)->sum('final_amount');
+            $dailyExpensesData[]  = (float) Expense::whereDate('expense_date', $day)->sum('amount');
+        }
+
+        // 2. RÈGLEMENTS PAR JOUR (7 derniers jours, par mode de paiement)
+        $dailyPayments = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $day  = now()->subDays($i);
+            $base = SalesOrderPayment::whereDate('payment_date', $day);
+            $cash     = (float) (clone $base)->where('payment_method', 'cash')->sum('amount');
+            $check    = (float) (clone $base)->where('payment_method', 'check')->sum('amount');
+            $traite   = (float) (clone $base)->where('payment_method', 'traite')->sum('amount');
+            $transfer = (float) (clone $base)->where('payment_method', 'transfer')->sum('amount');
+            $dailyPayments[] = [
+                'date'     => $day->format('d/m'),
+                'is_today' => $day->isToday(),
+                'cash'     => $cash,
+                'check'    => $check,
+                'traite'   => $traite,
+                'transfer' => $transfer,
+                'total'    => $cash + $check + $traite + $transfer,
+            ];
+        }
+
+        // 3. COÛT DE PRODUCTION (jour / mois) — valeur des matières consommées
+        $prodCostToday = (float) ProductionConsumption::whereHas('productionOrder', function ($q) {
+            $q->whereDate('start_date', today());
+        })->sum('total_cost');
+        $prodCostMonth = (float) ProductionConsumption::whereHas('productionOrder', function ($q) use ($currentYear, $currentMonth) {
+            $q->whereYear('start_date', $currentYear)->whereMonth('start_date', $currentMonth);
+        })->sum('total_cost');
+
+        // 3.a QUANTITÉ PRODUITE EN m³ PAR ARTICLE (mois courant)
+        $productionByProduct = ProductionOutput::join('products', 'production_output.product_id', '=', 'products.product_id')
+            ->whereYear('production_output.production_date', $currentYear)
+            ->whereMonth('production_output.production_date', $currentMonth)
+            ->groupBy('products.product_id', 'products.product_name', 'products.product_code')
+            ->selectRaw('products.product_name, products.product_code,
+                SUM(production_output.quantity_produced) as qty_produced,
+                SUM(production_output.total_volume_m3) as volume_m3')
+            ->orderByDesc('volume_m3')
+            ->limit(8)
+            ->get();
+
+        // 3.b QUANTITÉ MATIÈRE PREMIÈRE CONSOMMÉE (mois courant) — EPS + gaz + ...
+        $materialConsumption = ProductionConsumption::join('raw_materials', 'production_consumption.material_id', '=', 'raw_materials.material_id')
+            ->whereHas('productionOrder', function ($q) use ($currentYear, $currentMonth) {
+                $q->whereYear('start_date', $currentYear)->whereMonth('start_date', $currentMonth);
+            })
+            ->groupBy('raw_materials.material_id', 'raw_materials.material_name', 'raw_materials.material_code', 'raw_materials.unit_of_measure')
+            ->selectRaw('raw_materials.material_name, raw_materials.material_code, raw_materials.unit_of_measure,
+                SUM(production_consumption.actual_quantity_used) as qty_used,
+                SUM(production_consumption.planned_quantity) as qty_planned,
+                SUM(production_consumption.total_cost) as total_cost')
+            ->orderByDesc('total_cost')
+            ->limit(8)
+            ->get();
+
+        // 4. CAPACITÉ DE PRODUCTION PAR ÉQUIPE (production / découpage) + rendement (mois courant)
+        $typeLabels = [
+            'type1' => 'Production',
+            'type2' => 'Découpage',
+            'type3' => 'Conversion',
+            'type4' => 'Transformation',
+            'type5' => 'Chutes → Finis',
+        ];
+        $capacityByType = ProductionOutput::join('production_orders', 'production_output.production_order_id', '=', 'production_orders.order_id')
+            ->whereYear('production_output.production_date', $currentYear)
+            ->whereMonth('production_output.production_date', $currentMonth)
+            ->groupBy('production_orders.production_type')
+            ->selectRaw('production_orders.production_type as production_type,
+                SUM(production_output.quantity_produced) as qty_produced,
+                SUM(production_output.quantity_defective) as qty_defective,
+                SUM(production_output.total_volume_m3) as volume_m3')
+            ->get()
+            ->map(function ($row) use ($typeLabels) {
+                $produced  = (float) $row->qty_produced;
+                $defective = (float) $row->qty_defective;
+                $row->label = $typeLabels[$row->production_type] ?? $row->production_type;
+                $row->yield = $produced > 0 ? round((($produced - $defective) / $produced) * 100, 1) : 0;
+                return $row;
+            });
+
+        // 5. ÉCHÉANCES : Chèques / Traites (fournisseur / client) avec dates
+        $echeances = collect();
+
+        Check::whereNotIn('status', ['cleared'])
+            ->orderByRaw('COALESCE(clearing_date, deposit_date, issue_date) asc')
+            ->limit(10)
+            ->get()
+            ->each(function ($check) use ($echeances) {
+                $date = $check->clearing_date ?? $check->deposit_date ?? $check->issue_date;
+                $echeances->push([
+                    'instrument' => 'Chèque',
+                    'sens'       => $check->check_type === 'client' ? 'Client' : 'Fournisseur',
+                    'party'      => $check->account_holder ?? $check->bank_name ?? '—',
+                    'reference'  => $check->check_number,
+                    'amount'     => (float) ($check->remaining_amount ?? $check->amount),
+                    'date'       => $date,
+                    'status'     => $check->status,
+                ]);
+            });
+
+        Traite::whereNotIn('status', ['paid', 'cancelled'])
+            ->with('client')
+            ->orderByRaw('COALESCE(due_date, issue_date) asc')
+            ->limit(10)
+            ->get()
+            ->each(function ($traite) use ($echeances) {
+                $echeances->push([
+                    'instrument' => 'Traite',
+                    'sens'       => 'Client',
+                    'party'      => $traite->client->display_name ?? $traite->drawee ?? '—',
+                    'reference'  => $traite->traite_number,
+                    'amount'     => (float) $traite->amount,
+                    'date'       => $traite->due_date ?? $traite->issue_date,
+                    'status'     => $traite->status,
+                ]);
+            });
+
+        $echeances = $echeances
+            ->sortBy(fn ($e) => $e['date'] ? $e['date']->timestamp : PHP_INT_MAX)
+            ->take(10)
+            ->values();
+
         // ── Alerts ────────────────────────────────────────────────────────────
         $totalAlerts = $lowStockProducts->count()
             + $lowStockMaterials->count()
@@ -345,7 +484,18 @@ class DashboardController extends Controller
             'lowStockProducts',
             'lowStockMaterials',
             'machinesInMaint',
-            'cashFlowData'
+            'cashFlowData',
+            // Checklist métier
+            'dailyLabels',
+            'dailySalesData',
+            'dailyExpensesData',
+            'dailyPayments',
+            'prodCostToday',
+            'prodCostMonth',
+            'productionByProduct',
+            'materialConsumption',
+            'capacityByType',
+            'echeances'
         ));
     }
 

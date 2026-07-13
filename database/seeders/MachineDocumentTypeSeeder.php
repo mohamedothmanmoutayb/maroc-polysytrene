@@ -50,6 +50,15 @@ class MachineDocumentTypeSeeder extends Seeder
                 'is_active' => true,
                 'sort_order' => 5,
             ],
+            [
+                'type_code' => 'maintenance',
+                'type_name' => 'Maintenance',
+                'description' => 'Maintenance programmée',
+                'default_duration_days' => 180,
+                'reminder_days_before' => 15,
+                'is_active' => true,
+                'sort_order' => 6,
+            ],
         ];
 
         foreach ($types as $type) {

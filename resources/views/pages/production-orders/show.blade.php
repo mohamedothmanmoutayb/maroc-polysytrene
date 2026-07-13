@@ -43,6 +43,10 @@
                             <i class="fas fa-info-circle me-2"></i>Ordre : {{ $order->order_number }}
                         </h5>
                         <div>
+                            <a href="{{ route('production-orders.print', $order->order_id) }}" target="_blank"
+                                class="btn btn-outline-light btn-sm me-2">
+                                <i class="fas fa-print me-1"></i> Imprimer
+                            </a>
                             @if ($order->status === 'pending' || $order->status === 'approved')
                                 @can('start_production_orders')
                                 <button class="btn btn-success btn-sm me-2 start-production"
@@ -148,6 +152,10 @@
                                                 <th>Créé par:</th>
                                                 <td>{{ $order->creator->username ?? ($order->created_by ? 'Utilisateur #' . $order->created_by : 'N/A') }}
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Responsable:</th>
+                                                <td>{{ $order->responsibleEmployee->full_name ?? 'N/A' }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Créé le:</th>

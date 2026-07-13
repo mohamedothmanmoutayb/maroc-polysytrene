@@ -140,14 +140,15 @@
                                                 <label class="form-label small">Date de début</label>
                                                 <input type="date" class="form-control start-date"
                                                     name="documents[{{ $type->document_type_id }}][start_date]"
-                                                    value="{{ $currentDoc->start_date ? $currentDoc->start_date->format('Y-m-d') : '' }}">
+                                                    value="{{ $currentDoc?->start_date?->format('Y-m-d') }}"
+                                                    data-default-duration="{{ $type->default_duration_days }}"
+                                                    data-reminder-days="{{ $type->reminder_days_before }}">
                                             </div>
                                             <div class="col-md-4 mb-2">
-                                                <label class="form-label small">Date de fin *</label>
+                                                <label class="form-label small">Date de fin</label>
                                                 <input type="date" class="form-control end-date"
                                                     name="documents[{{ $type->document_type_id }}][end_date]"
-                                                    value="{{ $currentDoc->end_date ? $currentDoc->end_date->format('Y-m-d') : '' }}"
-                                                    required>
+                                                    value="{{ $currentDoc?->end_date?->format('Y-m-d') }}">
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <label class="form-label small">Autorité émettrice</label>
@@ -160,6 +161,9 @@
                                                 <input type="text" class="form-control"
                                                     name="documents[{{ $type->document_type_id }}][notes]"
                                                     value="{{ $currentDoc->notes ?? '' }}">
+                                            </div>
+                                            <div class="col-12">
+                                                <small class="text-muted duration-note"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -236,6 +240,36 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Recalculate end date when start date changes, and show duration/reminder as a note
+            $('#documentsContainer').on('change', '.start-date', function() {
+                const row = $(this).closest('.document-row');
+                const defaultDuration = $(this).data('default-duration');
+                const reminderDays = $(this).data('reminder-days');
+                const startDateVal = $(this).val();
+                let infoParts = [];
+
+                if (defaultDuration && defaultDuration > 0 && startDateVal) {
+                    const start = new Date(startDateVal);
+                    const end = new Date(start);
+                    end.setDate(end.getDate() + parseInt(defaultDuration));
+
+                    const year = end.getFullYear();
+                    const month = String(end.getMonth() + 1).padStart(2, '0');
+                    const day = String(end.getDate()).padStart(2, '0');
+                    row.find('.end-date').val(`${year}-${month}-${day}`);
+
+                    infoParts.push(`Durée: ${defaultDuration} jours (fin estimée le ${day}/${month}/${year})`);
+                } else if (defaultDuration && defaultDuration > 0) {
+                    infoParts.push(`Durée par défaut: ${defaultDuration} jours — sélectionnez une date de début pour calculer la date de fin`);
+                }
+
+                if (reminderDays) {
+                    infoParts.push(`Rappel programmé ${reminderDays} jours avant expiration`);
+                }
+
+                row.find('.duration-note').text(infoParts.join(' — '));
+            });
+
             // View document history
             $(document).on('click', '.view-history', function() {
                 var documentTypeId = $(this).data('document-type');
@@ -268,8 +302,8 @@
                                 }
 
                                 html += '<tr>' +
-                                    '<td>' + (doc.start_date || '-') + '</td>' +
-                                    '<td>' + (doc.end_date || '-') + '</td>' +
+                                    '<td>' + formatDate(doc.start_date) + '</td>' +
+                                    '<td>' + formatDate(doc.end_date) + '</td>' +
                                     '<td>' + (doc.document_number || '-') + '</td>' +
                                     '<td>' + (doc.issuing_authority || '-') + '</td>' +
                                     '<td class="text-center">' + statusBadge + '</td>' +
@@ -338,6 +372,10 @@
                 });
             });
         });
+
+        function formatDate(value) {
+            return value ? new Date(value).toLocaleDateString('fr-FR') : '-';
+        }
 
         function showToast(type, message) {
             var toast = $('<div class="toast align-items-center text-white bg-' +

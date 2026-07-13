@@ -6,6 +6,7 @@ use App\Helpers\ProductionOrderNotificationHelper;
 use App\Models\ProductionOrder;
 use App\Models\Product;
 use App\Models\BillOfMaterial;
+use App\Models\Employee;
 use App\Models\Famille;
 use App\Models\ProductFamilleStock;
 use App\Models\ProductionConsumption;
@@ -22,12 +23,13 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductionOrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:view_production_orders')->only(['index', 'show', 'apiShow', 'getStatistics', 'dashboardStatistics', 'getBom', 'getConversions', 'getSourceProducts', 'getFinalProducts', 'getOrderBom', 'getWastes', 'getOutputSummary', 'getBomForMaterial', 'getConsumedBlocks', 'getProductFamilles', 'getFamilles', 'getSourceProductFamilles']);
+        $this->middleware('can:view_production_orders')->only(['index', 'show', 'printOrder', 'apiShow', 'getStatistics', 'dashboardStatistics', 'getBom', 'getConversions', 'getSourceProducts', 'getFinalProducts', 'getOrderBom', 'getWastes', 'getOutputSummary', 'getBomForMaterial', 'getConsumedBlocks', 'getProductFamilles', 'getFamilles', 'getSourceProductFamilles']);
         $this->middleware('can:create_production_orders')->only(['create', 'store']);
         $this->middleware('can:edit_production_orders')->only(['edit', 'update', 'editOrder', 'cancelProduction']);
         $this->middleware('can:delete_production_orders')->only(['destroy']);
@@ -56,6 +58,9 @@ class ProductionOrderController extends Controller
                 })
                 ->when($request->filled('product_id'), function ($query) use ($request) {
                     return $query->where('product_id', $request->product_id);
+                })
+                ->when($request->filled('responsible_employee_id'), function ($query) use ($request) {
+                    return $query->where('responsible_employee_id', $request->responsible_employee_id);
                 })
                 ->when($request->filled('has_waste'), function ($query) use ($request) {
                     if ($request->has_waste === 'has_waste') {
@@ -255,8 +260,9 @@ class ProductionOrderController extends Controller
         }
 
         $products = Product::where('is_active', true)->get();
+        $employees = Employee::whereNull('resignation_date')->orderBy('full_name')->get();
 
-        return view('pages.production-orders.index', compact('products'));
+        return view('pages.production-orders.index', compact('products', 'employees'));
     }
 
     private function calculateDecoupageProgress(ProductionOrder $order)
@@ -307,6 +313,8 @@ class ProductionOrderController extends Controller
 
         $familles = Famille::where('is_active', true)->orderBy('famille_name')->get();
 
+        $employees = Employee::whereNull('resignation_date')->orderBy('full_name')->get();
+
         $product_id = $request->get('product_id');
 
         if ($product_id) {
@@ -321,7 +329,8 @@ class ProductionOrderController extends Controller
                 'salesProducts',
                 'product',
                 'familles',
-                'bom'
+                'bom',
+                'employees'
             ));
         }
 
@@ -329,7 +338,8 @@ class ProductionOrderController extends Controller
             'productionProducts',
             'decoupageProducts',
                 'familles',
-            'salesProducts'
+            'salesProducts',
+            'employees'
         ));
     }
 
@@ -351,6 +361,7 @@ class ProductionOrderController extends Controller
                 'chutes_volume' => 'nullable|numeric|min:0',
                 'total_cost' => 'nullable|numeric|min:0',
                 'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
                 'bom_consumptions' => 'nullable|array',
                 'bom_consumptions.*.material_id' => 'required_with:bom_consumptions.*.planned_quantity|exists:raw_materials,material_id',
                 'bom_consumptions.*.planned_quantity' => 'required_with:bom_consumptions.*.material_id|numeric|min:0',
@@ -371,6 +382,7 @@ class ProductionOrderController extends Controller
                 'expected_completion_date' => 'required|date',
                 'production_type' => 'required|in:type1,type2,type3,type4',
                 'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
             ]);
         } elseif ($request->production_type === 'type3') {
             $request->validate([
@@ -387,6 +399,7 @@ class ProductionOrderController extends Controller
                 'expected_completion_date' => 'required|date',
                 'production_type' => 'required|in:type1,type2,type3,type4',
                 'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
             ]);
        } elseif ($request->production_type === 'type4') {
             $request->validate([
@@ -401,6 +414,7 @@ class ProductionOrderController extends Controller
                 'expected_completion_date' => 'required|date',
                 'production_type' => 'required|in:type1,type2,type3,type4,type5',
                 'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
             ]);
         } elseif ($request->production_type === 'type5') {
             $request->validate([
@@ -414,6 +428,7 @@ class ProductionOrderController extends Controller
                 'expected_completion_date' => 'required|date',
                 'production_type' => 'required|in:type1,type2,type3,type4,type5',
                 'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
                 'force_chutes' => 'nullable|boolean',
             ]);
         } else {
@@ -918,6 +933,7 @@ class ProductionOrderController extends Controller
                 'notes' => $request->notes,
                 'status' => 'pending',
                 'created_by' => auth()->id(),
+                'responsible_employee_id' => $request->responsible_employee_id,
                 'additional_data' => $this->prepareAdditionalData($request, $productsData, $resolvedSourceProducts),
             ];
 
@@ -1577,7 +1593,7 @@ class ProductionOrderController extends Controller
 
                     if ($wasteId) {
                         // Update existing waste
-                        ProductionWaste::where('id', $wasteId)->update($wasteData);
+                        ProductionWaste::where('waste_id', $wasteId)->update($wasteData);
                     } else {
                         // Create new waste
                         ProductionWaste::create($wasteData);
@@ -1606,7 +1622,7 @@ class ProductionOrderController extends Controller
 
                     if ($wasteId) {
                         // Update existing waste
-                        ProductionWaste::where('id', $wasteId)->update($wasteData);
+                        ProductionWaste::where('waste_id', $wasteId)->update($wasteData);
                     } else {
                         // Create new waste
                         ProductionWaste::create($wasteData);
@@ -1852,6 +1868,28 @@ class ProductionOrderController extends Controller
 
     public function show($id)
     {
+        return view('pages.production-orders.show', $this->prepareOrderShowData($id));
+    }
+
+    /**
+     * Stream a printable A4 PDF of the production order (same data as show()).
+     */
+    public function printOrder($id)
+    {
+        $data = $this->prepareOrderShowData($id);
+
+        $data['date'] = now()->format('d/m/Y');
+        $data['time'] = now()->format('H:i');
+        $data['username'] = auth()->user()->name ?? auth()->user()->username;
+
+        $pdf = Pdf::loadView('pdf.production-order', $data);
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->stream('ordre-production-' . $data['order']->order_number . '.pdf');
+    }
+
+    private function prepareOrderShowData($id)
+    {
         $order = ProductionOrder::with([
             'product',
             'creator',
@@ -1862,7 +1900,8 @@ class ProductionOrderController extends Controller
             'conversionOutputs',
             'famille',
             'qualityCheckedBy',
-            'qualityOverrideBy'
+            'qualityOverrideBy',
+            'responsibleEmployee'
         ])->findOrFail($id);
 
         $totalProduced = $order->outputs->sum('quantity_produced');
@@ -1928,7 +1967,7 @@ class ProductionOrderController extends Controller
             }
         }
 
-        return view('pages.production-orders.show', compact('order', 'totalProduced', 'totalDefective', 'progress', 'qualityMetrics', 'sourceProducts', 'subProducts'));
+        return compact('order', 'totalProduced', 'totalDefective', 'progress', 'qualityMetrics', 'sourceProducts', 'subProducts');
     }
 
     /**
@@ -2051,7 +2090,7 @@ class ProductionOrderController extends Controller
 
             $wastes = $order->wastes->map(function($waste) {
                 return [
-                    'id' => $waste->id,
+                    'id' => $waste->waste_id,
                     'waste_type' => $waste->waste_type,
                     'waste_source' => $waste->waste_source,
                     'height' => $waste->height,
@@ -3171,13 +3210,16 @@ class ProductionOrderController extends Controller
             $type3Products = $order->getType3Products();
         }
 
+        $employees = Employee::whereNull('resignation_date')->orderBy('full_name')->get();
+
         return view('pages.production-orders.edit', compact(
             'order',
             'products',
             'productionProducts',
             'decoupageProducts',
             'salesProducts',
-            'type3Products'
+            'type3Products',
+            'employees'
         ));
     }
 
@@ -3213,6 +3255,7 @@ class ProductionOrderController extends Controller
                 'start_date' => 'required|date',
                 'expected_completion_date' => 'required|date',
                 'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
                 'waste_percentage' => 'nullable|numeric|min:0|max:100',
 
                 // Type specific validations
@@ -3506,6 +3549,7 @@ case 'type2':
                 'start_date' => $request->start_date,
                 'expected_completion_date' => $request->expected_completion_date,
                 'notes' => $request->notes,
+                'responsible_employee_id' => $request->responsible_employee_id,
                 'waste_percentage' => $wastePercentage,
                 'decoupage_ratio' => $decoupageRatio,
                 'conversion_rate' => $conversionRate,

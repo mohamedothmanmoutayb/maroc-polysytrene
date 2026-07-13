@@ -178,7 +178,7 @@
                 <li><span class="sidebar-divider lg"></span></li>
 
                 <!-- Parc Auto -->
-                @canany(['view_vehicles', 'view_machines', 'view_drivers'])
+                @canany(['view_vehicles', 'view_machines', 'view_drivers', 'view_recharge_parts'])
                     <li class="nav-small-cap">
                         <iconify-icon icon="solar:menu-dots-linear" class="mini-icon"></iconify-icon>
                         <span class="hide-menu">Parc Auto</span>
@@ -270,12 +270,29 @@
                             </ul>
                         </li>
                     @endcan
+
+                    @can('view_recharge_parts')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <iconify-icon icon="vaadin:stock"></iconify-icon>
+                                <span class="hide-menu">Pièces de Rechange</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('recharge-parts.index') }}">
+                                        <span class="icon-small"></span>
+                                        <span class="hide-menu">Gestion des Pièces</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endcan
                 @endcanany
 
                 <li><span class="sidebar-divider lg"></span></li>
 
                 <!-- Gestion -->
-                @canany(['view_clients', 'view_suppliers', 'view_recharge_parts', 'view_inventory', 'view_purchases'])
+                @canany(['view_clients', 'view_suppliers', 'view_inventory', 'view_purchases'])
                     <li class="nav-small-cap">
                         <iconify-icon icon="solar:menu-dots-linear" class="mini-icon"></iconify-icon>
                         <span class="hide-menu">Gestion</span>
@@ -343,23 +360,6 @@
                                         </a>
                                     </li>
                                 @endcan
-                            </ul>
-                        </li>
-                    @endcan
-
-                    @can('view_recharge_parts')
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                <iconify-icon icon="vaadin:stock"></iconify-icon>
-                                <span class="hide-menu">Pièces de Rechange</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('recharge-parts.index') }}">
-                                        <iconify-icon icon="solar:list-line-duotone" class="icon-small"></iconify-icon>
-                                        <span class="hide-menu">Gestion des Pièces</span>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                     @endcan

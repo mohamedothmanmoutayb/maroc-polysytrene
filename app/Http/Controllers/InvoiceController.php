@@ -476,11 +476,6 @@ class InvoiceController extends Controller
             $discount = (float) ($request->discount ?? 0);
             $finalAmount = $totalAmount - $discount;
 
-            // Check if invoice has payments and if status change is allowed
-            if ($invoice->amount_paid > 0 && $request->status === 'cancelled') {
-                throw new \Exception('Impossible d\'annuler une facture qui a déjà des paiements.');
-            }
-
             // Update invoice
             $invoice->update([
                 'invoice_number' => $request->invoice_number,
@@ -604,7 +599,6 @@ class InvoiceController extends Controller
         // Create new invoice based on the original
         $newInvoice = $originalInvoice->replicate();
         $newInvoice->invoice_number = Invoice::generateInvoiceNumber();
-        $newInvoice->status = 'draft';
         $newInvoice->amount_paid = 0;
         $newInvoice->created_by = Auth::id();
         $newInvoice->save();
@@ -627,19 +621,17 @@ class InvoiceController extends Controller
     public function getStatistics()
     {
         $totalInvoices = Invoice::count();
-        $draftInvoices = Invoice::where('status', 'draft')->count();
-        $sentInvoices = Invoice::where('status', 'sent')->count();
-        $paidInvoices = Invoice::where('status', 'paid')->count();
-        $totalPaidAmount = Invoice::where('status', 'paid')->sum('final_amount');
-        $pendingAmount = Invoice::whereNotIn('status', ['paid', 'cancelled'])->sum(DB::raw('final_amount - amount_paid'));
+        $paidInvoices = Invoice::whereColumn('amount_paid', '>=', 'final_amount')->count();
+        $unpaidInvoices = Invoice::whereColumn('amount_paid', '<', 'final_amount')->count();
+        $totalPaidAmount = Invoice::sum('amount_paid');
+        $pendingAmount = Invoice::sum(DB::raw('final_amount - amount_paid'));
 
         return response()->json([
             'success' => true,
             'data' => [
                 'total' => $totalInvoices,
-                'draft' => $draftInvoices,
-                'sent' => $sentInvoices,
                 'paid' => $paidInvoices,
+                'unpaid' => $unpaidInvoices,
                 'amount_paid' => $totalPaidAmount,
                 'pending_amount' => $pendingAmount,
             ]
@@ -763,6 +755,7 @@ class InvoiceController extends Controller
             $invoice = Invoice::with(['client', 'items'])->findOrFail($id);
             $showPrices = $request->query('show_prices', 1);
             $showLogo = $request->query('show_logo', 1);
+            $showCacher = $request->query('show_cacher', 1);
             $displayType = $request->query('display_type', 'unite');
 
             // Check if it's a print request (direct print without download)
@@ -802,6 +795,7 @@ class InvoiceController extends Controller
                 'items' => $invoice->items,
                 'showPrices' => (bool) $showPrices,
                 'showLogo' => (bool) $showLogo,
+                'showCacher' => (bool) $showCacher,
                 'displayType' => $displayType,
                 'totalVolume' => $totalVolume,
                 'date' => now()->format('d/m/Y'),

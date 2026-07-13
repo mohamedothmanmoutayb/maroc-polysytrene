@@ -162,6 +162,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th width="5%">#</th>
+                                        <th>Date Consommation</th>
                                         <th>Ordre Production</th>
                                         <th>Matière Première</th>
                                         <th>Planifié</th>
@@ -302,6 +303,11 @@
                         className: 'text-center'
                     },
                     {
+                        data: 'consumption_date',
+                        name: 'created_at',
+                        className: 'text-center'
+                    },
+                    {
                         data: 'order_number',
                         name: 'productionOrder.order_number'
                     },
@@ -360,7 +366,7 @@
                     url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json"
                 },
                 order: [
-                    [0, 'desc']
+                    [1, 'desc']
                 ],
                 responsive: true,
                 dom: '<"row"<"col-md-6"l><"col-md-6"f>>rtip',

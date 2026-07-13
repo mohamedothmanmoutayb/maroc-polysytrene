@@ -29,6 +29,7 @@ class ProductionOrder extends Model
         'actual_completion_date',
         'notes',
         'created_by',
+        'responsible_employee_id',
         'cancelled_at',
         'cancellation_reason',
         'cancelled_by',
@@ -125,6 +126,11 @@ class ProductionOrder extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function responsibleEmployee()
+    {
+        return $this->belongsTo(Employee::class, 'responsible_employee_id');
     }
 
     public function cancelledBy()

@@ -18,6 +18,7 @@ class MachineDocumentType extends Model
         'type_code',
         'type_name',
         'description',
+        'default_duration_days',
         'reminder_days_before',
         'is_active',
         'sort_order',
@@ -25,6 +26,7 @@ class MachineDocumentType extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'default_duration_days' => 'integer',
         'reminder_days_before' => 'integer',
         'sort_order' => 'integer',
     ];

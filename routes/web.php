@@ -16,6 +16,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\MachineDocumentTypeController;
+use App\Http\Controllers\MachineMaintenanceController;
 use App\Http\Controllers\MagazineController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductCategoryController;
@@ -192,6 +193,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/statistics', [ProductionOrderController::class, 'getStatistics'])->name('statistics');
         Route::get('/{id}', [ProductionOrderController::class, 'show'])->name('show');
+        Route::get('/{id}/print', [ProductionOrderController::class, 'printOrder'])->name('print');
         Route::get('/{id}/edit', [ProductionOrderController::class, 'edit'])->name('edit');
         Route::put('/{id}', [ProductionOrderController::class, 'update'])->name('update');
         Route::delete('/{id}', [ProductionOrderController::class, 'destroy'])->name('destroy');
@@ -585,6 +587,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/machines/export/excel', [MachineController::class, 'exportExcel'])->name('machines.export.excel');
     Route::get('/machines/export/pdf', [MachineController::class, 'exportPdf'])->name('machines.export.pdf');
 
+    // Machine Maintenance Schedules Routes
+    Route::prefix('machine-maintenance')->name('machine-maintenance.')->group(function () {
+        Route::post('/', [MachineMaintenanceController::class, 'store'])->name('store');
+        Route::put('/{id}', [MachineMaintenanceController::class, 'update'])->name('update');
+        Route::delete('/{id}', [MachineMaintenanceController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/complete', [MachineMaintenanceController::class, 'complete'])->name('complete');
+        Route::get('/{id}/history', [MachineMaintenanceController::class, 'history'])->name('history');
+    });
+
 
     // Drivers
     Route::get('/drivers/statistics', [DriverController::class, 'getStatistics'])->name('drivers.statistics');
@@ -601,6 +612,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Recharge Parts Routes
     Route::put('recharge-parts/{id}/adjust-stock', [RechargePartController::class, 'adjustStock'])->name('recharge-parts.adjust-stock');
+    Route::get('recharge-parts/{id}/history', [RechargePartController::class, 'history'])->name('recharge-parts.history');
     Route::get('recharge-parts-statistics', [RechargePartController::class, 'getStatistics'])->name('recharge-parts.statistics');
     Route::get('recharge-parts-low-stock', [RechargePartController::class, 'getLowStock'])->name('recharge-parts.low-stock');
     Route::resource('recharge-parts', RechargePartController::class);

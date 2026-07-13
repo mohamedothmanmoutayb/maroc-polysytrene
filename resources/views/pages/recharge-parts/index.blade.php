@@ -180,22 +180,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Ajuster le stock</h5>
+                    <h5 class="modal-title" id="adjustStockModalLabel">Ajuster le stock</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="adjustStockForm">
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="adjust_part_id" name="part_id">
+                    <input type="hidden" id="movement_type" name="movement_type">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Pièce</label>
                             <input type="text" class="form-control" id="adjust_part_name" readonly>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Ajustement *</label>
-                            <input type="number" class="form-control" id="adjustment" name="adjustment" required>
-                            <small class="text-muted">Valeur positive pour ajouter, négative pour retirer</small>
+                            <label class="form-label" id="quantity_label">Quantité *</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Raison</label>
@@ -204,9 +204,46 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-warning">Appliquer</button>
+                        <button type="submit" class="btn btn-warning" id="adjustStockSubmit">Appliquer</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal fade" id="historyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Historique du stock — <span id="history_part_name"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th class="text-center">Quantité</th>
+                                    <th class="text-center">Stock Avant</th>
+                                    <th class="text-center">Stock Après</th>
+                                    <th>Raison</th>
+                                    <th>Utilisateur</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history_table_body">
+                            </tbody>
+                        </table>
+                        <p class="text-muted text-center mb-0" id="history_empty" style="display:none">
+                            Aucun mouvement de stock enregistré.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
             </div>
         </div>
     </div>
@@ -359,16 +396,18 @@
                 e.preventDefault();
 
                 let id = $('#adjust_part_id').val();
-                let adjustment = $('#adjustment').val();
+                let movementType = $('#movement_type').val();
+                let quantity = $('#quantity').val();
                 let reason = $('#reason').val();
 
                 $.ajax({
-                    url: "recharge-parts/" + id + "/adjust-stock",
+                    url: "{{ url('recharge-parts') }}/" + id + "/adjust-stock",
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
                         _method: 'PUT',
-                        adjustment: adjustment,
+                        movement_type: movementType,
+                        quantity: quantity,
                         reason: reason
                     },
                     success: function(response) {
@@ -455,18 +494,73 @@
             });
         }
 
-        function adjustStock(id, name) {
+        function adjustStock(id, name, type) {
             $('#adjust_part_id').val(id);
             $('#adjust_part_name').val(name);
-            $('#adjustment').val('');
+            $('#movement_type').val(type);
+            $('#quantity').val('');
             $('#reason').val('');
+
+            if (type === 'in') {
+                $('#adjustStockModalLabel').text('Ajouter au stock');
+                $('#quantity_label').text('Quantité à ajouter *');
+                $('#adjustStockSubmit').removeClass('btn-danger').addClass('btn-success').text('Ajouter');
+            } else {
+                $('#adjustStockModalLabel').text('Retirer du stock');
+                $('#quantity_label').text('Quantité à retirer *');
+                $('#adjustStockSubmit').removeClass('btn-success').addClass('btn-danger').text('Retirer');
+            }
+
             $('#adjustStockModal').modal('show');
+        }
+
+        function showHistory(id, name) {
+            $('#history_part_name').text(name);
+            $('#history_table_body').empty();
+            $('#history_empty').hide();
+
+            $.ajax({
+                url: "{{ url('recharge-parts') }}/" + id + "/history",
+                type: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        if (response.data.length === 0) {
+                            $('#history_empty').show();
+                        } else {
+                            response.data.forEach(function(movement) {
+                                let typeLabel = movement.movement_type === 'in' ?
+                                    '<span class="badge bg-success">Entrée</span>' :
+                                    '<span class="badge bg-danger">Sortie</span>';
+                                let row = '<tr>' +
+                                    '<td>' + escapeHtml(movement.date) + '</td>' +
+                                    '<td>' + typeLabel + '</td>' +
+                                    '<td class="text-center">' + escapeHtml(movement.quantity) + '</td>' +
+                                    '<td class="text-center">' + escapeHtml(movement.previous_stock) + '</td>' +
+                                    '<td class="text-center">' + escapeHtml(movement.new_stock) + '</td>' +
+                                    '<td>' + escapeHtml(movement.reason || '-') + '</td>' +
+                                    '<td>' + escapeHtml(movement.performed_by) + '</td>' +
+                                    '</tr>';
+                                $('#history_table_body').append(row);
+                            });
+                        }
+                        $('#historyModal').modal('show');
+                    }
+                },
+                error: function(xhr) {
+                    let response = xhr.responseJSON;
+                    showToast('error', response?.message || 'Une erreur est survenue');
+                }
+            });
         }
 
         function deletePart(id, name) {
             deleteId = id;
             $('#deletePartName').text(name);
             $('#deleteModal').modal('show');
+        }
+
+        function escapeHtml(value) {
+            return $('<div>').text(value ?? '').html();
         }
 
         function resetForm() {

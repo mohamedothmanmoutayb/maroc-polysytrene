@@ -443,58 +443,56 @@
                 responsive: true
             });
 
-            // Auto-calculate end date when document type is selected
-            $('#documentTypeSelect').change(function() {
-                const selectedOption = $(this).find('option:selected');
+            // Calculate end date only once a start date is chosen; otherwise just
+            // show the type's duration/reminder as a note (no premature "today" fallback)
+            function updateDocumentTypeInfo() {
+                const selectedOption = $('#documentTypeSelect').find('option:selected');
                 const defaultDuration = selectedOption.data('default-duration');
                 const reminderDays = selectedOption.data('reminder-days');
-                const typeName = selectedOption.text();
+                const typeName = selectedOption.text().trim();
+                const startDateVal = $('#startDate').val();
 
-                if (defaultDuration && defaultDuration > 0) {
-                    const startDate = $('#startDate').val();
-                    const today = new Date();
-                    const start = startDate ? new Date(startDate) : today;
+                if (!typeName) {
+                    $('#documentTypeInfo').html(
+                        '<i class="fas fa-info-circle me-2"></i>Sélectionnez un type de document pour voir les informations'
+                    );
+                    return;
+                }
 
-                    const endDate = new Date(start);
-                    endDate.setDate(endDate.getDate() + parseInt(defaultDuration));
+                let infoParts = [];
 
-                    const year = endDate.getFullYear();
-                    const month = String(endDate.getMonth() + 1).padStart(2, '0');
-                    const day = String(endDate.getDate()).padStart(2, '0');
+                if (defaultDuration && defaultDuration > 0 && startDateVal) {
+                    const start = new Date(startDateVal);
+                    const end = new Date(start);
+                    end.setDate(end.getDate() + parseInt(defaultDuration));
+
+                    const year = end.getFullYear();
+                    const month = String(end.getMonth() + 1).padStart(2, '0');
+                    const day = String(end.getDate()).padStart(2, '0');
                     $('#endDate').val(`${year}-${month}-${day}`);
+
+                    infoParts.push(`Durée: ${defaultDuration} jours (fin estimée le ${day}/${month}/${year})`);
+                } else if (defaultDuration && defaultDuration > 0) {
+                    infoParts.push(`Durée par défaut: ${defaultDuration} jours — sélectionnez une date de début pour calculer la date de fin`);
                 }
 
                 if (reminderDays) {
-                    $('#documentTypeInfo').html(`
-                        <i class="fas fa-bell me-2"></i>
-                        <strong>${typeName}</strong><br>
-                        <small class="text-muted">Rappel programmé ${reminderDays} jours avant expiration</small>
-                    `);
-                } else {
-                    $('#documentTypeInfo').html(`
-                        <i class="fas fa-file-alt me-2"></i>
-                        <strong>${typeName}</strong><br>
-                        <small class="text-muted">Aucun rappel configuré pour ce type de document</small>
-                    `);
+                    infoParts.push(`Rappel programmé ${reminderDays} jours avant expiration`);
                 }
-            });
 
-            // Update end date when start date changes
-            $('#startDate').change(function() {
-                const selectedOption = $('#documentTypeSelect').find('option:selected');
-                const defaultDuration = selectedOption.data('default-duration');
-
-                if (defaultDuration && defaultDuration > 0 && $(this).val()) {
-                    const startDate = new Date($(this).val());
-                    const endDate = new Date(startDate);
-                    endDate.setDate(endDate.getDate() + parseInt(defaultDuration));
-
-                    const year = endDate.getFullYear();
-                    const month = String(endDate.getMonth() + 1).padStart(2, '0');
-                    const day = String(endDate.getDate()).padStart(2, '0');
-                    $('#endDate').val(`${year}-${month}-${day}`);
+                if (infoParts.length === 0) {
+                    infoParts.push('Aucune durée ni rappel configurés pour ce type de document');
                 }
-            });
+
+                $('#documentTypeInfo').html(`
+                    <i class="fas fa-bell me-2"></i>
+                    <strong>${typeName}</strong><br>
+                    <small class="text-muted">${infoParts.join(' — ')}</small>
+                `);
+            }
+
+            $('#documentTypeSelect').change(updateDocumentTypeInfo);
+            $('#startDate').change(updateDocumentTypeInfo);
 
             // Document form submission
             $('#documentForm').submit(function(e) {
@@ -582,8 +580,8 @@
                                 }
 
                                 html += '<tr>' +
-                                    '<td>' + (doc.start_date || '-') + '</td>' +
-                                    '<td>' + (doc.end_date || '-') + '</td>' +
+                                    '<td>' + formatDate(doc.start_date) + '</td>' +
+                                    '<td>' + formatDate(doc.end_date) + '</td>' +
                                     '<td>' + (doc.document_number || '-') + '</td>' +
                                     '<td>' + (doc.issuing_authority || '-') + '</td>' +
                                     '<td class="text-center">' + statusBadge + '</td>' +
@@ -612,6 +610,10 @@
                 modal.show();
             });
         });
+
+        function formatDate(value) {
+            return value ? new Date(value).toLocaleDateString('fr-FR') : '-';
+        }
 
         // Toast notification function
         function showToast(type, message) {

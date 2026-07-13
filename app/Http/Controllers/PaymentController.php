@@ -121,8 +121,7 @@ class PaymentController extends Controller
     public function create($invoiceId = null)
     {
         $clients = Client::where('is_active', true)->get();
-        $invoices = Invoice::where('status', '!=', 'paid')
-            ->where('status', '!=', 'cancelled')
+        $invoices = Invoice::whereColumn('amount_paid', '<', 'total_amount')
             ->with('order.client')
             ->get();
 
@@ -250,20 +249,14 @@ class PaymentController extends Controller
             if ($request->status == 'completed') {
                 $invoice->amount_paid += $request->amount;
 
-                // Update invoice status
+                // Update order payment status
                 if ($invoice->amount_paid >= $invoice->total_amount) {
-                    $invoice->status = 'paid';
-
-                    // Update order payment status
                     if ($invoice->order) {
                         $invoice->order->update([
                             'payment_status' => 'paid'
                         ]);
                     }
                 } else {
-                    $invoice->status = 'partial';
-
-                    // Update order payment status
                     if ($invoice->order) {
                         $invoice->order->update([
                             'payment_status' => 'partial'
@@ -449,34 +442,29 @@ class PaymentController extends Controller
                 'notes' => $request->notes,
             ]);
 
-            // Update invoice status
+            // Update order payment status
             if ($request->status == 'completed') {
                 if ($invoice->amount_paid >= $invoice->total_amount) {
-                    $invoice->status = 'paid';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'paid']);
                     }
                 } else {
-                    $invoice->status = 'partial';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'partial']);
                     }
                 }
             } else {
-                // Recalculate invoice status based on other payments
+                // Recalculate order payment status based on other payments
                 $totalPaid = $invoice->payments()->where('status', 'completed')->sum('amount');
                 if ($totalPaid >= $invoice->total_amount) {
-                    $invoice->status = 'paid';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'paid']);
                     }
                 } elseif ($totalPaid > 0) {
-                    $invoice->status = 'partial';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'partial']);
                     }
                 } else {
-                    $invoice->status = 'sent';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'pending']);
                     }
@@ -552,24 +540,21 @@ class PaymentController extends Controller
                 $invoice = $payment->invoice;
                 $invoice->amount_paid -= $payment->amount;
 
-                // Recalculate invoice status
+                // Recalculate order payment status
                 $totalPaid = $invoice->payments()
                     ->where('status', 'completed')
                     ->where('payment_id', '!=', $id)
                     ->sum('amount');
 
                 if ($totalPaid >= $invoice->total_amount) {
-                    $invoice->status = 'paid';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'paid']);
                     }
                 } elseif ($totalPaid > 0) {
-                    $invoice->status = 'partial';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'partial']);
                     }
                 } else {
-                    $invoice->status = 'sent';
                     if ($invoice->order) {
                         $invoice->order->update(['payment_status' => 'pending']);
                     }

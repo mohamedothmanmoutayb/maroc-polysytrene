@@ -175,6 +175,13 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'edit_machines',                     'module' => 'Parc Auto',            'description' => 'Modifier une machine'],
             ['name' => 'delete_machines',                   'module' => 'Parc Auto',            'description' => 'Supprimer une machine'],
 
+            // Machine preventive maintenance
+            ['name' => 'view_machine_maintenance',          'module' => 'Parc Auto',            'description' => 'Voir la maintenance préventive'],
+            ['name' => 'create_machine_maintenance',        'module' => 'Parc Auto',            'description' => 'Créer un programme de maintenance'],
+            ['name' => 'edit_machine_maintenance',          'module' => 'Parc Auto',            'description' => 'Modifier un programme de maintenance'],
+            ['name' => 'delete_machine_maintenance',        'module' => 'Parc Auto',            'description' => 'Supprimer un programme de maintenance'],
+            ['name' => 'complete_machine_maintenance',      'module' => 'Parc Auto',            'description' => 'Confirmer une maintenance effectuée'],
+
             // Fleet – Drivers
             ['name' => 'view_drivers',                      'module' => 'Parc Auto',            'description' => 'Voir les chauffeurs'],
             ['name' => 'create_drivers',                    'module' => 'Parc Auto',            'description' => 'Ajouter un chauffeur'],
@@ -229,6 +236,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'create_machines',
             'edit_machines',
             'delete_machines',
+
+            // Maintenance préventive – All
+            'view_machine_maintenance',
+            'create_machine_maintenance',
+            'edit_machine_maintenance',
+            'delete_machine_maintenance',
+            'complete_machine_maintenance',
         ]);
 
         // ─────────────────────────────────────────

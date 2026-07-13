@@ -517,6 +517,7 @@ class SalesOrderController extends Controller
                 $itemsData[] = [
                     'item_type' => $itemData['type'],
                     'item_id' => $itemData['item_id'],
+                    'item_code' => $itemData['code'] ?? null,
                     'item_name' => $itemData['name'],
                     'quantity' => $quantity,
                     'unit_price' => $unitPrice,

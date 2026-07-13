@@ -38,11 +38,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        // 'api' => [
-        //     // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-        //     \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
-        //     \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        // ],
+        'api' => [
+            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
     ];
 
     /**
@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        'zk.agent' => \App\Http\Middleware\VerifyZkAgentKey::class,
     ];
 }

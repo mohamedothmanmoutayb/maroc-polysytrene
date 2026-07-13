@@ -912,6 +912,22 @@
                                         </small>
                                     </div>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="responsible_employee_id" class="form-label">Responsable</label>
+                                        <select class="form-control select2" id="responsible_employee_id"
+                                            name="responsible_employee_id" style="width: 100%;"
+                                            {{ $isDisabled ? 'disabled' : '' }}>
+                                            <option value="">Sélectionner un employé...</option>
+                                            @foreach ($employees as $employee)
+                                                <option value="{{ $employee->employee_id }}"
+                                                    {{ $order->responsible_employee_id == $employee->employee_id ? 'selected' : '' }}>
+                                                    {{ $employee->full_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Waste Percentage -->

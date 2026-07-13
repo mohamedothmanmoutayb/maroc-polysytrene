@@ -248,6 +248,92 @@
             </div>
         </div>
 
+        <!-- Maintenance Préventive -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">
+                            <i class="fas fa-tools me-2"></i>Maintenance Préventive
+                        </h6>
+                        @can('create_machine_maintenance')
+                            <button type="button" class="btn btn-sm btn-dark" onclick="openCreateMaintenance()">
+                                <i class="fas fa-plus me-1"></i> Nouveau Programme
+                            </button>
+                        @endcan
+                    </div>
+                    <div class="card-body">
+                        @if ($machine->maintenanceSchedules->count() > 0)
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Programme</th>
+                                            <th>Intervalle</th>
+                                            <th>Dernière effectuée</th>
+                                            <th>Prochaine échéance</th>
+                                            <th>Statut</th>
+                                            <th width="20%">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($machine->maintenanceSchedules as $schedule)
+                                            <tr>
+                                                <td class="fw-bold">
+                                                    {{ $schedule->label }}
+                                                    @if (!$schedule->is_active)
+                                                        <span class="badge bg-secondary ms-1">Inactif</span>
+                                                    @endif
+                                                </td>
+                                                <td>Tous les {{ $schedule->interval_days }} jours</td>
+                                                <td>{{ $schedule->last_completed_at ? $schedule->last_completed_at->format('d/m/Y') : '-' }}</td>
+                                                <td>{{ $schedule->next_due_at->format('d/m/Y') }}</td>
+                                                <td>{!! $schedule->status_badge !!}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        @can('complete_machine_maintenance')
+                                                            <button type="button" class="btn btn-sm btn-success"
+                                                                onclick="completeMaintenance({{ $schedule->id }}, '{{ addslashes($schedule->label) }}')"
+                                                                title="Confirmer effectuée">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                        @endcan
+                                                        <button type="button" class="btn btn-sm btn-outline-info"
+                                                            onclick="showMaintenanceHistory({{ $schedule->id }}, '{{ addslashes($schedule->label) }}')"
+                                                            title="Historique">
+                                                            <i class="fas fa-history"></i>
+                                                        </button>
+                                                        @can('edit_machine_maintenance')
+                                                            <button type="button" class="btn btn-sm btn-outline-warning"
+                                                                onclick="editMaintenance({{ $schedule->id }})" title="Modifier">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        @endcan
+                                                        @can('delete_machine_maintenance')
+                                                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                onclick="deleteMaintenance({{ $schedule->id }}, '{{ addslashes($schedule->label) }}')"
+                                                                title="Supprimer">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        @endcan
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Aucun programme de maintenance préventive pour cette machine.
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @if ($machine->notes)
             <div class="row mt-4">
                 <div class="col-12">
@@ -294,10 +380,12 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">Type de document *</label>
-                                <select class="form-control" name="document_type_id" required>
+                                <select class="form-control" name="document_type_id" id="documentTypeSelect" required>
                                     <option value="">Sélectionner...</option>
                                     @foreach (\App\Models\MachineDocumentType::active()->orderBy('sort_order')->get() as $type)
-                                        <option value="{{ $type->document_type_id }}">
+                                        <option value="{{ $type->document_type_id }}"
+                                            data-default-duration="{{ $type->default_duration_days }}"
+                                            data-reminder-days="{{ $type->reminder_days_before }}">
                                             {{ $type->type_name }}
                                         </option>
                                     @endforeach
@@ -311,11 +399,11 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">Date de début</label>
-                                <input type="date" class="form-control" name="start_date">
+                                <input type="date" class="form-control" name="start_date" id="startDate">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Date de fin *</label>
-                                <input type="date" class="form-control" name="end_date" required>
+                                <input type="date" class="form-control" name="end_date" id="endDate" required>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -327,6 +415,10 @@
                                 <label class="form-label">Notes</label>
                                 <input type="text" class="form-control" name="notes">
                             </div>
+                        </div>
+                        <div class="alert alert-info" id="documentTypeInfo">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Sélectionnez un type de document pour voir les informations
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -379,6 +471,157 @@
         </div>
     </div>
 
+    <!-- Modal: Nouveau/Modifier Programme de Maintenance -->
+    <div class="modal fade" id="maintenanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="maintenanceModalLabel">
+                        <i class="fas fa-tools me-2"></i>Nouveau Programme de Maintenance
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="maintenanceForm">
+                    @csrf
+                    <input type="hidden" name="machine_id" value="{{ $machine->machine_id }}">
+                    <input type="hidden" id="maintenance_id" name="maintenance_id">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Libellé *</label>
+                            <input type="text" class="form-control" name="label" id="maintenance_label"
+                                placeholder="Ex: Vidange moteur, Graissage général" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="maintenance_description" rows="2"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Intervalle (jours) *</label>
+                                <input type="number" class="form-control" name="interval_days"
+                                    id="maintenance_interval" min="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Rappel (jours avant) *</label>
+                                <input type="number" class="form-control" name="reminder_days_before"
+                                    id="maintenance_reminder" min="0" value="7">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Prochaine échéance *</label>
+                            <input type="date" class="form-control" name="next_due_at" id="maintenance_next_due"
+                                required>
+                        </div>
+                        <div class="mb-3" id="maintenance_active_wrapper" style="display:none">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="is_active"
+                                    id="maintenance_is_active" value="1" checked>
+                                <label class="form-check-label">Actif</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary" id="maintenanceSubmitBtn">
+                            <i class="fas fa-save me-1"></i> Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirmer Maintenance Effectuée -->
+    <div class="modal fade" id="completeMaintenanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle me-2"></i>Confirmer la maintenance effectuée
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="completeMaintenanceForm">
+                    @csrf
+                    <div class="modal-body">
+                        <p>Confirmez-vous que la maintenance <strong id="complete_maintenance_label"></strong> a bien
+                            été effectuée aujourd'hui ?</p>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            La prochaine échéance sera automatiquement recalculée à partir d'aujourd'hui.
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-control" name="notes" id="complete_notes" rows="2"
+                                placeholder="Optionnel"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check me-1"></i> Confirmer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Historique de Maintenance -->
+    <div class="modal fade" id="maintenanceHistoryModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-history me-2"></i>Historique — <span id="maintenance_history_label"></span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Effectuée le</th>
+                                    <th>Échéance précédente</th>
+                                    <th>Nouvelle échéance</th>
+                                    <th>Notes</th>
+                                    <th>Par</th>
+                                </tr>
+                            </thead>
+                            <tbody id="maintenance_history_body"></tbody>
+                        </table>
+                    </div>
+                    <p class="text-muted text-center mb-0" id="maintenance_history_empty" style="display:none">
+                        Aucun historique pour ce programme.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Supprimer Programme de Maintenance -->
+    <div class="modal fade" id="deleteMaintenanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirmer la suppression</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Supprimer le programme de maintenance : <strong id="delete_maintenance_label"></strong> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteMaintenanceBtn">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast container -->
     <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>
 @endsection
@@ -401,6 +644,8 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script>
+        const maintenanceSchedules = @json($machine->maintenanceSchedules->keyBy('id'));
+
         $(document).ready(function() {
             // Initialize DataTable for history
             $('#history-table').DataTable({ paging: false, lengthChange: false, 
@@ -413,6 +658,57 @@
                 pageLength: 10,
                 responsive: true
             });
+
+            // Calculate end date only once a start date is chosen; otherwise just
+            // show the type's duration/reminder as a note (no premature "today" fallback)
+            function updateDocumentTypeInfo() {
+                const selectedOption = $('#documentTypeSelect').find('option:selected');
+                const defaultDuration = selectedOption.data('default-duration');
+                const reminderDays = selectedOption.data('reminder-days');
+                const typeName = selectedOption.text().trim();
+                const startDateVal = $('#startDate').val();
+
+                if (!typeName) {
+                    $('#documentTypeInfo').html(
+                        '<i class="fas fa-info-circle me-2"></i>Sélectionnez un type de document pour voir les informations'
+                    );
+                    return;
+                }
+
+                let infoParts = [];
+
+                if (defaultDuration && defaultDuration > 0 && startDateVal) {
+                    const start = new Date(startDateVal);
+                    const end = new Date(start);
+                    end.setDate(end.getDate() + parseInt(defaultDuration));
+
+                    const year = end.getFullYear();
+                    const month = String(end.getMonth() + 1).padStart(2, '0');
+                    const day = String(end.getDate()).padStart(2, '0');
+                    $('#endDate').val(`${year}-${month}-${day}`);
+
+                    infoParts.push(`Durée: ${defaultDuration} jours (fin estimée le ${day}/${month}/${year})`);
+                } else if (defaultDuration && defaultDuration > 0) {
+                    infoParts.push(`Durée par défaut: ${defaultDuration} jours — sélectionnez une date de début pour calculer la date de fin`);
+                }
+
+                if (reminderDays) {
+                    infoParts.push(`Rappel programmé ${reminderDays} jours avant expiration`);
+                }
+
+                if (infoParts.length === 0) {
+                    infoParts.push('Aucune durée ni rappel configurés pour ce type de document');
+                }
+
+                $('#documentTypeInfo').html(`
+                    <i class="fas fa-bell me-2"></i>
+                    <strong>${typeName}</strong><br>
+                    <small class="text-muted">${infoParts.join(' — ')}</small>
+                `);
+            }
+
+            $('#documentTypeSelect').change(updateDocumentTypeInfo);
+            $('#startDate').change(updateDocumentTypeInfo);
 
             // Document form submission
             $('#documentForm').submit(function(e) {
@@ -469,8 +765,7 @@
                     '<tr><td colspan="6" class="text-center text-muted">Chargement...</td></tr>');
 
                 $.ajax({
-                    url: "{{ url('machines') }}/" + machineId + "/documents/" + documentTypeId +
-                        "/history",
+                    url: "{{ url('machines') }}/" + machineId + "/document-history/" + documentTypeId,
                     type: 'GET',
                     success: function(response) {
                         if (response.success && response.data.length > 0) {
@@ -495,8 +790,8 @@
                                 }
 
                                 html += '<tr>' +
-                                    '<td>' + (doc.start_date || '-') + '</td>' +
-                                    '<td>' + (doc.end_date || '-') + '</td>' +
+                                    '<td>' + formatDate(doc.start_date) + '</td>' +
+                                    '<td>' + formatDate(doc.end_date) + '</td>' +
                                     '<td>' + (doc.document_number || '-') + '</td>' +
                                     '<td>' + (doc.issuing_authority || '-') + '</td>' +
                                     '<td class="text-center">' + statusBadge + '</td>' +
@@ -524,7 +819,197 @@
                 var modal = new bootstrap.Modal(document.getElementById('historyModal'));
                 modal.show();
             });
+
+            // Create/update maintenance schedule
+            $('#maintenanceForm').submit(function(e) {
+                e.preventDefault();
+
+                const id = $('#maintenance_id').val();
+                const url = id ? "{{ url('machine-maintenance') }}/" + id :
+                    "{{ route('machine-maintenance.store') }}";
+
+                const submitBtn = $(this).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+                submitBtn.prop('disabled', true).html(
+                    '<i class="fas fa-spinner fa-spin me-1"></i> Enregistrement...');
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: $(this).serialize() + (id ? '&_method=PUT' : ''),
+                    success: function(response) {
+                        if (response.success) {
+                            showToast('success', response.message);
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            showToast('error', response.message);
+                            submitBtn.prop('disabled', false).html(originalText);
+                        }
+                    },
+                    error: function(xhr) {
+                        let errors = xhr.responseJSON?.errors;
+                        let errorMessage = xhr.responseJSON?.message || 'Erreur lors de l\'enregistrement';
+
+                        if (errors) {
+                            errorMessage = Object.values(errors).flat().join('\n');
+                        }
+
+                        showToast('error', errorMessage);
+                        submitBtn.prop('disabled', false).html(originalText);
+                    }
+                });
+            });
+
+            // Confirm maintenance completion (the "approve" step)
+            $('#completeMaintenanceForm').submit(function(e) {
+                e.preventDefault();
+
+                const id = $(this).data('schedule-id');
+                const submitBtn = $(this).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+                submitBtn.prop('disabled', true).html(
+                    '<i class="fas fa-spinner fa-spin me-1"></i> Confirmation...');
+
+                $.ajax({
+                    url: "{{ url('machine-maintenance') }}/" + id + "/complete",
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            $('#completeMaintenanceModal').modal('hide');
+                            showToast('success', response.message);
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        showToast('error', xhr.responseJSON?.message || 'Erreur lors de la confirmation');
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).html(originalText);
+                    }
+                });
+            });
+
+            // Delete maintenance schedule
+            let deleteMaintenanceId = null;
+            $('#confirmDeleteMaintenanceBtn').click(function() {
+                if (!deleteMaintenanceId) return;
+
+                $.ajax({
+                    url: "{{ url('machine-maintenance') }}/" + deleteMaintenanceId,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        _method: 'DELETE'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#deleteMaintenanceModal').modal('hide');
+                            showToast('success', response.message);
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        showToast('error', xhr.responseJSON?.message || 'Erreur lors de la suppression');
+                    }
+                });
+            });
+
+            window.deleteMaintenance = function(id, label) {
+                deleteMaintenanceId = id;
+                $('#delete_maintenance_label').text(label);
+                $('#deleteMaintenanceModal').modal('show');
+            };
         });
+
+        function resetMaintenanceForm() {
+            $('#maintenanceForm')[0].reset();
+            $('#maintenance_id').val('');
+            $('#maintenance_reminder').val(7);
+        }
+
+        function openCreateMaintenance() {
+            resetMaintenanceForm();
+            $('#maintenanceModalLabel').html('<i class="fas fa-tools me-2"></i>Nouveau Programme de Maintenance');
+            $('#maintenance_active_wrapper').hide();
+            $('#maintenanceSubmitBtn').html('<i class="fas fa-save me-1"></i> Enregistrer');
+            new bootstrap.Modal(document.getElementById('maintenanceModal')).show();
+        }
+
+        function editMaintenance(id) {
+            const schedule = maintenanceSchedules[id];
+            if (!schedule) return;
+
+            $('#maintenance_id').val(schedule.id);
+            $('#maintenance_label').val(schedule.label);
+            $('#maintenance_description').val(schedule.description);
+            $('#maintenance_interval').val(schedule.interval_days);
+            $('#maintenance_reminder').val(schedule.reminder_days_before);
+            $('#maintenance_next_due').val(schedule.next_due_at ? schedule.next_due_at.split('T')[0] : '');
+            $('#maintenance_is_active').prop('checked', !!schedule.is_active);
+            $('#maintenance_active_wrapper').show();
+            $('#maintenanceModalLabel').html('<i class="fas fa-tools me-2"></i>Modifier le Programme de Maintenance');
+            $('#maintenanceSubmitBtn').html('<i class="fas fa-save me-1"></i> Mettre à jour');
+            new bootstrap.Modal(document.getElementById('maintenanceModal')).show();
+        }
+
+        function completeMaintenance(id, label) {
+            $('#completeMaintenanceForm').data('schedule-id', id);
+            $('#complete_maintenance_label').text(label);
+            $('#complete_notes').val('');
+            new bootstrap.Modal(document.getElementById('completeMaintenanceModal')).show();
+        }
+
+        function escapeHtml(value) {
+            return $('<div>').text(value ?? '').html();
+        }
+
+        function formatDate(value) {
+            return value ? new Date(value).toLocaleDateString('fr-FR') : '-';
+        }
+
+        function showMaintenanceHistory(id, label) {
+            $('#maintenance_history_label').text(label);
+            $('#maintenance_history_body').empty();
+            $('#maintenance_history_empty').hide();
+
+            $.ajax({
+                url: "{{ url('machine-maintenance') }}/" + id + "/history",
+                type: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        if (response.data.length === 0) {
+                            $('#maintenance_history_empty').show();
+                        } else {
+                            response.data.forEach(function(entry) {
+                                const row = '<tr>' +
+                                    '<td>' + escapeHtml(entry.completed_at) + '</td>' +
+                                    '<td>' + escapeHtml(entry.previous_due_at) + '</td>' +
+                                    '<td>' + escapeHtml(entry.next_due_at) + '</td>' +
+                                    '<td>' + escapeHtml(entry.notes || '-') + '</td>' +
+                                    '<td>' + escapeHtml(entry.completed_by) + '</td>' +
+                                    '</tr>';
+                                $('#maintenance_history_body').append(row);
+                            });
+                        }
+                        new bootstrap.Modal(document.getElementById('maintenanceHistoryModal')).show();
+                    }
+                },
+                error: function(xhr) {
+                    showToast('error', xhr.responseJSON?.message || 'Erreur lors du chargement de l\'historique');
+                }
+            });
+        }
 
         function showToast(type, message) {
             var bgColor = type === 'success' ? 'bg-success' : (type === 'warning' ? 'bg-warning' : 'bg-danger');

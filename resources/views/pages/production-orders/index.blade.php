@@ -101,7 +101,7 @@
         <div class="card mb-4">
             <div class="card-body">
                 <form id="filterForm">
-                    <div class="row">
+                    <div class="row g-3">
                         <div class="col-md-3">
                             <label class="form-label">Numéro d'Ordre</label>
                             <input type="text" class="form-control" id="filterOrderNumber" placeholder="PO-202401-0001">
@@ -140,8 +140,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-2">
                             <label class="form-label">Priorité</label>
                             <select class="form-control" id="filterPriority">
                                 <option value="">Toutes</option>
@@ -151,7 +151,7 @@
                                 <option value="urgent">Urgente</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label class="form-label">Avec chutes</label>
                             <select class="form-control" id="filterHasWaste">
                                 <option value="">Tous</option>
@@ -161,17 +161,28 @@
                             </select>
                         </div>
                         <div class="col-md-3">
+                            <label class="form-label">Responsable</label>
+                            <select class="form-control select2" id="filterResponsibleEmployeeId">
+                                <option value="">Tous les responsables</option>
+                                @foreach ($employees as $employee)
+                                    <option value="{{ $employee->employee_id }}">
+                                        {{ $employee->full_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
                             <label class="form-label">Date Début</label>
                             <input type="text" class="form-control date-range-picker" id="filterDateRange"
                                 placeholder="Sélectionner une période">
                         </div>
-                        <div class="col-md-3">
-                            <label class="form-label">&nbsp;</label>
+                        <div class="col-md-2">
+                            <label class="form-label d-block">&nbsp;</label>
                             <div class="d-flex gap-2">
-                                <button type="button" class="btn btn-secondary w-50" id="resetFilters">
+                                <button type="button" class="btn btn-secondary btn-sm" id="resetFilters">
                                     <i class="fas fa-redo me-1"></i> Réinitialiser
                                 </button>
-                                <button type="submit" class="btn btn-primary w-50">
+                                <button type="submit" class="btn btn-primary btn-sm">
                                     <i class="fas fa-filter me-1"></i> Filtrer
                                 </button>
                             </div>
@@ -945,6 +956,11 @@
             let wasteCounter = 0;
             let currentOrderId = null;
             let existingWastes = [];
+            // Volume total des chutes estimé = volume consommé - volume produit.
+            // La part "déchet" (non recyclable) est déduite automatiquement de cette
+            // estimation moins le volume recyclable saisi par l'utilisateur.
+            let currentEstimatedChute = 0;
+            let autoWasteRecordId = null;
 
             // Initialize Select2
             $('.select2').select2({
@@ -1002,6 +1018,7 @@
                         d.priority = $('#filterPriority').val();
                         d.production_type = $('#filterProductionType').val();
                         d.has_waste = $('#filterHasWaste').val();
+                        d.responsible_employee_id = $('#filterResponsibleEmployeeId').val();
                         d.date_range = $('#filterDateRange').val();
                     }
                 },
@@ -1190,6 +1207,7 @@
                 $('#filterStatus').val('');
                 $('#filterPriority').val('');
                 $('#filterHasWaste').val('');
+                $('#filterResponsibleEmployeeId').val('').trigger('change');
                 $('#filterDateRange').val('');
                 table.draw();
             });
@@ -1391,6 +1409,8 @@
                 const estimatedChute = parseFloat($(this).data('estimated-chute')) || 0;
 
                 currentOrderId = orderId;
+                currentEstimatedChute = estimatedChute;
+                autoWasteRecordId = null;
 
                 // Populate order info
                 $('#wasteOrderId').val(orderId);
@@ -1813,23 +1833,18 @@
             }
 
             function updateWasteStatistics() {
+                // Every item declared here is the recyclable portion of the chute.
                 let totalRecyclableVolume = 0;
-                let totalWasteVolume = 0;
                 let recyclableCount = 0;
-                let wasteCount = 0;
 
                 $('.waste-item').each(function() {
-                    const wasteType = $(this).find('.waste-type').val();
-                    const volume = parseFloat($(this).find('.waste-volume').val()) || 0;
-
-                    if (wasteType === 'recyclable') {
-                        totalRecyclableVolume += volume;
-                        recyclableCount++;
-                    } else {
-                        totalWasteVolume += volume;
-                        wasteCount++;
-                    }
+                    totalRecyclableVolume += parseFloat($(this).find('.waste-volume').val()) || 0;
+                    recyclableCount++;
                 });
+
+                // Chute Déchet = Volume total des chutes estimé (consommé - produit) - Volume Recyclable saisi
+                const totalWasteVolume = Math.max(0, currentEstimatedChute - totalRecyclableVolume);
+                const wasteCount = totalWasteVolume > 0.0001 ? 1 : 0;
 
                 const totalAllVolume = totalRecyclableVolume + totalWasteVolume;
                 const totalVolume = parseFloat($('#wasteTotalVolume').text()) || 0;
@@ -1851,6 +1866,11 @@
                     success: function(response) {
                         if (response.success && response.wastes.length > 0) {
                             existingWastes = response.wastes;
+
+                            // Remember the previously auto-calculated "déchet" record (if any)
+                            // so re-declaring updates it instead of creating a duplicate.
+                            const autoWaste = existingWastes.find(w => w.waste_type === 'waste');
+                            autoWasteRecordId = autoWaste ? autoWaste.id : null;
 
                             // Show existing wastes section
                             $('#existingWastesContainer').show();
@@ -1984,11 +2004,33 @@
                     '<i class="fas fa-spinner fa-spin me-1"></i> Enregistrement...'
                 );
 
-                // Calculate and add volume for each waste item
+                // Calculate and add volume for each recyclable waste item
+                let totalRecyclableVolume = 0;
+                const recyclableItemCount = $('.waste-item').length;
                 $('.waste-item').each(function(index) {
                     const volume = parseFloat($(this).find('.waste-volume').val()) || 0;
                     formData.set(`wastes[${index}][volume_m3]`, volume.toFixed(4));
+                    totalRecyclableVolume += volume;
                 });
+
+                // Auto-calculate the "chute déchet" (non-recyclable) portion:
+                // Volume Total des Chutes estimé (consommé - produit) - Volume Recyclable saisi
+                const computedWasteVolume = Math.max(0, currentEstimatedChute - totalRecyclableVolume);
+
+                if (computedWasteVolume > 0.0001) {
+                    const wasteIndex = recyclableItemCount;
+                    if (autoWasteRecordId) {
+                        formData.append(`wastes[${wasteIndex}][id]`, autoWasteRecordId);
+                    }
+                    formData.append(`wastes[${wasteIndex}][waste_type]`, 'waste');
+                    formData.append(`wastes[${wasteIndex}][waste_source]`,
+                        'Chute non-recyclable (calcul automatique)');
+                    formData.append(`wastes[${wasteIndex}][height]`, '1');
+                    formData.append(`wastes[${wasteIndex}][width]`, '1');
+                    formData.append(`wastes[${wasteIndex}][depth]`, computedWasteVolume.toFixed(4));
+                    formData.append(`wastes[${wasteIndex}][volume_m3]`, computedWasteVolume.toFixed(4));
+                    formData.append(`wastes[${wasteIndex}][waste_category]`, 'Non spécifié');
+                }
 
                 $.ajax({
                     url: "{{ url('production-orders') }}/" + orderId + "/waste-declaration",
@@ -2054,9 +2096,16 @@
 
             $(document).on('click', '.load-existing-waste', function() {
                 const wasteIndex = $(this).data('waste-index');
-                if (existingWastes[wasteIndex]) {
-                    addWasteItem(existingWastes[wasteIndex]);
+                const waste = existingWastes[wasteIndex];
+                if (!waste) {
+                    return;
                 }
+                if (waste.waste_type !== 'recyclable') {
+                    showToast('info',
+                        'La part "Déchet" est calculée automatiquement, elle ne se modifie pas ici.');
+                    return;
+                }
+                addWasteItem(waste);
             });
 
             $(document).on('change', '.waste-type', handleWasteTypeChange);
@@ -2113,6 +2162,8 @@
                 wasteCounter = 0;
                 wasteItems = [];
                 existingWastes = [];
+                currentEstimatedChute = 0;
+                autoWasteRecordId = null;
                 $('#wasteListContainer').empty();
                 $('#existingWastesContainer').hide();
             });

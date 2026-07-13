@@ -6,7 +6,10 @@
       "Bash(php artisan tinker '--execute= *)",
       "Bash(grep -v \"WARNING\\\\|DEPRECATED\\\\|Unsuccessful stat\\\\|^$\")",
       "Bash(gs -sDEVICE=png16m -r150 -dFirstPage=1 -dLastPage=1 -o devis2.png devis2.pdf)",
-      "Bash(convert devis2.png -crop 1240x350+0+150 +repage header_crop2.png)"
+      "Bash(convert devis2.png -crop 1240x350+0+150 +repage header_crop2.png)",
+      "Bash(php -l app/Http/Controllers/DashboardController.php)",
+      "Bash(php -r 'error_reporting\\(E_ALL\\); ini_set\\(\"display_errors\",1\\); *)",
+      "Bash(grep -v \"newline\\\\|WARNING\\\\|DEPRECATED\\\\|^$\")"
     ]
   }
 }
