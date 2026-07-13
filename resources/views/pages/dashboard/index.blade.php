@@ -557,7 +557,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="card bg-success-subtle overflow-hidden shadow-none flex-fill mb-0">
                         <div class="card-body p-3">
                             <div class="d-flex align-items-center gap-2 gap-md-3 mb-3">
@@ -576,7 +576,7 @@
         </div>
 
         {{-- ═══════════════════════════════════════════════════════════════════════
-             3. GRAPHIQUE VENTES + RÉSUMÉ FINANCE - Mobile Responsive Charts    
+             3. GRAPHIQUE VENTES + RÉSUMÉ FINANCE - Mobile Responsive Charts
         ═══════════════════════════════════════════════════════════════════════ --}}
         <p class="section-title">Finance</p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
