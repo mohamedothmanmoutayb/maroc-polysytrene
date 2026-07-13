@@ -333,24 +333,24 @@
                         @if ($showPrices)
                             @if ($priceType == 'ttc')
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
-                                    {{ number_format($itemData['roundedUnitPriceTTC'], 0) }} DH
+                                    {{ number_format($itemData['unitPriceTTC'], 2) }} DH
                                 </td>
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
                                     {{ number_format($itemData['roundedTotalPriceTTC'], 0) }} DH
                                 </td>
                             @elseif ($priceType == 'ht')
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
-                                    {{ number_format($itemData['roundedUnitPriceHT'], 0) }} DH
+                                    {{ number_format($itemData['unitPriceHT'], 2) }} DH
                                 </td>
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
                                     {{ number_format($itemData['roundedTotalPriceHT'], 0) }} DH
                                 </td>
                             @elseif ($priceType == 'both')
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
-                                    {{ number_format($itemData['roundedUnitPriceTTC'], 0) }} DH
+                                    {{ number_format($itemData['unitPriceTTC'], 2) }} DH
                                 </td>
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
-                                    {{ number_format($itemData['roundedUnitPriceHT'], 0) }} DH
+                                    {{ number_format($itemData['unitPriceHT'], 2) }} DH
                                 </td>
                                 <td style="border-bottom: none; border-top: none;" class="text-right">
                                     {{ number_format($itemData['roundedTotalPriceTTC'], 0) }} DH
