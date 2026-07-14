@@ -1191,7 +1191,7 @@
                                         class="{{ $cashFlowData['taux_couverture_class'] == 'success' ? 'table-success' : ($cashFlowData['taux_couverture_class'] == 'warning' ? 'table-warning' : ($cashFlowData['taux_couverture_class'] == 'info' ? 'table-info' : 'table-danger')) }}">
                                         <td class="fw-bold">
                                             Taux de couverture
-                                            <small class="text-muted d-block">= (Résultat NET ÷  II) × 100</small>
+                                            <small class="text-muted d-block">= (Résultat NET /  II) × 100</small>
                                         </td>
                                         <td class="text-end fw-bold fs-3">
                                             {{ $cashFlowData['taux_couverture'] > 0 ? '+' : '' }}{{ number_format($cashFlowData['taux_couverture'], 2, ',', '.') }}%
