@@ -182,13 +182,13 @@
                             </h6>
                             <div class="d-flex flex-wrap gap-2">
                                 @if ($type === 'all' || $type === 'type2')
-                                    <span class="badge bg-info-subtle text-info">Sous-blocs: {{ number_format($employee['totals']['sous_bloc'], 3, ',', '.') }} m³</span>
+                                    <span class="badge bg-info text-info">Sous-blocs: {{ number_format($employee['totals']['sous_bloc'], 3, ',', '.') }} m³</span>
                                 @endif
                                 @if ($type === 'all' || $type === 'type3')
-                                    <span class="badge bg-success-subtle text-success">Produits finis: {{ number_format($employee['totals']['produit_fini'], 3, ',', '.') }} m³</span>
+                                    <span class="badge bg-success text-success">Produits finis: {{ number_format($employee['totals']['produit_fini'], 3, ',', '.') }} m³</span>
                                 @endif
                                 @if ($type === 'all' || $type === 'type5')
-                                    <span class="badge bg-warning-subtle text-warning">Chutes: {{ number_format($employee['totals']['chute'], 3, ',', '.') }} m³</span>
+                                    <span class="badge bg-warning text-warning">Chutes: {{ number_format($employee['totals']['chute'], 3, ',', '.') }} m³</span>
                                 @endif
                                 <span class="badge bg-primary">Total: {{ number_format($employee['totals']['total'], 3, ',', '.') }} m³</span>
                             </div>
