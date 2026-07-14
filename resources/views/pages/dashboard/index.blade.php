@@ -391,7 +391,8 @@
                             <div class="kpi-icon bg-primary-subtle">
                                 <iconify-icon icon="solar:calendar-bold" class="text-primary fs-5"></iconify-icon>
                             </div>
-                            <span class="kpi-label">CA Aujourd'hui</span>
+                            <a href="{{ route('sales.orders.index') }}"
+                                class="kpi-label text-decoration-none text-reset stretched-link">CA Aujourd'hui</a>
                         </div>
                         <div class="kpi-value text-primary mb-1">{{ number_format($stats['today_sales'], 0) }}<small
                                 class="fs-11 fw-normal text-muted"> DH</small></div>
@@ -409,7 +410,8 @@
                             <div class="kpi-icon bg-success-subtle">
                                 <iconify-icon icon="solar:box-bold" class="text-success fs-5"></iconify-icon>
                             </div>
-                            <span class="kpi-label">Production</span>
+                            <a href="{{ route('production-output.index') }}"
+                                class="kpi-label text-decoration-none text-reset stretched-link">Production</a>
                         </div>
                         <div class="kpi-value text-success mb-1">{{ number_format($stats['today_qty_produced']) }}<small
                                 class="fs-11 fw-normal text-muted"> u.</small></div>
@@ -445,7 +447,8 @@
                             <div class="kpi-icon bg-warning-subtle">
                                 <iconify-icon icon="solar:cart-bold" class="text-warning fs-5"></iconify-icon>
                             </div>
-                            <span class="kpi-label">Ventes</span>
+                            <a href="{{ route('sales.orders.index') }}"
+                                class="kpi-label text-decoration-none text-reset stretched-link">Ventes</a>
                         </div>
                         <div class="kpi-value text-warning mb-2">{{ $stats['pending_sales_orders'] }}<small
                                 class="fs-11 fw-normal text-muted"> attente</small></div>
@@ -468,7 +471,8 @@
                                 <iconify-icon icon="solar:bell-bold"
                                     class="{{ $stats['total_alerts'] > 0 ? 'text-danger' : 'text-success' }} fs-5"></iconify-icon>
                             </div>
-                            <span class="kpi-label">Alertes</span>
+                            <a href="{{ route('inventory.index') }}"
+                                class="kpi-label text-decoration-none text-reset stretched-link">Alertes</a>
                         </div>
                         <div class="kpi-value {{ $stats['total_alerts'] > 0 ? 'text-danger' : 'text-success' }} mb-1">
                             {{ $stats['total_alerts'] }}</div>
@@ -533,8 +537,10 @@
                         <div class="card-body p-3">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <div>
-                                    <span class="text-dark fw-semibold" style="font-size: 0.8rem;">Ordres
-                                        Production</span>
+                                    <a href="{{ route('production-orders.index') }}"
+                                        class="text-dark fw-semibold text-decoration-none stretched-link"
+                                        style="font-size: 0.8rem;">Ordres
+                                        Production</a>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <h5 class="fw-semibold mb-0">
                                             {{ number_format($stats['total_production_orders']) }}
@@ -557,7 +563,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card bg-success-subtle overflow-hidden shadow-none flex-fill mb-0">
                         <div class="card-body p-3">
                             <div class="d-flex align-items-center gap-2 gap-md-3 mb-3">
@@ -565,7 +571,9 @@
                                     class="round-48 d-flex align-items-center justify-content-center rounded bg-white">
                                     <iconify-icon icon="solar:wallet-linear" class="fs-7 text-success"></iconify-icon>
                                 </span>
-                                <h6 class="mb-0 fw-medium">Total Paiements</h6>
+                                <a href="{{ route('purchases.index') }}"
+                                    class="mb-0 fw-medium h6 text-reset text-decoration-none stretched-link">Total
+                                    Paiements</a>
                             </div>
                             <h4 class="mb-2">{{ number_format($stats['completed_payments'], 0) }} <small
                                     class="fs-12 text-muted">DH</small></h4>
@@ -807,7 +815,8 @@
                                 <div class="kpi-icon bg-info-subtle">
                                     <iconify-icon icon="solar:calendar-bold" class="text-info fs-5"></iconify-icon>
                                 </div>
-                                <span class="kpi-label">Coût Production Jour</span>
+                                <a href="{{ route('production-consumption.index') }}"
+                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production Jour</a>
                             </div>
                             <div class="kpi-value text-info mb-0">{{ number_format($prodCostToday, 0, ',', ' ') }}<small
                                     class="fs-11 fw-normal text-muted"> DH</small></div>
@@ -819,7 +828,8 @@
                                 <div class="kpi-icon bg-primary-subtle">
                                     <iconify-icon icon="solar:calendar-mark-bold" class="text-primary fs-5"></iconify-icon>
                                 </div>
-                                <span class="kpi-label">Coût Production Mois</span>
+                                <a href="{{ route('production-consumption.index') }}"
+                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production Mois</a>
                             </div>
                             <div class="kpi-value text-primary mb-0">{{ number_format($prodCostMonth, 0, ',', ' ') }}<small
                                     class="fs-11 fw-normal text-muted"> DH</small></div>
@@ -833,8 +843,11 @@
                 <div class="card h-100">
                     <div class="card-body p-3">
                         <h5 class="card-title mb-3" style="font-size:1rem;">
-                            <iconify-icon icon="solar:box-bold" class="text-success me-1"></iconify-icon>
-                            Qté Produite en m³ par Article <small class="text-muted fw-normal">· ce mois</small>
+                            <a href="{{ route('production-output.index') }}"
+                                class="text-reset text-decoration-none stretched-link">
+                                <iconify-icon icon="solar:box-bold" class="text-success me-1"></iconify-icon>
+                                Qté Produite en m³ par Article <small class="text-muted fw-normal">· ce mois</small>
+                            </a>
                         </h5>
                         <div class="table-responsive-stack">
                             <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
@@ -876,8 +889,11 @@
                 <div class="card h-100">
                     <div class="card-body p-3">
                         <h5 class="card-title mb-3" style="font-size:1rem;">
-                            <iconify-icon icon="solar:test-tube-bold" class="text-warning me-1"></iconify-icon>
-                            Matière Première Consommée <small class="text-muted fw-normal">· ce mois</small>
+                            <a href="{{ route('production-consumption.index') }}"
+                                class="text-reset text-decoration-none stretched-link">
+                                <iconify-icon icon="solar:test-tube-bold" class="text-warning me-1"></iconify-icon>
+                                Matière Première Consommée <small class="text-muted fw-normal">· ce mois</small>
+                            </a>
                         </h5>
                         <div class="table-responsive-stack">
                             <table class="table align-middle table-custom mb-0" style="font-size:.8rem;">
@@ -1147,8 +1163,7 @@
                                         class="{{ $cashFlowData['resultat_net'] >= 0 ? 'table-success' : 'table-danger' }}">
                                         <td class="fw-bold">
                                             Résultat NET
-                                            <small class="text-muted d-block">= (Crédit Client + La Caisse + Stock MP +
-                                                Stock Produit) − (Crédit Fournisseur + Charges Fixes)</small>
+                                            <small class="text-muted d-block">= II − I</small>
                                         </td>
                                         <td class="text-end fw-bold fs-4">
                                             {{ $cashFlowData['resultat_net'] > 0 ? '+' : '' }}{{ number_format($cashFlowData['resultat_net'], 2, ',', '.') }}
@@ -1176,8 +1191,7 @@
                                         class="{{ $cashFlowData['taux_couverture_class'] == 'success' ? 'table-success' : ($cashFlowData['taux_couverture_class'] == 'warning' ? 'table-warning' : ($cashFlowData['taux_couverture_class'] == 'info' ? 'table-info' : 'table-danger')) }}">
                                         <td class="fw-bold">
                                             Taux de couverture
-                                            <small class="text-muted d-block">= (Résultat NET ÷ (Crédit Client + La
-                                                Caisse + Stock MP + Stock Produit)) × 100</small>
+                                            <small class="text-muted d-block">= (Résultat NET ÷  II) × 100</small>
                                         </td>
                                         <td class="text-end fw-bold fs-3">
                                             {{ $cashFlowData['taux_couverture'] > 0 ? '+' : '' }}{{ number_format($cashFlowData['taux_couverture'], 2, ',', '.') }}%
@@ -1445,7 +1459,8 @@
                         <div class="bg-success-subtle rounded-circle p-2 d-inline-flex mb-2">
                             <iconify-icon icon="solar:box-bold" class="text-success"></iconify-icon>
                         </div>
-                        <h5 class="mb-2" style="font-size: 1rem;">Production du Jour</h5>
+                        <h5 class="mb-2" style="font-size: 1rem;"><a href="{{ route('production-output.index') }}"
+                                class="text-reset text-decoration-none stretched-link">Production du Jour</a></h5>
                         <div class="row g-0 mt-2">
                             <div class="col-6 border-end">
                                 <h3 class="text-success mb-0" style="font-size: 1.3rem;">
@@ -1490,7 +1505,8 @@
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <iconify-icon icon="solar:box-outline" class="text-secondary"></iconify-icon>
-                            <h5 class="card-title mb-0" style="font-size: 0.95rem;">Ordres Récents</h5>
+                            <a href="{{ route('production-orders.index') }}"
+                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 0.95rem;">Ordres Récents</a>
                         </div>
                         @forelse($recentProductionOrders as $order)
                             <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
@@ -1519,7 +1535,8 @@
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <iconify-icon icon="solar:settings-bold" class="text-warning"></iconify-icon>
-                            <h5 class="card-title mb-0" style="font-size: 0.95rem;">Machines</h5>
+                            <a href="{{ route('machines.index') }}"
+                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 0.95rem;">Machines</a>
                         </div>
                         @if ($machinesInMaint->count() > 0)
                             @foreach ($machinesInMaint as $machine)
@@ -1572,7 +1589,8 @@
                 <div class="card h-100">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="card-title mb-0" style="font-size: 1rem;">Ventes Récentes</h5>
+                            <a href="{{ route('sales.orders.index') }}"
+                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 1rem;">Ventes Récentes</a>
                             <a href="{{ route('sales.orders.index') }}" class="btn btn-sm btn-outline-primary">Voir</a>
                         </div>
                         <div class="overflow-auto-mobile" style="max-height:340px; overflow-y:auto;">
@@ -1607,7 +1625,8 @@
             <div class="col-lg-4">
                 <div class="card h-100">
                     <div class="card-body p-3">
-                        <h5 class="card-title mb-2" style="font-size: 1rem;">Suivi Paiements</h5>
+                        <a href="{{ route('sales.situation.index') }}"
+                            class="card-title mb-2 d-block text-reset text-decoration-none" style="font-size: 1rem;">Suivi Paiements</a>
                         <p class="text-muted" style="font-size:.75rem;">
                             {{ number_format($stats['completed_payments'], 0) }} DH encaissés</p>
 
@@ -1848,7 +1867,8 @@
             <div class="col-lg-4">
                 <div class="card h-100">
                     <div class="card-body p-3">
-                        <h5 class="card-title mb-3" style="font-size: 1rem;">Répartition Clients</h5>
+                        <a href="{{ route('clients.index') }}"
+                            class="card-title mb-3 d-block text-reset text-decoration-none" style="font-size: 1rem;">Répartition Clients</a>
                         <div class="bg-primary bg-opacity-10 rounded overflow-hidden mb-3">
                             <div class="p-2 p-md-3">
                                 <div class="d-flex align-items-center justify-content-between">

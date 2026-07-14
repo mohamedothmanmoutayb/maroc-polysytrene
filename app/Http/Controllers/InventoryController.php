@@ -59,15 +59,15 @@ class InventoryController extends Controller
 
         return DataTables::of($products)
             ->addIndexColumn()
-            ->addColumn('product_name_with_code', function($product) {
+            ->addColumn('product_name_with_code', function ($product) {
                 return '<strong>' . e($product->product_name) . '</strong><br><small class="text-muted">Code: ' . e($product->product_code) . '</small>';
             })
-            ->addColumn('families_stock', function($product) {
+            ->addColumn('families_stock', function ($product) {
                 if ($product->familles->count() > 0) {
                     $parts = [];
                     foreach ($product->familles as $famille) {
                         $input = '<input type="number" class="form-control form-control-sm text-end inline-stock-input"'
-                            . ' style="width:90px;display:inline-block;"'
+                            . ' style="width:50px;display:inline-block;"'
                             . ' min="0" step="0.01"'
                             . ' data-product-id="' . $product->product_id . '"'
                             . ' data-famille-id="' . $famille->famille_id . '"'
@@ -89,13 +89,13 @@ class InventoryController extends Controller
                     . ' data-famille-id="' . $familleId . '"'
                     . ' data-label="' . e($product->product_name) . '">';
             })
-            ->addColumn('total_stock', function($product) {
+            ->addColumn('total_stock', function ($product) {
                 return number_format($product->total_stock, 2, ',', '.');
             })
-            ->addColumn('min_stock', function($product) {
+            ->addColumn('min_stock', function ($product) {
                 return $product->min_stock_level ? number_format($product->min_stock_level, 2, ',', '.') : '-';
             })
-            ->addColumn('status_badge', function($product) {
+            ->addColumn('status_badge', function ($product) {
                 $totalStock = $product->total_stock;
                 $minStock = $product->min_stock_level;
 
@@ -106,7 +106,7 @@ class InventoryController extends Controller
                 }
                 return '<span class="badge badge-success">Stock Normal</span>';
             })
-            ->editColumn('product_type', function($product) {
+            ->editColumn('product_type', function ($product) {
                 return $product->product_type_label;
             })
             ->rawColumns(['product_name_with_code', 'families_stock', 'status_badge'])
@@ -123,10 +123,10 @@ class InventoryController extends Controller
 
         return DataTables::of($materials)
             ->addIndexColumn()
-            ->addColumn('material_name_with_code', function($material) {
+            ->addColumn('material_name_with_code', function ($material) {
                 return '<strong>' . e($material->material_name) . '</strong><br><small class="text-muted">Code: ' . e($material->material_code) . '</small>';
             })
-            ->addColumn('current_stock_display', function($material) {
+            ->addColumn('current_stock_display', function ($material) {
                 $class = '';
                 if ($material->min_stock_level && $material->current_stock <= $material->min_stock_level) {
                     $class = 'text-danger';
@@ -145,19 +145,19 @@ class InventoryController extends Controller
                             </button>
                         </div>';
             })
-            ->addColumn('current_stock_value', function($material) {
+            ->addColumn('current_stock_value', function ($material) {
                 return number_format($material->current_stock, 2, ',', '.');
             })
-            ->addColumn('min_stock', function($material) {
+            ->addColumn('min_stock', function ($material) {
                 return $material->min_stock_level ? number_format($material->min_stock_level, 2, ',', '.') : '-';
             })
-            ->addColumn('max_stock', function($material) {
+            ->addColumn('max_stock', function ($material) {
                 return $material->max_stock_level ? number_format($material->max_stock_level, 2, ',', '.') : '-';
             })
-            ->addColumn('category_name', function($material) {
+            ->addColumn('category_name', function ($material) {
                 return $material->category ? $material->category->name : '-';
             })
-            ->addColumn('status_badge', function($material) {
+            ->addColumn('status_badge', function ($material) {
                 if ($material->min_stock_level && $material->current_stock <= $material->min_stock_level) {
                     return '<span class="badge badge-danger">Stock Critique</span>';
                 } elseif ($material->min_stock_level && $material->current_stock <= $material->min_stock_level * 2) {
@@ -182,7 +182,7 @@ class InventoryController extends Controller
 
         return DataTables::of($adjustments)
             ->addIndexColumn()
-            ->addColumn('reference_info', function($adjustment) {
+            ->addColumn('reference_info', function ($adjustment) {
                 if ($adjustment->adjustment_type == 'product_famille') {
                     $product = Product::find($adjustment->reference_id);
                     return 'Produit: ' . ($product ? $product->product_name : 'N/A') . '<br>Famille: ' . ($adjustment->famille ? $adjustment->famille->famille_name : 'N/A');
@@ -192,22 +192,22 @@ class InventoryController extends Controller
                 }
                 return 'N/A';
             })
-            ->addColumn('old_quantity_formatted', function($adjustment) {
+            ->addColumn('old_quantity_formatted', function ($adjustment) {
                 return number_format($adjustment->old_quantity, 2, ',', '.');
             })
-            ->addColumn('new_quantity_formatted', function($adjustment) {
+            ->addColumn('new_quantity_formatted', function ($adjustment) {
                 return number_format($adjustment->new_quantity, 2, ',', '.');
             })
-            ->addColumn('adjusted_quantity_formatted', function($adjustment) {
+            ->addColumn('adjusted_quantity_formatted', function ($adjustment) {
                 $diff = $adjustment->adjusted_quantity;
                 $class = $diff > 0 ? 'text-success' : ($diff < 0 ? 'text-danger' : '');
                 $sign = $diff > 0 ? '+' : '';
                 return '<span class="' . $class . '">' . $sign . number_format($diff, 2, ',', '.') . '</span>';
             })
-            ->addColumn('requested_by_name', function($adjustment) {
+            ->addColumn('requested_by_name', function ($adjustment) {
                 return $adjustment->requester ? $adjustment->requester->name : 'N/A';
             })
-            ->addColumn('actions', function($adjustment) {
+            ->addColumn('actions', function ($adjustment) {
                 return '<div class="btn-group btn-group-sm">
                             <button type="button" class="btn btn-success approve-adjustment" data-id="' . $adjustment->adjustment_id . '">
                                 <i class="fas fa-check"></i> Approuver
@@ -259,8 +259,7 @@ class InventoryController extends Controller
                     'status' => 'pending',
                     'requested_by' => Auth::id(),
                 ]);
-            }
-            elseif ($request->adjustment_type == 'raw_material') {
+            } elseif ($request->adjustment_type == 'raw_material') {
                 $material = RawMaterial::findOrFail($request->reference_id);
                 $oldQuantity = $material->current_stock;
 
@@ -283,7 +282,6 @@ class InventoryController extends Controller
                 'success' => true,
                 'message' => 'Demande d\'ajustement créée avec succès. En attente d\'approbation.'
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -330,8 +328,7 @@ class InventoryController extends Controller
                         'last_updated' => now(),
                     ]);
                 }
-            }
-            elseif ($adjustment->adjustment_type == 'raw_material') {
+            } elseif ($adjustment->adjustment_type == 'raw_material') {
                 $material      = RawMaterial::findOrFail($adjustment->reference_id);
                 $previousStock = (float) $material->current_stock;
 
@@ -373,7 +370,6 @@ class InventoryController extends Controller
                 'success' => true,
                 'message' => 'Ajustement approuvé avec succès.'
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -415,7 +411,6 @@ class InventoryController extends Controller
                 'success' => true,
                 'message' => 'Ajustement rejeté.'
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -459,7 +454,7 @@ class InventoryController extends Controller
     {
         $request->validate([
             'material_id'    => 'required|exists:raw_materials,material_id',
-            'quantity_to_add'=> 'required|numeric|min:0',
+            'quantity_to_add' => 'required|numeric|min:0',
             'unit_price'     => 'required|numeric|min:0',
             'reason'         => 'nullable|string|max:500',
         ]);
@@ -490,7 +485,6 @@ class InventoryController extends Controller
                 'success' => true,
                 'message' => 'Demande d\'ajustement soumise. En attente d\'approbation.',
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -509,7 +503,7 @@ class InventoryController extends Controller
             'items'              => 'required|array|min:1',
             'items.*.product_id' => 'required|integer',
             'items.*.famille_id' => 'required|integer',
-            'items.*.new_quantity'=> 'required|numeric|min:0',
+            'items.*.new_quantity' => 'required|numeric|min:0',
             'reason'             => 'nullable|string|max:500',
         ]);
 
@@ -550,7 +544,6 @@ class InventoryController extends Controller
                 'success' => true,
                 'message' => $count . ' demande(s) soumise(s) avec succès. En attente d\'approbation.',
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -635,7 +628,6 @@ class InventoryController extends Controller
                 'success' => true,
                 'message' => $count . ' ajustement(s) approuvé(s) avec succès.',
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -652,7 +644,7 @@ class InventoryController extends Controller
     {
         $product = Product::with('familles')->findOrFail($productId);
 
-        $families = $product->familles->map(function($famille) use ($product) {
+        $families = $product->familles->map(function ($famille) use ($product) {
             $familleStock = ProductFamilleStock::where('product_id', $product->product_id)
                 ->where('famille_id', $famille->famille_id)
                 ->first();
