@@ -974,8 +974,8 @@
         {{-- ═══════════════════════════════════════════════════════════════════════
             ÉTAT DE TRÉSORERIE (Cash Flow Statement)
             Formules:
-            Résultat NET = (Crédit Fournisseur + Charges Fixes)
-                        - (Crédit Client + La Caisse + Stock MP + Stock Produit)
+            Résultat NET = (Crédit Client + La Caisse + Stock MP + Stock Produit)
+                        - (Crédit Fournisseur + Charges Fixes)
 
             Taux de couverture = (Résultat NET / (Crédit Client + La Caisse + Stock MP + Stock Produit)) × 100
         ═══════════════════════════════════════════════════════════════════════ --}}
@@ -1007,14 +1007,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- SECTION 1: RESSOURCES (Sources de fonds) -->
-                                    <tr class="table-success">
+                                    <!-- SECTION 1: DETTES & CHARGES (Ce qui diminue la trésorerie) -->
+                                    <tr class="table-danger">
                                         <td colspan="3">
                                             <strong>
-                                                <iconify-icon icon="solar:arrow-up-bold" class="me-1"></iconify-icon>
-                                                I - RESSOURCES (Sources)
+                                                <iconify-icon icon="solar:arrow-down-bold" class="me-1"></iconify-icon>
+                                                I - DETTES & CHARGES
                                             </strong>
-                                            <small class="text-muted ms-2">Ce qui augmente la trésorerie</small>
+                                            <small class="text-muted ms-2">Ce qui diminue la trésorerie</small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1023,7 +1023,7 @@
                                             <small class="text-muted d-block">Dettes fournisseurs (achats non
                                                 réglés)</small>
                                         </td>
-                                        <td class="text-end fw-bold text-success">
+                                        <td class="text-end fw-bold text-danger">
                                             {{ number_format($cashFlowData['credit_fournisseur'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted small">Achats du mois non encore payés</td>
@@ -1031,29 +1031,32 @@
                                     <tr>
                                         <td style="padding-left: 30px;">
                                             <strong>Charges Fixes</strong>
-                                            <small class="text-muted d-block">Total des dépenses du mois</small>
+                                            <small class="text-muted d-block">Dépenses du mois + Salaires employés</small>
                                         </td>
-                                        <td class="text-end fw-bold text-success">
+                                        <td class="text-end fw-bold text-danger">
                                             {{ number_format($cashFlowData['charges_fixes'], 2, ',', '.') }}
                                         </td>
-                                        <td class="text-muted small">Toutes charges confondues</td>
+                                        <td class="text-muted small">
+                                            Dépenses: {{ number_format($cashFlowData['depenses_mois'], 2, ',', '.') }} +
+                                            Salaires: {{ number_format($cashFlowData['salaires_employes'], 2, ',', '.') }}
+                                        </td>
                                     </tr>
                                     <tr class="table-light">
-                                        <td class="fw-bold">Total Ressources</td>
-                                        <td class="text-end fw-bold bg-success text-white fs-5">
-                                            {{ number_format($cashFlowData['total_positif'], 2, ',', '.') }}
+                                        <td class="fw-bold">Total Dettes & Charges</td>
+                                        <td class="text-end fw-bold bg-danger text-white fs-5">
+                                            {{ number_format($cashFlowData['total_negatif'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted">= Crédit Fournisseur + Charges Fixes</td>
                                     </tr>
 
-                                    <!-- SECTION 2: EMPLOIS (Utilisations des fonds) -->
-                                    <tr class="table-danger">
+                                    <!-- SECTION 2: RESSOURCES (Ce qui augmente la trésorerie) -->
+                                    <tr class="table-success">
                                         <td colspan="3">
                                             <strong>
-                                                <iconify-icon icon="solar:arrow-down-bold" class="me-1"></iconify-icon>
-                                                II - EMPLOIS (Utilisations)
+                                                <iconify-icon icon="solar:arrow-up-bold" class="me-1"></iconify-icon>
+                                                II - RESSOURCES (Sources)
                                             </strong>
-                                            <small class="text-muted ms-2">Ce qui diminue la trésorerie</small>
+                                            <small class="text-muted ms-2">Ce qui augmente la trésorerie</small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1061,7 +1064,7 @@
                                             <strong>Crédit Client</strong>
                                             <small class="text-muted d-block">Ventes impayées (créances clients)</small>
                                         </td>
-                                        <td class="text-end fw-bold text-danger">
+                                        <td class="text-end fw-bold text-success">
                                             {{ number_format($cashFlowData['credit_client'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted small">Factures clients non encaissées</td>
@@ -1071,7 +1074,7 @@
                                             <strong>La Caisse</strong>
                                             <small class="text-muted d-block">Encaissements espèces</small>
                                         </td>
-                                        <td class="text-end fw-bold text-danger">
+                                        <td class="text-end fw-bold text-success">
                                             {{ number_format($cashFlowData['la_caisse'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted small">Paiements espèces reçus</td>
@@ -1082,7 +1085,7 @@
                                             <small class="text-muted d-block">Valeur matières premières (Coût moyen
                                                 pondéré)</small>
                                         </td>
-                                        <td class="text-end fw-bold text-danger">
+                                        <td class="text-end fw-bold text-success">
                                             {{ number_format($cashFlowData['stock_mp'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted small">
@@ -1105,7 +1108,7 @@
                                             <strong>Stock Produit</strong>
                                             <small class="text-muted d-block">Valeur produits finis (Prix de vente)</small>
                                         </td>
-                                        <td class="text-end fw-bold text-danger">
+                                        <td class="text-end fw-bold text-success">
                                             {{ number_format($cashFlowData['stock_produit'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted small">
@@ -1124,9 +1127,9 @@
                                         </td>
                                     </tr>
                                     <tr class="table-light">
-                                        <td class="fw-bold">Total Emplois + Stock</td>
-                                        <td class="text-end fw-bold bg-danger text-white fs-5">
-                                            {{ number_format($cashFlowData['total_negatif'], 2, ',', '.') }}
+                                        <td class="fw-bold">Total Ressources + Stock</td>
+                                        <td class="text-end fw-bold bg-success text-white fs-5">
+                                            {{ number_format($cashFlowData['total_positif'], 2, ',', '.') }}
                                         </td>
                                         <td class="text-muted">= Crédit Client + La Caisse + Stock MP + Stock Produit</td>
                                     </tr>
@@ -1144,20 +1147,11 @@
                                         class="{{ $cashFlowData['resultat_net'] >= 0 ? 'table-success' : 'table-danger' }}">
                                         <td class="fw-bold">
                                             Résultat NET
-                                            <small class="text-muted d-block">Trésorerie
-                                                {{ $cashFlowData['resultat_net'] >= 0 ? 'Positive' : 'Négative' }}</small>
+                                            <small class="text-muted d-block">= (Crédit Client + La Caisse + Stock MP +
+                                                Stock Produit) − (Crédit Fournisseur + Charges Fixes)</small>
                                         </td>
                                         <td class="text-end fw-bold fs-4">
-                                            {{ number_format(abs($cashFlowData['resultat_net']), 2, ',', '.') }}
-                                            @if ($cashFlowData['resultat_net'] >= 0)
-                                                <span class="text-success ms-2">
-                                                    <iconify-icon icon="solar:check-circle-bold"></iconify-icon> Bénéfice
-                                                </span>
-                                            @else
-                                                <span class="text-danger ms-2">
-                                                    <iconify-icon icon="solar:danger-triangle-bold"></iconify-icon> Perte
-                                                </span>
-                                            @endif
+                                            {{ $cashFlowData['resultat_net'] > 0 ? '+' : '' }}{{ number_format($cashFlowData['resultat_net'], 2, ',', '.') }}
                                         </td>
                                         <td class="small">
                                             @if ($cashFlowData['resultat_net'] >= 0)
@@ -1182,10 +1176,11 @@
                                         class="{{ $cashFlowData['taux_couverture_class'] == 'success' ? 'table-success' : ($cashFlowData['taux_couverture_class'] == 'warning' ? 'table-warning' : ($cashFlowData['taux_couverture_class'] == 'info' ? 'table-info' : 'table-danger')) }}">
                                         <td class="fw-bold">
                                             Taux de couverture
-                                            <small class="text-muted d-block">Indicateur de performance</small>
+                                            <small class="text-muted d-block">= (Résultat NET ÷ (Crédit Client + La
+                                                Caisse + Stock MP + Stock Produit)) × 100</small>
                                         </td>
                                         <td class="text-end fw-bold fs-3">
-                                            {{ number_format($cashFlowData['taux_couverture'], 2, ',', '.') }}%
+                                            {{ $cashFlowData['taux_couverture'] > 0 ? '+' : '' }}{{ number_format($cashFlowData['taux_couverture'], 2, ',', '.') }}%
                                         </td>
                                         <td>
                                             @php
@@ -1220,12 +1215,12 @@
                                                     <div class="d-flex flex-wrap gap-3">
                                                         <div class="d-flex align-items-center gap-2">
                                                             <span class="badge bg-success p-2 rounded-circle">①</span>
-                                                            <small class="text-muted">Ressources > Emplois = Trésorerie
+                                                            <small class="text-muted">Ressources > Dettes = Trésorerie
                                                                 Positive</small>
                                                         </div>
                                                         <div class="d-flex align-items-center gap-2">
                                                             <span class="badge bg-danger p-2 rounded-circle">②</span>
-                                                            <small class="text-muted">Ressources < Emplois=Trésorerie
+                                                            <small class="text-muted">Ressources < Dettes=Trésorerie
                                                                     Négative</small>
                                                         </div>
                                                         <div class="d-flex align-items-center gap-2">

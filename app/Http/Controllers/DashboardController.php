@@ -17,6 +17,7 @@ use App\Models\Check;
 use App\Models\Traite;
 use App\Models\Supplier;
 use App\Models\Employee;
+use App\Models\Attendance;
 use App\Models\Machine;
 use App\Models\SalesOrderPayment;
 use App\Models\PurchasePaymentDocument;
@@ -194,8 +195,8 @@ class DashboardController extends Controller
         // ═══════════════════════════════════════════════════════════════════════
         // ÉTAT DE TRÉSORERIE (Cash Flow Statement)
         // Formule:
-        // Résultat NET = (Crédit Fournisseur + Charges Fixes)
-        //               - (Crédit Client + La Caisse + Stock MP + Stock Produit)
+        // Résultat NET = (Crédit Client + La Caisse + Stock MP + Stock Produit)
+        //               - (Crédit Fournisseur + Charges Fixes)
         //
         // Taux de couverture = (Résultat NET / (Crédit Client + La Caisse + Stock MP + Stock Produit)) × 100
         // ═══════════════════════════════════════════════════════════════════════
@@ -216,10 +217,18 @@ class DashboardController extends Controller
             })
             ->sum(DB::raw('final_amount - paid_amount'));
 
-        // 2. CHARGES FIXES (Fixed Expenses - All expenses)
-        $chargesFixes = Expense::whereYear('expense_date', $currentYear)
+        // 2. CHARGES FIXES (Fixed Expenses - All expenses + salaires employés)
+        $depensesMois = Expense::whereYear('expense_date', $currentYear)
             ->whereMonth('expense_date', $currentMonth)
             ->sum('amount');
+
+        // Salaires payés du mois: heures pointées × taux horaire (même formule que la paie)
+        $salairesEmployes = (float) Attendance::join('employees', 'employees.employee_id', '=', 'attendances.employee_id')
+            ->whereYear('attendances.date', $currentYear)
+            ->whereMonth('attendances.date', $currentMonth)
+            ->sum(DB::raw('attendances.hours_worked * COALESCE(employees.hourly_salary, 0)'));
+
+        $chargesFixes = $depensesMois + $salairesEmployes;
 
         // 3. CRÉDIT CLIENT (Client Credit - Unpaid sales/ventes impayé)
         $creditClient = SalesOrder::whereYear('order_date', $currentYear)
@@ -245,8 +254,8 @@ class DashboardController extends Controller
         $denominateur = $creditClient + $laCaisse + $stockMP + $stockProduit;
 
         // Calculate Résultat NET
-        $totalPositif = $creditFournisseur + $chargesFixes;
-        $totalNegatif = $denominateur;
+        $totalPositif = $denominateur; // Crédit Client + La Caisse + Stock MP + Stock Produit
+        $totalNegatif = $creditFournisseur + $chargesFixes;
         $resultatNet = $totalPositif - $totalNegatif;
 
         // Calculate Taux de couverture
@@ -254,17 +263,19 @@ class DashboardController extends Controller
 
         // Prepare cash flow data for view
         $cashFlowData = [
-            // Positives (Income/Sources)
+            // Negatives (Debts/Charges - what decreases the treasury)
             'credit_fournisseur' => $creditFournisseur,
             'charges_fixes' => $chargesFixes,
-            'total_positif' => $totalPositif,
+            'depenses_mois' => $depensesMois,
+            'salaires_employes' => $salairesEmployes,
+            'total_negatif' => $totalNegatif,
 
-            // Negatives (Expenses/Uses)
+            // Positives (Assets/Sources - what increases the treasury)
             'credit_client' => $creditClient,
             'la_caisse' => $laCaisse,
             'stock_mp' => $stockMP,
             'stock_produit' => $stockProduit,
-            'total_negatif' => $totalNegatif,
+            'total_positif' => $totalPositif,
             'denominateur' => $denominateur,
 
             // Stock details for display
