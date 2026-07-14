@@ -17,6 +17,28 @@
             justify-content: center;
         }
 
+        /* ── Filtres de dates : période personnalisée + badge alignés sur les
+               boutons rapides (.btn : padding 9px 16px, font .875rem, radius 8px) ── */
+        .dashboard-period-input {
+            width: auto;
+            min-width: 220px;
+            padding: 9px 16px;
+            font-size: .875rem;
+            font-weight: 500;
+            line-height: 1.5;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .dashboard-period-badge {
+            padding: 9px 16px;
+            font-size: .875rem;
+            font-weight: 500;
+            line-height: 1.5;
+            border-radius: 8px;
+        }
+
         /* ── Responsive Design Variables ─────────────────────────────────────── */
         :root {
             --mobile-breakpoint: 768px;
@@ -370,7 +392,7 @@
                 <form method="GET" action="{{ route('dashboard') }}" id="dashboardFilterForm">
                     <div class="d-flex flex-wrap align-items-center gap-2">
                         <div class="d-flex align-items-center gap-2 flex-wrap me-auto">
-                            <iconify-icon icon="solar:calendar-bold" class="text-primary fs-5 d-none d-md-inline"></iconify-icon>
+                            <iconify-icon icon="solar:calendar-bold" class="text-primary fs-8 d-none d-md-inline"></iconify-icon>
                             <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="Filtres rapides">
                                 <button type="submit" name="quick_filter" value="today"
                                     class="btn btn-outline-primary {{ $quickFilter === 'today' ? 'active' : '' }}">Aujourd'hui</button>
@@ -388,16 +410,14 @@
                         </div>
                         <div class="d-flex align-items-center gap-2">
                             <input type="text"
-                                class="form-control form-control-sm {{ $quickFilter === 'custom' ? 'border-primary' : '' }}"
-                                id="dashboardDateRange" style="min-width: 220px; cursor: pointer; background: #fff;"
-                                placeholder="Période personnalisée" readonly
+                                class="form-control dashboard-period-input {{ $quickFilter === 'custom' ? 'border-primary' : '' }}"
+                                id="dashboardDateRange" placeholder="Période personnalisée" readonly
                                 value="{{ $quickFilter === 'custom' ? $periodStart->format('d/m/Y') . ' - ' . $periodEnd->format('d/m/Y') : '' }}">
                             <input type="hidden" name="date_from" id="dashboardDateFrom"
                                 value="{{ $quickFilter === 'custom' ? $periodStart->format('Y-m-d') : '' }}">
                             <input type="hidden" name="date_to" id="dashboardDateTo"
                                 value="{{ $quickFilter === 'custom' ? $periodEnd->format('Y-m-d') : '' }}">
-                            <span class="badge bg-primary text-primary d-none d-lg-inline-flex align-items-center gap-1"
-                                style="font-size:.72rem;">
+                            <span class="badge bg-primary text-primary dashboard-period-badge d-none d-lg-inline-flex align-items-center gap-1">
                                 <iconify-icon icon="solar:calendar-linear"></iconify-icon>
                                 @if ($quickFilter === 'all_time')
                                     Tout le temps
