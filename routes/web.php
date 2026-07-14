@@ -265,9 +265,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('api/familles/stock/{productId}/{familleId}', [FamilleController::class, 'getStockInfo']);
 
     // Production Consumption
-    Route::resource('production-consumption', ProductionConsumptionController::class);
     Route::get('production-consumption/statistics', [ProductionConsumptionController::class, 'getStatistics'])->name('production-consumption.statistics');
     Route::get('production-consumption/order/{order_id}', [ProductionConsumptionController::class, 'getOrderConsumptions'])->name('production-consumption.order');
+    Route::resource('production-consumption', ProductionConsumptionController::class);
 
     // Clients Routes
     Route::prefix('clients')->name('clients.')->group(function () {

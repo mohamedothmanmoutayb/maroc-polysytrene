@@ -31,60 +31,60 @@
 
         <!-- Statistics Cards -->
         <div class="row mb-4">
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card h-100">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-start">
                             <div>
-                                <span class="text-muted">Coût Total</span>
-                                <h3 class="mb-0" id="totalConsumptionCost">0 DH</h3>
+                                <span class="text-muted d-block mb-1">Coût Total</span>
+                                <h2 class="mb-0 fw-bold" id="totalConsumptionCost">0 DH</h2>
                             </div>
-                            <div class="align-self-center">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded">
                                 <i class="fas fa-money-bill-wave fs-1 text-primary"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card h-100">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-start">
                             <div>
-                                <span class="text-muted">Coût Déchets</span>
-                                <h3 class="mb-0" id="totalWasteCost">0 DH</h3>
+                                <span class="text-muted d-block mb-1">Coût Déchets</span>
+                                <h2 class="mb-0 fw-bold text-danger" id="totalWasteCost">0 DH</h2>
                             </div>
-                            <div class="align-self-center">
+                            <div class="bg-danger bg-opacity-10 p-3 rounded">
                                 <i class="fas fa-trash-alt fs-1 text-danger"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card h-100">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-start">
                             <div>
-                                <span class="text-muted">Ce Mois</span>
-                                <h3 class="mb-0" id="monthlyConsumption">0 DH</h3>
+                                <span class="text-muted d-block mb-1">Ce Mois</span>
+                                <h2 class="mb-0 fw-bold" id="monthlyConsumption">0 DH</h2>
                             </div>
-                            <div class="align-self-center">
+                            <div class="bg-success bg-opacity-10 p-3 rounded">
                                 <i class="fas fa-calendar-alt fs-1 text-success"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card h-100">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-start">
                             <div>
-                                <span class="text-muted">Top Matières</span>
-                                <h3 class="mb-0" id="topMaterialsCount">0</h3>
+                                <span class="text-muted d-block mb-1">Top Matières</span>
+                                <h2 class="mb-0 fw-bold" id="topMaterialsCount">0</h2>
                             </div>
-                            <div class="align-self-center">
+                            <div class="bg-warning bg-opacity-10 p-3 rounded">
                                 <i class="fas fa-star fs-1 text-warning"></i>
                             </div>
                         </div>
@@ -409,12 +409,12 @@
                     type: "GET",
                     success: function(response) {
                         if (response.success) {
-                            $('#totalConsumptionCost').text(response.data.total_consumption_cost
+                            $('#totalConsumptionCost').text(parseFloat(response.data
+                                .total_consumption_cost || 0).toFixed(2) + ' DH');
+                            $('#totalWasteCost').text(parseFloat(response.data.total_waste_cost || 0)
                                 .toFixed(2) + ' DH');
-                            $('#totalWasteCost').text(response.data.total_waste_cost.toFixed(2) +
-                                ' DH');
-                            $('#monthlyConsumption').text(response.data.monthly_consumption.toFixed(2) +
-                                ' DH');
+                            $('#monthlyConsumption').text(parseFloat(response.data
+                                .monthly_consumption || 0).toFixed(2) + ' DH');
                             $('#topMaterialsCount').text(response.data.top_materials.length);
                         }
                     },
