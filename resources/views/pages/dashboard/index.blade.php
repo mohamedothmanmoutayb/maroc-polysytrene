@@ -3,7 +3,20 @@
 @section('title', 'Tableau de Bord')
 
 @push('stylesheets')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
     <style>
+        /* ── Loader AJAX du tableau de bord ─────────────────────────────────── */
+        #dashboard-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* ── Responsive Design Variables ─────────────────────────────────────── */
         :root {
             --mobile-breakpoint: 768px;
@@ -347,7 +360,56 @@
 @endpush
 
 @section('content')
-    <div class="container-fluid pb-3 pb-md-4">
+    <div class="container-fluid pb-3 pb-md-4" id="dashboard-content">
+
+        {{-- ═══════════════════════════════════════════════════════════════════════
+             FILTRES DE DATES - Filtres rapides + Période personnalisée
+        ═══════════════════════════════════════════════════════════════════════ --}}
+        <div class="card mb-3 mb-md-4">
+            <div class="card-body p-2 p-md-3">
+                <form method="GET" action="{{ route('dashboard') }}" id="dashboardFilterForm">
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2 flex-wrap me-auto">
+                            <iconify-icon icon="solar:calendar-bold" class="text-primary fs-5 d-none d-md-inline"></iconify-icon>
+                            <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="Filtres rapides">
+                                <button type="submit" name="quick_filter" value="today"
+                                    class="btn btn-outline-primary {{ $quickFilter === 'today' ? 'active' : '' }}">Aujourd'hui</button>
+                                <button type="submit" name="quick_filter" value="this_week"
+                                    class="btn btn-outline-primary {{ $quickFilter === 'this_week' ? 'active' : '' }}">Cette semaine</button>
+                                <button type="submit" name="quick_filter" value="last_week"
+                                    class="btn btn-outline-primary {{ $quickFilter === 'last_week' ? 'active' : '' }}">Semaine dernière</button>
+                                <button type="submit" name="quick_filter" value="this_month"
+                                    class="btn btn-outline-primary {{ $quickFilter === 'this_month' ? 'active' : '' }}">Ce mois</button>
+                                <button type="submit" name="quick_filter" value="last_month"
+                                    class="btn btn-outline-primary {{ $quickFilter === 'last_month' ? 'active' : '' }}">Mois dernier</button>
+                                <button type="submit" name="quick_filter" value="all_time"
+                                    class="btn btn-outline-primary {{ $quickFilter === 'all_time' ? 'active' : '' }}">Tout</button>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="text"
+                                class="form-control form-control-sm {{ $quickFilter === 'custom' ? 'border-primary' : '' }}"
+                                id="dashboardDateRange" style="min-width: 220px; cursor: pointer; background: #fff;"
+                                placeholder="Période personnalisée" readonly
+                                value="{{ $quickFilter === 'custom' ? $periodStart->format('d/m/Y') . ' - ' . $periodEnd->format('d/m/Y') : '' }}">
+                            <input type="hidden" name="date_from" id="dashboardDateFrom"
+                                value="{{ $quickFilter === 'custom' ? $periodStart->format('Y-m-d') : '' }}">
+                            <input type="hidden" name="date_to" id="dashboardDateTo"
+                                value="{{ $quickFilter === 'custom' ? $periodEnd->format('Y-m-d') : '' }}">
+                            <span class="badge bg-primary text-primary d-none d-lg-inline-flex align-items-center gap-1"
+                                style="font-size:.72rem;">
+                                <iconify-icon icon="solar:calendar-linear"></iconify-icon>
+                                @if ($quickFilter === 'all_time')
+                                    Tout le temps
+                                @else
+                                    {{ $periodStart->format('d/m/Y') }}@if (!$periodStart->isSameDay($periodEnd)) → {{ $periodEnd->format('d/m/Y') }}@endif
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         {{-- ═══════════════════════════════════════════════════════════════════════
              ALERTES IMPORTANTES - Mobile Responsive
@@ -380,7 +442,11 @@
         {{-- ═══════════════════════════════════════════════════════════════════════
              1. SECTION KPIs – Mobile First Grid
         ═══════════════════════════════════════════════════════════════════════ --}}
-        <p class="section-title">Vue d'ensemble · {{ date('d F Y') }}</p>
+        <p class="section-title">Vue d'ensemble · {{ $periodLabel }}
+            @if ($quickFilter !== 'all_time')
+                <span class="text-muted fw-normal" style="font-size:.75rem;">({{ $periodStart->format('d/m/Y') }}@if (!$periodStart->isSameDay($periodEnd)) → {{ $periodEnd->format('d/m/Y') }}@endif)</span>
+            @endif
+        </p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
 
             {{-- CA Aujourd'hui --}}
@@ -392,12 +458,13 @@
                                 <iconify-icon icon="solar:calendar-bold" class="text-primary fs-5"></iconify-icon>
                             </div>
                             <a href="{{ route('sales.orders.index') }}"
-                                class="kpi-label text-decoration-none text-reset stretched-link">CA Aujourd'hui</a>
+                                class="kpi-label text-decoration-none text-reset stretched-link">CA · {{ $periodLabel }}</a>
                         </div>
-                        <div class="kpi-value text-primary mb-1">{{ number_format($stats['today_sales'], 0) }}<small
+                        <div class="kpi-value text-primary mb-1">{{ number_format($stats['period_sales'], 0) }}<small
                                 class="fs-11 fw-normal text-muted"> DH</small></div>
-                        <div class="kpi-sub text-muted">Mois: <strong
-                                class="text-dark">{{ number_format($stats['month_sales'], 0) }} DH</strong></div>
+                        <div class="kpi-sub text-muted"><strong
+                                class="text-dark">{{ $stats['period_sales_count'] }}</strong> commande(s) · Auj:
+                            <strong class="text-dark">{{ number_format($stats['today_sales'], 0) }} DH</strong></div>
                     </div>
                 </div>
             </div>
@@ -413,11 +480,11 @@
                             <a href="{{ route('production-output.index') }}"
                                 class="kpi-label text-decoration-none text-reset stretched-link">Production</a>
                         </div>
-                        <div class="kpi-value text-success mb-1">{{ number_format($stats['today_qty_produced']) }}<small
+                        <div class="kpi-value text-success mb-1">{{ number_format($stats['period_qty_produced']) }}<small
                                 class="fs-11 fw-normal text-muted"> u.</small></div>
                         <div class="kpi-sub text-muted">
-                            @if ($stats['today_volume_m3'] > 0)
-                                {{ $stats['today_volume_m3'] }} m³ ·
+                            @if ($stats['period_volume_m3'] > 0)
+                                {{ $stats['period_volume_m3'] }} m³ ·
                             @endif
                             Rendement <strong
                                 class="{{ $stats['production_yield'] >= 90 ? 'text-success' : ($stats['production_yield'] >= 70 ? 'text-warning' : 'text-danger') }}">{{ $stats['production_yield'] }}%</strong>
@@ -648,15 +715,15 @@
                             <div class="col-4">
                                 <div class="d-flex align-items-center gap-1 gap-md-2">
                                     <span
-                                        class="d-flex align-items-center justify-content-center rounded p-1 p-md-2 {{ $stats['profit_month'] >= 0 ? 'bg-success-subtle' : 'bg-danger-subtle' }}">
+                                        class="d-flex align-items-center justify-content-center rounded p-1 p-md-2 {{ $stats['period_profit'] >= 0 ? 'bg-success-subtle' : 'bg-danger-subtle' }}">
                                         <iconify-icon icon="solar:dollar-minimalistic-linear"
-                                            class="{{ $stats['profit_month'] >= 0 ? 'text-success' : 'text-danger' }}"></iconify-icon>
+                                            class="{{ $stats['period_profit'] >= 0 ? 'text-success' : 'text-danger' }}"></iconify-icon>
                                     </span>
                                     <div>
-                                        <div class="kpi-label">Bénéfice</div>
+                                        <div class="kpi-label">Bénéfice · {{ $periodLabel }}</div>
                                         <div
-                                            class="fw-semibold small {{ $stats['profit_month'] >= 0 ? 'text-success' : 'text-danger' }}">
-                                            {{ number_format($stats['profit_month'], 0) }} DH
+                                            class="fw-semibold small {{ $stats['period_profit'] >= 0 ? 'text-success' : 'text-danger' }}">
+                                            {{ number_format($stats['period_profit'], 0) }} DH
                                         </div>
                                     </div>
                                 </div>
@@ -669,16 +736,16 @@
             <div class="col-lg-4">
                 <div class="card h-100">
                     <div class="card-body p-3">
-                        <h5 class="card-title mb-3">Résumé Financier</h5>
+                        <h5 class="card-title mb-3">Résumé Financier · {{ $periodLabel }}</h5>
 
                         <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="kpi-icon bg-primary-subtle" style="width:32px;height:32px;">
                                     <iconify-icon icon="solar:chart-bold" class="text-primary"></iconify-icon>
                                 </span>
-                                <span class="fw-medium small">CA Ce Mois</span>
+                                <span class="fw-medium small">CA · {{ $periodLabel }}</span>
                             </div>
-                            <span class="fw-bold text-primary small">{{ number_format($stats['month_sales'], 0) }}
+                            <span class="fw-bold text-primary small">{{ number_format($stats['period_sales'], 0) }}
                                 DH</span>
                         </div>
 
@@ -687,24 +754,24 @@
                                 <span class="kpi-icon bg-danger-subtle" style="width:32px;height:32px;">
                                     <iconify-icon icon="solar:bill-bold" class="text-danger"></iconify-icon>
                                 </span>
-                                <span class="fw-medium small">Dépenses Ce Mois</span>
+                                <span class="fw-medium small">Dépenses · {{ $periodLabel }}</span>
                             </div>
-                            <span class="fw-bold text-danger small">{{ number_format($stats['month_expenses'], 0) }}
+                            <span class="fw-bold text-danger small">{{ number_format($stats['period_expenses'], 0) }}
                                 DH</span>
                         </div>
 
                         <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <span
-                                    class="kpi-icon {{ $stats['profit_month'] >= 0 ? 'bg-success-subtle' : 'bg-danger-subtle' }}"
+                                    class="kpi-icon {{ $stats['period_profit'] >= 0 ? 'bg-success-subtle' : 'bg-danger-subtle' }}"
                                     style="width:32px;height:32px;">
                                     <iconify-icon icon="solar:hand-money-bold"
-                                        class="{{ $stats['profit_month'] >= 0 ? 'text-success' : 'text-danger' }}"></iconify-icon>
+                                        class="{{ $stats['period_profit'] >= 0 ? 'text-success' : 'text-danger' }}"></iconify-icon>
                                 </span>
                                 <span class="fw-medium small">Bénéfice</span>
                             </div>
                             <span
-                                class="fw-bold small {{ $stats['profit_month'] >= 0 ? 'text-success' : 'text-danger' }}">{{ number_format($stats['profit_month'], 0) }}
+                                class="fw-bold small {{ $stats['period_profit'] >= 0 ? 'text-success' : 'text-danger' }}">{{ number_format($stats['period_profit'], 0) }}
                                 DH</span>
                         </div>
 
@@ -712,11 +779,11 @@
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="fw-medium small">Marge bénéficiaire</span>
                                 <span
-                                    class="fw-bold small {{ $stats['margin_pct'] >= 15 ? 'text-success' : ($stats['margin_pct'] >= 5 ? 'text-warning' : 'text-danger') }}">{{ $stats['margin_pct'] }}%</span>
+                                    class="fw-bold small {{ $stats['period_margin_pct'] >= 15 ? 'text-success' : ($stats['period_margin_pct'] >= 5 ? 'text-warning' : 'text-danger') }}">{{ $stats['period_margin_pct'] }}%</span>
                             </div>
                             <div class="progress progress-sm">
-                                <div class="progress-bar {{ $stats['margin_pct'] >= 15 ? 'bg-success' : ($stats['margin_pct'] >= 5 ? 'bg-warning' : 'bg-danger') }}"
-                                    style="width:{{ max(0, min(100, $stats['margin_pct'])) }}%"></div>
+                                <div class="progress-bar {{ $stats['period_margin_pct'] >= 15 ? 'bg-success' : ($stats['period_margin_pct'] >= 5 ? 'bg-warning' : 'bg-danger') }}"
+                                    style="width:{{ max(0, min(100, $stats['period_margin_pct'])) }}%"></div>
                             </div>
                         </div>
 
@@ -816,9 +883,9 @@
                                     <iconify-icon icon="solar:calendar-bold" class="text-info fs-5"></iconify-icon>
                                 </div>
                                 <a href="{{ route('production-consumption.index') }}"
-                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production Jour</a>
+                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production · {{ $periodLabel }}</a>
                             </div>
-                            <div class="kpi-value text-info mb-0">{{ number_format($prodCostToday, 0, ',', ' ') }}<small
+                            <div class="kpi-value text-info mb-0">{{ number_format($prodCostPeriod, 0, ',', ' ') }}<small
                                     class="fs-11 fw-normal text-muted"> DH</small></div>
                         </div>
                     </div>
@@ -846,7 +913,7 @@
                             <a href="{{ route('production-output.index') }}"
                                 class="text-reset text-decoration-none stretched-link">
                                 <iconify-icon icon="solar:box-bold" class="text-success me-1"></iconify-icon>
-                                Qté Produite en m³ par Article <small class="text-muted fw-normal">· ce mois</small>
+                                Qté Produite en m³ par Article <small class="text-muted fw-normal">· {{ $periodLabel }}</small>
                             </a>
                         </h5>
                         <div class="table-responsive-stack">
@@ -873,8 +940,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune production ce
-                                                mois</td>
+                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune production sur
+                                                cette période</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -892,7 +959,7 @@
                             <a href="{{ route('production-consumption.index') }}"
                                 class="text-reset text-decoration-none stretched-link">
                                 <iconify-icon icon="solar:test-tube-bold" class="text-warning me-1"></iconify-icon>
-                                Matière Première Consommée <small class="text-muted fw-normal">· ce mois</small>
+                                Matière Première Consommée <small class="text-muted fw-normal">· {{ $periodLabel }}</small>
                             </a>
                         </h5>
                         <div class="table-responsive-stack">
@@ -922,8 +989,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune consommation ce
-                                                mois</td>
+                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune consommation sur
+                                                cette période</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -937,7 +1004,7 @@
         {{-- ═══════════════════════════════════════════════════════════════════════
              CAPACITÉ DE PRODUCTION PAR ÉQUIPE (production / découpage) + rendement
         ═══════════════════════════════════════════════════════════════════════ --}}
-        <p class="section-title">Capacité de Production par Équipe · Rendement</p>
+        <p class="section-title">Capacité de Production par Équipe · Rendement · {{ $periodLabel }}</p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
             <div class="col-12">
                 <div class="card">
@@ -975,8 +1042,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center py-3 text-muted small">Aucune production ce
-                                                mois</td>
+                                            <td colspan="5" class="text-center py-3 text-muted small">Aucune production sur
+                                                cette période</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -1007,7 +1074,12 @@
                             <div class="d-flex align-items-center gap-3 mt-2 mt-sm-0">
                                 <small class="text-white-50">
                                     <iconify-icon icon="solar:calendar-linear"></iconify-icon>
-                                    Période: {{ $cashFlowData['date_from'] }} - {{ $cashFlowData['date_to'] }}
+                                    Période:
+                                    @if ($quickFilter === 'all_time')
+                                        Tout le temps
+                                    @else
+                                        {{ $cashFlowData['date_from'] }} - {{ $cashFlowData['date_to'] }}
+                                    @endif
                                 </small>
                             </div>
                         </div>
@@ -1263,7 +1335,7 @@
         </div>
 
         @push('scripts')
-            <script>
+            <script data-dashboard-script>
                 // Initialize popovers for stock details
                 $(document).ready(function() {
                     $('[data-bs-toggle="popover"]').popover({
@@ -1460,15 +1532,15 @@
                             <iconify-icon icon="solar:box-bold" class="text-success"></iconify-icon>
                         </div>
                         <h5 class="mb-2" style="font-size: 1rem;"><a href="{{ route('production-output.index') }}"
-                                class="text-reset text-decoration-none stretched-link">Production du Jour</a></h5>
+                                class="text-reset text-decoration-none stretched-link">Production · {{ $periodLabel }}</a></h5>
                         <div class="row g-0 mt-2">
                             <div class="col-6 border-end">
                                 <h3 class="text-success mb-0" style="font-size: 1.3rem;">
-                                    {{ number_format($stats['today_qty_produced']) }}</h3>
+                                    {{ number_format($stats['period_qty_produced']) }}</h3>
                                 <small class="text-muted" style="font-size: 0.7rem;">Unités</small>
                             </div>
                             <div class="col-6">
-                                <h3 class="text-info mb-0" style="font-size: 1.3rem;">{{ $stats['today_volume_m3'] }}
+                                <h3 class="text-info mb-0" style="font-size: 1.3rem;">{{ $stats['period_volume_m3'] }}
                                 </h3>
                                 <small class="text-muted" style="font-size: 0.7rem;">m³</small>
                             </div>
@@ -2006,7 +2078,122 @@
 
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.45.2/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    {{-- Script persistant: chargement AJAX du tableau de bord (ne se ré-exécute pas) --}}
     <script>
+        (function() {
+            function showDashboardLoader() {
+                if (document.getElementById('dashboard-loader')) return;
+                var loader = document.createElement('div');
+                loader.id = 'dashboard-loader';
+                loader.innerHTML = '<div class="text-center">' +
+                    '<div class="spinner-border text-primary" role="status" style="width:3rem;height:3rem;">' +
+                    '<span class="visually-hidden">Chargement...</span></div>' +
+                    '<div class="mt-3 fw-semibold text-primary">Chargement des données...</div>' +
+                    '</div>';
+                document.body.appendChild(loader);
+            }
+
+            function hideDashboardLoader() {
+                var loader = document.getElementById('dashboard-loader');
+                if (loader) loader.remove();
+            }
+
+            window.loadDashboard = function(url, pushState) {
+                if (pushState === undefined) pushState = true;
+                showDashboardLoader();
+                fetch(url, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(function(response) {
+                        if (!response.ok) throw new Error('HTTP ' + response.status);
+                        return response.text();
+                    })
+                    .then(function(html) {
+                        var doc = new DOMParser().parseFromString(html, 'text/html');
+                        var fresh = doc.getElementById('dashboard-content');
+                        var current = document.getElementById('dashboard-content');
+                        if (!fresh || !current) {
+                            window.location.href = url;
+                            return;
+                        }
+                        // Nettoie les anciens calendriers daterangepicker orphelins
+                        document.querySelectorAll('body > .daterangepicker').forEach(function(el) {
+                            el.remove();
+                        });
+                        current.replaceWith(fresh);
+                        if (pushState) {
+                            window.history.pushState({
+                                dashboard: true
+                            }, '', url);
+                        }
+                        // Ré-exécute les scripts du tableau de bord (graphiques, datepicker, popovers)
+                        doc.querySelectorAll('script[data-dashboard-script]').forEach(function(oldScript) {
+                            var s = document.createElement('script');
+                            s.text = oldScript.textContent;
+                            document.body.appendChild(s);
+                            s.remove();
+                        });
+                        hideDashboardLoader();
+                    })
+                    .catch(function() {
+                        window.location.href = url;
+                    });
+            };
+
+            // Filtres rapides (délégation: survit au remplacement du DOM)
+            $(document).on('click', '#dashboardFilterForm button[name="quick_filter"]', function(e) {
+                e.preventDefault();
+                window.loadDashboard('{{ route('dashboard') }}?quick_filter=' + this.value);
+            });
+
+            // Empêche la soumission classique du formulaire (fallback sans JS uniquement)
+            $(document).on('submit', '#dashboardFilterForm', function(e) {
+                e.preventDefault();
+            });
+
+            // Boutons précédent / suivant du navigateur
+            window.addEventListener('popstate', function() {
+                window.loadDashboard(window.location.href, false);
+            });
+        })();
+    </script>
+    {{-- Script ré-exécutable après chaque chargement AJAX --}}
+    <script data-dashboard-script>
+        $(document).ready(function() {
+            // ── Filtre de dates personnalisé (période) ───────────────────────────
+            $('#dashboardDateRange').daterangepicker({
+                autoApply: false,
+                autoUpdateInput: false,
+                showDropdowns: true,
+                opens: 'left',
+                startDate: moment('{{ $quickFilter === 'all_time' ? now()->format('Y-m-d') : $periodStart->format('Y-m-d') }}'),
+                endDate: moment('{{ $quickFilter === 'all_time' ? now()->format('Y-m-d') : $periodEnd->format('Y-m-d') }}'),
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    separator: ' - ',
+                    applyLabel: 'Appliquer',
+                    cancelLabel: 'Annuler',
+                    customRangeLabel: 'Personnalisé',
+                    daysOfWeek: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+                    ],
+                    firstDay: 1
+                }
+            });
+
+            $('#dashboardDateRange').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+                window.loadDashboard('{{ route('dashboard') }}?date_from=' + picker.startDate.format('YYYY-MM-DD') +
+                    '&date_to=' + picker.endDate.format('YYYY-MM-DD'));
+            });
+        });
+    </script>
+    <script data-dashboard-script>
         $(document).ready(function() {
             // Function to check if mobile
             const isMobile = window.innerWidth < 768;
@@ -2234,14 +2421,17 @@
                 }
             }).render();
 
-            // Handle resize events to update charts
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    location.reload();
-                }, 250);
-            });
+            // Handle resize events to update charts (bound once, even after rechargements AJAX)
+            if (!window.__dashboardResizeBound) {
+                window.__dashboardResizeBound = true;
+                let resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        location.reload();
+                    }, 250);
+                });
+            }
         });
     </script>
 @endpush

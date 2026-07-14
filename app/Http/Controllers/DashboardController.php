@@ -27,12 +27,16 @@ use App\Models\ProductFamilleStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+
+        // ── Période sélectionnée (filtres de dates) ──────────────────────────
+        [$periodStart, $periodEnd, $quickFilter, $periodLabel] = $this->resolvePeriod($request);
 
         // ── Client stats ──────────────────────────────────────────────────────
         $clientTypeStats = collect([
@@ -145,18 +149,18 @@ class DashboardController extends Controller
                 return $order;
             });
 
-        // Today's production output
-        $todayQtyProduced  = ProductionOutput::whereDate('production_date', today())->sum('quantity_produced');
-        $todayVolumeM3     = ProductionOutput::whereDate('production_date', today())->sum('total_volume_m3');
-        $todayDefective    = ProductionOutput::whereDate('production_date', today())->sum('quantity_defective');
-        $productionYield   = $todayQtyProduced > 0
-            ? round((($todayQtyProduced - $todayDefective) / $todayQtyProduced) * 100, 1)
+        // Production output sur la période sélectionnée
+        $periodQtyProduced = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])->sum('quantity_produced');
+        $periodVolumeM3    = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])->sum('total_volume_m3');
+        $periodDefective   = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])->sum('quantity_defective');
+        $productionYield   = $periodQtyProduced > 0
+            ? round((($periodQtyProduced - $periodDefective) / $periodQtyProduced) * 100, 1)
             : 0;
 
         // Objective = total quantity to produce across in_progress orders
         $productionObjective = ProductionOrder::where('status', 'in_progress')->sum('quantity_to_produce');
         $productionProgress  = $productionObjective > 0
-            ? min(100, round(($todayQtyProduced / $productionObjective) * 100))
+            ? min(100, round(($periodQtyProduced / $productionObjective) * 100))
             : 0;
 
         // Late production orders
@@ -179,14 +183,15 @@ class DashboardController extends Controller
         $overdueSalesOrders = $paymentStatusStats['overdue']['count'];
 
         // ── Finance ───────────────────────────────────────────────────────────
+        // Valeurs "aujourd'hui" (référence fixe)
         $todaySales    = SalesOrder::whereDate('order_date', today())->sum('final_amount');
-        $monthSales    = SalesOrder::whereYear('order_date', now()->year)
-                            ->whereMonth('order_date', now()->month)->sum('final_amount');
         $todayExpenses = Expense::whereDate('expense_date', today())->sum('amount');
-        $monthExpenses = Expense::whereYear('expense_date', now()->year)
-                            ->whereMonth('expense_date', now()->month)->sum('amount');
-        $profitMonth   = $monthSales - $monthExpenses;
-        $marginPct     = $monthSales > 0 ? round(($profitMonth / $monthSales) * 100, 1) : 0;
+        // Valeurs de la période sélectionnée
+        $periodSales      = SalesOrder::whereBetween('order_date', [$periodStart, $periodEnd])->sum('final_amount');
+        $periodSalesCount = SalesOrder::whereBetween('order_date', [$periodStart, $periodEnd])->count();
+        $periodExpenses   = Expense::whereBetween('expense_date', [$periodStart, $periodEnd])->sum('amount');
+        $periodProfit     = $periodSales - $periodExpenses;
+        $periodMargin     = $periodSales > 0 ? round(($periodProfit / $periodSales) * 100, 1) : 0;
 
         // ── Machines ──────────────────────────────────────────────────────────
         $machinesBreakdown = Machine::where('status', '!=', 'active')->count();
@@ -201,16 +206,16 @@ class DashboardController extends Controller
         // Taux de couverture = (Résultat NET / (Crédit Client + La Caisse + Stock MP + Stock Produit)) × 100
         // ═══════════════════════════════════════════════════════════════════════
 
-        // Get current month and year
+        // Get current month and year (références "mois courant")
         $currentMonth = now()->month;
         $currentYear = now()->year;
-        $dateFrom = now()->startOfMonth();
-        $dateTo = now()->endOfMonth();
+        // Période sélectionnée via les filtres de dates
+        $dateFrom = $periodStart;
+        $dateTo = $periodEnd;
 
         // 1. CRÉDIT FOURNISSEUR (Supplier Credit - Amount we owe to suppliers)
         // Get all raw material purchases that are not fully paid
-        $creditFournisseur = RawMaterialPurchase::whereYear('purchase_date', $currentYear)
-            ->whereMonth('purchase_date', $currentMonth)
+        $creditFournisseur = RawMaterialPurchase::whereBetween('purchase_date', [$periodStart, $periodEnd])
             ->where(function($query) {
                 $query->where('payment_status', 'pending')
                     ->orWhere('payment_status', 'partial');
@@ -218,26 +223,22 @@ class DashboardController extends Controller
             ->sum(DB::raw('final_amount - paid_amount'));
 
         // 2. CHARGES FIXES (Fixed Expenses - All expenses + salaires employés)
-        $depensesMois = Expense::whereYear('expense_date', $currentYear)
-            ->whereMonth('expense_date', $currentMonth)
+        $depensesMois = Expense::whereBetween('expense_date', [$periodStart, $periodEnd])
             ->sum('amount');
 
-        // Salaires payés du mois: heures pointées × taux horaire (même formule que la paie)
+        // Salaires payés de la période: heures pointées × taux horaire (même formule que la paie)
         $salairesEmployes = (float) Attendance::join('employees', 'employees.employee_id', '=', 'attendances.employee_id')
-            ->whereYear('attendances.date', $currentYear)
-            ->whereMonth('attendances.date', $currentMonth)
+            ->whereBetween('attendances.date', [$periodStart, $periodEnd])
             ->sum(DB::raw('attendances.hours_worked * COALESCE(employees.hourly_salary, 0)'));
 
         $chargesFixes = $depensesMois + $salairesEmployes;
 
         // 3. CRÉDIT CLIENT (Client Credit - Unpaid sales/ventes impayé)
-        $creditClient = SalesOrder::whereYear('order_date', $currentYear)
-            ->whereMonth('order_date', $currentMonth)
+        $creditClient = SalesOrder::whereBetween('order_date', [$periodStart, $periodEnd])
             ->sum(DB::raw('final_amount - paid_amount'));
 
         // 4. LA CAISSE (Sales Payments received - encaissements)
-        $laCaisse = SalesOrderPayment::whereYear('payment_date', $currentYear)
-            ->whereMonth('payment_date', $currentMonth)
+        $laCaisse = SalesOrderPayment::whereBetween('payment_date', [$periodStart, $periodEnd])
             ->sum('amount');
 
         // 5. STOCK MP (Raw Material Stock Value with Weighted Average Cost)
@@ -288,7 +289,7 @@ class DashboardController extends Controller
             'taux_couverture_class' => $this->getCoverageRateClass($tauxCouverture),
 
             // Period info
-            'month' => now()->format('F Y'),
+            'month' => $periodLabel,
             'date_from' => $dateFrom->format('d/m/Y'),
             'date_to' => $dateTo->format('d/m/Y'),
         ];
@@ -329,18 +330,17 @@ class DashboardController extends Controller
             ];
         }
 
-        // 3. COÛT DE PRODUCTION (jour / mois) — valeur des matières consommées
-        $prodCostToday = (float) ProductionConsumption::whereHas('productionOrder', function ($q) {
-            $q->whereDate('start_date', today());
+        // 3. COÛT DE PRODUCTION (période / mois) — valeur des matières consommées
+        $prodCostPeriod = (float) ProductionConsumption::whereHas('productionOrder', function ($q) use ($periodStart, $periodEnd) {
+            $q->whereBetween('start_date', [$periodStart, $periodEnd]);
         })->sum('total_cost');
         $prodCostMonth = (float) ProductionConsumption::whereHas('productionOrder', function ($q) use ($currentYear, $currentMonth) {
             $q->whereYear('start_date', $currentYear)->whereMonth('start_date', $currentMonth);
         })->sum('total_cost');
 
-        // 3.a QUANTITÉ PRODUITE EN m³ PAR ARTICLE (mois courant)
+        // 3.a QUANTITÉ PRODUITE EN m³ PAR ARTICLE (période sélectionnée)
         $productionByProduct = ProductionOutput::join('products', 'production_output.product_id', '=', 'products.product_id')
-            ->whereYear('production_output.production_date', $currentYear)
-            ->whereMonth('production_output.production_date', $currentMonth)
+            ->whereBetween('production_output.production_date', [$periodStart, $periodEnd])
             ->groupBy('products.product_id', 'products.product_name', 'products.product_code')
             ->selectRaw('products.product_name, products.product_code,
                 SUM(production_output.quantity_produced) as qty_produced,
@@ -349,10 +349,10 @@ class DashboardController extends Controller
             ->limit(8)
             ->get();
 
-        // 3.b QUANTITÉ MATIÈRE PREMIÈRE CONSOMMÉE (mois courant) — EPS + gaz + ...
+        // 3.b QUANTITÉ MATIÈRE PREMIÈRE CONSOMMÉE (période sélectionnée) — EPS + gaz + ...
         $materialConsumption = ProductionConsumption::join('raw_materials', 'production_consumption.material_id', '=', 'raw_materials.material_id')
-            ->whereHas('productionOrder', function ($q) use ($currentYear, $currentMonth) {
-                $q->whereYear('start_date', $currentYear)->whereMonth('start_date', $currentMonth);
+            ->whereHas('productionOrder', function ($q) use ($periodStart, $periodEnd) {
+                $q->whereBetween('start_date', [$periodStart, $periodEnd]);
             })
             ->groupBy('raw_materials.material_id', 'raw_materials.material_name', 'raw_materials.material_code', 'raw_materials.unit_of_measure')
             ->selectRaw('raw_materials.material_name, raw_materials.material_code, raw_materials.unit_of_measure,
@@ -363,7 +363,7 @@ class DashboardController extends Controller
             ->limit(8)
             ->get();
 
-        // 4. CAPACITÉ DE PRODUCTION PAR ÉQUIPE (production / découpage) + rendement (mois courant)
+        // 4. CAPACITÉ DE PRODUCTION PAR ÉQUIPE (production / découpage) + rendement (période sélectionnée)
         $typeLabels = [
             'type1' => 'Production',
             'type2' => 'Découpage',
@@ -372,8 +372,7 @@ class DashboardController extends Controller
             'type5' => 'Chutes → Finis',
         ];
         $capacityByType = ProductionOutput::join('production_orders', 'production_output.production_order_id', '=', 'production_orders.order_id')
-            ->whereYear('production_output.production_date', $currentYear)
-            ->whereMonth('production_output.production_date', $currentMonth)
+            ->whereBetween('production_output.production_date', [$periodStart, $periodEnd])
             ->groupBy('production_orders.production_type')
             ->selectRaw('production_orders.production_type as production_type,
                 SUM(production_output.quantity_produced) as qty_produced,
@@ -450,8 +449,8 @@ class DashboardController extends Controller
             'completed_production_orders'=> ProductionOrder::where('status', 'completed')->count(),
             'pending_production_orders'  => ProductionOrder::whereIn('status', ['pending', 'approved'])->count(),
             'late_production_orders'     => $lateProductionOrders,
-            'today_qty_produced'         => $todayQtyProduced,
-            'today_volume_m3'            => round($todayVolumeM3, 2),
+            'period_qty_produced'        => $periodQtyProduced,
+            'period_volume_m3'           => round($periodVolumeM3, 2),
             'production_objective'       => $productionObjective,
             'production_progress'        => $productionProgress,
             'production_yield'           => $productionYield,
@@ -462,11 +461,12 @@ class DashboardController extends Controller
             'overdue_sales_orders'       => $overdueSalesOrders,
             // Finance
             'today_sales'                => (float) $todaySales,
-            'month_sales'                => (float) $monthSales,
             'today_expenses'             => (float) $todayExpenses,
-            'month_expenses'             => (float) $monthExpenses,
-            'profit_month'               => (float) $profitMonth,
-            'margin_pct'                 => $marginPct,
+            'period_sales'               => (float) $periodSales,
+            'period_sales_count'         => $periodSalesCount,
+            'period_expenses'            => (float) $periodExpenses,
+            'period_profit'              => (float) $periodProfit,
+            'period_margin_pct'          => $periodMargin,
             'total_expenses'             => Expense::sum('amount'),
             // Payments
             'completed_payments' => SalesOrderPayment::sum('amount'),
@@ -480,6 +480,10 @@ class DashboardController extends Controller
 
         return view('pages.dashboard.index', compact(
             'stats',
+            'periodStart',
+            'periodEnd',
+            'quickFilter',
+            'periodLabel',
             'clientTypeStats',
             'clientMonthlyGrowth',
             'monthlySalesData',
@@ -501,13 +505,61 @@ class DashboardController extends Controller
             'dailySalesData',
             'dailyExpensesData',
             'dailyPayments',
-            'prodCostToday',
+            'prodCostPeriod',
             'prodCostMonth',
             'productionByProduct',
             'materialConsumption',
             'capacityByType',
             'echeances'
         ));
+    }
+
+    /**
+     * Résout la période sélectionnée à partir de la requête.
+     * Filtres rapides: today, this_week, last_week, this_month, last_month, all_time, custom.
+     * Par défaut: aujourd'hui.
+     *
+     * @return array{0: \Carbon\Carbon, 1: \Carbon\Carbon, 2: string, 3: string}
+     */
+    private function resolvePeriod(Request $request)
+    {
+        $quickFilter = $request->get('quick_filter');
+        $isQuick = in_array($quickFilter, ['today', 'this_week', 'last_week', 'this_month', 'last_month', 'all_time'], true);
+        $dateFrom = $request->get('date_from');
+        $dateTo   = $request->get('date_to');
+
+        // Plage personnalisée si des dates valides sont fournies (sauf si un filtre rapide est cliqué)
+        if (!$isQuick && $dateFrom && $dateTo) {
+            try {
+                $start = Carbon::parse($dateFrom)->startOfDay();
+                $end   = Carbon::parse($dateTo)->endOfDay();
+                if ($start->gt($end)) {
+                    [$start, $end] = [$end->copy()->startOfDay(), $start->copy()->endOfDay()];
+                }
+                $label = $start->isSameDay($end)
+                    ? $start->translatedFormat('d M Y')
+                    : $start->translatedFormat('d M Y') . ' — ' . $end->translatedFormat('d M Y');
+                return [$start, $end, 'custom', $label];
+            } catch (\Exception $e) {
+                // Retombe sur le filtre rapide en cas de dates invalides
+            }
+        }
+
+        switch ($quickFilter) {
+            case 'this_week':
+                return [now()->startOfWeek(), now()->endOfWeek(), 'this_week', 'Cette semaine'];
+            case 'last_week':
+                return [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek(), 'last_week', 'La semaine dernière'];
+            case 'this_month':
+                return [now()->startOfMonth(), now()->endOfMonth(), 'this_month', 'Ce mois-ci'];
+            case 'last_month':
+                return [now()->subMonthNoOverflow()->startOfMonth(), now()->subMonthNoOverflow()->endOfMonth(), 'last_month', 'Le mois dernier'];
+            case 'all_time':
+                return [Carbon::create(2000, 1, 1)->startOfDay(), now()->endOfDay(), 'all_time', 'Tout le temps'];
+            case 'today':
+            default:
+                return [now()->startOfDay(), now()->endOfDay(), 'today', "Aujourd'hui"];
+        }
     }
 
     /**

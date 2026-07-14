@@ -2227,10 +2227,10 @@ class SalesOrderController extends Controller
                 $totalPriceTTC = $unitPriceTTC * $item->quantity;
                 $totalPriceHT = $unitPriceHT * $item->quantity;
 
-                $roundedUnitPriceTTC = ceil($unitPriceTTC);
-                $roundedUnitPriceHT = ceil($unitPriceHT);
-                $roundedTotalPriceTTC = $roundedUnitPriceTTC * $item->quantity;
-                $roundedTotalPriceHT = $roundedUnitPriceHT * $item->quantity;
+                $roundedUnitPriceTTC = $unitPriceTTC;
+                $roundedUnitPriceHT = $unitPriceHT;
+                $roundedTotalPriceTTC = round($totalPriceTTC);
+                $roundedTotalPriceHT = round($totalPriceHT);
 
                 $roundedTotalAmountTTC += $roundedTotalPriceTTC;
                 $roundedTotalAmountHT += $roundedTotalPriceHT;
@@ -2357,10 +2357,10 @@ class SalesOrderController extends Controller
                 $totalPriceTTC = $unitPriceTTC * $item->quantity;
                 $totalPriceHT = $unitPriceHT * $item->quantity;
 
-                $roundedUnitPriceTTC = ceil($unitPriceTTC);
-                $roundedUnitPriceHT = ceil($unitPriceHT);
-                $roundedTotalPriceTTC = $roundedUnitPriceTTC * $item->quantity;
-                $roundedTotalPriceHT = $roundedUnitPriceHT * $item->quantity;
+                $roundedUnitPriceTTC = $unitPriceTTC;
+                $roundedUnitPriceHT = $unitPriceHT;
+                $roundedTotalPriceTTC = round($totalPriceTTC);
+                $roundedTotalPriceHT = round($totalPriceHT);
 
                 $roundedTotalAmountTTC += $roundedTotalPriceTTC;
                 $roundedTotalAmountHT += $roundedTotalPriceHT;
