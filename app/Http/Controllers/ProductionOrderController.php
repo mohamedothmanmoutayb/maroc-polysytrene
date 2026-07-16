@@ -2555,66 +2555,7 @@ class ProductionOrderController extends Controller
 
     public function editOrder($id)
     {
-        $order = ProductionOrder::with([
-            'product',
-            'sourceProduct',
-            'famille',
-            'sourceFamille'
-        ])->findOrFail($id);
-
-        if (in_array($order->status, ['completed', 'cancelled'])) {
-            return redirect()->route('production-orders.show', $id)
-                ->with('error', 'Impossible de modifier un ordre ' . $order->status);
-        }
-
-        if ($order->outputs()->count() > 0) {
-            return redirect()->route('production-orders.show', $id)
-                ->with('error', 'Impossible de modifier un ordre avec des sorties de production.');
-        }
-
-        $productionProducts = Product::where('is_active', true)
-            ->whereIn('product_type', ['production', 'both'])
-            ->orderBy('product_name')
-            ->get();
-
-        $decoupageProducts = Product::where('is_active', true)
-            ->where('product_type', 'decoupage')
-            ->orderBy('product_name')
-            ->get();
-
-        $salesProducts = Product::where('is_active', true)
-            ->whereIn('product_type', ['finale', 'both'])
-            ->orderBy('product_name')
-            ->get();
-
-        $type3Products = [];
-        if ($order->production_type === 'type3') {
-            $type3Products = DB::table('production_order_products')
-                ->where('production_order_id', $order->order_id)
-                ->join('products', 'production_order_products.product_id', '=', 'products.product_id')
-                ->select(
-                    'production_order_products.*',
-                    'products.product_name',
-                    'products.product_code'
-                )
-                ->get();
-        }
-
-        $bom = null;
-        if ($order->production_type === 'type1' && $order->product) {
-            $bom = BillOfMaterial::where('product_id', $order->product_id)
-                ->with('rawMaterial')
-                ->get();
-        }
-
-        return view('pages.production-orders.edit', compact(
-            'order',
-            'productionProducts',
-            'decoupageProducts',
-            'salesProducts',
-            'type3Products',
-            'bom'
-        ));
+        return $this->edit($id);
     }
 
     public function cancelProduction($id)
@@ -3273,370 +3214,671 @@ class ProductionOrderController extends Controller
 
     public function edit($id)
     {
-        $order = ProductionOrder::with(['product', 'consumptions.rawMaterial'])->findOrFail($id);
+        $order = ProductionOrder::with([
+            'product',
+            'sourceProduct',
+            'famille',
+            'sourceFamille',
+            'consumptions.rawMaterial'
+        ])->findOrFail($id);
 
         if (in_array($order->status, ['completed', 'cancelled', 'in_progress'])) {
             return redirect()->route('production-orders.show', $id)
                 ->with('error', 'Impossible de modifier un ordre ' . $order->status);
         }
 
-        $products = Product::where('is_active', true)->get();
+        if ($order->outputs()->count() > 0) {
+            return redirect()->route('production-orders.show', $id)
+                ->with('error', 'Impossible de modifier un ordre avec des sorties de production.');
+        }
 
         $productionProducts = Product::where('is_active', true)
             ->whereIn('product_type', ['production', 'both'])
+            ->orderBy('product_name')
             ->get();
 
         $decoupageProducts = Product::where('is_active', true)
             ->where('product_type', 'decoupage')
-            ->orWhere(function($query) {
-                $query->where('is_active', true)
-                    ->where('product_type', 'both');
-            })
+            ->orderBy('product_name')
             ->get();
 
         $salesProducts = Product::where('is_active', true)
-            ->whereIn('product_type', ['finale', 'both', 'sales'])
+            ->whereIn('product_type', ['finale', 'both'])
+            ->orderBy('product_name')
             ->get();
 
-        $type3Products = [];
-        if ($order->production_type === 'type3') {
-            $type3Products = $order->getType3Products();
-        }
+        $familles = Famille::where('is_active', true)->orderBy('famille_name')->get();
 
         $employees = Employee::whereNull('resignation_date')->orderBy('full_name')->get();
 
+        // Produced articles saved for this order (types 2 à 5)
+        $orderProducts = DB::table('production_order_products')
+            ->where('production_order_id', $order->order_id)
+            ->join('products', 'production_order_products.product_id', '=', 'products.product_id')
+            ->select(
+                'production_order_products.*',
+                'products.product_name',
+                'products.product_code'
+            )
+            ->get();
+
+        // Legacy orders created before multi-product support: fall back to the
+        // single product stored on the order itself
+        if ($orderProducts->isEmpty() && $order->production_type !== 'type1' && $order->product_id) {
+            $orderProducts = collect([
+                (object) [
+                    'product_id' => $order->product_id,
+                    'quantity_to_produce' => $order->quantity_to_produce,
+                ],
+            ]);
+        }
+
+        // Source articles for type3 (stored in additional_data)
+        $sourceProducts = collect();
+        if ($order->production_type === 'type3') {
+            $additionalData = json_decode($order->additional_data ?? '', true);
+            $sourceProducts = collect($additionalData['source_products'] ?? []);
+            if ($sourceProducts->isEmpty() && $order->source_product_id) {
+                $sourceProducts = collect([
+                    [
+                        'product_id' => $order->source_product_id,
+                        'quantity' => $order->required_quantity,
+                    ],
+                ]);
+            }
+        }
+
+        // Planned BOM consumptions for type1 (chutes records excluded: the
+        // chutes volume is edited via its dedicated field, not the BOM table)
+        $bomConsumptions = collect();
+        if ($order->production_type === 'type1') {
+            $bomConsumptions = $order->consumptions
+                ->where('is_waste', false)
+                ->map(function ($consumption) {
+                    return [
+                        'material_id' => $consumption->material_id,
+                        'planned_quantity' => (float) $consumption->planned_quantity,
+                        'unit_cost' => (float) $consumption->unit_cost,
+                        'material_name' => $consumption->rawMaterial->material_name ?? '',
+                        'material_code' => $consumption->rawMaterial->material_code ?? '',
+                        'unit' => $consumption->rawMaterial->unit_of_measure ?? 'unité',
+                        'current_stock' => (float) ($consumption->rawMaterial->current_stock ?? 0),
+                    ];
+                })
+                ->values();
+        }
+
         return view('pages.production-orders.edit', compact(
             'order',
-            'products',
             'productionProducts',
             'decoupageProducts',
             'salesProducts',
-            'type3Products',
-            'employees'
+            'familles',
+            'employees',
+            'orderProducts',
+            'sourceProducts',
+            'bomConsumptions'
         ));
     }
 
     public function update(Request $request, $id)
     {
-        DB::beginTransaction();
-        try {
-            $order = ProductionOrder::with(['product', 'sourceProduct', 'outputs'])->findOrFail($id);
+        $order = ProductionOrder::with(['product', 'sourceProduct', 'outputs'])->findOrFail($id);
 
-            // Check if order can be edited
-            if (in_array($order->status, ['completed', 'cancelled'])) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossible de modifier un ordre ' . $order->status
-                ], 400);
-            }
+        if (in_array($order->status, ['completed', 'cancelled'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Impossible de modifier un ordre ' . $order->status
+            ], 400);
+        }
 
-            // Check if order has outputs
-            if ($order->outputs()->count() > 0) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossible de modifier un ordre avec des sorties de production.'
-                ], 400);
-            }
+        if ($order->outputs()->count() > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Impossible de modifier un ordre avec des sorties de production.'
+            ], 400);
+        }
 
+        // The production type of an existing order cannot change
+        $request->merge(['production_type' => $order->production_type]);
+
+        if ($order->production_type === 'type1') {
             $request->validate([
-                'production_type' => 'required|in:type1,type2,type3',
                 'product_id' => 'required|exists:products,product_id',
                 'famille_id' => 'nullable|exists:familles,famille_id',
-                'source_famille_id' => 'nullable|exists:familles,famille_id',
                 'quantity_to_produce' => 'required|numeric|min:0.01',
+                'priority' => 'required|in:low,medium,high,urgent',
+                'start_date' => 'required|date',
+                'expected_completion_date' => 'required',
+                'material_source' => 'nullable|in:bom_only,chutes_only,both',
+                'chutes_volume' => 'nullable|numeric|min:0',
+                'total_cost' => 'nullable|numeric|min:0',
+                'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
+                'bom_consumptions' => 'nullable|array',
+                'bom_consumptions.*.material_id' => 'required_with:bom_consumptions.*.planned_quantity|exists:raw_materials,material_id',
+                'bom_consumptions.*.planned_quantity' => 'required_with:bom_consumptions.*.material_id|numeric|min:0',
+                'bom_consumptions.*.quantity_required' => 'nullable|numeric|min:0',
+                'bom_consumptions.*.save_to_product' => 'nullable|boolean',
+                'bom_consumptions.*.remove_from_product' => 'nullable|boolean',
+            ]);
+        } elseif ($order->production_type === 'type2') {
+            $request->validate([
+                'source_product_id' => 'required|exists:products,product_id',
+                'type2_total_blocks' => 'required|numeric|min:0.01',
+                'type2_products' => 'required|array|min:1',
+                'type2_products.*.product_id' => 'required|exists:products,product_id',
+                'type2_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
+                'source_famille_id' => 'nullable|exists:familles,famille_id',
                 'priority' => 'required|in:low,medium,high,urgent',
                 'start_date' => 'required|date',
                 'expected_completion_date' => 'required|date',
                 'notes' => 'nullable|string|max:500',
                 'responsible_employee_id' => 'nullable|exists:employees,employee_id',
-                'waste_percentage' => 'nullable|numeric|min:0|max:100',
-
-                // Type specific validations
-                'source_product_id' => 'nullable|exists:products,product_id',
-                'decoupage_ratio' => 'nullable|numeric|min:1',
-                'conversion_rate' => 'nullable|numeric|min:0.01',
-
-                // Material source for Type 1
-                'material_source' => 'nullable|in:bom_only,chutes_only,both',
-                'bom_percentage' => 'nullable|numeric|min:0|max:100',
-                'chutes_volume' => 'nullable|numeric|min:0',
             ]);
+        } elseif ($order->production_type === 'type3') {
+            $request->validate([
+                'type3_source_products' => 'required|array|min:1',
+                'type3_source_products.*.product_id' => 'required|exists:products,product_id',
+                'type3_source_products.*.quantity' => 'required|numeric|min:0.01',
+                'type3_products' => 'required|array|min:1',
+                'type3_products.*.product_id' => 'required|exists:products,product_id',
+                'type3_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
+                'source_famille_id' => 'nullable|exists:familles,famille_id',
+                'famille_id' => 'nullable|exists:familles,famille_id',
+                'priority' => 'required|in:low,medium,high,urgent',
+                'start_date' => 'required|date',
+                'expected_completion_date' => 'required|date',
+                'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
+            ]);
+        } elseif ($order->production_type === 'type4') {
+            $request->validate([
+                'source_product_id' => 'required|exists:products,product_id',
+                'type4_total_units' => 'required|numeric|min:0.01',
+                'type4_products' => 'required|array|min:1',
+                'type4_products.*.product_id' => 'required|exists:products,product_id',
+                'type4_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
+                'famille_id' => 'nullable|exists:familles,famille_id',
+                'priority' => 'required|in:low,medium,high,urgent',
+                'start_date' => 'required|date',
+                'expected_completion_date' => 'required|date',
+                'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
+            ]);
+        } elseif ($order->production_type === 'type5') {
+            $request->validate([
+                'chutes_volume' => 'required|numeric|min:0.01',
+                'type5_products' => 'required|array|min:1',
+                'type5_products.*.product_id' => 'required|exists:products,product_id',
+                'type5_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
+                'famille_id' => 'required|exists:familles,famille_id',
+                'priority' => 'required|in:low,medium,high,urgent',
+                'start_date' => 'required|date',
+                'expected_completion_date' => 'required|date',
+                'notes' => 'nullable|string|max:500',
+                'responsible_employee_id' => 'nullable|exists:employees,employee_id',
+                'force_chutes' => 'nullable|boolean',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Type de production invalide.'
+            ], 400);
+        }
 
-            // Type 3 additional validation
-            if ($order->production_type === 'type3') {
-                $request->validate([
-                    'type3_products' => 'required|array|min:1',
-                    'type3_products.*.product_id' => 'required|exists:products,product_id',
-                    'type3_products.*.conversion_rate' => 'required|numeric|min:0.01',
-                    'type3_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
-                ]);
+        if ($order->production_type === 'type2') {
+            $sourceProduct = Product::find($request->source_product_id);
+            $sourceVolume = $this->calculateProductVolume($sourceProduct);
+            $totalSourceVolume = $request->type2_total_blocks * $sourceVolume;
+
+            $totalProducedVolume = 0;
+            foreach ($request->type2_products as $productData) {
+                $product = Product::find($productData['product_id']);
+                $productVolume = $this->calculateProductVolume($product);
+                $totalProducedVolume += $productData['quantity_to_produce'] * $productVolume;
             }
 
-            $finalProduct = Product::findOrFail($request->product_id);
+            if ($totalProducedVolume > ($totalSourceVolume + 0.0001)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => "Le volume total des produits ({$totalProducedVolume} m³) " .
+                        "dépasse le volume source disponible ({$totalSourceVolume} m³). " .
+                        "Veuillez ajuster les quantités."
+                ], 400);
+            }
+        }
+
+        DB::beginTransaction();
+        try {
             $finalFamille = null;
             $sourceFamille = null;
-
-            // Initialize variables
+            $finalProduct = null;
             $sourceProduct = null;
             $requiredQuantity = 0;
-            $decoupageRatio = 0;
-            $conversionRate = 0;
             $wastePercentage = $request->waste_percentage ?? 0;
-
-            // Material source variables (for Type 1 only)
+            $totalCost = $request->total_cost ?? 0;
             $materialSource = $request->material_source ?? 'bom_only';
-            $bomPercentage = $request->bom_percentage ?? 100;
             $chutesVolume = $request->chutes_volume ?? 0;
 
-            // VOLUME CALCULATION VARIABLES
             $sourceVolume = 0;
             $finalVolume = 0;
             $totalVolumeProduced = 0;
             $wasteVolume = 0;
 
-            // Validate based on production type
+            $totalQuantityToProduce = 0;
+            $productsData = [];
+            $resolvedSourceProducts = null;
+
+            $bomItemsToSave = [];
+            $bomItemsToRemove = [];
+            $bomItemsToUpdate = [];
+
             switch ($order->production_type) {
                 case 'type1':
-                    // Type 1: Direct production (BOM -> Production Product)
-                    // Validate product type
+                    $finalProduct = Product::findOrFail($request->product_id);
+
                     if (!$finalProduct->isProductionProduct() && $finalProduct->product_type !== 'both') {
                         throw new \Exception("Le produit doit être de type production pour la production directe.");
                     }
 
-                    // Check if product has familles and famille is selected
                     if ($finalProduct->has_familles && !$request->famille_id) {
                         throw new \Exception("Ce produit a des familles. Veuillez sélectionner une famille de destination.");
                     }
 
+                    if ($request->famille_id) {
+                        $finalFamille = Famille::find($request->famille_id);
+                    }
+
                     $requiredQuantity = (float) $request->quantity_to_produce;
+                    $totalQuantityToProduce = (float) $request->quantity_to_produce;
 
-                    // Check BOM material availability with material source
-                    $this->checkMaterialAvailability($finalProduct, $request->quantity_to_produce,
-                        $materialSource, $chutesVolume, $bomPercentage);
+                    // Process BOM items...
+                    $currentBomMaterialIds = BillOfMaterial::where('product_id', $finalProduct->product_id)
+                        ->pluck('material_id')
+                        ->toArray();
 
+                    $requestMaterialIds = [];
+
+                    if ($request->has('bom_consumptions')) {
+                        foreach ($request->bom_consumptions as $materialId => $consumption) {
+                            if (isset($consumption['planned_quantity']) && $consumption['planned_quantity'] > 0) {
+                                $requestMaterialIds[] = $materialId;
+                                $shouldSaveToBom = false;
+
+                                if (isset($consumption['save_to_product']) && $consumption['save_to_product'] == 1) {
+                                    $shouldSaveToBom = true;
+                                } else {
+                                    $existingBom = BillOfMaterial::where('product_id', $finalProduct->product_id)
+                                        ->where('material_id', $materialId)
+                                        ->exists();
+                                    if (!$existingBom) {
+                                        $shouldSaveToBom = true;
+                                    }
+                                }
+
+                                if ($shouldSaveToBom) {
+                                    $bomItemsToSave[] = [
+                                        'material_id' => $materialId,
+                                        'quantity_required' => $consumption['quantity_required'] ?? 1,
+                                    ];
+                                }
+
+                                if (isset($consumption['update_quantity']) && $consumption['update_quantity'] == 1) {
+                                    $bomItemsToUpdate[] = [
+                                        'material_id' => $materialId,
+                                        'quantity_required' => $consumption['quantity_required'] ?? 1,
+                                    ];
+                                }
+                            }
+                        }
+                    }
+
+                    foreach ($currentBomMaterialIds as $currentMaterialId) {
+                        if (!in_array($currentMaterialId, $requestMaterialIds)) {
+                            $bomItemsToRemove[] = $currentMaterialId;
+                        }
+                    }
+
+                    if (!empty($bomItemsToRemove)) {
+                        foreach ($bomItemsToRemove as $materialIdToRemove) {
+                            BillOfMaterial::where('product_id', $finalProduct->product_id)
+                                ->where('material_id', $materialIdToRemove)
+                                ->delete();
+                        }
+                    }
+
+                    if (!empty($bomItemsToUpdate)) {
+                        foreach ($bomItemsToUpdate as $updateItem) {
+                            BillOfMaterial::where('product_id', $finalProduct->product_id)
+                                ->where('material_id', $updateItem['material_id'])
+                                ->update([
+                                    'quantity_required' => $updateItem['quantity_required'],
+                                    'updated_at' => now(),
+                                ]);
+                        }
+                    }
                     break;
 
-case 'type2':
-    // Type 2: Production -> Découpage (Multiple Products)
-    if (!$request->source_product_id) {
-        throw new \Exception("Le produit source est requis pour le découpage.");
-    }
-
-    $sourceProduct = Product::findOrFail($request->source_product_id);
-
-    // Validate source product type
-    if (!$sourceProduct->isProductionProduct() && $sourceProduct->product_type !== 'both') {
-        throw new \Exception("Le produit source doit être de type production pour le découpage.");
-    }
-
-    // Validate that we have products to produce
-    if (!$request->has('type2_products') || empty($request->type2_products)) {
-        throw new \Exception("Veuillez ajouter au moins un produit à découper.");
-    }
-
-    // Get or create famille for source product
-    $sourceFamille = null;
-    if ($sourceProduct->has_familles) {
-        if ($request->source_famille_id) {
-            $sourceFamille = Famille::find($request->source_famille_id);
-        } else {
-            // Create or get default famille for this product
-            $sourceFamille = Famille::firstOrCreate(
-                [
-                    'famille_name' => $sourceProduct->product_name . ' - Default',
-                    'famille_code' => 'DFT_' . $sourceProduct->product_code
-                ],
-                [
-                    'description' => 'Famille par défaut pour ' . $sourceProduct->product_name,
-                    'is_active' => true,
-                    'sort_order' => 0
-                ]
-            );
-
-            $sourceFamille->associateToProductIfNotExists($sourceProduct->product_id);
-        }
-    }
-
-    // Calculate totals from all products
-    $totalQuantityToProduce = 0;
-    $totalSourceRequired = 0;
-    $totalVolume = 0;
-    $productsData = [];
-    $totalWasteVolume = 0;
-
-    foreach ($request->type2_products as $index => $productData) {
-        $finalProduct = Product::findOrFail($productData['product_id']);
-
-        // Validate final product type (should be decoupage type)
-        if (!$finalProduct->isDecoupageProduct() && $finalProduct->product_type !== 'decoupage') {
-            throw new \Exception("Le produit #" . ($index + 1) . " doit être de type découpage.");
-        }
-
-        $decoupageRatio = $productData['decoupage_ratio'];
-        $quantityToProduce = $productData['quantity_to_produce'];
-
-        // Calculate source required based on decoupage ratio
-        $sourceRequired = ceil($quantityToProduce / $decoupageRatio);
-
-        // Calculate volume
-        $productVolume = $this->calculateProductVolume($finalProduct);
-        $productTotalVolume = $quantityToProduce * $productVolume;
-
-        $totalQuantityToProduce += $quantityToProduce;
-        $totalSourceRequired += $sourceRequired;
-        $totalVolume += $productTotalVolume;
-
-        $productsData[] = [
-            'product' => $finalProduct,
-            'decoupage_ratio' => $decoupageRatio,
-            'quantity_to_produce' => $quantityToProduce,
-            'source_required' => $sourceRequired,
-            'volume_per_unit' => $productVolume,
-            'total_volume' => $productTotalVolume,
-        ];
-    }
-
-    // Calculate waste volume
-    $sourceVolume = $this->calculateProductVolume($sourceProduct);
-    $totalSourceVolume = $totalSourceRequired * $sourceVolume;
-    $wasteVolume = max(0, $totalSourceVolume - $totalVolume);
-
-    // Check source product stock availability
-    $this->checkSourceProductStock($sourceProduct, $totalSourceRequired, $sourceFamille ? $sourceFamille->famille_id : null);
-
-    // Set the required quantity to the total source required
-    $requiredQuantity = $totalSourceRequired;
-
-    break;
-
-                case 'type3':
-                    // Type 3: Découpage -> Vente (Multiple Products)
+                case 'type2':
                     if (!$request->source_product_id) {
-                        throw new \Exception("Le produit source est requis pour la conversion.");
+                        throw new \Exception("Le produit source est requis pour le découpage.");
                     }
 
                     $sourceProduct = Product::findOrFail($request->source_product_id);
 
-                    // Validate source product type is DECOUPAGE
-                    if (!$sourceProduct->isDecoupageProduct() && $sourceProduct->product_type !== 'decoupage') {
-                        throw new \Exception("Le produit source doit être de type découpage pour la conversion.");
+                    if (!$sourceProduct->isProductionProduct() && $sourceProduct->product_type !== 'both') {
+                        throw new \Exception("Le produit source doit être de type production pour le découpage.");
                     }
 
-                    // Get or create famille for source product
                     if ($sourceProduct->has_familles) {
                         if ($request->source_famille_id) {
                             $sourceFamille = Famille::find($request->source_famille_id);
                         } else {
-                            // Create or get default famille for this decoupage product
-                            $sourceFamille = Famille::firstOrCreate(
-                                [
-                                    'famille_name' => $sourceProduct->product_name . ' - Sous-blocs',
-                                    'famille_code' => 'SUB_' . $sourceProduct->product_code
-                                ],
-                                [
-                                    'description' => 'Famille de sous-blocs pour ' . $sourceProduct->product_name,
-                                    'is_active' => true,
-                                    'sort_order' => 0
-                                ]
+                            $sourceFamille = $this->getOrCreateFamille(
+                                $sourceProduct,
+                                $sourceProduct->product_name . ' - Default',
+                                'DFT_' . $sourceProduct->product_code
                             );
-
-                            $sourceFamille->associateToProductIfNotExists($sourceProduct->product_id);
                         }
                     }
 
-                    // Calculate totals from all products
+                    $totalSourceRequired = (float) $request->type2_total_blocks;
                     $totalQuantityToProduce = 0;
-                    $totalSourceRequired = 0;
+                    $totalVolume = 0;
+
+                    foreach ($request->type2_products as $index => $productData) {
+                        $decoupageProduct = Product::findOrFail($productData['product_id']);
+
+                        if (!$decoupageProduct->isDecoupageProduct() && $decoupageProduct->product_type !== 'decoupage') {
+                            throw new \Exception("Le produit #" . ($index + 1) . " doit être de type découpage.");
+                        }
+
+                        $quantityToProduce = $productData['quantity_to_produce'];
+                        $productVolume = $this->calculateProductVolume($decoupageProduct);
+                        $productTotalVolume = $quantityToProduce * $productVolume;
+
+                        $totalQuantityToProduce += $quantityToProduce;
+                        $totalVolume += $productTotalVolume;
+
+                        $productsData[] = [
+                            'product_id' => $decoupageProduct->product_id,
+                            'product' => $decoupageProduct,
+                            'quantity_to_produce' => $quantityToProduce,
+                            'volume_per_unit' => $productVolume,
+                            'total_volume' => $productTotalVolume,
+                        ];
+                    }
+
+                    $firstDecoupageProduct = Product::find($productsData[0]['product_id']);
+                    if ($request->source_famille_id) {
+                        $finalFamille = Famille::find($request->source_famille_id);
+                    } else {
+                        throw new \Exception("Veuillez sélectionner une famille de destination pour les produits de découpage.");
+                    }
+
+                    $sourceVolume = $this->calculateProductVolume($sourceProduct);
+                    $totalSourceVolume = $totalSourceRequired * $sourceVolume;
+                    $wasteVolume = max(0, $totalSourceVolume - $totalVolume);
+
+                    $this->checkSourceProductStock($sourceProduct, $totalSourceRequired,
+                        $sourceFamille ? $sourceFamille->famille_id : null);
+
+                    $requiredQuantity = $totalSourceRequired;
+                    $finalProduct = $firstDecoupageProduct;
+                    break;
+
+                case 'type3':
+                    // Multiple sous-blocs sources → multiple produits finaux
+                    $totalSourceVolume = 0;
+                    $totalSousBlocsRequired = 0;
+                    $firstSourceProduct = null;
+                    $resolvedSourceProducts = [];
+
+                    foreach ($request->type3_source_products as $sbIndex => $sbData) {
+                        $sbProduct = Product::findOrFail($sbData['product_id']);
+
+                        if (!$sbProduct->isDecoupageProduct() && $sbProduct->product_type !== 'decoupage') {
+                            throw new \Exception("Le sous-bloc #" . ($sbIndex + 1) . " doit être de type découpage.");
+                        }
+
+                        $sbQty = (float) $sbData['quantity'];
+                        $sbVolume = $this->calculateProductVolume($sbProduct) * $sbQty;
+                        $totalSourceVolume += $sbVolume;
+                        $totalSousBlocsRequired += $sbQty;
+
+                        $resolvedSourceProducts[] = [
+                            'product_id' => $sbProduct->product_id,
+                            'product_name' => $sbProduct->product_name,
+                            'quantity' => $sbQty,
+                        ];
+
+                        if ($sbIndex === 0) {
+                            $firstSourceProduct = $sbProduct;
+                        }
+                    }
+
+                    $sourceProduct = $firstSourceProduct;
+
+                    $totalQuantityToProduce = 0;
                     $totalVolume = 0;
                     $productsData = [];
 
                     foreach ($request->type3_products as $index => $productData) {
                         $finalProductItem = Product::findOrFail($productData['product_id']);
 
-                        // Validate final product type
                         if (!$finalProductItem->isFinaleProduct() && $finalProductItem->product_type !== 'both') {
                             throw new \Exception("Le produit final #" . ($index + 1) . " doit être de type vente (finale).");
                         }
 
-                        $conversionRateItem = $productData['conversion_rate'];
                         $quantityToProduce = $productData['quantity_to_produce'];
-
-                        // Calculate source required based on conversion rate
-                        $sourceRequired = ceil($quantityToProduce / $conversionRateItem);
-
-                        // Calculate volume
                         $productVolume = $this->calculateProductVolume($finalProductItem);
                         $productTotalVolume = $quantityToProduce * $productVolume;
 
                         $totalQuantityToProduce += $quantityToProduce;
-                        $totalSourceRequired += $sourceRequired;
                         $totalVolume += $productTotalVolume;
 
                         $productsData[] = [
                             'product_id' => $finalProductItem->product_id,
-                            'conversion_rate' => $conversionRateItem,
+                            'product' => $finalProductItem,
                             'quantity_to_produce' => $quantityToProduce,
-                            'source_required' => $sourceRequired,
                             'volume_per_unit' => $productVolume,
                             'total_volume' => $productTotalVolume,
                         ];
                     }
 
-                    // Get or create familles for final products
+                    if ($totalVolume > ($totalSourceVolume + 0.0001)) {
+                        throw new \Exception(
+                            "Le volume total des produits ({$totalVolume} m³) " .
+                            "dépasse le volume source disponible ({$totalSourceVolume} m³). " .
+                            "Veuillez ajuster les quantités."
+                        );
+                    }
+
+                    $wasteVolume = max(0, $totalSourceVolume - $totalVolume);
+                    $wastePercentage = $totalSourceVolume > 0 ? ($wasteVolume / $totalSourceVolume * 100) : 0;
+
+                    if ($request->source_famille_id) {
+                        $finalFamille = Famille::find($request->source_famille_id);
+                        $sourceFamille = $finalFamille;
+                    } else {
+                        $finalFamille = null;
+                        $sourceFamille = null;
+                    }
+
+                    // Stock check for each sous-bloc
+                    foreach ($request->type3_source_products as $sbData) {
+                        $sbProduct = Product::findOrFail($sbData['product_id']);
+                        $this->checkSourceProductStock($sbProduct, (float) $sbData['quantity'],
+                            $sourceFamille ? $sourceFamille->famille_id : null);
+                    }
+
+                    $requiredQuantity = $totalSousBlocsRequired;
+
+                    $sourceVolume = $totalSourceVolume > 0 && $totalSousBlocsRequired > 0
+                        ? $totalSourceVolume / $totalSousBlocsRequired
+                        : 0;
+                    $finalVolume = 0;
+                    break;
+
+                case 'type4':
+                    if (!$request->source_product_id) {
+                        throw new \Exception("Le produit source est requis pour la transformation.");
+                    }
+
+                    $sourceProduct = Product::findOrFail($request->source_product_id);
+
+                    if (!$sourceProduct->isFinaleProduct() && $sourceProduct->product_type !== 'both') {
+                        throw new \Exception("Le produit source doit être de type vente (finale) pour la transformation.");
+                    }
+
+                    $sourceVolumePerUnit = $this->calculateProductVolume($sourceProduct);
+                    $totalUnitsRequired = (float) $request->type4_total_units;
+                    $totalSourceVolume = $totalUnitsRequired * $sourceVolumePerUnit;
+
+                    $totalQuantityToProduce = 0;
+                    $totalVolume = 0;
+                    $productsData = [];
+
+                    foreach ($request->type4_products as $index => $productData) {
+                        $finalProductItem = Product::findOrFail($productData['product_id']);
+
+                        if (!$finalProductItem->isFinaleProduct() && $finalProductItem->product_type !== 'both') {
+                            throw new \Exception("Le produit final #" . ($index + 1) . " doit être de type vente (finale).");
+                        }
+
+                        $quantityToProduce = $productData['quantity_to_produce'];
+                        $productVolume = $this->calculateProductVolume($finalProductItem);
+                        $productTotalVolume = $quantityToProduce * $productVolume;
+
+                        $totalQuantityToProduce += $quantityToProduce;
+                        $totalVolume += $productTotalVolume;
+
+                        if ($totalVolume > ($totalSourceVolume + 0.0001)) {
+                            throw new \Exception(
+                                "Le volume total des produits ({$totalVolume} m³) " .
+                                "dépasse le volume source disponible ({$totalSourceVolume} m³). " .
+                                "Veuillez ajuster les quantités."
+                            );
+                        }
+
+                        $productsData[] = [
+                            'product_id' => $finalProductItem->product_id,
+                            'product' => $finalProductItem,
+                            'quantity_to_produce' => $quantityToProduce,
+                            'volume_per_unit' => $productVolume,
+                            'total_volume' => $productTotalVolume,
+                        ];
+                    }
+
+                    $wasteVolume = max(0, $totalSourceVolume - $totalVolume);
+                    $wastePercentage = $totalSourceVolume > 0 ? ($wasteVolume / $totalSourceVolume * 100) : 0;
+
                     $finalFamille = null;
-                    if ($productsData[0]['product_id'] && ($product = Product::find($productsData[0]['product_id'])) && $product->has_familles) {
+                    if ($sourceProduct->has_familles) {
                         if ($request->famille_id) {
                             $finalFamille = Famille::find($request->famille_id);
                         } else {
-                            $finalFamille = Famille::firstOrCreate(
-                                [
-                                    'famille_name' => 'Type 3 - Multiple Produits',
-                                    'famille_code' => 'T3_' . $sourceProduct->product_code
-                                ],
-                                [
-                                    'description' => 'Famille pour conversion Type 3 avec multiple produits',
-                                    'is_active' => true,
-                                    'sort_order' => 0
-                                ]
-                            );
+                            throw new \Exception("Veuillez sélectionner une famille pour ce produit.");
                         }
                     }
 
-                    // Use the calculated source required
-                    $requiredQuantity = $totalSourceRequired;
+                    $requiredQuantity = $totalUnitsRequired;
 
-                    // Calculate volumes for Type 3
-                    $sourceVolume = $this->calculateProductVolume($sourceProduct);
-                    $totalSourceVolume = $requiredQuantity * $sourceVolume;
-
-                    // Calculate waste volume (for informational purposes)
-                    $wasteVolume = max(0, $totalSourceVolume - $totalVolume);
-
-                    // Check source product stock availability
                     $this->checkSourceProductStock($sourceProduct, $requiredQuantity,
-                        $sourceFamille ? $sourceFamille->famille_id : null);
+                        $finalFamille ? $finalFamille->famille_id : null);
 
-                    // Update quantity to produce (sum of all products)
-                    $request->merge(['quantity_to_produce' => $totalQuantityToProduce]);
-                    $request->merge(['required_quantity' => $totalSourceRequired]);
+                    $sourceVolume = $sourceVolumePerUnit;
+                    $finalVolume = 0;
 
+                    $request->merge(['source_famille_id' => $finalFamille ? $finalFamille->famille_id : null]);
+                    break;
+
+                case 'type5':
+                    // Chutes de production → Produits finaux (multiple)
+                    $chutesVolume = (float) ($request->chutes_volume ?? 0);
+
+                    if ($chutesVolume <= 0) {
+                        throw new \Exception("Veuillez saisir un volume de chutes valide.");
+                    }
+
+                    $forceChutesOverride = $request->boolean('force_chutes');
+
+                    if (!$forceChutesOverride) {
+                        $this->checkChutesAvailability($chutesVolume);
+                    }
+
+                    $totalQuantityToProduce = 0;
+                    $totalVolume = 0;
+                    $productsData = [];
+
+                    foreach ($request->type5_products as $index => $productData) {
+                        $finalProductItem = Product::findOrFail($productData['product_id']);
+
+                        if (!$finalProductItem->isFinaleProduct() && $finalProductItem->product_type !== 'both') {
+                            throw new \Exception("Le produit final #" . ($index + 1) . " doit être de type vente (finale).");
+                        }
+
+                        $quantityToProduce = $productData['quantity_to_produce'];
+                        $productVolume = $this->calculateProductVolume($finalProductItem);
+                        $productTotalVolume = $quantityToProduce * $productVolume;
+
+                        $totalQuantityToProduce += $quantityToProduce;
+                        $totalVolume += $productTotalVolume;
+
+                        $productsData[] = [
+                            'product_id' => $finalProductItem->product_id,
+                            'product' => $finalProductItem,
+                            'quantity_to_produce' => $quantityToProduce,
+                            'volume_per_unit' => $productVolume,
+                            'total_volume' => $productTotalVolume,
+                        ];
+                    }
+
+                    if ($totalVolume > ($chutesVolume + 0.0001)) {
+                        throw new \Exception(
+                            "Le volume total des produits ({$totalVolume} m³) " .
+                            "dépasse le volume de chutes alloué ({$chutesVolume} m³). " .
+                            "Veuillez ajuster (augmenter) le volume de chutes ou réduire les quantités."
+                        );
+                    }
+
+                    $wasteVolume = max(0, $chutesVolume - $totalVolume);
+                    $wastePercentage = $chutesVolume > 0 ? ($wasteVolume / $chutesVolume * 100) : 0;
+
+                    if ($request->famille_id) {
+                        $finalFamille = Famille::find($request->famille_id);
+                    } else {
+                        throw new \Exception("Veuillez sélectionner une famille de destination.");
+                    }
+
+                    $requiredQuantity = $chutesVolume;
+                    $materialSource = 'chutes_only';
+
+                    $sourceVolume = $chutesVolume;
+                    $finalVolume = 0;
                     break;
 
                 default:
                     throw new \Exception("Type de production invalide.");
             }
 
-            // Update the production order
             $updateData = [
-                'product_id' => $request->production_type === 'type3' ?
-                    ($productsData[0]['product_id'] ?? $order->product_id) :
-                    $finalProduct->product_id,
-                'famille_id' => $finalFamille ? $finalFamille->famille_id : ($request->famille_id ?? $order->famille_id),
-                'source_product_id' => $sourceProduct ? $sourceProduct->product_id : ($request->source_product_id ?? $order->source_product_id),
-                'source_famille_id' => $sourceFamille ? $sourceFamille->famille_id : ($request->source_famille_id ?? $order->source_famille_id),
-                'quantity_to_produce' => $request->production_type === 'type3' ?
-                    $totalQuantityToProduce :
-                    $request->quantity_to_produce,
+                'product_id' => in_array($order->production_type, ['type3', 'type4', 'type5'])
+                    ? ($productsData[0]['product_id'] ?? $order->product_id)
+                    : ($finalProduct ? $finalProduct->product_id : $order->product_id),
+                'famille_id' => $order->production_type === 'type4'
+                    ? ($request->famille_id ?? null)
+                    : ($finalFamille ? $finalFamille->famille_id : ($request->famille_id ?? null)),
+                'source_product_id' => $order->production_type === 'type4'
+                    ? $request->source_product_id
+                    : ($sourceProduct ? $sourceProduct->product_id : null),
+                'source_famille_id' => $order->production_type === 'type4'
+                    ? ($request->famille_id ?? null)
+                    : ($sourceFamille ? $sourceFamille->famille_id : ($request->source_famille_id ?? null)),
+                'quantity_to_produce' => $order->production_type === 'type1'
+                    ? $request->quantity_to_produce
+                    : $totalQuantityToProduce,
                 'required_quantity' => $requiredQuantity,
                 'priority' => $request->priority,
                 'start_date' => $request->start_date,
@@ -3644,52 +3886,64 @@ case 'type2':
                 'notes' => $request->notes,
                 'responsible_employee_id' => $request->responsible_employee_id,
                 'waste_percentage' => $wastePercentage,
-                'decoupage_ratio' => $decoupageRatio,
-                'conversion_rate' => $conversionRate,
                 'material_source' => $materialSource,
-                'bom_percentage' => $bomPercentage,
                 'chutes_volume' => $chutesVolume,
+                'total_cost' => $totalCost,
                 'source_volume' => $sourceVolume,
                 'final_volume' => $finalVolume,
-                'total_volume_produced' => $totalVolumeProduced ?? $totalVolume ?? 0,
+                'total_volume_produced' => $totalVolumeProduced,
                 'waste_volume' => $wasteVolume,
-                'additional_data' => $order->production_type === 'type3' ? json_encode([
-                    'multiple_products' => true,
-                    'products_count' => count($productsData),
-                    'products_summary' => array_map(function($product) {
-                        $prod = Product::find($product['product_id']);
-                        return [
-                            'product_id' => $product['product_id'],
-                            'product_name' => $prod ? $prod->product_name : 'N/A',
-                            'quantity_to_produce' => $product['quantity_to_produce'],
-                            'conversion_rate' => $product['conversion_rate'],
-                        ];
-                    }, $productsData)
-                ]) : $order->additional_data,
+                'additional_data' => $this->prepareAdditionalData($request, $productsData, $resolvedSourceProducts),
             ];
 
             $order->update($updateData);
 
             if ($order->production_type === 'type1') {
-                $this->updateConsumptionRecords($order, $request->quantity_to_produce,
-                    $materialSource, $chutesVolume, $bomPercentage);
+                ProductionConsumption::where('production_order_id', $order->order_id)->delete();
+
+                $this->createConsumptionRecords(
+                    $order,
+                    $request->quantity_to_produce,
+                    $materialSource,
+                    $chutesVolume,
+                    $request->bom_consumptions ?? []
+                );
+
+                $this->updateProductBOM($finalProduct, $request->bom_consumptions ?? []);
+
+                if (!empty($bomItemsToSave)) {
+                    foreach ($bomItemsToSave as $bomItem) {
+                        $existingBom = BillOfMaterial::where('product_id', $finalProduct->product_id)
+                            ->where('material_id', $bomItem['material_id'])
+                            ->first();
+
+                        if (!$existingBom) {
+                            $material = RawMaterial::find($bomItem['material_id']);
+                            BillOfMaterial::create([
+                                'product_id' => $finalProduct->product_id,
+                                'material_id' => $bomItem['material_id'],
+                                'quantity_required' => $bomItem['quantity_required'],
+                                'unit_of_measure' => $material ? $material->unit_of_measure : 'unité',
+                                'scrap_factor' => 0,
+                                'is_active' => true,
+                            ]);
+                        }
+                    }
+                }
             }
 
-            // Update Type 3 products
-            if ($order->production_type === 'type3') {
-                // Delete existing Type 3 products
+            // Rewrite the produced-articles rows for multi-product types
+            if (in_array($order->production_type, ['type2', 'type3', 'type4', 'type5'])) {
                 DB::table('production_order_products')
                     ->where('production_order_id', $order->order_id)
                     ->delete();
 
-                // Insert updated Type 3 products
                 foreach ($productsData as $productData) {
                     DB::table('production_order_products')->insert([
                         'production_order_id' => $order->order_id,
                         'product_id' => $productData['product_id'],
-                        'conversion_rate' => $productData['conversion_rate'],
                         'quantity_to_produce' => $productData['quantity_to_produce'],
-                        'source_required' => $productData['source_required'],
+                        'source_required' => $requiredQuantity ?? 0,
                         'volume_per_unit' => $productData['volume_per_unit'],
                         'total_volume' => $productData['total_volume'],
                         'created_at' => now(),
@@ -3706,7 +3960,7 @@ case 'type2':
                 'order_id' => $order->order_id,
                 'order_number' => $order->order_number,
                 'production_type' => $order->production_type,
-                'multiple_products' => $order->production_type === 'type3' ? count($productsData) : 0,
+                'multiple_products' => count($productsData),
             ]);
 
         } catch (\Exception $e) {

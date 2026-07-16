@@ -147,7 +147,7 @@
                                                 <tr>
                                                     <th>Paiement Associé</th>
                                                     <td>
-                                                        <a href="{{ route('sales-order-payments.show', $traite->payment_id) }}"
+                                                        <a href="{{ route('purchases.show', $traite->payment_id) }}"
                                                             class="text-decoration-none">
                                                             <i class="fas fa-receipt me-1"></i>
                                                             Voir le paiement #{{ $traite->payment_id }}

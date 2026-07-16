@@ -385,6 +385,42 @@ class PurchaseController extends Controller
             'document' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240',
         ]);
 
+        // Cheque/traite details — same rules as ClientController::distributePayment
+        if ($request->payment_method === 'check') {
+            $request->validate([
+                'check_number' => 'required|string|max:100',
+                'check_amount' => 'required|numeric|min:0.01',
+                'bank_name' => 'required|string|max:255',
+                'account_holder' => 'required|string|max:255',
+                'issue_date' => 'required|date',
+            ]);
+
+            if ($request->check_amount != $request->amount) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Le montant du chèque doit être égal au montant du paiement'
+                ], 422);
+            }
+        }
+
+        if ($request->payment_method === 'traite') {
+            $request->validate([
+                'traite_number' => 'required|string|max:100',
+                'traite_amount' => 'required|numeric|min:0.01',
+                'traite_bank_name' => 'required|string|max:255',
+                'drawee' => 'required|string|max:255',
+                'traite_issue_date' => 'required|date',
+                'due_date' => 'required|date',
+            ]);
+
+            if ($request->traite_amount != $request->amount) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Le montant de la traite doit être égal au montant du paiement'
+                ], 422);
+            }
+        }
+
         DB::beginTransaction();
         try {
             $client = Client::findOrFail($request->client_id);
@@ -399,6 +435,59 @@ class PurchaseController extends Controller
                 $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
                 $filePath = $file->storeAs('payment-documents/' . date('Y/m'), $filename, 'public');
             }
+
+            // Register the cheque / traite — same as ClientController::distributePayment
+            $traite = null;
+
+            if ($request->payment_method === 'check') {
+                $check = Check::create([
+                    'check_number' => $request->check_number,
+                    'check_type' => 'client',
+                    'amount' => $request->check_amount,
+                    'remaining_amount' => $request->check_amount,
+                    'bank_name' => $request->bank_name,
+                    'account_holder' => $request->account_holder,
+                    'issue_date' => $request->issue_date,
+                    'deposit_date' => $request->deposit_date,
+                    'status' => 'pending',
+                    'notes' => $request->notes,
+                    'is_active' => true,
+                    'created_by' => auth()->id(),
+                ]);
+
+                if ($request->hasFile('check_images')) {
+                    foreach ($request->file('check_images') as $image) {
+                        $image->store('checks/' . $check->check_id, 'public');
+                    }
+                }
+            } elseif ($request->payment_method === 'traite') {
+                $traite = Traite::create([
+                    'traite_number' => $request->traite_number,
+                    'amount' => $request->traite_amount,
+                    'client_id' => $client->client_id,
+                    'issue_date' => $request->traite_issue_date,
+                    'due_date' => $request->due_date,
+                    'bank_name' => $request->traite_bank_name,
+                    'drawee' => $request->drawee,
+                    'drawee_address' => $request->drawee_address,
+                    'status' => 'paid',
+                    'payment_date' => now(),
+                    'notes' => $request->notes,
+                    'created_by' => auth()->id(),
+                ]);
+
+                if ($request->hasFile('traite_document')) {
+                    $traiteDocument = $request->file('traite_document');
+                    $traite->update([
+                        'document_path' => $traiteDocument->store('traites/' . $traite->traite_id, 'public'),
+                        'original_filename' => $traiteDocument->getClientOriginalName(),
+                    ]);
+                }
+            }
+
+            // The first payment created below is linked to the traite so the
+            // règlement page (purchases.show) can display it.
+            $firstPayment = null;
 
             // If a specific order is targeted, pay that order
             if ($request->filled('target_order_id')) {
@@ -419,6 +508,7 @@ class PurchaseController extends Controller
                     'original_filename' => $originalFilename,
                     'notes' => $request->notes ?? null,
                 ]);
+                $firstPayment = $firstPayment ?? $payment;
 
                 $oldPaid = $order->paid_amount;
                 $order->paid_amount += $applyAmount;
@@ -440,6 +530,7 @@ class PurchaseController extends Controller
                         'payment_date' => $request->payment_date,
                         'notes' => 'Excédent de commande #' . $order->order_number,
                     ]);
+                    $firstPayment = $firstPayment ?? $excessPayment;
                     $client->balance += $excess;
                     $client->save();
                     $client->balanceHistory()->create([
@@ -470,7 +561,7 @@ class PurchaseController extends Controller
                     $applyAmount = min($soAmount, $remaining);
                     if ($applyAmount <= 0) continue;
 
-                    $order->payments()->create([
+                    $payment = $order->payments()->create([
                         'client_id' => $client->client_id,
                         'payment_method' => $request->payment_method,
                         'amount' => $applyAmount,
@@ -479,6 +570,7 @@ class PurchaseController extends Controller
                         'original_filename' => $originalFilename,
                         'notes' => $request->notes ?? null,
                     ]);
+                    $firstPayment = $firstPayment ?? $payment;
 
                     $oldPaid = $order->paid_amount;
                     $order->paid_amount += $applyAmount;
@@ -498,13 +590,14 @@ class PurchaseController extends Controller
                 // Any excess goes to client balance
                 $excess = round($amount - $totalDistributed, 2);
                 if ($excess > 0.005) {
-                    SalesOrderPayment::create([
+                    $excessPayment = SalesOrderPayment::create([
                         'client_id' => $client->client_id,
                         'payment_method' => $request->payment_method,
                         'amount' => $excess,
                         'payment_date' => $request->payment_date,
                         'notes' => 'Excédent après distribution sélectionnée',
                     ]);
+                    $firstPayment = $firstPayment ?? $excessPayment;
                     $prevBalance = $client->balance;
                     $client->balance += $excess;
                     $client->save();
@@ -520,8 +613,9 @@ class PurchaseController extends Controller
                     ]);
                 }
 
-            // Auto-distribute across all unpaid orders (FIFO)
-                // Distribute across unpaid orders (FIFO), like distributePayment in ClientController
+            // Auto-distribute across all unpaid orders (FIFO), like distributePayment
+            // in ClientController, when no specific order/selection was provided
+            } else {
                 $unpaidOrders = SalesOrder::where('client_id', $client->client_id)
                     ->whereIn('payment_status', ['pending', 'partial'])
                     ->whereRaw('final_amount > paid_amount')
@@ -532,7 +626,7 @@ class PurchaseController extends Controller
 
                 if ($unpaidOrders->isEmpty()) {
                     // No unpaid orders — direct payment to client balance
-                    SalesOrderPayment::create([
+                    $payment = SalesOrderPayment::create([
                         'client_id' => $client->client_id,
                         'payment_method' => $request->payment_method,
                         'amount' => $amount,
@@ -541,6 +635,7 @@ class PurchaseController extends Controller
                         'original_filename' => $originalFilename,
                         'notes' => $request->notes ?? 'Règlement direct client',
                     ]);
+                    $firstPayment = $firstPayment ?? $payment;
                     $prevBalance = $client->balance;
                     $client->balance += $amount;
                     $client->save();
@@ -561,7 +656,7 @@ class PurchaseController extends Controller
                         $apply = min($remainingAmount, $orderRemaining);
                         if ($apply <= 0) continue;
 
-                        $order->payments()->create([
+                        $payment = $order->payments()->create([
                             'client_id' => $client->client_id,
                             'payment_method' => $request->payment_method,
                             'amount' => $apply,
@@ -570,6 +665,7 @@ class PurchaseController extends Controller
                             'original_filename' => $originalFilename,
                             'notes' => $request->notes ?? null,
                         ]);
+                        $firstPayment = $firstPayment ?? $payment;
 
                         $oldPaid = $order->paid_amount;
                         $order->paid_amount += $apply;
@@ -588,13 +684,14 @@ class PurchaseController extends Controller
 
                     // Any leftover goes to client balance
                     if ($remainingAmount > 0.005) {
-                        SalesOrderPayment::create([
+                        $excessPayment = SalesOrderPayment::create([
                             'client_id' => $client->client_id,
                             'payment_method' => $request->payment_method,
                             'amount' => $remainingAmount,
                             'payment_date' => $request->payment_date,
                             'notes' => 'Excédent après distribution',
                         ]);
+                        $firstPayment = $firstPayment ?? $excessPayment;
                         $prevBalance = $client->balance;
                         $client->balance += $remainingAmount;
                         $client->save();
@@ -610,6 +707,14 @@ class PurchaseController extends Controller
                         ]);
                     }
                 }
+            }
+
+            // Link the traite to the payment so the règlement page can find it
+            if ($traite && $firstPayment) {
+                $traite->update([
+                    'payment_id' => $firstPayment->payment_id,
+                    'order_id' => $firstPayment->order_id,
+                ]);
             }
 
             DB::commit();

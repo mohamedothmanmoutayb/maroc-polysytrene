@@ -44,9 +44,8 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <form id="editProductionOrderForm" novalidate>
+                        <form id="productionOrderForm">
                             @csrf
-                            @method('PUT')
 
                             <!-- Order Information -->
                             <div class="row mb-4">
@@ -54,85 +53,129 @@
                                     <div class="alert alert-info">
                                         <i class="fas fa-info-circle me-2"></i>
                                         <strong>Ordre:</strong> {{ $order->order_number }}
-                                        | <strong>Type:</strong>
-                                        @if ($order->production_type === 'type1')
-                                            <span class="badge bg-primary">Production Directe</span>
-                                        @elseif($order->production_type === 'type2')
-                                            <span class="badge bg-warning">Découpage</span>
-                                        @elseif($order->production_type === 'type3')
-                                            <span class="badge bg-success">Conversion</span>
-                                        @endif
                                         | <strong>Statut:</strong>
                                         <span
-                                            class="badge bg-{{ $order->status === 'pending' ? 'warning' : ($order->status === 'approved' ? 'info' : ($order->status === 'in_progress' ? 'primary' : 'secondary')) }}">
-                                            {{ $order->status === 'pending' ? 'En attente' : ($order->status === 'approved' ? 'Approuvé' : ($order->status === 'in_progress' ? 'En cours' : $order->status)) }}
+                                            class="badge bg-{{ $order->status === 'pending' ? 'warning' : ($order->status === 'approved' ? 'info' : 'secondary') }}">
+                                            {{ $order->status === 'pending' ? 'En attente' : ($order->status === 'approved' ? 'Approuvé' : $order->status) }}
                                         </span>
-                                        @if ($order->outputs()->count() > 0)
-                                            <span class="badge bg-danger ms-2">
-                                                <i class="fas fa-exclamation-triangle me-1"></i>Avec Sorties
-                                            </span>
-                                        @endif
+                                        | Le type de production ne peut pas être modifié.
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Production Type Selection (Show only the selected type) -->
+                            <!-- Production Type Selection -->
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <h6 class="mb-3">
                                         <i class="fas fa-cogs me-2"></i>Type de Production
                                     </h6>
                                     <div class="row">
-                                        @php
-                                            $isDisabled = $order->outputs()->count() > 0;
-                                            $typeClass = '';
-                                            $typeIcon = '';
-                                            $typeText = '';
-
-                                            if ($order->production_type === 'type1') {
-                                                $typeClass = 'border-primary';
-                                                $typeIcon = 'fa-industry text-primary';
-                                                $typeText = 'Type 1: Production Directe';
-                                            } elseif ($order->production_type === 'type2') {
-                                                $typeClass = 'border-warning';
-                                                $typeIcon = 'fa-cut text-warning';
-                                                $typeText = 'Type 2: Découpage';
-                                            } elseif ($order->production_type === 'type3') {
-                                                $typeClass = 'border-success';
-                                                $typeIcon = 'fa-exchange-alt text-success';
-                                                $typeText = 'Type 3: Conversion';
-                                            }
-                                        @endphp
-
-                                        <div class="col-md-4 mb-3">
-                                            <div class="card h-100 {{ $typeClass }}">
-                                                <div class="card-body">
+                                        <!-- Type 1: Production Directe -->
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check card h-100">
+                                                <input class="form-check-input" type="radio" name="production_type"
+                                                    id="type1Production" value="type1"
+                                                    {{ $order->production_type === 'type1' ? 'checked' : 'disabled' }}>
+                                                <label class="form-check-label card-body" for="type1Production">
                                                     <div class="d-flex align-items-center">
                                                         <div class="me-3">
-                                                            <i class="fas {{ $typeIcon }} fa-2x"></i>
+                                                            <i class="fas fa-industry fa-2x text-primary"></i>
                                                         </div>
                                                         <div>
-                                                            <h6 class="mb-1">{{ $typeText }}</h6>
+                                                            <h6 class="mb-1">Production Directe</h6>
                                                             <p class="text-muted mb-0 small">
-                                                                @if ($order->production_type === 'type1')
-                                                                    Matières premières → Produit de production
-                                                                @elseif($order->production_type === 'type2')
-                                                                    Bloc production → Produit découpage
-                                                                @elseif($order->production_type === 'type3')
-                                                                    Sous-blocs → Produit de vente (Multiple)
-                                                                @endif
+                                                                Matières premières → Bloc production
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="production_type"
-                                                        value="{{ $order->production_type }}">
-                                                    @if ($isDisabled)
-                                                        <small class="text-danger d-block mt-2">
-                                                            <i class="fas fa-lock me-1"></i> Le type ne peut pas être
-                                                            modifié car des sorties existent
-                                                        </small>
-                                                    @endif
-                                                </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Type 2: Production -> Découpage (Multiple Products) -->
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check card h-100">
+                                                <input class="form-check-input" type="radio" name="production_type"
+                                                    id="type2Production" value="type2"
+                                                    {{ $order->production_type === 'type2' ? 'checked' : 'disabled' }}>
+                                                <label class="form-check-label card-body" for="type2Production">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-cut fa-2x text-warning"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1">Découpage</h6>
+                                                            <p class="text-muted mb-0 small">
+                                                                Bloc production → Sous-blocs
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Type 3: Découpage -> Vente -->
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check card h-100">
+                                                <input class="form-check-input" type="radio" name="production_type"
+                                                    id="type3Production" value="type3"
+                                                    {{ $order->production_type === 'type3' ? 'checked' : 'disabled' }}>
+                                                <label class="form-check-label card-body" for="type3Production">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-exchange-alt fa-2x text-success"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1">Produits Finaux</h6>
+                                                            <p class="text-muted mb-0 small">
+                                                                Sous-blocs → Produits finaux
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check card h-100">
+                                                <input class="form-check-input" type="radio" name="production_type"
+                                                    id="type4Production" value="type4"
+                                                    {{ $order->production_type === 'type4' ? 'checked' : 'disabled' }}>
+                                                <label class="form-check-label card-body" for="type4Production">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-exchange-alt fa-2x text-info"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1">Transformation Vente → Vente</h6>
+                                                            <p class="text-muted mb-0 small">
+                                                                Produits vente → Nouveaux produits vente
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Type 5: Chutes -> Produits Finis -->
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check card h-100">
+                                                <input class="form-check-input" type="radio" name="production_type"
+                                                    id="type5Production" value="type5"
+                                                    {{ $order->production_type === 'type5' ? 'checked' : 'disabled' }}>
+                                                <label class="form-check-label card-body" for="type5Production">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-recycle fa-2x text-success"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1">Chutes → Produits Finis</h6>
+                                                            <p class="text-muted mb-0 small">
+                                                                Chutes de production → Produits finaux
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -142,24 +185,35 @@
                             <!-- Product Selection Section -->
                             <div class="row mb-4">
                                 <!-- Type 1: Production Directe -->
-                                <div class="col-md-12" id="type1Section"
-                                    style="{{ $order->production_type !== 'type1' ? 'display:none;' : '' }}">
+                                <div class="col-md-12 {{ $order->production_type !== 'type1' ? 'd-none' : '' }}" id="type1Section">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="type1_product_id" class="form-label">Produit à Produire
-                                                    *</label>
+                                                <div class="d-flex align-items-center mb-2 gap-2">
+                                                    <label for="type1_product_id" class="form-label">Produit à Produire
+                                                        *</label>
+                                                    <button type="button" class="btn btn-success" style="padding:3px;"
+                                                        id="addProductFromTopBtn">
+                                                        <i class="fas fa-box-plus me-1"></i> Ajouter un Produit
+                                                    </button>
+                                                </div>
+
                                                 <select class="form-control select2" id="type1_product_id"
-                                                    name="type1_product_id" {{ $isDisabled ? 'disabled' : '' }}>
+                                                    name="type1_product_id">
                                                     <option value="">Sélectionner un produit de production</option>
+                                                    @if ($order->production_type === 'type1' && $order->product && !$productionProducts->contains('product_id', $order->product_id))
+                                                        <option value="{{ $order->product_id }}"
+                                                            data-has-familles="{{ $order->product->has_familles }}" selected>
+                                                            {{ $order->product->product_code }} -
+                                                            {{ $order->product->product_name }}
+                                                        </option>
+                                                    @endif
                                                     @foreach ($productionProducts as $product)
                                                         @if ($product->product_type === 'production' || $product->product_type === 'both')
                                                             <option value="{{ $product->product_id }}"
                                                                 data-has-familles="{{ $product->has_familles }}"
-                                                                data-volume="{{ $product->volume_m3 ?? 0 }}"
-                                                                {{ $order->product_id == $product->product_id ? 'selected' : '' }}>
-                                                                {{ $product->product_code }} -
-                                                                {{ $product->product_name }}
+                                                                {{ $order->production_type === 'type1' && $order->product_id == $product->product_id ? 'selected' : '' }}>
+                                                                {{ $product->product_code }} - {{ $product->product_name }}
                                                                 @if ($product->product_type === 'production')
                                                                     <span class="badge bg-primary">Production</span>
                                                                 @elseif($product->product_type === 'both')
@@ -179,11 +233,12 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="type1_quantity" class="form-label">Quantité à Produire *</label>
+                                                <label for="type1_quantity" class="form-label">Quantité à Produire
+                                                    *</label>
                                                 <input type="number" class="form-control" id="type1_quantity"
                                                     name="type1_quantity" min="0.01" step="0.01"
-                                                    value="{{ $order->quantity_to_produce }}"
-                                                    {{ $isDisabled ? 'readonly' : '' }}>
+                                                    placeholder="Ex: 100"
+                                                    value="{{ $order->production_type === 'type1' ? $order->quantity_to_produce : '' }}">
                                                 <small class="form-text text-muted">
                                                     Quantité de produit de production à fabriquer
                                                 </small>
@@ -194,18 +249,10 @@
                                                 <label class="form-label">Volume/Unité</label>
                                                 <div class="input-group">
                                                     <input type="number" class="form-control" id="type1_volume_per_unit"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->product->volume_m3 ?? 0 }}">
+                                                        step="0.0001" min="0" readonly>
                                                     <span class="input-group-text">m³</span>
                                                 </div>
-                                                <small class="form-text text-muted" id="type1_volume_info">
-                                                    {{ $order->product->volume_m3 ?? 0 }} m³
-                                                    @if ($order->product->height_m && $order->product->width_m && $order->product->depth_m)
-                                                        ({{ $order->product->height_m }} ×
-                                                        {{ $order->product->width_m }} × {{ $order->product->depth_m }}
-                                                        m)
-                                                    @endif
-                                                </small>
+                                                <small class="form-text text-muted" id="type1_volume_info"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -215,8 +262,7 @@
                                                 <label class="form-label">Volume Total Produit</label>
                                                 <div class="input-group">
                                                     <input type="number" class="form-control" id="type1_total_volume"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->product ? $order->product->volume_m3 * $order->quantity_to_produce : 0 }}">
+                                                        step="0.0001" min="0" readonly>
                                                     <span class="input-group-text">m³</span>
                                                 </div>
                                             </div>
@@ -224,33 +270,29 @@
                                     </div>
                                 </div>
 
-                                <!-- Type 2: Production -> Découpage -->
-                                <div class="col-md-12" id="type2Section"
-                                    style="{{ $order->production_type !== 'type2' ? 'display:none;' : '' }}">
+                                <!-- Type 2: Production -> Découpage (Multiple Products) -->
+                                <div class="col-md-12 {{ $order->production_type !== 'type2' ? 'd-none' : '' }}" id="type2Section">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="type2_source_product_id" class="form-label">Produit Source
                                                     (Bloc) *</label>
                                                 <select class="form-control select2" id="type2_source_product_id"
-                                                    name="type2_source_product_id" {{ $isDisabled ? 'disabled' : '' }}>
+                                                    name="type2_source_product_id">
                                                     <option value="">Sélectionner un produit source</option>
+                                                    @if ($order->production_type === 'type2' && $order->sourceProduct && !$productionProducts->contains('product_id', $order->source_product_id))
+                                                        <option value="{{ $order->source_product_id }}"
+                                                            data-has-familles="{{ $order->sourceProduct->has_familles }}" selected>
+                                                            {{ $order->sourceProduct->product_code }} -
+                                                            {{ $order->sourceProduct->product_name }}
+                                                        </option>
+                                                    @endif
                                                     @foreach ($productionProducts as $product)
                                                         @if ($product->product_type === 'production' || $product->product_type === 'both')
                                                             <option value="{{ $product->product_id }}"
                                                                 data-has-familles="{{ $product->has_familles }}"
-                                                                data-volume="{{ $product->volume_m3 ?? 0 }}"
-                                                                {{ $order->source_product_id == $product->product_id ? 'selected' : '' }}>
-                                                                {{ $product->product_code }} -
-                                                                {{ $product->product_name }}
-                                                                @if ($product->product_type === 'production')
-                                                                    <span class="badge bg-primary">Production</span>
-                                                                @elseif($product->product_type === 'both')
-                                                                    <span class="badge bg-info">Production & Vente</span>
-                                                                @endif
-                                                                @if ($product->has_familles)
-                                                                    <span class="badge bg-warning">Avec Familles</span>
-                                                                @endif
+                                                                {{ $order->production_type === 'type2' && $order->source_product_id == $product->product_id ? 'selected' : '' }}>
+                                                                {{ $product->product_code }} - {{ $product->product_name }}
                                                             </option>
                                                         @endif
                                                     @endforeach
@@ -260,46 +302,14 @@
                                                 </small>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="type2_final_product_id" class="form-label">Produit Découpage
+                                                <label for="type2_total_blocks" class="form-label">Total Blocs Requis
                                                     *</label>
-                                                <select class="form-control select2" id="type2_final_product_id"
-                                                    name="type2_final_product_id" {{ $isDisabled ? 'disabled' : '' }}>
-                                                    <option value="">Sélectionner un produit découpage</option>
-                                                    @foreach ($decoupageProducts as $product)
-                                                        @if ($product->product_type === 'decoupage')
-                                                            <option value="{{ $product->product_id }}"
-                                                                data-has-familles="{{ $product->has_familles }}"
-                                                                data-volume="{{ $product->volume_m3 ?? 0 }}"
-                                                                {{ $order->product_id == $product->product_id ? 'selected' : '' }}>
-                                                                {{ $product->product_code }} -
-                                                                {{ $product->product_name }}
-                                                                <span class="badge bg-warning">Découpage</span>
-                                                                @if ($product->has_familles)
-                                                                    <span class="badge bg-info">Avec Familles</span>
-                                                                @endif
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                                <small class="form-text text-muted">
-                                                    Produit de type découpage à produire
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="type2_quantity" class="form-label">Quantité de Blocs *</label>
-                                                <input type="number" class="form-control" id="type2_quantity"
-                                                    name="type2_quantity" min="0.01" step="0.01"
-                                                    value="{{ $order->quantity_to_produce }}"
-                                                    {{ $isDisabled ? 'readonly' : '' }}>
-                                                <small class="form-text text-muted">
-                                                    Quantité de blocs à découper
-                                                </small>
+                                                <input type="number" class="form-control" id="type2_total_blocks"
+                                                    name="type2_total_blocks" min="0.01" step="0.01"
+                                                    value="{{ $order->production_type === 'type2' ? $order->required_quantity : 1 }}">
+                                                <small class="form-text text-muted">Nombre de blocs à découper</small>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -307,433 +317,361 @@
                                                 <label class="form-label">Volume/Bloc</label>
                                                 <div class="input-group">
                                                     <input type="number" class="form-control" id="type2_source_volume"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->sourceProduct->volume_m3 ?? 0 }}">
+                                                        step="0.0001" min="0" readonly>
                                                     <span class="input-group-text">m³</span>
                                                 </div>
-                                                <small class="form-text text-muted" id="type2_source_volume_info">
-                                                    {{ $order->sourceProduct->volume_m3 ?? 0 }} m³
-                                                    @if ($order->sourceProduct)
-                                                        @if ($order->sourceProduct->height_m && $order->sourceProduct->width_m && $order->sourceProduct->depth_m)
-                                                            ({{ $order->sourceProduct->height_m }} ×
-                                                            {{ $order->sourceProduct->width_m }} ×
-                                                            {{ $order->sourceProduct->depth_m }} m)
-                                                        @endif
-                                                    @endif
-                                                </small>
+                                                <small class="form-text text-muted" id="type2_source_volume_info"></small>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label class="form-label">Volume/Produit Découpage</label>
+                                                <label class="form-label">Volume Total Source</label>
                                                 <div class="input-group">
-                                                    <input type="number" class="form-control" id="type2_final_volume"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->product->volume_m3 ?? 0 }}">
+                                                    <input type="number" class="form-control"
+                                                        id="type2_total_source_volume" step="0.0001" min="0"
+                                                        readonly>
                                                     <span class="input-group-text">m³</span>
                                                 </div>
-                                                <small class="form-text text-muted" id="type2_final_volume_info">
-                                                    {{ $order->product->volume_m3 ?? 0 }} m³
-                                                    @if ($order->product->height_m && $order->product->width_mm && $order->product->depth_mm)
-                                                        ({{ $order->product->height_m }} ×
-                                                        {{ $order->product->width_m }} × {{ $order->product->depth_m }}
-                                                        m)
-                                                    @endif
-                                                </small>
+                                                <small class="form-text text-muted">Volume total des blocs à
+                                                    découper</small>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="form-label">Volume Total Produit</label>
+                                                <label class="form-label">Produits Découpage à Produire *</label>
+                                                <button type="button" class="btn btn-sm btn-primary mb-2"
+                                                    id="addType2Product">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter un Produit
+                                                </button>
+                                                <div id="type2ProductsContainer">
+                                                    <div class="alert alert-info" id="noType2ProductsMessage">
+                                                        Cliquez sur "Ajouter un Produit" pour ajouter des produits découpage
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume Total Produits Découpage</label>
                                                 <div class="input-group">
                                                     <input type="number" class="form-control" id="type2_total_volume"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->product ? $order->product->volume_m3 * $order->quantity_to_produce : 0 }}">
+                                                        step="0.0001" min="0" readonly>
                                                     <span class="input-group-text">m³</span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Chute/Déchet Estimé (Volume)</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type2_waste_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                                <small class="form-text text-muted" id="type2_waste_info"></small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Type 3: Découpage -> Vente (Multiple Products) -->
-                                <div class="col-md-12" id="type3Section"
-                                    style="{{ $order->production_type !== 'type3' ? 'display:none;' : '' }}">
+                                <!-- Type 3: Découpage -> Vente -->
+                                <div class="col-md-12 {{ $order->production_type !== 'type3' ? 'd-none' : '' }}" id="type3Section">
+                                    <!-- Multiple Sous-blocs Sources -->
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="type3_source_product_id" class="form-label">Produit Source
-                                                    (Sous-bloc) *</label>
-                                                <select class="form-control select2" id="type3_source_product_id"
-                                                    name="type3_source_product_id" {{ $isDisabled ? 'disabled' : '' }}>
-                                                    <option value="">Sélectionner un sous-bloc</option>
-                                                    @foreach ($decoupageProducts as $product)
-                                                        @if ($product->product_type === 'decoupage')
+                                                <label class="form-label fw-semibold">Sous-blocs Sources *</label>
+                                                <button type="button" class="btn btn-sm btn-success mb-2 ms-2"
+                                                    id="addType3SousBloc">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter un Sous-bloc
+                                                </button>
+                                                <div id="type3SousBlocsContainer">
+                                                    <div class="alert alert-info" id="noSousBlocsMessage">
+                                                        Cliquez sur "Ajouter un Sous-bloc" pour ajouter des sous-blocs sources
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Multiple Produits Finaux -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label fw-semibold">Produits Finaux à Produire *</label>
+                                                <button type="button" class="btn btn-sm btn-primary mb-2 ms-2"
+                                                    id="addType3Product">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter un Produit
+                                                </button>
+                                                <div id="type3ProductsContainer">
+                                                    <div class="alert alert-info" id="noProductsMessage">
+                                                        Cliquez sur "Ajouter un Produit" pour ajouter des produits finaux
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Volume Summary -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume Total Sous-blocs</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control"
+                                                        id="type3_total_source_volume" step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume Total Produits Finaux</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type3_total_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Chute/Déchet Estimé (Volume)</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type3_waste_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                                <small class="form-text text-muted" id="type3_waste_info"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Type 4: Vente -> Vente (Transformation) -->
+                                <div class="col-md-12 {{ $order->production_type !== 'type4' ? 'd-none' : '' }}" id="type4Section">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="type4_source_product_id" class="form-label">Produit Source
+                                                    (Vente) *</label>
+                                                <select class="form-control select2" id="type4_source_product_id"
+                                                    name="source_product_id">
+                                                    <option value="">Sélectionner un produit source</option>
+                                                    @if ($order->production_type === 'type4' && $order->sourceProduct && !$salesProducts->contains('product_id', $order->source_product_id))
+                                                        <option value="{{ $order->source_product_id }}"
+                                                            data-has-familles="{{ $order->sourceProduct->has_familles }}" selected>
+                                                            {{ $order->sourceProduct->product_code }} -
+                                                            {{ $order->sourceProduct->product_name }}
+                                                        </option>
+                                                    @endif
+                                                    @foreach ($salesProducts as $product)
+                                                        @if ($product->product_type === 'finale' || $product->product_type === 'both')
                                                             <option value="{{ $product->product_id }}"
                                                                 data-has-familles="{{ $product->has_familles }}"
-                                                                data-volume="{{ $product->volume_m3 ?? 0 }}"
-                                                                {{ $order->source_product_id == $product->product_id ? 'selected' : '' }}>
+                                                                {{ $order->production_type === 'type4' && $order->source_product_id == $product->product_id ? 'selected' : '' }}>
                                                                 {{ $product->product_code }} -
                                                                 {{ $product->product_name }}
-                                                                <span class="badge bg-warning">Découpage</span>
-                                                                @if ($product->has_familles)
-                                                                    <span class="badge bg-info">Avec Familles</span>
-                                                                @endif
                                                             </option>
                                                         @endif
                                                     @endforeach
                                                 </select>
-                                                <small class="form-text text-muted">
-                                                    Sous-bloc de type découpage à convertir
-                                                </small>
+                                                <small class="form-text text-muted">Produit vente à transformer</small>
                                             </div>
                                         </div>
-                                        <div class="col-md-12" style="margin-top: 17px">
+                                        <div class="col-md-2">
                                             <div class="form-group">
-                                                <label class="form-label">Produits Finaux à Produire *</label>
-                                                @if (!$isDisabled)
-                                                    <button type="button" class="btn btn-sm btn-primary mb-2"
-                                                        id="addType3Product">
-                                                        <i class="fas fa-plus me-1"></i> Ajouter un Produit
-                                                    </button>
-                                                @endif
-                                                <div id="type3ProductsContainer">
-                                                    @if ($type3Products && count($type3Products) > 0)
-                                                        @foreach ($type3Products as $index => $product)
-                                                            <div class="type3-product-row card mb-3"
-                                                                data-index="{{ $index }}">
-                                                                <div class="card-body">
-                                                                    <div class="row align-items-center">
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Produit Final
-                                                                                    *</label>
-                                                                                <select
-                                                                                    class="form-control select2 type3-product-select"
-                                                                                    name="type3_products[{{ $index }}][product_id]"
-                                                                                    data-index="{{ $index }}"
-                                                                                    {{ $isDisabled ? 'disabled' : '' }}>
-                                                                                    @foreach ($salesProducts->whereIn('product_type', ['finale', 'both']) as $salesProduct)
-                                                                                        <option
-                                                                                            value="{{ $salesProduct->product_id }}"
-                                                                                            data-volume="{{ $salesProduct->volume_m3 ?? 0 }}"
-                                                                                            {{ $product->product_id == $salesProduct->product_id ? 'selected' : '' }}>
-                                                                                            {{ $salesProduct->product_code }}
-                                                                                            -
-                                                                                            {{ $salesProduct->product_name }}
-                                                                                            <span
-                                                                                                class="badge bg-success">Vente</span>
-                                                                                            @if ($salesProduct->has_familles)
-                                                                                                <span
-                                                                                                    class="badge bg-info">Avec
-                                                                                                    Familles</span>
-                                                                                            @endif
-                                                                                        </option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-2" style="margin-top: 20px;">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Ratio *</label>
-                                                                                <input type="number"
-                                                                                    class="form-control type3-conversion-rate"
-                                                                                    name="type3_products[{{ $index }}][conversion_rate]"
-                                                                                    value="{{ $product->conversion_rate }}"
-                                                                                    step="0.01" min="0.01"
-                                                                                    placeholder="1.0"
-                                                                                    {{ $isDisabled ? 'readonly' : '' }}>
-                                                                                <small
-                                                                                    class="form-text text-muted">sous-bloc
-                                                                                    → produit</small>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Quantité
-                                                                                    *</label>
-                                                                                <input type="number"
-                                                                                    class="form-control type3-quantity"
-                                                                                    name="type3_products[{{ $index }}][quantity_to_produce]"
-                                                                                    value="{{ $product->quantity_to_produce }}"
-                                                                                    min="0.01" step="0.01"
-                                                                                    placeholder="100"
-                                                                                    {{ $isDisabled ? 'readonly' : '' }}>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    class="form-label">Volume/Unité</label>
-                                                                                <div class="input-group">
-                                                                                    <input type="number"
-                                                                                        class="form-control type3-volume"
-                                                                                        data-index="{{ $index }}"
-                                                                                        step="0.0001" min="0"
-                                                                                        readonly
-                                                                                        value="{{ $product->volume_per_unit ?? ($product->volume_m3 ?? 0) }}">
-                                                                                    <span
-                                                                                        class="input-group-text">m³</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        @if (!$isDisabled)
-                                                                            <div class="col-md-2">
-                                                                                <div class="form-group">
-                                                                                    <label
-                                                                                        class="form-label">Actions</label>
-                                                                                    <button type="button"
-                                                                                        class="btn btn-sm btn-danger w-100 remove-type3-product"
-                                                                                        data-index="{{ $index }}">
-                                                                                        <i class="fas fa-trash"></i>
-                                                                                        Supprimer
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <small
-                                                                                class="form-text text-muted type3-volume-info"
-                                                                                data-index="{{ $index }}">
-                                                                                {{ number_format($product->volume_per_unit ?? ($product->volume_m3 ?? 0), 4) }}
-                                                                                m³
-                                                                                @if (isset($product->height_mm) && isset($product->width_mm) && isset($product->depth_mm))
-                                                                                    ({{ $product->height_mm }} ×
-                                                                                    {{ $product->width_mm }} ×
-                                                                                    {{ $product->depth_mm }} mm)
-                                                                                @endif
-                                                                            </small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @else
-                                                        <div class="alert alert-info" id="noProductsMessage">
-                                                            Cliquez sur "Ajouter un Produit" pour ajouter des produits
-                                                            finaux
-                                                        </div>
-                                                    @endif
+                                                <label for="type4_total_units" class="form-label">Total Unités Requises
+                                                    *</label>
+                                                <input type="number" class="form-control" id="type4_total_units"
+                                                    name="type4_total_units" min="0.01" step="0.01"
+                                                    value="{{ $order->production_type === 'type4' ? $order->required_quantity : 1 }}">
+                                                <small class="form-text text-muted">Nombre d'unités source à
+                                                    transformer</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume/Unité Source</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type4_source_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                                <small class="form-text text-muted" id="type4_source_volume_info"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume Total Source</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control"
+                                                        id="type4_total_source_volume" step="0.0001" min="0"
+                                                        readonly>
+                                                    <span class="input-group-text">m³</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Famille Selection (SINGLE - same as Type 2 and Type 3) -->
                                     <div class="row mt-3">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="type3_total_sous_blocs" class="form-label">Total Sous-blocs
-                                                    Requis</label>
-                                                <input type="number" class="form-control" id="type3_total_sous_blocs"
-                                                    name="type3_total_sous_blocs" min="0.01" step="0.01"
-                                                    placeholder="Calculé automatiquement" readonly
-                                                    value="{{ $order->required_quantity }}">
-                                                <small class="form-text text-muted">
-                                                    Total des sous-blocs nécessaires pour tous les produits
-                                                </small>
+                                                <label for="type4_famille_id" class="form-label">Famille *</label>
+                                                <select class="form-control select2" id="type4_famille_id"
+                                                    name="famille_id">
+                                                    <option value="">Sélectionner la famille...</option>
+                                                </select>
+                                                <small class="form-text text-muted">Famille où seront retirés les produits
+                                                    source et ajoutés les nouveaux produits</small>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                    </div>
+
+                                    <!-- Products to Produce -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="form-label">Volume/Sous-bloc</label>
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control" id="type3_source_volume"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->sourceProduct->volume_m3 ?? 0 }}">
-                                                    <span class="input-group-text">m³</span>
+                                                <label class="form-label">Produits à Produire *</label>
+                                                <button type="button" class="btn btn-sm btn-primary mb-2"
+                                                    id="addType4Product">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter un Produit
+                                                </button>
+                                                <div id="type4ProductsContainer">
+                                                    <div class="alert alert-info" id="noType4ProductsMessage">
+                                                        Cliquez sur "Ajouter un Produit" pour ajouter des produits
+                                                    </div>
                                                 </div>
-                                                <small class="form-text text-muted" id="type3_source_volume_info">
-                                                    {{ $order->sourceProduct->volume_m3 ?? 0 }} m³
-                                                    @if ($order->sourceProduct)
-                                                        @if ($order->sourceProduct->height_m && $order->sourceProduct->width_m && $order->sourceProduct->depth_m)
-                                                            ({{ $order->sourceProduct->height_m }} ×
-                                                            {{ $order->sourceProduct->width_m }} ×
-                                                            {{ $order->sourceProduct->depth_m }} m)
-                                                        @endif
-                                                    @endif
-                                                </small>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                    </div>
+
+                                    <!-- Volume Calculations -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Volume Total Produits</label>
                                                 <div class="input-group">
-                                                    <input type="number" class="form-control" id="type3_total_volume"
-                                                        step="0.0001" min="0" readonly
-                                                        value="{{ $order->total_volume_produced ?? 0 }}">
+                                                    <input type="number" class="form-control" id="type4_total_volume"
+                                                        step="0.0001" min="0" readonly>
                                                     <span class="input-group-text">m³</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-label">Total Produits Finaux</label>
+                                                <label class="form-label">Chute/Déchet Estimé (Volume)</label>
                                                 <div class="input-group">
-                                                    <input type="number" class="form-control"
-                                                        id="type3_total_final_products" step="0.0001" min="0"
-                                                        readonly value="{{ $order->quantity_to_produce }}">
-                                                    <span class="input-group-text">unités</span>
+                                                    <input type="number" class="form-control" id="type4_waste_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                                <small class="form-text text-muted" id="type4_waste_info"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Stock Alerts -->
+                                    <div id="type4InsufficientStockAlert" class="alert alert-danger d-none mt-3">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>Attention: Stock insuffisant!</strong>
+                                        <div id="type4InsufficientStockList" class="mt-2"></div>
+                                    </div>
+
+                                    <div id="type4VolumeExceedAlert" class="alert alert-danger d-none mt-3">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>Erreur: Volume source insuffisant!</strong>
+                                        <div id="type4VolumeExceedMessage" class="mt-2"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Type 5: Chutes -> Produits Finis -->
+                                <div class="col-md-12 {{ $order->production_type !== 'type5' ? 'd-none' : '' }}" id="type5Section">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type5_chutes_volume" class="form-label">Volume de Chutes à
+                                                    Utiliser *</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type5_chutes_volume"
+                                                        min="0" step="0.0001" placeholder="Ex: 10.0000"
+                                                        value="{{ $order->production_type === 'type5' ? $order->chutes_volume : '' }}">
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                                <small class="form-text text-muted">Volume de chutes à consommer pour cet
+                                                    ordre</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div id="type5ChutesStockInfo"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label fw-semibold">Produits Finaux à Produire *</label>
+                                                <button type="button" class="btn btn-sm btn-primary mb-2 ms-2"
+                                                    id="addType5Product">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter un Produit
+                                                </button>
+                                                <div id="type5ProductsContainer">
+                                                    <div class="alert alert-info" id="noType5ProductsMessage">
+                                                        Cliquez sur "Ajouter un Produit" pour ajouter des produits finaux
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <!-- Chutes Selection Section (Only for Type 1) -->
-                            <div class="row mb-4" id="chutesSection"
-                                style="{{ $order->production_type !== 'type1' ? 'display:none;' : '' }}">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header bg-warning">
-                                            <h6 class="card-title mb-0" style="color:white">
-                                                <i class="fas fa-recycle me-2"></i>Utilisation des Chutes de Production
-                                            </h6>
+                                    <!-- Volume Summary -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume Chutes Alloué</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control"
+                                                        id="type5_chutes_volume_display" step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-check card h-100">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="material_source" id="bomOnly" value="bom_only"
-                                                            {{ $order->material_source === 'bom_only' ? 'checked' : '' }}
-                                                            {{ $isDisabled ? 'disabled' : '' }}>
-                                                        <label class="form-check-label card-body" for="bomOnly">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="me-3">
-                                                                    <i class="fas fa-boxes fa-2x text-primary"></i>
-                                                                </div>
-                                                                <div>
-                                                                    <h6 class="mb-1">Nomenclature Standard</h6>
-                                                                    <p class="text-muted mb-0 small">
-                                                                        Utiliser uniquement les matières premières standards
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-check card h-100">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="material_source" id="chutesOnly" value="chutes_only"
-                                                            {{ $order->material_source === 'chutes_only' ? 'checked' : '' }}
-                                                            {{ $isDisabled ? 'disabled' : '' }}>
-                                                        <label class="form-check-label card-body" for="chutesOnly">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="me-3">
-                                                                    <i class="fas fa-trash-restore fa-2x text-warning"></i>
-                                                                </div>
-                                                                <div>
-                                                                    <h6 class="mb-1">Chutes uniquement</h6>
-                                                                    <p class="text-muted mb-0 small">
-                                                                        Recycler uniquement des chutes existantes
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-check card h-100">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="material_source" id="bothSources" value="both"
-                                                            {{ $order->material_source === 'both' ? 'checked' : '' }}
-                                                            {{ $isDisabled ? 'disabled' : '' }}>
-                                                        <label class="form-check-label card-body" for="bothSources">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="me-3">
-                                                                    <i class="fas fa-layer-group fa-2x text-success"></i>
-                                                                </div>
-                                                                <div>
-                                                                    <h6 class="mb-1">Mixte (BOM + Chutes)</h6>
-                                                                    <p class="text-muted mb-0 small">
-                                                                        Utiliser les deux sources de matière
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </label>
-                                                    </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Volume Total Produits</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type5_total_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Chute Résiduelle Estimée</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="type5_waste_volume"
+                                                        step="0.0001" min="0" readonly>
+                                                    <span class="input-group-text">m³</span>
+                                                </div>
+                                                <small class="form-text text-muted" id="type5_waste_info"></small>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                            <!-- Chutes volume input -->
-                                            <div class="row mt-3" id="chutesVolumeSection"
-                                                style="{{ !in_array($order->material_source, ['chutes_only', 'both']) ? 'display:none;' : '' }}">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="chutes_volume" class="form-label">
-                                                            <i class="fas fa-recycle me-2"></i>Volume de Chutes à Utiliser
-                                                            (m³)
-                                                            @if (in_array($order->material_source, ['chutes_only', 'both']))
-                                                                <span class="text-danger">*</span>
-                                                            @endif
-                                                        </label>
-                                                        <div class="input-group">
-                                                            <input type="number" class="form-control" id="chutes_volume"
-                                                                name="chutes_volume" step="0.0001" min="0.0001"
-                                                                value="{{ $order->chutes_volume ?? 0 }}"
-                                                                {{ $isDisabled ? 'readonly' : '' }}>
-                                                            <span class="input-group-text">m³</span>
-                                                        </div>
-                                                        <small class="form-text text-muted">
-                                                            Volume de chutes de production à recycler
-                                                        </small>
-                                                        <div class="mt-2" id="chutesStockInfo">
-                                                            <!-- Stock info will be loaded here -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="alert alert-info">
-                                                        <h6><i class="fas fa-info-circle me-2"></i>Informations</h6>
-                                                        <p class="mb-1"><small>Les chutes seront consommées comme matière
-                                                                première.</small></p>
-                                                        <p class="mb-0"><small>Coût: 0 DH (recyclage interne)</small></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- BOM percentage when using both -->
-                                            <div class="row mt-3" id="bomPercentageSection"
-                                                style="{{ $order->material_source !== 'both' ? 'display:none;' : '' }}">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="bom_percentage" class="form-label">
-                                                            <i class="fas fa-percentage me-2"></i>Pourcentage de Matières
-                                                            Nouvelles
-                                                            @if ($order->material_source === 'both')
-                                                                <span class="text-danger">*</span>
-                                                            @endif
-                                                        </label>
-                                                        <div class="input-group">
-                                                            <input type="number" class="form-control"
-                                                                id="bom_percentage" name="bom_percentage" step="1"
-                                                                min="0" max="100" placeholder="Ex: 60"
-                                                                value="{{ $order->bom_percentage ?? 60 }}"
-                                                                {{ $isDisabled ? 'readonly' : '' }}>
-                                                            <span class="input-group-text">%</span>
-                                                        </div>
-                                                        <small class="form-text text-muted">
-                                                            Pourcentage de matières premières standards (reste = chutes)
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="alert alert-info">
-                                                        <h6><i class="fas fa-calculator me-2"></i>Calcul</h6>
-                                                        <p class="mb-1"><small id="bomCalcInfo">
-                                                                {{ $order->material_source === 'both' ? $order->bom_percentage ?? 60 : 60 }}%
-                                                                matières nouvelles +
-                                                                {{ $order->material_source === 'both' ? 100 - ($order->bom_percentage ?? 60) : 40 }}%
-                                                                chutes
-                                                            </small></p>
-                                                        <p class="mb-0"><small>Les coûts seront calculés
-                                                                proportionnellement</small></p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div id="type5VolumeExceedAlert" class="alert alert-danger d-none mt-3">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>Erreur: Volume de chutes insuffisant!</strong>
+                                        <div id="type5VolumeExceedMessage" class="mt-2">
+                                            Le volume total des produits dépasse le volume de chutes alloué. Veuillez
+                                            ajouter plus de chutes ou réduire les quantités.
                                         </div>
                                     </div>
                                 </div>
@@ -748,143 +686,75 @@
                                 </div>
                             </div>
 
-                            <!-- Conversion Ratios Section -->
-                            <div class="row mb-4" id="conversionSection"
-                                style="{{ $order->production_type !== 'type2' ? 'display:none;' : '' }}">
-                                <div class="col-md-12">
-                                    <h6 class="mb-3">
-                                        <i class="fas fa-exchange-alt me-2"></i>Paramètres de Conversion
-                                    </h6>
-
-                                    <!-- Type 2: Découpage Ratio -->
-                                    <div class="row" id="type2ConversionSection">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="decoupage_ratio" class="form-label">Ratio de Découpage
-                                                    *</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text">1 bloc =</span>
-                                                    <input type="number" class="form-control" id="decoupage_ratio"
-                                                        name="decoupage_ratio" step="1" min="1"
-                                                        placeholder="Ex: 4" value="{{ $order->decoupage_ratio ?? 1 }}"
-                                                        {{ $isDisabled ? 'readonly' : '' }}>
-                                                    <span class="input-group-text">sous bloc</span>
-                                                </div>
-                                                <small class="form-text text-muted">
-                                                    Nombre de sous bloc obtenus à partir d'1 bloc
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Calculated Results Section -->
-                            <div class="row mb-4 d-none" id="calculatedResultsSection">
+                            <!-- BOM Information (for Type 1 only) -->
+                            <div class="row mb-4 d-none" id="bomCard">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <div class="card-header bg-info text-white">
+                                        <div class="card-header bg-primary text-white">
                                             <h6 class="card-title mb-0">
-                                                <i class="fas fa-calculator me-2"></i>Résultats Calculés
+                                                <i class="fas fa-list-alt me-2"></i>Nomenclature (BOM) - Matières Premières
+                                                Requises
                                             </h6>
                                         </div>
-                                        <div class="card-body" id="calculatedResults">
-                                            <!-- Results will be displayed here -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- BOM Information (for Type 1 only) -->
-                            <div class="card mb-4 d-none" id="bomCard">
-                                <div class="card-header bg-primary text-white">
-                                    <h6 class="card-title mb-0">
-                                        <i class="fas fa-list-alt me-2"></i>Nomenclature (BOM) - Matières Premières
-                                        Requises
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="alert alert-info">
-                                        <i class="fas fa-info-circle me-2"></i>
-                                        <strong>Calcul:</strong> Pour <span id="bom-quantity-display">1</span> produit, il
-                                        faut:
-                                        <span id="materialSourceInfo" class="ms-2"></span>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th width="25%">Matière Première</th>
-                                                    <th width="10%">Code</th>
-                                                    <th width="10%" class="text-center">Quantité/Unité</th>
-                                                    <th width="10%" class="text-center">Stock Disponible</th>
-                                                    <th width="10%" class="text-center">Quantité Requise</th>
-                                                    <th width="8%" class="text-center">Unités</th>
-                                                    <th width="10%" class="text-center">Coût Unitaire</th>
-                                                    <th width="10%" class="text-center">Coût Total</th>
-                                                    <th width="7%" class="text-center">Statut</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="bomTableBody">
-                                                <!-- BOM items will be loaded here via AJAX -->
-                                            </tbody>
-                                            <tfoot id="bomTableFooter">
-                                                <!-- Total cost will be loaded via AJAX -->
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
-                                    <!-- Stock Summary -->
-                                    <div id="bomStockSummary" class="mt-3 d-none">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header bg-light">
-                                                        <h6 class="card-title mb-0">
-                                                            <i class="fas fa-clipboard-check me-2"></i>Résumé du Stock
-                                                        </h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div id="stockSummaryContent">
-                                                            <!-- Stock summary will be loaded here -->
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="card-body">
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                <strong>Calcul:</strong> Pour <span id="bom-quantity-display">1</span>
+                                                produit, il faut:
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header bg-light">
-                                                        <h6 class="card-title mb-0">
-                                                            <i class="fas fa-calculator me-2"></i>Récapitulatif Coûts
-                                                        </h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div id="costSummaryContent">
-                                                            <!-- Cost summary will be loaded here -->
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                            <div class="mb-3 text-start">
+                                                <button type="button" class="btn btn-success"
+                                                    id="addRawMaterialToBomBtn">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter une matière première
+                                                </button>
+                                                <button type="button" class="btn btn-danger ms-2" id="clearBomBtn">
+                                                    <i class="fas fa-trash me-1"></i> Vider la nomenclature
+                                                </button>
+                                            </div>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th width="25%">Matière Première</th>
+                                                            <th width="10%">Code</th>
+                                                            <th width="10%" class="text-center">Quantité/Unité</th>
+                                                            <th width="10%" class="text-center">Stock Disponible</th>
+                                                            <th width="10%" class="text-center">Quantité Requise</th>
+                                                            <th width="8%" class="text-center">Unités</th>
+                                                            <th width="10%" class="text-center">Coût Unitaire</th>
+                                                            <th width="10%" class="text-center">Coût Total</th>
+                                                            <th width="7%" class="text-center">Statut</th>
+                                                            <th width="10%" class="text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="bomTableBody">
+                                                        <tr>
+                                                            <td colspan="10" class="text-center text-muted py-4">
+                                                                <i class="fas fa-box-open me-2"></i>
+                                                                Aucune matière première. Cliquez sur "Ajouter une matière
+                                                                première" pour ajouter.
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot id="bomTableFooter"></tfoot>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Production Details -->
-                            <div class="row mb-4" id="productionDetailsSection">
+                            <div class="row mb-4">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="priority" class="form-label">Priorité *</label>
-                                        <select class="form-control" id="priority" name="priority" required
-                                            {{ $isDisabled ? 'disabled' : '' }}>
-                                            <option value="low" {{ $order->priority == 'low' ? 'selected' : '' }}>
-                                                Basse</option>
-                                            <option value="medium" {{ $order->priority == 'medium' ? 'selected' : '' }}>
-                                                Moyenne</option>
-                                            <option value="high" {{ $order->priority == 'high' ? 'selected' : '' }}>
-                                                Haute</option>
-                                            <option value="urgent" {{ $order->priority == 'urgent' ? 'selected' : '' }}>
-                                                Urgente</option>
+                                        <select class="form-control" id="priority" name="priority" required>
+                                            <option value="low" {{ $order->priority === 'low' ? 'selected' : '' }}>Basse</option>
+                                            <option value="medium" {{ ($order->priority ?? 'medium') === 'medium' ? 'selected' : '' }}>Moyenne</option>
+                                            <option value="high" {{ $order->priority === 'high' ? 'selected' : '' }}>Haute</option>
+                                            <option value="urgent" {{ $order->priority === 'urgent' ? 'selected' : '' }}>Urgente</option>
                                         </select>
                                     </div>
                                 </div>
@@ -893,9 +763,7 @@
                                     <div class="form-group">
                                         <label for="start_date" class="form-label">Date de Début *</label>
                                         <input type="date" class="form-control" id="start_date" name="start_date"
-                                            required
-                                            value="{{ $order->start_date ? $order->start_date->format('Y-m-d') : date('Y-m-d') }}"
-                                            {{ $isDisabled ? 'readonly' : '' }}>
+                                            required value="{{ $order->start_date ? $order->start_date->format('Y-m-d') : date('Y-m-d') }}">
                                     </div>
                                 </div>
 
@@ -905,20 +773,18 @@
                                             *</label>
                                         <input type="date" class="form-control" id="expected_completion_date"
                                             name="expected_completion_date" required
-                                            value="{{ $order->expected_completion_date ? $order->expected_completion_date->format('Y-m-d') : '' }}"
-                                            {{ $isDisabled ? 'readonly' : '' }}>
+                                            value="{{ $order->expected_completion_date ? $order->expected_completion_date->format('Y-m-d') : '' }}">
                                         <small class="form-text text-muted" id="productionTimeInfo">
                                             <!-- Production time info will be loaded via AJAX -->
                                         </small>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-4 mt-3">
                                     <div class="form-group">
                                         <label for="responsible_employee_id" class="form-label">Responsable</label>
                                         <select class="form-control select2" id="responsible_employee_id"
-                                            name="responsible_employee_id" style="width: 100%;"
-                                            {{ $isDisabled ? 'disabled' : '' }}>
+                                            name="responsible_employee_id" style="width: 100%;">
                                             <option value="">Sélectionner un employé...</option>
                                             @foreach ($employees as $employee)
                                                 <option value="{{ $employee->employee_id }}"
@@ -926,23 +792,6 @@
                                                     {{ $employee->full_name }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Waste Percentage -->
-                            <div class="row mb-4" id="wasteSection"
-                                style="{{ !in_array($order->production_type, ['type2', 'type3']) ? 'display:none;' : '' }}">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="waste_percentage" class="form-label">Pourcentage de Déchet</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="waste_percentage"
-                                                name="waste_percentage" step="0.01" min="0" max="100"
-                                                value="{{ $order->waste_percentage ?? 0 }}"
-                                                {{ $isDisabled ? 'readonly' : '' }}>
-                                            <span class="input-group-text">%</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -969,7 +818,7 @@
                                     <i class="fas fa-sticky-note me-2"></i>Notes
                                 </label>
                                 <textarea class="form-control" id="notes" name="notes" rows="3"
-                                    placeholder="Instructions spéciales, notes de production..." {{ $isDisabled ? 'readonly' : '' }}>{{ $order->notes }}</textarea>
+                                    placeholder="Instructions spéciales, notes de production...">{{ old('notes', $order->notes) }}</textarea>
                             </div>
 
                             <!-- Hidden fields for final form submission -->
@@ -986,31 +835,27 @@
                             <input type="hidden" id="actual_conversion_rate" name="conversion_rate"
                                 value="{{ $order->conversion_rate }}">
                             <input type="hidden" id="actual_waste_percentage" name="waste_percentage"
-                                value="{{ $order->waste_percentage }}">
+                                value="{{ $order->waste_percentage ?? 0 }}">
                             <input type="hidden" id="actual_material_source" name="material_source"
                                 value="{{ $order->material_source ?? 'bom_only' }}">
                             <input type="hidden" id="actual_bom_percentage" name="bom_percentage"
                                 value="{{ $order->bom_percentage ?? 100 }}">
                             <input type="hidden" id="actual_chutes_volume" name="chutes_volume"
                                 value="{{ $order->chutes_volume ?? 0 }}">
+                            <input type="hidden" id="actual_total_cost" name="total_cost"
+                                value="{{ $order->total_cost ?? 0 }}">
+                            <input type="hidden" id="actual_total_source_volume" name="total_source_volume"
+                                value="{{ $order->source_volume ?? 0 }}">
+                            <input type="hidden" id="actual_total_produced_volume" name="total_produced_volume"
+                                value="{{ $order->total_volume_produced ?? 0 }}">
 
                             <!-- Form Actions -->
                             <div class="d-flex gap-2 mt-4">
-                                <button type="submit" class="btn btn-primary" id="submitBtn"
-                                    {{ $isDisabled ? 'disabled' : '' }}>
-                                    <i class="fas fa-save me-1"></i> Mettre à jour
+                                <button type="submit" class="btn btn-primary" id="submitBtn">
+                                    <i class="fas fa-save me-1"></i> Mettre à jour l'Ordre
                                 </button>
-                                @if (in_array($order->status, ['pending', 'approved']) && !$isDisabled)
-                                    <button type="button" class="btn btn-warning" id="cancelProductionBtn">
-                                        <i class="fas fa-ban me-1"></i> Annuler la Production
-                                    </button>
-                                @endif
-                                <a href="{{ route('production-orders.show', $order->order_id) }}"
-                                    class="btn btn-secondary">
-                                    <i class="fas fa-eye me-1"></i> Voir Détails
-                                </a>
-                                <a href="{{ route('production-orders.index') }}" class="btn btn-light">
-                                    <i class="fas fa-arrow-left me-1"></i> Retour
+                                <a href="{{ route('production-orders.index') }}" class="btn btn-secondary">
+                                    <i class="fas fa-times me-1"></i> Annuler
                                 </a>
                             </div>
                         </form>
@@ -1020,89 +865,208 @@
         </div>
     </div>
 
-    <!-- Cancel Production Modal -->
-    @if (in_array($order->status, ['pending', 'approved']) && !$isDisabled)
-        <div class="modal fade" id="cancelProductionModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            <i class="fas fa-ban me-2"></i>Annuler la Production
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Veuillez confirmer l'annulation de la production :</p>
-                        <div class="alert alert-warning">
-                            <strong>{{ $order->order_number }}</strong>
+    <!-- Modal for Creating Product -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-box-plus me-2"></i>Ajouter un Nouveau Produit
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quickProductForm">
+                        @csrf
+
+                        <!-- Basic Information -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Code Produit *</label>
+                                <input type="text" class="form-control" id="quick_product_code" name="product_code"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nom du Produit *</label>
+                                <input type="text" class="form-control" id="quick_product_name" name="product_name"
+                                    required>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="cancellationReason" class="form-label">
-                                <i class="fas fa-comment-dots me-2"></i>Raison de l'annulation *
-                            </label>
-                            <select class="form-control" id="cancellationReason" required>
-                                <option value="">Sélectionner une raison</option>
-                                <option value="stock_insufficient">Stock insuffisant</option>
-                                <option value="customer_cancelled">Commande client annulée</option>
-                                <option value="technical_issue">Problème technique</option>
-                                <option value="schedule_conflict">Conflit d'horaire</option>
-                                <option value="quality_concerns">Problèmes de qualité</option>
-                                <option value="other">Autre</option>
-                            </select>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Type de Production *</label>
+                                <select class="form-control" id="quick_product_type" name="product_type" required>
+                                    <option value="">Sélectionner</option>
+                                    <option value="production">Production (Bloc)</option>
+                                    <option value="decoupage">Découpage (Sous Bloc)</option>
+                                    <option value="finale">Produit Final (Volume)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Unité (affichée dans les ventes)</label>
+                                <input type="text" class="form-control" id="quick_unit_of_measure"
+                                    name="unit_of_measure" maxlength="50" value="pièce">
+                                <small class="text-muted">Par défaut "pièce", modifiable (Ex: m3, kg...)</small>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="additionalNotes" class="form-label">
-                                <i class="fas fa-sticky-note me-2"></i>Notes supplémentaires
-                            </label>
-                            <textarea class="form-control" id="additionalNotes" rows="3"
-                                placeholder="Ajouter des détails sur l'annulation..."></textarea>
+                        <!-- Dimensions -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Hauteur (m)</label>
+                                <input type="number" class="form-control" id="quick_height_m" name="height_m"
+                                    step="0.001">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Largeur (m)</label>
+                                <input type="number" class="form-control" id="quick_width_m" name="width_m"
+                                    step="0.001">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Profondeur (m)</label>
+                                <input type="number" class="form-control" id="quick_depth_m" name="depth_m"
+                                    step="0.001">
+                            </div>
                         </div>
 
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <strong>Attention :</strong> Cette action marquera la commande comme annulée et ne pourra pas
-                            être
-                            annulée.
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Volume (m³)</label>
+                                <input type="number" class="form-control" id="quick_volume_m3" name="volume_m3"
+                                    step="0.0001" readonly>
+                                <small class="text-muted">Calculé automatiquement</small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times me-2"></i>Fermer
-                        </button>
-                        <button type="button" class="btn btn-warning" id="confirmCancelProduction">
-                            <i class="fas fa-ban me-2"></i>Annuler la Production
+
+                        <!-- Familles et Prix Spécifiques Section -->
+                        <div class="section-header mb-3">
+                            <h6 class="section-title bg-info text-white p-2 rounded">
+                                <i class="fas fa-layer-group me-2"></i>Familles et Prix Spécifiques
+                            </h6>
+                        </div>
+
+                        <div class="alert alert-info mb-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Ajoutez les familles pour ce produit et définissez les prix pour chaque type de client.
+                        </div>
+
+                        <div id="quickFamillesContainer">
+                            <!-- Famille rows will be added here -->
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-outline-primary btn-sm" id="quickAddFamilleBtn">
+                                    <i class="fas fa-plus me-1"></i> Ajouter une Famille
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Stock Levels -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Stock Minimum</label>
+                                <input type="number" class="form-control" id="quick_min_stock_level"
+                                    name="min_stock_level" step="0.01" placeholder="Ex: 10.00">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Stock Maximum</label>
+                                <input type="number" class="form-control" id="quick_max_stock_level"
+                                    name="max_stock_level" step="0.01" placeholder="Ex: 100.00">
+                            </div>
+                        </div>
+
+                        <!-- Additional Info -->
+                        <div class="form-group mb-3">
+                            <label for="quick_description" class="form-label">Description</label>
+                            <textarea class="form-control" id="quick_description" name="description" rows="2"
+                                placeholder="Description du produit..."></textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Statut</label>
+                                <select class="form-control" id="quick_is_active" name="is_active">
+                                    <option value="1" selected>Actif</option>
+                                    <option value="0">Inactif</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-success" id="saveQuickProductBtn">
+                        <i class="fas fa-save me-1"></i> Créer Produit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="quickFamilleRowTemplate">
+        <div class="quick-famille-row mb-3 border rounded p-3 bg-light">
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Famille</h6>
+                        <button type="button" class="btn btn-sm btn-danger remove-quick-famille-btn">
+                            <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 mb-2">
+                    <label class="form-label">Famille *</label>
+                    <select class="form-control quick-famille-select" name="familles[INDEX][famille_id]" required
+                        style="width: 100%;">
+                        <option value="">Sélectionner une famille</option>
+                        @foreach ($familles as $famille)
+                            <option value="{{ $famille->famille_id }}" data-prix-client="{{ $famille->prix_client }}"
+                                data-prix-grossiste="{{ $famille->prix_grossiste }}"
+                                data-prix-commercial="{{ $famille->prix_commercial }}"
+                                data-prix-special="{{ $famille->prix_special }}">
+                                {{ $famille->famille_name }} ({{ $famille->famille_code }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Prix Client (DH) *</label>
+                    <input type="number" class="form-control quick-famille-prix-client"
+                        name="familles[INDEX][prix_client]" min="0" step="0.01" required>
+                    <small class="text-muted quick-prix-client-standard"></small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Prix Grossiste (DH) *</label>
+                    <input type="number" class="form-control quick-famille-prix-grossiste"
+                        name="familles[INDEX][prix_grossiste]" min="0" step="0.01" required>
+                    <small class="text-muted quick-prix-grossiste-standard"></small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Prix Commercial (DH) *</label>
+                    <input type="number" class="form-control quick-famille-prix-commercial"
+                        name="familles[INDEX][prix_commercial]" min="0" step="0.01" required>
+                    <small class="text-muted quick-prix-commercial-standard"></small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Prix Spécial (DH) *</label>
+                    <input type="number" class="form-control quick-famille-prix-special"
+                        name="familles[INDEX][prix_special]" min="0" step="0.01" required>
+                    <small class="text-muted quick-prix-special-standard"></small>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <div id="product-options-data"
-        data-products="{{ htmlspecialchars(
-            json_encode(
-                $salesProducts->whereIn('product_type', ['finale', 'both'])->map(function ($product) {
-                        return [
-                            'id' => $product->product_id,
-                            'text' => $product->product_code . ' - ' . $product->product_name,
-                            'volume_m3' => $product->volume_m3 ?? 0,
-                        ];
-                    })->values(),
-            ),
-            ENT_QUOTES,
-            'UTF-8',
-            true,
-        ) }}">
-    </div>
-
-    <!-- Toast container -->
-    <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>
+    </template>
 @endsection
 
 @push('stylesheets')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         .form-check .card {
             cursor: pointer;
@@ -1130,58 +1094,31 @@
             background-color: rgba(25, 135, 84, 0.05);
         }
 
-        .form-check-input:disabled+.card {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .select2-container--disabled .select2-selection--single {
-            background-color: #e9ecef;
-            cursor: not-allowed;
-        }
-
-        input:read-only,
-        select:disabled,
-        textarea:read-only {
-            background-color: #e9ecef;
-            cursor: not-allowed;
+        #type5Production:checked+.card {
+            border-color: #198754;
+            background-color: rgba(25, 135, 84, 0.05);
         }
 
         .badge.bg-warning {
             color: #000 !important;
         }
 
-        .calculation-result {
-            font-weight: bold;
-            color: #198754;
-        }
-
-        .stock-info {
-            font-size: 0.9em;
-            color: #6c757d;
-        }
-
-        .volume-display {
-            background-color: #f8f9fa;
-            border-left: 3px solid #0d6efd;
-        }
-
-        .volume-display.warning {
-            border-left-color: #ffc107;
-        }
-
-        .volume-display.success {
-            border-left-color: #198754;
+        .type2-product-row,
+        .type3-product-row {
+            border-left: 3px solid #ffc107;
+            margin-bottom: 1rem;
         }
 
         .type3-product-row {
-            border-left: 3px solid #198754;
+            border-left-color: #198754;
         }
 
+        .type2-product-row .card-body,
         .type3-product-row .card-body {
             padding: 1rem;
         }
 
+        /* Chutes stock info styling */
         #chutesStockInfo .alert {
             padding: 0.5rem 1rem;
             margin-bottom: 0;
@@ -1205,20 +1142,23 @@
             color: #842029;
         }
 
-        /* Chutes section styling */
-        #bomOnly:checked+.card {
-            border-color: #0d6efd;
-            background-color: rgba(13, 110, 253, 0.05);
+        #type2VolumeExceedAlert,
+        #type3VolumeExceedAlert,
+        #type4VolumeExceedAlert {
+            border-left: 4px solid #dc3545;
         }
 
-        #chutesOnly:checked+.card {
-            border-color: #ffc107;
-            background-color: rgba(255, 193, 7, 0.05);
+        #type2VolumeExceedAlert .alert,
+        #type3VolumeExceedAlert .alert,
+        #type4VolumeExceedAlert .alert {
+            background-color: #f8d7da;
         }
 
-        #bothSources:checked+.card {
-            border-color: #198754;
-            background-color: rgba(25, 135, 84, 0.05);
+        /* Chute info styling */
+        .text-warning,
+        .text-success,
+        .text-danger {
+            font-weight: 500;
         }
     </style>
 @endpush
@@ -1226,8 +1166,310 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
+            let rawMaterialsList = [];
+            let type4Products = [];
+            let quickFamilleRowIndex = 0;
+            const CHUTES_DENSITY = 8.2;
+
+            // Edit mode: the order's saved famille is applied to the first famille
+            // load, then cleared so later product changes behave like on create.
+            let editFamillePreselectId = null;
+
+            $('#addProductFromTopBtn').click(function() {
+                // Reset form
+                $('#quickProductForm')[0].reset();
+                $('#quick_volume_m3').val('');
+                $('#quickFamillesContainer').empty();
+                quickFamilleRowIndex = 0;
+
+                // Add initial famille row
+                addQuickFamilleRow();
+
+                // Show modal
+                $('#addProductModal').modal('show');
+
+                // Ensure Select2 works properly after modal is shown
+                // setTimeout(function() {
+                //     $('#addProductModal').find('.quick-famille-select').each(function() {
+                //         if ($(this).data('select2')) {
+                //             $(this).select2('destroy');
+                //         }
+                //         $(this).select2({
+                //             language: "fr",
+                //             placeholder: "Sélectionner une famille...",
+                //             allowClear: true,
+                //             width: '100%',
+                //             dropdownParent: $('#addProductModal'),
+                //             minimumResultsForSearch: 1
+                //         });
+                //     });
+                // }, 200);
+            });
+
+            function calculateQuickVolume() {
+                var height = parseFloat($('#quick_height_m').val()) || 0;
+                var width = parseFloat($('#quick_width_m').val()) || 0;
+                var depth = parseFloat($('#quick_depth_m').val()) || 0;
+
+                if (height > 0 && width > 0 && depth > 0) {
+                    var volume = height * width * depth;
+                    $('#quick_volume_m3').val(volume.toFixed(4));
+                } else {
+                    $('#quick_volume_m3').val('');
+                }
+            }
+
+
+            $('#quick_height_m, #quick_width_m, #quick_depth_m').on('input', calculateQuickVolume);
+
+            function addQuickFamilleRow(data = null) {
+                const template = document.getElementById('quickFamilleRowTemplate');
+                if (!template) return;
+
+                const clone = template.content.cloneNode(true);
+                const row = clone.querySelector('.quick-famille-row');
+                const index = quickFamilleRowIndex++;
+
+                row.innerHTML = row.innerHTML.replace(/INDEX/g, index);
+
+                $('#quickFamillesContainer').append(row);
+
+                const $familleSelect = $(row).find('.quick-famille-select');
+
+                let preselectedValue = null;
+                if (data && data.famille_id) {
+                    preselectedValue = data.famille_id;
+                }
+
+                // Initialize Select2
+                // $familleSelect.select2({
+                //     language: "fr",
+                //     placeholder: "Sélectionner une famille...",
+                //     allowClear: true,
+                //     width: '100%',
+                //     dropdownParent: $('#addProductModal'),
+                //     minimumResultsForSearch: 1
+                // });
+
+                // If there's a preselected value, set it
+                if (preselectedValue) {
+                    $familleSelect.val(preselectedValue).trigger('change');
+                }
+
+                // Add change event to famille select
+                $familleSelect.off('change').on('change', function(e) {
+                    e.preventDefault();
+                    const selectedOption = $(this).find('option:selected');
+                    const familleId = $(this).val();
+
+                    if (familleId) {
+                        const prixClient = selectedOption.data('prix-client') || 0;
+                        const prixGrossiste = selectedOption.data('prix-grossiste') || 0;
+                        const prixCommercial = selectedOption.data('prix-commercial') || 0;
+                        const prixSpecial = selectedOption.data('prix-special') || 0;
+
+                        // Set the price fields
+                        $(row).find('.quick-famille-prix-client').val(prixClient);
+                        $(row).find('.quick-famille-prix-grossiste').val(prixGrossiste);
+                        $(row).find('.quick-famille-prix-commercial').val(prixCommercial);
+                        $(row).find('.quick-famille-prix-special').val(prixSpecial);
+
+                        // Show standard prices as reference
+                        $(row).find('.quick-prix-client-standard').text('Std: ' + prixClient +
+                            ' DH');
+                        $(row).find('.quick-prix-grossiste-standard').text('Std: ' + prixGrossiste + ' DH');
+                        $(row).find('.quick-prix-commercial-standard').text('Std: ' + prixCommercial +
+                            ' DH');
+                        $(row).find('.quick-prix-special-standard').text('Std: ' + prixSpecial +
+                            ' DH');
+                    } else {
+                        // Clear price fields if no famille selected
+                        $(row).find('.quick-famille-prix-client').val('');
+                        $(row).find('.quick-famille-prix-grossiste').val('');
+                        $(row).find('.quick-famille-prix-commercial').val('');
+                        $(row).find('.quick-famille-prix-special').val('');
+                        $(row).find('.quick-prix-client-standard').text('');
+                        $(row).find('.quick-prix-grossiste-standard').text('');
+                        $(row).find('.quick-prix-commercial-standard').text('');
+                        $(row).find('.quick-prix-special-standard').text('');
+                    }
+
+                    // Manually trigger the change event on the original select for form submission
+                    $familleSelect.trigger('change.select2');
+                });
+
+                // Add remove functionality
+                $(row).find('.remove-quick-famille-btn').off('click').on('click', function() {
+                    // Destroy Select2 before removing
+                    if ($familleSelect.data('select2')) {
+                        $familleSelect.select2('destroy');
+                    }
+                    $(row).addClass('removing');
+                    setTimeout(() => {
+                        $(row).remove();
+                    }, 300);
+                });
+
+                return row;
+            }
+
+            $('#addProductFromTopBtn, #addProductBtn').click(function() {
+                $('#quickProductForm')[0].reset();
+                $('#quick_volume_m3').val('');
+                $('#quickFamillesContainer').empty();
+                quickFamilleRowIndex = 0;
+                addQuickFamilleRow(); // Add one default row
+
+                // // Small delay to ensure modal is fully shown before Select2 initialization
+                // setTimeout(function() {
+                //     $('#addProductModal').modal('show');
+                //     // Re-initialize any Select2 elements in the modal
+                //     $('#addProductModal').find('.quick-famille-select').each(function() {
+                //         if ($(this).data('select2')) {
+                //             $(this).select2('destroy');
+                //         }
+                //         $(this).select2({
+                //             language: "fr",
+                //             placeholder: "Sélectionner une famille...",
+                //             allowClear: true,
+                //             width: '100%',
+                //             dropdownParent: $('#addProductModal')
+                //         });
+                //     });
+                // }, 100);
+            });
+
+            $(document).on('click', '#quickAddFamilleBtn', function() {
+                addQuickFamilleRow();
+            });
+
+            // Save Quick Product
+            $('#saveQuickProductBtn').click(function() {
+                // Validate at least one famille
+                if ($('#quickFamillesContainer .quick-famille-row').length === 0) {
+                    showToast('error', 'Veuillez ajouter au moins une famille');
+                    return;
+                }
+
+                // Create FormData object
+                const formData = new FormData();
+
+                // Add basic product fields
+                formData.append('product_code', $('#quick_product_code').val());
+                formData.append('product_name', $('#quick_product_name').val());
+                formData.append('product_type', $('#quick_product_type').val());
+                formData.append('unit_of_measure', $('#quick_unit_of_measure').val());
+                formData.append('height_m', $('#quick_height_m').val() || 0);
+                formData.append('width_m', $('#quick_width_m').val() || 0);
+                formData.append('depth_m', $('#quick_depth_m').val() || 0);
+                formData.append('volume_m3', $('#quick_volume_m3').val() || 0);
+                formData.append('min_stock_level', $('#quick_min_stock_level').val() || 0);
+                formData.append('max_stock_level', $('#quick_max_stock_level').val() || 0);
+                formData.append('description', $('#quick_description').val());
+                formData.append('is_active', $('#quick_is_active').val());
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content') ||
+                    '{{ csrf_token() }}');
+
+                // Collect famille data as array
+                const famillesData = [];
+                let hasError = false;
+
+                $('#quickFamillesContainer .quick-famille-row').each(function(index) {
+                    const familleId = $(this).find('.quick-famille-select').val();
+                    const prixClient = $(this).find('.quick-famille-prix-client').val();
+                    const prixGrossiste = $(this).find('.quick-famille-prix-grossiste').val();
+                    const prixCommercial = $(this).find('.quick-famille-prix-commercial').val();
+                    const prixSpecial = $(this).find('.quick-famille-prix-special').val();
+
+                    if (!familleId) {
+                        showToast('error', 'Veuillez sélectionner une famille pour chaque ligne');
+                        hasError = true;
+                        return false;
+                    }
+
+                    famillesData.push({
+                        famille_id: parseInt(familleId),
+                        prix_client: parseFloat(prixClient) || 0,
+                        prix_grossiste: parseFloat(prixGrossiste) || 0,
+                        prix_commercial: parseFloat(prixCommercial) || 0,
+                        prix_special: parseFloat(prixSpecial) || 0
+                    });
+                });
+
+                if (hasError) return;
+
+                // Add familles as JSON string
+                formData.append('familles', JSON.stringify(famillesData));
+
+                // Show loading state
+                const saveBtn = $('#saveQuickProductBtn');
+                const originalText = saveBtn.html();
+                saveBtn.prop('disabled', true).html(
+                    '<i class="fas fa-spinner fa-spin me-1"></i> Création...');
+
+                $.ajax({
+                    url: "{{ route('products.store') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            showToast('success', 'Produit créé avec succès');
+
+                            // Reload all item selects to include the new product
+                            $('#items-body tr').each(function() {
+                                let rowId = $(this).attr('id');
+                                let currentType = $(this).find('.item-type').val();
+
+                                if (currentType && $('#client_id').val()) {
+                                    loadItemsForType(currentType, rowId);
+                                }
+                            });
+
+                            $('#addProductModal').modal('hide');
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        const errors = xhr.responseJSON?.errors;
+                        let errorMessage = '';
+                        if (errors) {
+                            $.each(errors, function(key, value) {
+                                errorMessage += value[0] + '\n';
+                            });
+                        } else {
+                            errorMessage = xhr.responseJSON?.message ||
+                                'Erreur lors de la création du produit';
+                        }
+                        showToast('error', errorMessage);
+                    },
+                    complete: function() {
+                        saveBtn.prop('disabled', false).html(originalText);
+                    }
+                });
+            });
+
+
+            // Helper function to round to 2 decimal places
+            function roundTo2Decimals(value) {
+                return Math.round(value * 100) / 100;
+            }
+
+            // Helper function to format volume with 2 decimals
+            function formatVolume(value) {
+                return roundTo2Decimals(value).toFixed(2);
+            }
+
+            // Helper function to format kg with 2 decimals
+            function formatKg(value) {
+                return roundTo2Decimals(value).toFixed(2);
+            }
+
             // Initialize Select2
             $('.select2').select2({
                 language: "fr",
@@ -1235,147 +1477,113 @@
                 allowClear: true
             });
 
-            // Check if form is disabled (outputs exist)
-            const isDisabled = {{ $order->outputs()->count() > 0 ? 'true' : 'false' }};
-            const currentProductionType = '{{ $order->production_type }}';
-            const orderId = {{ $order->order_id }};
-
-            // Store product options for Type 3
-            const productOptionsData = {!! json_encode(
-                $salesProducts->whereIn('product_type', ['finale', 'both'])->map(function ($product) {
-                        return [
-                            'id' => $product->product_id,
-                            'text' => $product->product_code . ' - ' . $product->product_name,
-                            'volume_m3' => $product->volume_m3 ?? 0,
-                        ];
-                    })->values(),
-            ) !!};
-
             // Set default expected completion date
             const setDefaultCompletionDate = () => {
                 const startDate = $('#start_date').val();
-                if (startDate) {
+                if (startDate && !$('#expected_completion_date').val()) {
                     const expectedDate = new Date(startDate);
                     expectedDate.setDate(expectedDate.getDate() + 7);
-                    if (!$('#expected_completion_date').val()) {
-                        $('#expected_completion_date').val(expectedDate.toISOString().split('T')[0]);
-                    }
+                    $('#expected_completion_date').val(expectedDate.toISOString().split('T')[0]);
                 }
             };
             setDefaultCompletionDate();
 
-            // Material source change handler
+            // Production type change handler
+            $('input[name="production_type"]').change(function() {
+                const productionType = $(this).val();
+                toggleProductionTypeSections(productionType);
+            });
+
+            // Material source change handler (for chutes)
             $('input[name="material_source"]').change(function() {
                 updateMaterialSourceSections();
             });
 
-            // BOM percentage change handler
-            $('#bom_percentage').on('input', function() {
-                updateBomPercentageInfo();
-            });
-
             // Chutes volume change handler
             $('#chutes_volume').on('input', function() {
-                const materialSource = $('input[name="material_source"]:checked').val();
-                if (materialSource === 'chutes_only' || materialSource === 'both') {
-                    $('#actual_chutes_volume').val($(this).val());
+                let volumeM3 = parseFloat($(this).val()) || 0;
+                // Round to 2 decimals
+                volumeM3 = roundTo2Decimals(volumeM3);
+                $(this).val(volumeM3);
+
+                const kg = volumeM3 * CHUTES_DENSITY;
+                $('#chutes_kg').val(formatKg(kg));
+
+                if (volumeM3 < 0) {
+                    $('#chutes_volume').val(0);
+                    $('#chutes_kg').val('0.00');
+                    showToast('warning', 'Le volume ne peut pas être négatif');
+                    return;
                 }
 
-                const productId = $('#type1_product_id').val();
-                const quantity = $('#type1_quantity').val() || 1;
-                if (productId && quantity >= 1 && currentProductionType === 'type1') {
-                    loadBOM(productId, quantity);
+                const materialSource = $('input[name="material_source"]:checked').val();
+                if (materialSource === 'both') {
+                    $('#actual_chutes_volume').val(volumeM3);
                 }
+                updateCalculations();
             });
 
-            // Toggle material source sections
-            function updateMaterialSourceSections() {
-                const materialSource = $('input[name="material_source"]:checked').val();
-                $('#actual_material_source').val(materialSource);
-
-                if (materialSource === 'bom_only') {
-                    $('#chutesVolumeSection, #bomPercentageSection').hide();
-                    $('#actual_bom_percentage').val('100');
-                    $('#actual_chutes_volume').val('0');
-                } else if (materialSource === 'chutes_only') {
-                    $('#chutesVolumeSection').show();
-                    $('#bomPercentageSection').hide();
-                    $('#actual_bom_percentage').val('0');
-                } else if (materialSource === 'both') {
-                    $('#chutesVolumeSection, #bomPercentageSection').show();
+            // Type 5 chutes volume/kg inputs
+            $('#type5_chutes_volume').on('input', function() {
+                let volumeM3 = parseFloat($(this).val()) || 0;
+                if (volumeM3 < 0) {
+                    volumeM3 = 0;
+                    $(this).val(0);
+                    showToast('warning', 'Le volume ne peut pas être négatif');
                 }
 
-                updateBomPercentageInfo();
-            }
+                $('#actual_chutes_volume').val(volumeM3);
+                checkType5ChutesStock();
+                updateType5Calculation();
+            });
 
-            // Update BOM percentage info
-            function updateBomPercentageInfo() {
-                let bomPercentage = $('#bom_percentage').val() || 60;
-                bomPercentage = Math.round(parseFloat(bomPercentage) || 60);
-                const chutesPercentage = 100 - bomPercentage;
-                $('#bomCalcInfo').text(`${bomPercentage}% matières nouvelles + ${chutesPercentage}% chutes`);
-                $('#actual_bom_percentage').val(bomPercentage);
-            }
+            function checkType5ChutesStock() {
+                $.ajax({
+                    url: "{{ route('raw-materials.get-by-code') }}",
+                    type: "GET",
+                    data: {
+                        material_code: 'CHUTE-PRODUCTION'
+                    },
+                    success: function(response) {
+                        if (response.success && response.material) {
+                            const chutesMaterial = response.material;
+                            const availableStockM3 = parseFloat(chutesMaterial.current_stock) || 0;
+                            const requestedM3 = parseFloat($('#type5_chutes_volume').val()) || 0;
 
-            // Check chutes stock availability
-            function checkChutesStock() {
-                const materialSource = $('input[name="material_source"]:checked').val();
+                            let stockInfoHtml = '';
+                            const isSufficient = availableStockM3 >= requestedM3;
+                            const stockClass = availableStockM3 <= 0 ?
+                                'chutes-stock-none' : (isSufficient ? 'chutes-stock-ok' : 'chutes-stock-low');
 
-                if (materialSource === 'chutes_only' || materialSource === 'both') {
-                    $.ajax({
-                        url: "{{ route('raw-materials.get-by-code') }}",
-                        type: "GET",
-                        data: {
-                            material_code: 'CHUTE-PRODUCTION'
-                        },
-                        success: function(response) {
-                            if (response.success && response.material) {
-                                const chutesMaterial = response.material;
-                                const availableStock = parseFloat(chutesMaterial.current_stock) || 0;
-
-                                let stockInfoHtml = '';
-                                let stockClass = 'chutes-stock-none';
-
-                                if (availableStock > 0) {
-                                    stockInfoHtml = `
-                                        <div class="alert ${availableStock >= 10 ? 'chutes-stock-ok' : 'chutes-stock-low'}">
-                                            <i class="fas ${availableStock >= 10 ? 'fa-check-circle' : 'fa-exclamation-triangle'} me-2"></i>
-                                            <strong>Stock disponible:</strong> ${availableStock.toFixed(4)} m³
-                                            ${availableStock < 10 ? '<br><small>Stock faible</small>' : ''}
-                                        </div>
-                                    `;
-                                } else {
-                                    stockInfoHtml = `
-                                        <div class="alert chutes-stock-none">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            <strong>Aucun stock disponible</strong>
-                                            <br><small>Les chutes de production ne sont pas disponibles</small>
-                                        </div>
-                                    `;
-                                }
-
-                                $('#chutesStockInfo').html(stockInfoHtml);
-                            } else {
-                                $('#chutesStockInfo').html(`
-                                    <div class="alert chutes-stock-none">
-                                        <i class="fas fa-exclamation-circle me-2"></i>
-                                        <strong>Matière non trouvée</strong>
-                                        <br><small>Les chutes de production (CHUTE-PRODUCTION) ne sont pas configurées</small>
+                            stockInfoHtml = `
+                                <div class="alert ${stockClass}">
+                                    <i class="fas ${isSufficient ? 'fa-check-circle' : 'fa-exclamation-triangle'} me-2"></i>
+                                    <strong>Stock disponible:</strong> ${availableStockM3.toFixed(4)} m³<br>
+                                    <strong>Demandé:</strong> ${requestedM3.toFixed(4)} m³<br>
+                                    ${!isSufficient ? `<small class="text-danger">⚠️ Stock insuffisant de ${Math.abs(availableStockM3 - requestedM3).toFixed(4)} m³</small>` :
+                                                      `<small class="text-success">✓ Stock suffisant</small>`}
                                 </div>
-                                `);
-                            }
-                        },
-                        error: function() {
-                            $('#chutesStockInfo').html(`
+                            `;
+
+                            $('#type5ChutesStockInfo').html(stockInfoHtml);
+                        } else {
+                            $('#type5ChutesStockInfo').html(`
                                 <div class="alert chutes-stock-none">
                                     <i class="fas fa-exclamation-circle me-2"></i>
-                                    <strong>Erreur de chargement</strong>
-                                    <br><small>Impossible de vérifier le stock des chutes</small>
+                                    <strong>Produit "CHUTE-PRODUCTION" non trouvé</strong>
                                 </div>
                             `);
                         }
-                    });
-                }
+                    },
+                    error: function() {
+                        $('#type5ChutesStockInfo').html(`
+                            <div class="alert chutes-stock-none">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                <strong>Erreur de chargement du stock</strong>
+                            </div>
+                        `);
+                    }
+                });
             }
 
             // Get product details including volume
@@ -1399,6 +1607,7 @@
                         }
 
                         return {
+                            product_id: product.product_id,
                             product_name: product.product_name,
                             product_code: product.product_code,
                             product_type: product.product_type,
@@ -1497,11 +1706,11 @@
                     },
                     beforeSend: function() {
                         $('#familleContainer').html(`
-                            <div class="form-group">
-                                <div class="spinner-border spinner-border-sm" role="status"></div>
-                                Chargement des familles...
-                            </div>
-                        `);
+                <div class="form-group">
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                    Chargement des familles...
+                </div>
+            `);
                     },
                     success: function(response) {
                         if (response.success) {
@@ -1512,6 +1721,11 @@
                                     `name="${selectName}"`);
 
                                 $('#familleContainer').html(updatedHtml);
+
+                                if (editFamillePreselectId) {
+                                    $(`#${selectId}`).val(String(editFamillePreselectId));
+                                    editFamillePreselectId = null;
+                                }
 
                                 if (response.has_familles) {
                                     $(`#${selectId}`).prev('label').text(label);
@@ -1554,7 +1768,7 @@
             }
 
             function getFamilleId() {
-                const productionType = currentProductionType;
+                const productionType = $('input[name="production_type"]:checked').val();
 
                 if (productionType === 'type2' || productionType === 'type3') {
                     return $('#source_famille_id').val();
@@ -1565,12 +1779,16 @@
 
             // Update all calculations based on current production type
             function updateCalculations() {
-                if (currentProductionType === 'type1') {
+                const productionType = $('input[name="production_type"]:checked').val();
+
+                if (productionType === 'type1') {
                     updateType1Calculation();
-                } else if (currentProductionType === 'type2') {
+                } else if (productionType === 'type2') {
                     updateType2Calculation();
-                } else if (currentProductionType === 'type3') {
+                } else if (productionType === 'type3') {
                     updateType3Calculation();
+                } else if (productionType === 'type5') {
+                    updateType5Calculation();
                 }
             }
 
@@ -1593,64 +1811,30 @@
                     }
                 } else if (productionType === 'type2') {
                     const sourceProductId = $('#type2_source_product_id').val();
-                    const finalProductId = $('#type2_final_product_id').val();
-                    const quantity = $('#type2_quantity').val() || 1;
-                    const decoupageRatio = $('#decoupage_ratio').val() || 1;
-
-                    if (sourceProductId && finalProductId) {
-                        Promise.all([
-                            getProductDetails(sourceProductId),
-                            getProductDetails(finalProductId)
-                        ]).then(([sourceProduct, finalProduct]) => {
-                            if (sourceProduct && finalProduct) {
-                                const decoupageProductsProduced = quantity * decoupageRatio;
-                                const totalVolume = decoupageProductsProduced * finalProduct
-                                    .volume_per_unit;
-
-                                $('#type2_source_volume').val(sourceProduct.volume_per_unit.toFixed(4));
-                                $('#type2_source_volume_info').text(
-                                    `${sourceProduct.display_volume} (${sourceProduct.dimensions})`);
-                                $('#type2_final_volume').val(finalProduct.volume_per_unit.toFixed(4));
-                                $('#type2_final_volume_info').text(
-                                    `${finalProduct.display_volume} (${finalProduct.dimensions})`);
-                                $('#type2_total_volume').val(totalVolume.toFixed(4));
-                            }
-                        });
-                    }
-                } else if (productionType === 'type3') {
-                    const sourceProductId = $('#type3_source_product_id').val();
 
                     if (sourceProductId) {
                         getProductDetails(sourceProductId).then(sourceProduct => {
                             if (sourceProduct) {
-                                $('#type3_source_volume').val(sourceProduct.volume_per_unit.toFixed(4));
-                                $('#type3_source_volume_info').text(
+                                $('#type2_source_volume').val(sourceProduct.volume_per_unit.toFixed(4));
+                                $('#type2_source_volume_info').text(
                                     `${sourceProduct.display_volume} (${sourceProduct.dimensions})`);
-
-                                // Calculate total volume from all products
-                                let totalVolume = 0;
-                                $('.type3-product-row').each(function() {
-                                    const volumeInput = $(this).find('.type3-volume').val();
-                                    const quantity = $(this).find('.type3-quantity').val() || 0;
-                                    const volume = parseFloat(volumeInput) || 0;
-                                    totalVolume += volume * quantity;
-                                });
-
-                                $('#type3_total_volume').val(totalVolume.toFixed(4));
                             }
                         });
                     }
+                } else if (productionType === 'type3') {
+                    updateType3Calculation();
                 }
             }
 
-            // Type 1: Direct production calculation
+            // Type 1: Direct production calculation with editable BOM
             function updateType1Calculation() {
                 const productId = $('#type1_product_id').val();
                 const quantity = $('#type1_quantity').val() || 1;
 
                 if (productId && quantity >= 1) {
-                    loadBOM(productId, quantity);
+                    // loadBOM(productId, quantity);
                     checkChutesStock();
+                    updateVolumeCalculations('type1');
 
                     // Set hidden fields
                     $('#actual_product_id').val(productId);
@@ -1659,624 +1843,1653 @@
                 }
             }
 
-            // Type 2: Découpage calculation
+            // Replace the updateType2Calculation function with this:
+
             function updateType2Calculation() {
                 const sourceProductId = $('#type2_source_product_id').val();
-                const finalProductId = $('#type2_final_product_id').val();
-                const quantity = $('#type2_quantity').val() || 1;
-                const decoupageRatio = $('#decoupage_ratio').val() || 1;
                 const familleId = getFamilleId();
 
-                if (sourceProductId && finalProductId && quantity && decoupageRatio) {
-                    // Calculate decoupage products produced
-                    const decoupageProductsProduced = quantity * decoupageRatio;
-                    const sourceBlocksNeeded = quantity;
+                if (!sourceProductId) {
+                    $('#insufficientStockAlert').addClass('d-none');
+                    $('#volumeExceedAlert').addClass('d-none');
+                    return;
+                }
 
-                    // Get source stock information for selected famille
-                    getStockInfo(sourceProductId, familleId).then(stockInfo => {
-                        const isSufficient = stockInfo.available >= sourceBlocksNeeded;
+                const productInputs = $('.type2-product-row');
 
-                        // Now get product details for waste calculation
-                        Promise.all([
-                            getProductDetails(sourceProductId),
-                            getProductDetails(finalProductId)
-                        ]).then(([sourceProduct, finalProduct]) => {
-                            if (sourceProduct && finalProduct) {
-                                // Calculate volumes
-                                const sourceVolume = sourceProduct.volume_per_unit;
-                                const finalVolume = finalProduct.volume_per_unit;
-                                const totalSourceVolume = sourceBlocksNeeded * sourceVolume;
-                                const totalFinalVolume = decoupageProductsProduced * finalVolume;
-                                const wasteVolume = Math.max(0, totalSourceVolume -
-                                    totalFinalVolume);
-                                const wastePercentage = totalSourceVolume > 0 ?
-                                    (wasteVolume / totalSourceVolume * 100).toFixed(2) : 0;
+                if (productInputs.length === 0) {
+                    return;
+                }
 
-                                // Display results
-                                const resultsHtml = `
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h6>Entrée:</h6>
-                                            <table class="table table-sm">
-                                                <tr>
-                                                    <td>Blocs à découper:</td>
-                                                    <td class="text-end"><strong>${parseFloat(quantity).toFixed(2)} unités</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ratio de découpage:</td>
-                                                    <td class="text-end">1 bloc = ${parseFloat(decoupageRatio).toFixed(2)} produits découpage</td>
-                                                </tr>
-                                                <tr class="table-primary">
-                                                    <td><strong>Total blocs requis:</strong></td>
-                                                    <td class="text-end"><strong class="calculation-result">${parseFloat(sourceBlocksNeeded).toFixed(2)} unités</strong></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h6>Sortie:</h6>
-                                            <table class="table table-sm">
-                                                <tr>
-                                                    <td>Produits découpage produits:</td>
-                                                    <td class="text-end"><strong class="calculation-result">${parseFloat(decoupageProductsProduced).toFixed(2)} unités</strong></td>
-                                                </tr>
-                                            </table>
-                                            <h6 class="mt-3">Stock Source:</h6>
-                                            <table class="table table-sm">
-                                                <tr>
-                                                    <td>Produit source:</td>
-                                                    <td class="text-end">${$('#type2_source_product_id option:selected').text().split('-')[1]?.trim() || 'N/A'}</td>
-                                                </tr>
-                                                ${stockInfo.famille_name ? `
-                                                                                                                                                                                        <tr>
-                                                                                                                                                                                            <td>Famille:</td>
-                                                                                                                                                                                            <td class="text-end">${stockInfo.famille_name}</td>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        ${stockInfo.location ? `
-                                                    <tr>
-                                                        <td>Location:</td>
-                                                        <td class="text-end">${stockInfo.location}</td>
-                                                    </tr>
-                                                ` : ''}
-                                                                                                                                                                                    ` : ''}
-                                                <tr>
-                                                    <td>Stock disponible:</td>
-                                                    <td class="text-end">${parseFloat(stockInfo.available).toFixed(2)} unités</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quantité totale:</td>
-                                                    <td class="text-end">${parseFloat(stockInfo.current_quantity).toFixed(2)} unités</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quantité réservée:</td>
-                                                    <td class="text-end">${parseFloat(stockInfo.reserved_quantity).toFixed(2)} unités</td>
-                                                </tr>
-                                                <tr class="${isSufficient ? 'table-success' : 'table-danger'}">
-                                                    <td><strong>Statut:</strong></td>
-                                                    <td class="text-end">
-                                                        <strong>
-                                                            ${isSufficient ?
-                                                                '<span class="text-success">✓ Suffisant</span>' :
-                                                                '<span class="text-danger">✗ Insuffisant</span>'}
-                                                        </strong>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- WASTE CALCULATION SECTION -->
-                                    <div id="wasteCalculationSection" class="alert alert-warning mt-3">
-                                        <h6><i class="fas fa-trash me-2"></i>Calcul du Chute/Déchet (Type 2)</h6>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <table class="table table-sm mb-0">
-                                                    <tr>
-                                                        <td>Volume du bloc source:</td>
-                                                        <td class="text-end">${sourceVolume.toFixed(4)} m³</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Volume produit découpage:</td>
-                                                        <td class="text-end">${finalVolume.toFixed(4)} m³</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Volume total source:</td>
-                                                        <td class="text-end">${totalSourceVolume.toFixed(4)} m³</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Volume total produit:</td>
-                                                        <td class="text-end">${totalFinalVolume.toFixed(4)} m³</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <table class="table table-sm mb-0">
-                                                    <tr class="table-danger">
-                                                        <td><strong>Volume chute/déchet:</strong></td>
-                                                        <td class="text-end"><strong>${wasteVolume.toFixed(4)} m³</strong></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Pourcentage chute:</td>
-                                                        <td class="text-end">${wastePercentage}%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Différence:</td>
-                                                        <td class="text-end">${(totalSourceVolume - totalFinalVolume).toFixed(4)} m³</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        ${totalFinalVolume > totalSourceVolume ?
-                                            '<div class="alert alert-danger mt-2 mb-0"><i class="fas fa-exclamation-triangle"></i> Attention: Le volume produit dépasse le volume source!</div>' :
-                                            ''}
-                                        <small class="text-muted mt-2 d-block">
-                                            <i class="fas fa-info-circle"></i>
-                                            Calcul: (Volume total des blocs) - (Volume total des produits découpage)
-                                        </small>
-                                    </div>
-                                `;
+                const products = [];
+                let totalFinalProducts = 0;
+                let totalVolume = 0;
 
-                                $('#calculatedResults').html(resultsHtml);
-                                $('#calculatedResultsSection').removeClass('d-none');
+                productInputs.each(function() {
+                    const productId = $(this).find('.type2-product-select').val();
+                    const quantityToProduce = parseFloat($(this).find('.type2-quantity').val()) || 0;
+                    const volumePerUnit = parseFloat($(this).find('.type2-volume').val()) || 0;
 
-                                // Update waste percentage input
-                                $('#waste_percentage').val(wastePercentage);
-                                $('#actual_waste_percentage').val(wastePercentage);
-                            }
-                        }).catch(error => {
-                            console.error('Error fetching product details for waste calculation:',
-                                error);
+                    if (productId) {
+                        const productVolume = quantityToProduce * volumePerUnit;
+
+                        products.push({
+                            product_id: productId,
+                            product_name: $(this).find('.type2-product-select option:selected')
+                                .text(),
+                            quantity_to_produce: quantityToProduce,
+                            volume_per_unit: volumePerUnit,
+                            total_volume: productVolume
                         });
 
-                        // Update insufficient stock alert
-                        if (!isSufficient && stockInfo.available > 0) {
-                            $('#insufficientStockList').html(`
-                                <ul class="mb-0 mt-2">
-                                    <li>${stockInfo.famille_name ? 'Famille: ' + stockInfo.famille_name : 'Produit source'}:
-                                        Requis ${sourceBlocksNeeded.toFixed(2)},
-                                        Disponible ${stockInfo.available.toFixed(2)} unités
-                                    </li>
-                                </ul>
-                            `);
-                            $('#insufficientStockAlert').removeClass('d-none');
-                        } else if (stockInfo.available === 0) {
-                            $('#insufficientStockList').html(`
-                                <ul class="mb-0 mt-2">
-                                    <li>${stockInfo.famille_name ? 'Famille: ' + stockInfo.famille_name : 'Produit source'}:
-                                        Stock vide (0 unités disponible)
-                                    </li>
-                                </ul>
-                            `);
-                            $('#insufficientStockAlert').removeClass('d-none');
+                        totalFinalProducts += quantityToProduce;
+                        totalVolume += productVolume;
+                    }
+                });
+
+                $('#type2_total_decoupage_products').val(totalFinalProducts);
+                $('#type2_total_volume').val(totalVolume.toFixed(4));
+
+                const totalBlocksRequired = parseFloat($('#type2_total_blocks').val()) || 0;
+
+                getProductDetails(sourceProductId).then(sourceProduct => {
+                    if (sourceProduct) {
+                        const sourceVolumePerUnit = sourceProduct.volume_per_unit;
+                        const totalSourceVolume = totalBlocksRequired * sourceVolumePerUnit;
+                        const wasteVolume = totalSourceVolume - totalVolume;
+
+                        $('#type2_source_volume').val(sourceVolumePerUnit.toFixed(4));
+                        $('#type2_source_volume_info').text(
+                            `${sourceProduct.display_volume} (${sourceProduct.dimensions})`);
+                        $('#type2_total_source_volume').val(totalSourceVolume.toFixed(4));
+
+                        // Check if target volume exceeds source volume
+                        if (totalVolume > totalSourceVolume) {
+                            const deficit = totalVolume - totalSourceVolume;
+                            $('#type2VolumeExceedMessage').html(`
+                    <strong>⚠️ Le volume total des produits découpage (${totalVolume.toFixed(4)} m³)
+                    dépasse le volume source disponible (${totalSourceVolume.toFixed(4)} m³).</strong>
+                    <br>Déficit: ${deficit.toFixed(4)} m³
+                    <br>Veuillez réduire la quantité à produire ou augmenter le nombre de blocs.
+                `);
+                            $('#type2VolumeExceedAlert').removeClass('d-none');
+                            $('#type2_waste_volume').val('');
+                            $('#type2_waste_info').html(
+                                '<span class="text-danger">❌ Volume source insuffisant!</span>');
                         } else {
-                            $('#insufficientStockAlert').addClass('d-none');
+                            $('#type2VolumeExceedAlert').addClass('d-none');
+                            const wasteVolumePositive = wasteVolume;
+                            $('#type2_waste_volume').val(wasteVolumePositive.toFixed(4));
+
+                            if (wasteVolumePositive > 0) {
+                                const wastePercentage = (wasteVolumePositive / totalSourceVolume * 100)
+                                    .toFixed(2);
+                                $('#type2_waste_info').html(
+                                    `<span class="text-warning">⚠️ Chute estimée: ${wasteVolumePositive.toFixed(4)} m³ (${wastePercentage}%)</span>`
+                                );
+                            } else if (wasteVolumePositive === 0) {
+                                $('#type2_waste_info').html(
+                                    `<span class="text-success">✓ Aucune chute (volume parfaitement optimisé)</span>`
+                                );
+                            }
                         }
 
-                        // Set hidden fields
-                        $('#actual_product_id').val(finalProductId);
-                        $('#actual_source_product_id').val(sourceProductId);
-                        $('#actual_quantity_to_produce').val(decoupageProductsProduced);
-                        $('#actual_required_quantity').val(sourceBlocksNeeded);
-                        $('#actual_decoupage_ratio').val(decoupageRatio);
+                        $('#actual_waste_percentage').val(wasteVolume > 0 ? (wasteVolume /
+                            totalSourceVolume * 100).toFixed(2) : 0);
+                        $('#actual_total_source_volume').val(totalSourceVolume);
+                        $('#actual_total_produced_volume').val(totalVolume);
+                    }
+                });
 
-                        // Update volume calculations
-                        updateVolumeCalculations('type2');
+                getStockInfo(sourceProductId, familleId).then(stockInfo => {
+                    const isSufficient = stockInfo.available >= totalBlocksRequired;
+
+                    if (!isSufficient && stockInfo.available > 0) {
+                        $('#insufficientStockList').html(`
+                <ul class="mb-0 mt-2">
+                    <li>${stockInfo.famille_name ? 'Famille: ' + stockInfo.famille_name : 'Produit source'}:
+                        Requis ${totalBlocksRequired.toFixed(2)},
+                        Disponible ${stockInfo.available.toFixed(2)} unités
+                    </li>
+                </ul>
+            `);
+                        $('#insufficientStockAlert').removeClass('d-none');
+                    } else if (stockInfo.available === 0 && totalBlocksRequired > 0) {
+                        $('#insufficientStockList').html(`
+                <ul class="mb-0 mt-2">
+                    <li>${stockInfo.famille_name ? 'Famille: ' + stockInfo.famille_name : 'Produit source'}:
+                        Stock vide (0 unités disponible)
+                    </li>
+                </ul>
+            `);
+                        $('#insufficientStockAlert').removeClass('d-none');
+                    } else {
+                        $('#insufficientStockAlert').addClass('d-none');
+                    }
+                });
+
+                if (products.length > 0) {
+                    $('#actual_product_id').val(products[0].product_id);
+                }
+                $('#actual_source_product_id').val(sourceProductId);
+                $('#actual_quantity_to_produce').val(totalFinalProducts);
+                $('#actual_required_quantity').val(totalBlocksRequired);
+            }
+
+            // Type 3: Multiple sous-blocs → multiple produits finaux
+            function updateType3Calculation() {
+                // Sum total source volume from all sous-bloc rows
+                let totalSourceVolume = 0;
+                let totalSousBlocsCount = 0;
+                let firstSourceProductId = null;
+                const familleId = getFamilleId();
+
+                $('.type3-sous-bloc-row').each(function() {
+                    const qty = parseFloat($(this).find('.type3-sous-bloc-quantity').val()) || 0;
+                    const vol = parseFloat($(this).find('.type3-sous-bloc-volume').val()) || 0;
+                    totalSourceVolume += qty * vol;
+                    totalSousBlocsCount += qty;
+                    if (!firstSourceProductId) {
+                        firstSourceProductId = $(this).find('.type3-sous-bloc-select').val();
+                    }
+                });
+
+                $('#type3_total_source_volume').val(totalSourceVolume.toFixed(4));
+
+                // Sum total final products volume
+                let totalFinalProducts = 0;
+                let totalVolume = 0;
+
+                $('.type3-product-row').each(function() {
+                    const productId = $(this).find('.type3-product-select').val();
+                    const qty = parseFloat($(this).find('.type3-quantity').val()) || 0;
+                    const vol = parseFloat($(this).find('.type3-volume').val()) || 0;
+                    if (productId) {
+                        totalFinalProducts += qty;
+                        totalVolume += qty * vol;
+                    }
+                });
+
+                $('#type3_total_volume').val(totalVolume.toFixed(4));
+
+                // Chute = sum sous-blocs volume - sum produits finis volume
+                const wasteVolume = totalSourceVolume - totalVolume;
+
+                if (totalVolume > totalSourceVolume && totalSourceVolume > 0) {
+                    const deficit = totalVolume - totalSourceVolume;
+                    $('#type3VolumeExceedMessage').html(`
+                        <strong>⚠️ Le volume total des produits finaux (${totalVolume.toFixed(4)} m³)
+                        dépasse le volume source disponible (${totalSourceVolume.toFixed(4)} m³).</strong>
+                        <br>Déficit: ${deficit.toFixed(4)} m³
+                        <br>Veuillez réduire la quantité ou ajouter des sous-blocs.
+                    `);
+                    $('#type3VolumeExceedAlert').removeClass('d-none');
+                    $('#type3_waste_volume').val('');
+                    $('#type3_waste_info').html('<span class="text-danger">❌ Volume source insuffisant!</span>');
+                } else {
+                    $('#type3VolumeExceedAlert').addClass('d-none');
+                    $('#type3_waste_volume').val(wasteVolume >= 0 ? wasteVolume.toFixed(4) : '0.0000');
+
+                    if (wasteVolume > 0 && totalSourceVolume > 0) {
+                        const wastePercentage = (wasteVolume / totalSourceVolume * 100).toFixed(2);
+                        $('#type3_waste_info').html(
+                            `<span class="text-warning">⚠️ Chute estimée: ${wasteVolume.toFixed(4)} m³ (${wastePercentage}%)</span>`
+                        );
+                    } else if (wasteVolume === 0 && totalSourceVolume > 0) {
+                        $('#type3_waste_info').html(
+                            `<span class="text-success">✓ Aucune chute (volume parfaitement optimisé)</span>`
+                        );
+                    } else {
+                        $('#type3_waste_info').html('');
+                    }
+                }
+
+                $('#actual_total_source_volume').val(totalSourceVolume);
+                $('#actual_total_produced_volume').val(totalVolume);
+                if (totalSourceVolume > 0) {
+                    $('#actual_waste_percentage').val(wasteVolume > 0 ? (wasteVolume / totalSourceVolume * 100).toFixed(2) : 0);
+                }
+                $('#actual_source_product_id').val(firstSourceProductId || '');
+                $('#actual_required_quantity').val(totalSousBlocsCount);
+
+                // Stock check per sous-bloc
+                $('#insufficientStockAlert').addClass('d-none');
+                let stockChecks = [];
+                $('.type3-sous-bloc-row').each(function() {
+                    const productId = $(this).find('.type3-sous-bloc-select').val();
+                    const qty = parseFloat($(this).find('.type3-sous-bloc-quantity').val()) || 0;
+                    if (productId && qty > 0) {
+                        stockChecks.push(getStockInfo(productId, familleId).then(stockInfo => {
+                            if (stockInfo.available < qty) {
+                                return `${stockInfo.famille_name || 'Sous-bloc'}: Requis ${qty}, Disponible ${stockInfo.available.toFixed(2)}`;
+                            }
+                            return null;
+                        }));
+                    }
+                });
+
+                if (stockChecks.length > 0) {
+                    Promise.all(stockChecks).then(results => {
+                        const issues = results.filter(r => r !== null);
+                        if (issues.length > 0) {
+                            $('#insufficientStockList').html('<ul class="mb-0 mt-2">' + issues.map(i => `<li>${i}</li>`).join('') + '</ul>');
+                            $('#insufficientStockAlert').removeClass('d-none');
+                        }
                     });
+                }
+
+            }
+
+            function updateType5Calculation() {
+                const chutesVolume = parseFloat($('#type5_chutes_volume').val()) || 0;
+                $('#type5_chutes_volume_display').val(chutesVolume.toFixed(4));
+
+                let totalVolume = 0;
+
+                $('.type5-product-row').each(function() {
+                    const productId = $(this).find('.type5-product-select').val();
+                    const qty = parseFloat($(this).find('.type5-quantity').val()) || 0;
+                    const vol = parseFloat($(this).find('.type5-volume').val()) || 0;
+                    if (productId) {
+                        totalVolume += qty * vol;
+                    }
+                });
+
+                $('#type5_total_volume').val(totalVolume.toFixed(4));
+
+                const wasteVolume = chutesVolume - totalVolume;
+
+                if (totalVolume > chutesVolume && chutesVolume > 0) {
+                    const deficit = totalVolume - chutesVolume;
+                    $('#type5VolumeExceedMessage').html(`
+                        <strong>⚠️ Le volume total des produits (${totalVolume.toFixed(4)} m³)
+                        dépasse le volume de chutes alloué (${chutesVolume.toFixed(4)} m³).</strong>
+                        <br>Déficit: ${deficit.toFixed(4)} m³
+                        <br>Veuillez ajouter plus de chutes ou réduire les quantités.
+                    `);
+                    $('#type5VolumeExceedAlert').removeClass('d-none');
+                    $('#type5_waste_volume').val('');
+                    $('#type5_waste_info').html('<span class="text-danger">❌ Volume de chutes insuffisant!</span>');
+                } else {
+                    $('#type5VolumeExceedAlert').addClass('d-none');
+                    $('#type5_waste_volume').val(wasteVolume >= 0 ? wasteVolume.toFixed(4) : '0.0000');
+
+                    if (wasteVolume > 0 && chutesVolume > 0) {
+                        const wastePercentage = (wasteVolume / chutesVolume * 100).toFixed(2);
+                        $('#type5_waste_info').html(
+                            `<span class="text-warning">⚠️ Chute résiduelle estimée: ${wasteVolume.toFixed(4)} m³ (${wastePercentage}%)</span>`
+                        );
+                    } else if (wasteVolume === 0 && chutesVolume > 0) {
+                        $('#type5_waste_info').html(
+                            `<span class="text-success">✓ Aucune chute résiduelle (volume parfaitement optimisé)</span>`
+                        );
+                    } else {
+                        $('#type5_waste_info').html('');
+                    }
+                }
+
+                $('#actual_material_source').val('chutes_only');
+                $('#actual_chutes_volume').val(chutesVolume);
+                $('#actual_total_source_volume').val(chutesVolume);
+                $('#actual_total_produced_volume').val(totalVolume);
+                if (chutesVolume > 0) {
+                    $('#actual_waste_percentage').val(wasteVolume > 0 ? (wasteVolume / chutesVolume * 100).toFixed(2) : 0);
+                }
+                $('#actual_required_quantity').val(chutesVolume);
+            }
+
+            // Load BOM for Type 1 with editable table
+            $(document).on('input', '.bom-planned-quantity', function() {
+                const $row = $(this).closest('tr');
+                const plannedQuantity = parseFloat($(this).val()) || 0;
+                const productionQuantity = parseFloat($('#type1_quantity').val()) || 1;
+
+                // Calculate quantity per unit
+                const quantityPerUnit = plannedQuantity / productionQuantity;
+
+                // Update quantity per unit field
+                $row.find('.bom-quantity-required').val(quantityPerUnit.toFixed(4));
+
+                // Update total cost
+                const unitCost = parseFloat($row.find('.bom-unit-cost').val()) || 0;
+                const totalCost = plannedQuantity * unitCost;
+                $row.find('.bom-item-total').text(totalCost.toFixed(2) + ' DH');
+
+                // Update hidden inputs
+                $row.find('input[name*="planned_quantity"]').val(plannedQuantity);
+                $row.find('input[name*="quantity_required"]').val(quantityPerUnit);
+
+                updateBomTotalCost();
+            });
+
+            $(document).on('input', '.bom-quantity-required', function() {
+                const $row = $(this).closest('tr');
+                const quantityPerUnit = parseFloat($(this).val()) || 0;
+                const productionQuantity = parseFloat($('#type1_quantity').val()) || 1;
+
+                // Calculate planned quantity
+                const plannedQuantity = quantityPerUnit * productionQuantity;
+
+                // Update planned quantity field
+                $row.find('.bom-planned-quantity').val(plannedQuantity.toFixed(4));
+
+                // Update total cost
+                const unitCost = parseFloat($row.find('.bom-unit-cost').val()) || 0;
+                const totalCost = plannedQuantity * unitCost;
+                $row.find('.bom-item-total').text(totalCost.toFixed(2) + ' DH');
+
+                // Update hidden inputs
+                $row.find('input[name*="planned_quantity"]').val(plannedQuantity);
+                $row.find('input[name*="quantity_required"]').val(quantityPerUnit);
+
+                updateBomTotalCost();
+            });
+
+            // function loadBOM(productId, quantity) {
+            //     const materialSource = $('input[name="material_source"]:checked').val();
+            //     const chutesVolume = $('#chutes_volume').val() || 0;
+
+            //     // Show loading state
+            //     $('#bomTableBody').html(`
+        //         <tr>
+        //             <td colspan="10" class="text-center py-4">
+        //                 <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+        //                 Chargement de la nomenclature...
+        //             </td>
+        //         </tr>
+        //     `);
+            //     $('#bomCard').removeClass('d-none');
+            //     $('#bom-quantity-display').text(quantity);
+
+            //     let sourceInfo = '';
+            //     if (materialSource === 'bom_only') sourceInfo =
+            //         '<span class="badge bg-primary">100% Matières Nouvelles</span>';
+            //     else if (materialSource === 'chutes_only') sourceInfo =
+            //         '<span class="badge bg-warning">100% Chutes Recyclées</span>';
+            //     else if (materialSource === 'both') sourceInfo =
+            //         '<span class="badge bg-success">Mixte (MP + Chutes)</span>';
+            //     $('#materialSourceInfo').html(sourceInfo);
+
+            //     $.ajax({
+            //         url: "{{ route('production-orders.get-bom') }}",
+            //         type: "GET",
+            //         data: {
+            //             product_id: productId,
+            //             quantity: quantity,
+            //             material_source: materialSource,
+            //             chutes_volume: chutesVolume,
+            //             bom_percentage: 100
+            //         },
+            //         success: function(response) {
+            //             if (response.success) {
+            //                 let editableBomHtml = '';
+            //                 let totalCost = 0;
+
+            //                 // Check if there are any items to display
+            //                 const hasChutes = response.chutes_material && response.chutes_material
+            //                     .chutes_volume > 0;
+            //                 const hasBomItems = response.bom_items && response.bom_items.length > 0;
+
+            //                 if (!hasChutes && !hasBomItems) {
+            //                     $('#bomTableBody').html(`
+        //                         <tr>
+        //                             <td colspan="10" class="text-center text-warning py-4">
+        //                                 <i class="fas fa-exclamation-triangle me-2"></i>
+        //                                 Aucune nomenclature définie pour ce produit. Cliquez sur "Ajouter une matière première" pour ajouter des matières premières.
+        //                             </td>
+        //                         </tr>
+        //                     `);
+            //                     $('#bomTableFooter').html('');
+            //                     $('#actual_total_cost').val(0);
+            //                     return;
+            //                 }
+
+            //                 if (hasChutes) {
+            //                     const chutesRequired = response.chutes_material.chutes_volume;
+            //                     const chutesStock = response.chutes_material.current_stock || 0;
+            //                     editableBomHtml += `
+        //                         <tr class="table-warning bom-item-row" data-material-id="${response.chutes_material.material_id}">
+        //                             <td><div class="d-flex align-items-center"><i class="fas fa-recycle text-warning me-2"></i><div><div class="fw-medium">${escapeHtml(response.chutes_material.material_name)}</div><small class="text-muted">${escapeHtml(response.chutes_material.material_code)}</small></div></div></td>
+        //                             <td><code>${escapeHtml(response.chutes_material.material_code)}</code></td>
+        //                             <td class="text-center">-</td>
+        //                             <td class="text-center bom-stock-available">${parseFloat(chutesStock).toFixed(4)}</td>
+        //                             <td class="text-center"><input type="number" class="form-control form-control-sm bom-planned-quantity" value="${parseFloat(chutesRequired).toFixed(4)}" step="0.0001" min="0" style="width: 120px; display: inline-block;"><input type="hidden" name="bom_consumptions[${response.chutes_material.material_id}][material_id]" value="${response.chutes_material.material_id}"><input type="hidden" name="bom_consumptions[${response.chutes_material.material_id}][planned_quantity]" value="${chutesRequired}"></td>
+        //                             <td class="text-center">m³</td>
+        //                             <td class="text-center bom-unit-cost">0.00 DH</td>
+        //                             <td class="text-center bom-item-total">0.00 DH</td>
+        //                             <td class="text-center"><span class="badge ${chutesStock >= chutesRequired ? 'bg-success' : 'bg-warning'}">${chutesStock >= chutesRequired ? '✓ Suffisant' : '⚠️ Stock faible'}</span></td>
+        //                             <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger remove-bom-item" data-material-id="${response.chutes_material.material_id}"><i class="fas fa-trash"></i></button></td>
+        //                         </tr>`;
+            //                 }
+
+            //                 if (hasBomItems) {
+            //                     response.bom_items.forEach((item) => {
+            //                         const unitCost = item.raw_material.unit_cost || 0;
+            //                         const requiredQty = item.quantity_required * quantity;
+            //                         const itemCost = requiredQty * unitCost;
+            //                         totalCost += itemCost;
+
+            //                         editableBomHtml += `
+        //                             <tr class="bom-item-row" data-material-id="${item.material_id}">
+        //                                 <td><div class="d-flex align-items-center"><i class="fas fa-box text-primary me-2"></i><div><div class="fw-medium">${escapeHtml(item.raw_material.material_name)}</div><small class="text-muted">${escapeHtml(item.raw_material.material_code)}</small></div></div></td>
+        //                                 <td><code>${escapeHtml(item.raw_material.material_code)}</code></td>
+        //                                 <td class="text-center"><input type="number" class="form-control form-control-sm bom-quantity-required" value="${item.quantity_required}" step="0.0001" min="0" style="width: 100px; display: inline-block;"></td>
+        //                                 <td class="text-center bom-stock-available">${parseFloat(item.raw_material.current_stock || 0).toFixed(4)}</td>
+        //                                 <td class="text-center"><input type="number" class="form-control form-control-sm bom-planned-quantity" value="${requiredQty.toFixed(4)}" step="0.0001" min="0" style="width: 120px; display: inline-block;"><input type="hidden" name="bom_consumptions[${item.material_id}][material_id]" value="${item.material_id}"><input type="hidden" name="bom_consumptions[${item.material_id}][planned_quantity]" value="${requiredQty}"><input type="hidden" name="bom_consumptions[${item.material_id}][quantity_required]" value="${item.quantity_required}"></td>
+        //                                 <td class="text-center">${escapeHtml(item.raw_material.unit_of_measure)}</td>
+        //                                 <td class="text-center bom-unit-cost">${unitCost.toFixed(2)} DH</td>
+        //                                 <td class="text-center bom-item-total">${itemCost.toFixed(2)} DH</td>
+        //                                 <td class="text-center"><span class="badge ${(item.raw_material.current_stock || 0) >= requiredQty ? 'bg-success' : 'bg-warning'}">${(item.raw_material.current_stock || 0) >= requiredQty ? '✓ Suffisant' : '⚠️ Stock faible'}</span></td>
+        //                                 <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger remove-bom-item" data-material-id="${item.material_id}"><i class="fas fa-trash"></i></button></td>
+        //                             </tr>`;
+            //                     });
+            //                 }
+
+            //                 if (editableBomHtml) {
+            //                     $('#bomTableBody').html(editableBomHtml);
+            //                     $('#bomTableFooter').html(
+            //                         `<tr class="table-primary"><td colspan="7" class="text-end"><strong>Coût Total Estimé:</strong></td><td class="text-center"><strong>${totalCost.toFixed(2)} DH</strong></td><td colspan="2"></td></tr>`
+            //                     );
+            //                     $('#actual_total_cost').val(totalCost);
+
+            //                     // Attach event handlers for editable fields
+            //                     attachBomEventHandlers();
+            //                     showToast('success', 'Nomenclature chargée avec succès');
+            //                 }
+            //             } else {
+            //                 $('#bomTableBody').html(
+            //                     `<tr><td colspan="10" class="text-center text-warning py-4"><i class="fas fa-exclamation-triangle me-2"></i>${response.message || 'Erreur lors du chargement de la nomenclature'}</td></tr>`
+            //                 );
+            //                 $('#bomTableFooter').html('');
+            //                 $('#actual_total_cost').val(0);
+            //             }
+            //         },
+            //         error: function(xhr) {
+            //             console.error('BOM loading error:', xhr);
+            //             $('#bomTableBody').html(
+            //                 '<tr><td colspan="10" class="text-center text-danger py-4"><i class="fas fa-exclamation-circle me-2"></i>Erreur lors du chargement de la nomenclature</td></tr>'
+            //             );
+            //             $('#bomCard').removeClass('d-none');
+            //         }
+            //     });
+            // }
+
+            // Function to load all raw materials
+            async function loadRawMaterials() {
+                try {
+                    const response = await $.ajax({
+                        url: "{{ route('raw-materials.list') }}",
+                        type: "GET",
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    if (response.success && response.data) {
+                        rawMaterialsList = response.data;
+                    } else if (Array.isArray(response)) {
+                        rawMaterialsList = response;
+                    } else if (response.data && Array.isArray(response.data)) {
+                        rawMaterialsList = response.data;
+                    }
+                    return rawMaterialsList;
+                } catch (error) {
+                    console.error('Error loading raw materials:', error);
+                    showToast('error', 'Erreur lors du chargement des matières premières');
+                    return [];
                 }
             }
 
-            // Type 3: Conversion calculation for multiple products
-            function updateType3Calculation() {
-                const sourceProductId = $('#type3_source_product_id').val();
-                const familleId = getFamilleId();
+            async function showAddRawMaterialModal() {
+                if (rawMaterialsList.length === 0) await loadRawMaterials();
+                if (!rawMaterialsList || rawMaterialsList.length === 0) {
+                    showToast('error', 'Aucune matière première disponible');
+                    return;
+                }
 
-                if (sourceProductId) {
-                    // Get all product inputs
-                    const productInputs = $('.type3-product-row');
+                if ($('#addRawMaterialModal').length) $('#addRawMaterialModal').remove();
 
-                    if (productInputs.length === 0) {
-                        // Hide results if no products added
-                        $('#calculatedResultsSection').addClass('d-none');
-                        $('#insufficientStockAlert').addClass('d-none');
-                        return;
+                let options = '<option value="">Sélectionner une matière première</option>';
+                rawMaterialsList.forEach(material => {
+                    const materialId = material.material_id || material.id;
+                    const materialName = material.material_name || material.name;
+                    const materialCode = material.material_code || material.code;
+                    const currentStock = parseFloat(material.current_stock || material.stock || 0);
+                    const unitOfMeasure = material.unit_of_measure || material.unit || 'unité';
+                    const unitCost = parseFloat(material.average_unit_cost || material.unit_cost ||
+                        material.cost || 0);
+
+                    // Check if this is Chutes de Production
+                    const isChutes = materialName.toLowerCase().includes('chute') ||
+                        materialCode === 'CHUTE-PRODUCTION' ||
+                        materialName === 'Chutes de Production';
+
+                    // Determine stock status class
+                    let stockClass = '';
+                    let stockIcon = '';
+                    if (currentStock <= 0) {
+                        stockClass = 'text-danger';
+                        stockIcon = '<i class="fas fa-times-circle text-danger me-1"></i>';
+                    } else if (currentStock < 10) {
+                        stockClass = 'text-warning';
+                        stockIcon = '<i class="fas fa-exclamation-triangle text-warning me-1"></i>';
+                    } else {
+                        stockIcon = '<i class="fas fa-check-circle text-success me-1"></i>';
                     }
 
-                    // Collect all product data
-                    const products = [];
-                    let totalFinalProducts = 0;
-                    let totalSourceRequired = 0;
-                    let totalVolume = 0;
-
-                    productInputs.each(function() {
-                        const productId = $(this).find('.type3-product-select').val();
-                        const conversionRate = parseFloat($(this).find('.type3-conversion-rate').val()) ||
-                            1;
-                        const quantityToProduce = parseFloat($(this).find('.type3-quantity').val()) || 1;
-                        const volumePerUnit = parseFloat($(this).find('.type3-volume').val()) || 0;
-
-                        if (productId) {
-                            const sourceRequired = quantityToProduce / conversionRate;
-                            const productVolume = quantityToProduce * volumePerUnit;
-
-                            products.push({
-                                product_id: productId,
-                                product_name: $(this).find('.type3-product-select option:selected')
-                                    .text(),
-                                conversion_rate: conversionRate,
-                                quantity_to_produce: quantityToProduce,
-                                source_required: sourceRequired,
-                                volume_per_unit: volumePerUnit,
-                                total_volume: productVolume
-                            });
-
-                            totalFinalProducts += quantityToProduce;
-                            totalSourceRequired += sourceRequired;
-                            totalVolume += productVolume;
-                        }
-                    });
-
-                    // Update totals display
-                    $('#type3_total_sous_blocs').val(totalSourceRequired.toFixed(2));
-                    $('#type3_total_final_products').val(totalFinalProducts);
-                    $('#type3_total_volume').val(totalVolume.toFixed(4));
-
-                    // Get source stock information and product details
-                    Promise.all([
-                        getStockInfo(sourceProductId, familleId),
-                        getProductDetails(sourceProductId)
-                    ]).then(([stockInfo, sourceProduct]) => {
-                        const isSufficient = stockInfo.available >= totalSourceRequired;
-
-                        // Calculate waste for Type 3
-                        let wasteHtml = '';
-                        if (sourceProduct && sourceProduct.volume_per_unit > 0) {
-                            const sourceVolumePerUnit = sourceProduct.volume_per_unit;
-                            const totalSourceVolume = totalSourceRequired * sourceVolumePerUnit;
-                            const wasteVolume = Math.max(0, totalSourceVolume - totalVolume);
-                            const wastePercentage = totalSourceVolume > 0 ?
-                                (wasteVolume / totalSourceVolume * 100).toFixed(2) : 0;
-
-                            // Store waste percentage in hidden field and input
-                            $('#actual_waste_percentage').val(wastePercentage);
-                            $('#waste_percentage').val(wastePercentage);
-
-                            wasteHtml = `
-                                <div id="wasteCalculationSection" class="alert alert-warning mt-3">
-                                    <h6><i class="fas fa-trash me-2"></i>Calcul du Chute/Déchet (Type 3)</h6>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <table class="table table-sm mb-0">
-                                                <tr>
-                                                    <td>Volume du sous-bloc source:</td>
-                                                    <td class="text-end">${sourceVolumePerUnit.toFixed(4)} m³</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sous-blocs totaux requis:</td>
-                                                    <td class="text-end">${totalSourceRequired.toFixed(2)} unités</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Volume total source:</strong></td>
-                                                    <td class="text-end"><strong>${totalSourceVolume.toFixed(4)} m³</strong></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <table class="table table-sm mb-0">
-                                                <tr>
-                                                    <td><strong>Volume total produits finaux:</strong></td>
-                                                    <td class="text-end"><strong>${totalVolume.toFixed(4)} m³</strong></td>
-                                                </tr>
-                                                <tr class="table-danger">
-                                                    <td><strong>Volume chute/déchet:</strong></td>
-                                                    <td class="text-end"><strong>${wasteVolume.toFixed(4)} m³</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Pourcentage chute:</td>
-                                                    <td class="text-end">${wastePercentage}%</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    ${totalVolume > totalSourceVolume ?
-                                        '<div class="alert alert-danger mt-2 mb-0"><i class="fas fa-exclamation-triangle"></i> Attention: Le volume produit dépasse le volume source!</div>' :
-                                        ''}
-                                    <small class="text-muted mt-2 d-block">
-                                        <i class="fas fa-info-circle"></i>
-                                        Calcul: (Volume total des sous-blocs) - (Volume total des produits finaux)
-                                    </small>
-                                </div>
-                            `;
-                        }
-
-                        // Display results
-                        let productsHtml = '';
-                        products.forEach((product, index) => {
-                            productsHtml += `
-                    <tr>
-                        <td>${product.product_name}</td>
-                        <td class="text-end">${product.quantity_to_produce} unités</td>
-                        <td class="text-end">${product.conversion_rate}</td>
-                        <td class="text-end">${product.source_required.toFixed(2)}</td>
-                        <td class="text-end">${product.volume_per_unit.toFixed(4)} m³</td>
-                        <td class="text-end">${product.total_volume.toFixed(4)} m³</td>
-                    </tr>
-                `;
-                        });
-
-                        const resultsHtml = `
-                <div class="row">
-                    <div class="col-md-12">
-                        <h6>Récapitulatif des Produits:</h6>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Produit Final</th>
-                                        <th class="text-end">Quantité à Produire</th>
-                                        <th class="text-end">Ratio (sous-bloc/produit)</th>
-                                        <th class="text-end">Sous-blocs Requis</th>
-                                        <th class="text-end">Volume/Unité</th>
-                                        <th class="text-end">Volume Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${productsHtml}
-                                </tbody>
-                                <tfoot class="table-primary">
-                                    <tr>
-                                        <td><strong>Totaux:</strong></td>
-                                        <td class="text-end"><strong>${totalFinalProducts} unités</strong></td>
-                                        <td class="text-end">-</td>
-                                        <td class="text-end"><strong>${totalSourceRequired.toFixed(2)} sous-blocs</strong></td>
-                                        <td class="text-end">-</td>
-                                        <td class="text-end"><strong>${totalVolume.toFixed(4)} m³</strong></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <h6>Source Requise:</h6>
-                        <table class="table table-sm">
-                            <tr>
-                                <td>Sous-blocs totaux requis:</td>
-                                <td class="text-end"><strong class="calculation-result">${totalSourceRequired.toFixed(2)} unités</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Produits finaux totaux:</td>
-                                <td class="text-end"><strong>${totalFinalProducts} unités</strong></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>Stock Source:</h6>
-                        <table class="table table-sm">
-                            <tr>
-                                <td>Produit source:</td>
-                                <td class="text-end">${$('#type3_source_product_id option:selected').text().split('-')[1]?.trim() || 'N/A'}</td>
-                            </tr>
-                            ${stockInfo.famille_name ? `
-                                                                                                                                            <tr>
-                                                                                                                                                <td>Famille:</td>
-                                                                                                                                                <td class="text-end">${stockInfo.famille_name}</td>
-                                                                                                                                            </tr>
-                                                                                                                                            ${stockInfo.location ? `
-                                    <tr>
-                                        <td>Location:</td>
-                                        <td class="text-end">${stockInfo.location}</td>
-                                    </tr>
-                                ` : ''}
-                                                                                                                                        ` : ''}
-                            <tr>
-                                <td>Stock disponible:</td>
-                                <td class="text-end">${parseFloat(stockInfo.available).toFixed(2)} unités</td>
-                            </tr>
-                            <tr>
-                                <td>Quantité totale:</td>
-                                <td class="text-end">${parseFloat(stockInfo.current_quantity).toFixed(2)} unités</td>
-                            </tr>
-                            <tr>
-                                <td>Quantité réservée:</td>
-                                <td class="text-end">${parseFloat(stockInfo.reserved_quantity).toFixed(2)} unités</td>
-                            </tr>
-                            <tr class="${isSufficient ? 'table-success' : 'table-danger'}">
-                                <td><strong>Statut:</strong></td>
-                                <td class="text-end">
-                                    <strong>
-                                        ${isSufficient ?
-                                            '<span class="text-success">✓ Suffisant</span>' :
-                                            '<span class="text-danger">✗ Insuffisant</span>'}
-                                    </strong>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                ${wasteHtml}
-            `;
-
-                        $('#calculatedResults').html(resultsHtml);
-                        $('#calculatedResultsSection').removeClass('d-none');
-
-                        // Update insufficient stock alert
-                        if (!isSufficient && stockInfo.available > 0) {
-                            $('#insufficientStockList').html(`
-                    <ul class="mb-0 mt-2">
-                        <li>${stockInfo.famille_name ? 'Famille: ' + stockInfo.famille_name : 'Produit source'}:
-                            Requis ${totalSourceRequired.toFixed(2)},
-                            Disponible ${stockInfo.available.toFixed(2)} unités
-                        </li>
-                    </ul>
-                `);
-                            $('#insufficientStockAlert').removeClass('d-none');
-                        } else if (stockInfo.available === 0) {
-                            $('#insufficientStockList').html(`
-                    <ul class="mb-0 mt-2">
-                        <li>${stockInfo.famille_name ? 'Famille: ' + stockInfo.famille_name : 'Produit source'}:
-                            Stock vide (0 unités disponible)
-                        </li>
-                    </ul>
-                `);
-                            $('#insufficientStockAlert').removeClass('d-none');
-                        } else {
-                            $('#insufficientStockAlert').addClass('d-none');
-                        }
-
-                        // Update hidden fields
-                        if (products.length > 0) {
-                            $('#actual_product_id').val(products[0].product_id);
-                            $('#actual_conversion_rate').val(products[0].conversion_rate);
-                        }
-                        $('#actual_source_product_id').val(sourceProductId);
-                        $('#actual_quantity_to_produce').val(totalFinalProducts);
-                        $('#actual_required_quantity').val(totalSourceRequired);
-
-                    }).catch(error => {
-                        console.error('Error in Type 3 calculation:', error);
-                        $('#calculatedResults').html(`
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle"></i> Erreur lors du calcul
-                </div>
-            `);
-                        $('#calculatedResultsSection').removeClass('d-none');
-                    });
-                } else {
-                    $('#calculatedResultsSection').addClass('d-none');
-                    $('#insufficientStockAlert').addClass('d-none');
-                }
-            }
-
-            // Function to add a new Type 3 product row
-            function addType3ProductRow(productData = null) {
-                const index = $('.type3-product-row').length;
-
-                // Get all available final products
-                const salesProducts = productOptionsData;
-
-                // Build options for select
-                let options = '<option value="">Sélectionner un produit</option>';
-                salesProducts.forEach(product => {
-                    const selected = productData && productData.product_id == product.id ?
-                        'selected' : '';
-                    options += `<option value="${product.id}" ${selected} data-volume="${product.volume_m3}">
-                        ${product.text}
-                        <span class="badge bg-success">Vente</span>
+                    options += `<option value="${materialId}"
+                        data-code="${materialCode || ''}"
+                        data-unit="${unitOfMeasure}"
+                        data-stock="${currentStock}"
+                        data-cost="${unitCost}"
+                        data-is-chutes="${isChutes}"
+                        data-stock-class="${stockClass}"
+                        data-stock-icon='${stockIcon}'>
+                        ${materialName} - ${stockIcon} Stock: ${currentStock.toFixed(2)} ${unitOfMeasure}
                     </option>`;
                 });
 
-                const rowHtml = `
-                    <div class="type3-product-row card mb-3" data-index="${index}">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Produit Final *</label>
-                                        <select class="form-control select2 type3-product-select"
-                                                name="type3_products[${index}][product_id]"
-                                                data-index="${index}" required>
-                                            ${options}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2" style="margin-top: 20px;">
-                                    <div class="form-group">
-                                        <label class="form-label">Ratio *</label>
-                                        <input type="number" class="form-control type3-conversion-rate"
-                                               name="type3_products[${index}][conversion_rate]"
-                                               value="${productData ? productData.conversion_rate : '1'}"
-                                               step="0.01" min="0.01" placeholder="1.0" required>
-                                        <small class="form-text text-muted">sous-bloc → produit</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="form-label">Quantité *</label>
-                                        <input type="number" class="form-control type3-quantity"
-                                               name="type3_products[${index}][quantity_to_produce]"
-                                               value="${productData ? productData.quantity_to_produce : '1'}"
-                                               min="0.01" step="0.01" placeholder="100" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="form-label">Volume/Unité</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control type3-volume"
-                                                   data-index="${index}"
-                                                   step="0.0001" min="0" readonly
-                                                   value="${productData ? productData.volume_per_unit : '0'}">
-                                            <span class="input-group-text">m³</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="form-label">Actions</label>
-                                        <button type="button" class="btn btn-sm btn-danger w-100 remove-type3-product" data-index="${index}">
-                                            <i class="fas fa-trash"></i> Supprimer
-                                        </button>
-                                    </div>
+                const productionQuantity = parseFloat($('#type1_quantity').val()) || 1;
+
+                const modalHtml = `
+                <div class="modal fade" id="addRawMaterialModal" tabindex="-1" data-bs-backdrop="static">
+                    <div class="modal-dialog"><div class="modal-content">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i>Ajouter une matière première</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Matière Première *</label>
+                                <select class="form-control" id="modal_material_id" name="modal_material_id" required style="width: 100%;">
+                                    ${options}
+                                </select>
+                            </div>
+                            <div id="stockAlertContainer" class="mb-3" style="display: none;">
+                                <div class="alert" id="stockAlert">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <span id="stockAlertMessage"></span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <small class="form-text text-muted type3-volume-info" data-index="${index}">
-                                        ${productData ? productData.volume_per_unit + ' m³' : 'Sélectionnez un produit pour voir son volume'}
-                                    </small>
+                            <div class="mb-3">
+                                <label class="form-label" id="quantityLabel">Quantité Totale à Utiliser *</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="modal_quantity_total" value="${productionQuantity}" step="0.0001" min="0.0001" required>
+                                    <span class="input-group-text" id="quantityUnit">unité(s)</span>
+                                </div>
+                                <small class="text-muted" id="quantityHelp">Quantité totale pour cette production (${productionQuantity} unités)</small>
+                                <div id="volumeEquivalentContainer" class="mt-2 small text-muted" style="display: none;">
+                                    <i class="fas fa-cube me-1"></i>
+                                    <span id="volumeEquivalent"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 d-none">
+                                <label class="form-label">Quantité par Unité (calculée automatiquement)</label>
+                                <input type="number" class="form-control" id="modal_quantity_per_unit" readonly step="0.0001" min="0">
+                                <small class="text-muted">Quantité par produit: Total ÷ Quantité à produire</small>
+                            </div>
+                            <div class="mb-3 d-none form-check">
+                                <input type="checkbox" checked="true" class="form-check-input" id="modal_save_to_product" value="1">
+                                <label class="form-check-label" for="modal_save_to_product">
+                                    <strong>Enregistrer cette matière dans la nomenclature du produit</strong>
+                                </label>
+                                <small class="form-text text-muted d-block">Cocher cette case pour ajouter cette matière à la BOM permanente du produit.</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-success" id="confirmAddMaterialBtn">
+                                <i class="fas fa-plus me-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div></div>
+                </div>`;
+
+                $('body').append(modalHtml);
+
+                setTimeout(function() {
+                    if ($('#modal_material_id').length) {
+                        $('#modal_material_id').select2({
+                            language: "fr",
+                            placeholder: "Sélectionner une matière première",
+                            dropdownParent: $('#addRawMaterialModal'),
+                            width: '100%'
+                        });
+                    }
+                }, 100);
+
+                // Function to update UI based on material type (chutes or regular)
+                function updateModalForMaterialType() {
+                    const materialId = $('#modal_material_id').val();
+                    if (!materialId) return;
+
+                    const selectedOption = $('#modal_material_id option:selected');
+                    const isChutes = selectedOption.data('is-chutes') === true;
+                    const unit = selectedOption.data('unit') || 'unité';
+
+                    if (isChutes) {
+                        // For chutes: show kg input, convert to volume
+                        $('#quantityLabel').html('Poids à Utiliser *');
+                        $('#quantityUnit').text('kg');
+                        $('#quantityHelp').html('Poids des chutes à utiliser pour cette production');
+                        $('#volumeEquivalentContainer').show();
+
+                        // Update the input - make it free typing without auto-conversion
+                        $('#modal_quantity_total').attr({
+                            'step': 'any',
+                            'placeholder': 'Ex: 1.23',
+                            'min': '0.0001',
+                        });
+
+                        const currentValue = $('#modal_quantity_total').val();
+                        if (currentValue && !isNaN(parseFloat(currentValue))) {
+                            // Keep as is, don't convert
+                        } else {
+                            $('#modal_quantity_total').val('');
+                        }
+
+                        $('#volumeEquivalent').html('');
+                    } else {
+                        // For regular materials: show unit input
+                        $('#quantityLabel').html('Quantité Totale à Utiliser *');
+                        $('#quantityUnit').text(unit);
+                        $('#quantityHelp').html(
+                            `Quantité totale pour cette production (${productionQuantity} unités)`);
+                        $('#volumeEquivalentContainer').hide();
+
+                        // Reset step
+                        $('#modal_quantity_total').attr('step', '0.0001');
+                        $('#modal_quantity_total').attr('placeholder', '');
+                    }
+                }
+
+                // Function to update volume equivalent display for chutes
+                function updateVolumeEquivalent(kgValue) {
+                    kgValue = roundTo2Decimals(kgValue);
+                    const volumeM3 = roundTo2Decimals(kgValue / CHUTES_DENSITY);
+                    $('#volumeEquivalent').html(`${formatKg(kgValue)} kg = ${formatVolume(volumeM3)} m³`);
+                }
+
+                // Function to check stock and show alert (modified for chutes)
+                function checkStockAndShowAlert() {
+                    const materialId = $('#modal_material_id').val();
+                    if (!materialId) {
+                        $('#stockAlertContainer').hide();
+                        return;
+                    }
+
+                    const selectedOption = $('#modal_material_id option:selected');
+                    const isChutes = selectedOption.data('is-chutes') === true;
+                    const currentStock = parseFloat(selectedOption.data('stock')) || 0;
+                    const materialName = selectedOption.text().split('(')[0].trim();
+                    const unit = selectedOption.data('unit') || 'unité';
+                    let totalQuantity = parseFloat($('#modal_quantity_total').val()) || 0;
+
+                    // For chutes, convert kg to m³ for stock comparison
+                    let stockQuantity = currentStock;
+                    let displayQuantity = totalQuantity;
+                    let displayUnit = unit;
+
+                    if (isChutes) {
+                        // Convert kg to m³ for stock comparison (stock is in m³)
+                        const volumeM3 = totalQuantity / CHUTES_DENSITY;
+                        stockQuantity = currentStock; // Stock is in m³
+                        displayQuantity = volumeM3;
+                        displayUnit = 'm³';
+                    }
+
+                    const stockStatus = stockQuantity <= 0 ? 'no_stock' :
+                        (stockQuantity < displayQuantity ? 'insufficient' :
+                            (stockQuantity < 10 ? 'low' : 'sufficient'));
+
+                    let alertClass = '';
+                    let alertMessage = '';
+                    let showAlert = true;
+
+                    if (stockQuantity <= 0) {
+                        alertClass = 'alert-danger';
+                        alertMessage = `<strong>⚠️ Stock épuisé !</strong><br>
+                                La matière première "${materialName}" n'a pas de stock disponible.<br>
+                                Stock actuel: <strong>0 ${displayUnit}</strong><br>
+                                Vous pouvez quand même ajouter cette matière, mais le stock deviendra négatif.`;
+                    } else if (stockQuantity < displayQuantity) {
+                        const deficit = displayQuantity - stockQuantity;
+                        alertClass = 'alert-warning';
+                        alertMessage = `<strong>⚠️ Stock insuffisant !</strong><br>
+                                La quantité demandée (${displayQuantity.toFixed(4)} ${displayUnit}) dépasse le stock disponible.<br>
+                                Stock actuel: <strong>${stockQuantity.toFixed(4)} ${displayUnit}</strong><br>
+                                Manque: <strong>${deficit.toFixed(4)} ${displayUnit}</strong><br>
+                                Vous pouvez quand même ajouter cette matière, le stock deviendra négatif.`;
+                    } else if (stockQuantity < 10) {
+                        alertClass = 'alert-warning';
+                        alertMessage = `<strong>⚠️ Stock faible !</strong><br>
+                                La matière première "${materialName}" a un stock faible.<br>
+                                Stock actuel: <strong>${stockQuantity.toFixed(4)} ${displayUnit}</strong><br>
+                                Vous pouvez toujours l'utiliser, mais pensez à réapprovisionner.`;
+                    } else {
+                        showAlert = false;
+                    }
+
+                    if (showAlert) {
+                        $('#stockAlert').removeClass('alert-danger alert-warning alert-info').addClass(
+                            alertClass);
+                        $('#stockAlertMessage').html(alertMessage);
+                        $('#stockAlertContainer').show();
+                    } else {
+                        $('#stockAlertContainer').hide();
+                    }
+                }
+
+                $('#modal_quantity_total').on('blur', function() {
+                    let rawValue = $(this).val();
+
+                    if (!rawValue || rawValue === '') {
+                        return;
+                    }
+
+                    let numericValue = parseFloat(rawValue);
+
+                    if (!isNaN(numericValue) && numericValue > 0) {
+                        // Round to 2 decimal places
+                        const roundedValue = roundTo2Decimals(numericValue);
+                        $(this).val(formatKg(roundedValue));
+
+                        // Trigger the calculation with the rounded value
+                        const materialId = $('#modal_material_id').val();
+                        if (materialId) {
+                            const selectedOption = $('#modal_material_id option:selected');
+                            const isChutes = selectedOption.data('is-chutes') === true;
+                            const productionQty = parseFloat($('#type1_quantity').val()) || 1;
+
+                            if (isChutes) {
+                                const volumeM3 = roundedValue / CHUTES_DENSITY;
+                                $('#volumeEquivalent').html(
+                                    `${formatKg(roundedValue)} kg = ${formatVolume(volumeM3)} m³`);
+                                const quantityPerUnit = volumeM3 / productionQty;
+                                $('#modal_quantity_per_unit').val(quantityPerUnit.toFixed(6));
+                            } else {
+                                const quantityPerUnit = roundedValue / productionQty;
+                                $('#modal_quantity_per_unit').val(quantityPerUnit.toFixed(4));
+                            }
+
+                            checkStockAndShowAlert();
+                        }
+                    }
+                });
+
+                // Calculate quantity per unit when total quantity changes
+                $('#modal_quantity_total').on('input', function() {
+                    let totalQuantity = parseFloat($(this).val()) || 0;
+                    const productionQty = parseFloat($('#type1_quantity').val()) || 1;
+                    const materialId = $('#modal_material_id').val();
+
+                    if (materialId) {
+                        const selectedOption = $('#modal_material_id option:selected');
+                        const isChutes = selectedOption.data('is-chutes') === true;
+
+                        if (isChutes) {
+                            // For chutes, we store the volume in m³, but user enters kg
+                            const kgValue = totalQuantity;
+                            const volumeM3 = kgValue / CHUTES_DENSITY;
+                            updateVolumeEquivalent(kgValue);
+                            // quantityPerUnit will be in m³ per unit
+                            const quantityPerUnit = volumeM3 / productionQty;
+                            $('#modal_quantity_per_unit').val(quantityPerUnit.toFixed(6));
+                        } else {
+                            const quantityPerUnit = totalQuantity / productionQty;
+                            $('#modal_quantity_per_unit').val(quantityPerUnit.toFixed(4));
+                        }
+                    }
+
+                    checkStockAndShowAlert();
+                });
+
+                // Check stock when material selection changes
+                // In the modal material selection change handler:
+                $('#modal_material_id').on('change', function() {
+                    updateModalForMaterialType();
+                    checkStockAndShowAlert();
+
+                    const selectedOption = $(this).find(':selected');
+                    const isChutes = selectedOption.data('is-chutes') === true;
+                    const productionQty = parseFloat($('#type1_quantity').val()) || 1;
+
+                    if (isChutes) {
+                        // For chutes - set empty, no default value
+                        $('#modal_quantity_total').val('');
+                        $('#modal_quantity_total').attr('placeholder', 'Ex: 1.23');
+                        $('#volumeEquivalent').html('');
+                        $('#modal_quantity_per_unit').val('');
+                    } else {
+                        $('#modal_quantity_total').val(productionQty);
+                        $('#modal_quantity_total').trigger('input');
+                    }
+                });
+
+                // Trigger initial UI setup
+                updateModalForMaterialType();
+                $('#modal_quantity_total').trigger('input');
+
+                const modal = new bootstrap.Modal(document.getElementById('addRawMaterialModal'));
+                modal.show();
+
+                $('#addRawMaterialModal').on('hidden.bs.modal', function() {
+                    if ($('#modal_material_id').length && $('#modal_material_id').data('select2')) {
+                        $('#modal_material_id').select2('destroy');
+                    }
+                    $('#addRawMaterialModal').remove();
+                });
+
+                $('#confirmAddMaterialBtn').off('click').on('click', function() {
+                    const materialId = $('#modal_material_id').val();
+                    let totalQuantity = parseFloat($('#modal_quantity_total').val());
+                    const quantityPerUnit = parseFloat($('#modal_quantity_per_unit').val());
+                    const saveToProduct = $('#modal_save_to_product').is(':checked');
+
+                    if (!materialId) {
+                        showToast('error', 'Veuillez sélectionner une matière première');
+                        return;
+                    }
+                    if (!totalQuantity || totalQuantity <= 0) {
+                        showToast('error', 'Veuillez saisir une quantité valide');
+                        return;
+                    }
+
+                    const selectedOption = $('#modal_material_id option:selected');
+                    if (!selectedOption.length) {
+                        showToast('error', 'Erreur: Matière première non valide');
+                        return;
+                    }
+
+                    const materialName = selectedOption.text().split('(')[0].trim();
+                    const materialCode = selectedOption.data('code') || '';
+                    const unit = selectedOption.data('unit') || 'unité';
+                    const stock = parseFloat(selectedOption.data('stock')) || 0;
+                    const unitCost = parseFloat(selectedOption.data('cost')) || 0;
+                    const isChutes = selectedOption.data('is-chutes') === true;
+                    const productionQuantity = parseFloat($('#type1_quantity').val()) || 1;
+
+                    let plannedQuantity = totalQuantity;
+                    let displayUnit = unit;
+                    let stockComparison = stock;
+
+                    if (isChutes) {
+                        plannedQuantity = totalQuantity / CHUTES_DENSITY;
+                        displayUnit = 'm³';
+                        stockComparison = stock;
+                    }
+
+                    const totalCost = plannedQuantity * unitCost;
+
+                    if (stockComparison < plannedQuantity && stockComparison > 0) {
+                        const deficit = plannedQuantity - stockComparison;
+                        if (!confirm(
+                                `⚠️ Attention: Stock insuffisant!\n\nMatière: ${materialName}\nStock disponible: ${stockComparison.toFixed(4)} ${displayUnit}\nQuantité demandée: ${plannedQuantity.toFixed(4)} ${displayUnit}\nManque: ${deficit.toFixed(4)} ${displayUnit}\n\nLe stock deviendra négatif.\n\nVoulez-vous continuer ?`
+                            )) {
+                            return;
+                        }
+                    } else if (stockComparison <= 0 && plannedQuantity > 0) {
+                        if (!confirm(
+                                `⚠️ Attention: Stock épuisé!\n\nMatière: ${materialName}\nStock actuel: 0 ${displayUnit}\nQuantité demandée: ${plannedQuantity.toFixed(4)} ${displayUnit}\n\nLe stock deviendra négatif.\n\nVoulez-vous continuer ?`
+                            )) {
+                            return;
+                        }
+                    } else if (stockComparison < 10 && stockComparison > 0) {
+                        if (!confirm(
+                                `⚠️ Attention: Stock faible!\n\nMatière: ${materialName}\nStock disponible: ${stockComparison.toFixed(4)} ${displayUnit}\nQuantité demandée: ${plannedQuantity.toFixed(4)} ${displayUnit}\n\nVoulez-vous continuer ?`
+                            )) {
+                            return;
+                        }
+                    }
+
+                    // Check if material already exists in BOM
+                    let exists = false;
+                    let existingRow = null;
+                    $('.bom-item-row').each(function() {
+                        if ($(this).data('material-id') == materialId) {
+                            exists = true;
+                            existingRow = $(this);
+                            return false;
+                        }
+                    });
+
+                    if (exists) {
+                        // Update existing row
+                        existingRow.find('.bom-quantity-required').val(quantityPerUnit.toFixed(2));
+                        existingRow.find('.bom-planned-quantity').val(plannedQuantity.toFixed(2));
+                        existingRow.find('.bom-item-total').text(totalCost.toFixed(2) + ' DH');
+
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: `bom_consumptions[${materialId}][update_quantity]`,
+                            value: '1'
+                        }).appendTo('#productionOrderForm');
+
+                        updateBomTotalCost();
+                        modal.hide();
+                        showToast('success', 'Quantité mise à jour avec succès');
+                        return;
+                    }
+
+                    // Remove "no data" message if exists
+                    if ($('#bomTableBody tr').length === 1 && $('#bomTableBody tr').find(
+                            'td[colspan="10"]').length) {
+                        $('#bomTableBody').empty();
+                    }
+
+                    // Determine stock status badge
+                    let stockBadge = '';
+                    if (stockComparison <= 0) {
+                        stockBadge = '<span class="badge bg-danger">Épuisé</span>';
+                    } else if (stockComparison < plannedQuantity) {
+                        stockBadge = '<span class="badge bg-warning">Stock insuffisant</span>';
+                    } else if (stockComparison < 10) {
+                        stockBadge = '<span class="badge bg-warning">Stock faible</span>';
+                    } else {
+                        stockBadge = '<span class="badge bg-success">Stock OK</span>';
+                    }
+
+                    // Add chutes specific styling
+                    const rowClass = isChutes ? 'table-warning' : '';
+                    const iconClass = isChutes ? 'fas fa-recycle text-warning' :
+                        'fas fa-box text-primary';
+
+                    const newRowHtml = `
+    <tr class="bom-item-row ${rowClass}" data-material-id="${materialId}">
+        <td><div class="d-flex align-items-center"><i class="${iconClass} me-2"></i><div><div class="fw-medium">${escapeHtml(materialName)}</div><small class="text-muted">${escapeHtml(materialCode)}</small></div></div></td>
+        <td><code>${escapeHtml(materialCode)}</code></td>
+        <td class="text-center"><input type="number" class="form-control form-control-sm bom-quantity-required" value="${quantityPerUnit.toFixed(2)}" step="0.0001" min="0" style="width: 100px; display: inline-block;"></td>
+        <td class="text-center bom-stock-available">${stockComparison.toFixed(2)} ${stockBadge}</td> <!-- Changed to 2 decimals -->
+        <td class="text-center"><input type="number" class="form-control form-control-sm bom-planned-quantity" value="${plannedQuantity.toFixed(2)}" step="0.0001" min="0" style="width: 120px; display: inline-block;"><input type="hidden" name="bom_consumptions[${materialId}][material_id]" value="${materialId}"><input type="hidden" name="bom_consumptions[${materialId}][planned_quantity]" value="${plannedQuantity.toFixed(2)}"><input type="hidden" name="bom_consumptions[${materialId}][quantity_required]" value="${quantityPerUnit.toFixed(2)}">${saveToProduct ? `<input type="hidden" name="bom_consumptions[${materialId}][save_to_product]" value="1">` : ''}${saveToProduct ? '' : `<input type="hidden" name="bom_consumptions[${materialId}][save_to_product]" value="0">`}</td>
+        <td class="text-center">${escapeHtml(displayUnit)}</td>
+        <td class="text-center bom-unit-cost">${unitCost.toFixed(2)} DH</td>
+        <td class="text-center bom-item-total">${totalCost.toFixed(2)} DH</td>
+        <td class="text-center"><span class="badge ${stockComparison >= plannedQuantity ? (stockComparison < 10 ? 'bg-warning' : 'bg-success') : 'bg-danger'}">${stockComparison >= plannedQuantity ? (stockComparison < 10 ? '⚠️ Stock faible' : '✓ Suffisant') : '⚠️ Stock insuffisant'}</span></td>
+        <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger remove-bom-item" data-material-id="${materialId}"><i class="fas fa-trash"></i></button></td>
+    </tr>
+`;
+
+                    $('#bomTableBody').append(newRowHtml);
+                    attachBomEventHandlers();
+                    updateBomTotalCost();
+                    modal.hide();
+
+                    if (stockComparison < plannedQuantity) {
+                        showToast('warning',
+                            `⚠️ Stock insuffisant pour ${materialName}. Le stock deviendra négatif.`
+                        );
+                    } else {
+                        showToast('success', 'Matière première ajoutée avec succès');
+                    }
+                });
+            }
+
+            function attachBomEventHandlers() {
+                $('.bom-planned-quantity').off('input').on('input', function() {
+                    const $row = $(this).closest('tr');
+                    const plannedQuantity = parseFloat($(this).val()) || 0;
+                    const productionQty = parseFloat($('#type1_quantity').val()) || 1;
+                    const quantityPerUnit = plannedQuantity / productionQty;
+                    $row.find('.bom-quantity-required').val(quantityPerUnit.toFixed(4));
+                    const unitCost = parseFloat($row.find('.bom-unit-cost').text()) || 0;
+                    const totalCost = plannedQuantity * unitCost;
+                    $row.find('.bom-item-total').text(totalCost.toFixed(2) + ' DH');
+                    $row.find('input[name*="planned_quantity"]').val(plannedQuantity);
+                    $row.find('input[name*="quantity_required"]').val(quantityPerUnit);
+                    updateBomTotalCost();
+                });
+
+                $('.bom-quantity-required').off('input').on('input', function() {
+                    const $row = $(this).closest('tr');
+                    const quantityPerUnit = parseFloat($(this).val()) || 0;
+                    const productionQty = parseFloat($('#type1_quantity').val()) || 1;
+                    const plannedQuantity = quantityPerUnit * productionQty;
+                    $row.find('.bom-planned-quantity').val(plannedQuantity.toFixed(4));
+                    const unitCost = parseFloat($row.find('.bom-unit-cost').text()) || 0;
+                    const totalCost = plannedQuantity * unitCost;
+                    $row.find('.bom-item-total').text(totalCost.toFixed(2) + ' DH');
+                    $row.find('input[name*="planned_quantity"]').val(plannedQuantity);
+                    $row.find('input[name*="quantity_required"]').val(quantityPerUnit);
+                    updateBomTotalCost();
+                });
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // Update BOM total cost
+            function updateBomTotalCost() {
+                let totalCost = 0;
+                $('.bom-item-row').each(function() {
+                    const totalText = $(this).find('td:nth-child(8)').text().replace(' DH', '');
+                    totalCost += parseFloat(totalText) || 0;
+                });
+
+                if ($('.bom-item-row').length > 0) {
+                    $('#bomTableFooter').html(`
+            <tr class="table-primary">
+                <td colspan="7" class="text-end"><strong>Coût Total Estimé:</strong></td>
+                <td class="text-center"><strong>${totalCost.toFixed(2)} DH</strong></td>
+                <td colspan="2"></td>
+            </tr>
+        `);
+                } else {
+                    $('#bomTableFooter').empty();
+                }
+
+                $('#actual_total_cost').val(totalCost);
+            }
+
+            // Remove BOM item
+            $(document).on('click', '.remove-bom-item', function() {
+                const $row = $(this).closest('tr');
+                const materialId = $row.data('material-id');
+
+                if (confirm(
+                        'Êtes-vous sûr de vouloir supprimer cette matière première de la nomenclature ?')) {
+                    // Add a hidden input to mark this material for removal from product BOM
+                    if (materialId) {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: `bom_consumptions[${materialId}][remove_from_product]`,
+                            value: '1'
+                        }).appendTo('#productionOrderForm');
+                    }
+
+                    $row.remove();
+
+                    if ($('.bom-item-row').length === 0) {
+                        $('#bomTableBody').html(`
+                        <tr>
+                            <td colspan="10" class="text-center text-muted py-4">
+                                <i class="fas fa-box-open me-2"></i>
+                                Aucune matière première. Cliquez sur "Ajouter une matière première" pour commencer.
+                            </td>
+                        </tr>
+                        `);
+                    }
+                    updateBomTotalCost();
+                }
+            });
+
+            // Event handler for add material button
+            $(document).on('click', '#addRawMaterialToBomBtn', function() {
+                showAddRawMaterialModal();
+            });
+
+            $('#chutes_kg').on('input', function() {
+                let kg = parseFloat($(this).val()) || 0;
+                kg = roundTo2Decimals(kg);
+                $(this).val(formatKg(kg));
+
+                const volumeM3 = kg / CHUTES_DENSITY;
+                $('#chutes_volume').val(formatVolume(volumeM3));
+
+                if (kg < 0) {
+                    $('#chutes_kg').val('0.00');
+                    $('#chutes_volume').val('0.00');
+                    showToast('warning', 'La quantité ne peut pas être négative');
+                    return;
+                }
+
+                const materialSource = $('input[name="material_source"]:checked').val();
+                if (materialSource === 'both') {
+                    $('#actual_chutes_volume').val(volumeM3);
+                }
+                updateCalculations();
+            });
+
+            function checkChutesStock() {
+                const materialSource = $('input[name="material_source"]:checked').val();
+
+                if (materialSource === 'both') {
+                    $.ajax({
+                        url: "{{ route('raw-materials.get-by-code') }}",
+                        type: "GET",
+                        data: {
+                            material_code: 'CHUTE-PRODUCTION'
+                        },
+                        success: function(response) {
+                            if (response.success && response.material) {
+                                const chutesMaterial = response.material;
+                                const availableStockM3 = parseFloat(chutesMaterial.current_stock) || 0;
+                                const availableStockKg = availableStockM3 * CHUTES_DENSITY;
+                                const requestedKg = parseFloat($('#chutes_kg').val()) || 0;
+                                const requestedM3 = requestedKg / CHUTES_DENSITY;
+
+                                let stockInfoHtml = '';
+                                let stockClass = 'chutes-stock-none';
+
+                                if (availableStockM3 > 0) {
+                                    const isSufficient = availableStockM3 >= requestedM3;
+                                    const percentage = requestedM3 > 0 ? (requestedM3 /
+                                        availableStockM3 * 100).toFixed(1) : 0;
+
+                                    stockInfoHtml = `
+                            <div class="alert ${isSufficient ? 'chutes-stock-ok' : 'chutes-stock-low'}">
+                                <i class="fas ${isSufficient ? 'fa-check-circle' : 'fa-exclamation-triangle'} me-2"></i>
+                                <strong>Stock disponible:</strong><br>
+                                ${availableStockM3.toFixed(4)} m³ (${availableStockKg.toFixed(2)} kg)<br>
+                                <strong>Demandé:</strong> ${requestedM3.toFixed(4)} m³ (${requestedKg.toFixed(2)} kg)<br>
+                                ${!isSufficient ? `<small class="text-danger">⚠️ Stock insuffisant de ${Math.abs(availableStockM3 - requestedM3).toFixed(4)} m³ (${Math.abs(availableStockKg - requestedKg).toFixed(2)} kg)</small>` :
+                                                  `<small class="text-success">✓ Stock suffisant (${percentage}% utilisé)</small>`}
+                            </div>
+                        `;
+                                } else if (availableStockM3 === 0) {
+                                    stockInfoHtml = `
+                            <div class="alert chutes-stock-none">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                <strong>Aucun stock disponible</strong><br>
+                                <small>Les chutes de production ne sont pas disponibles en stock.</small>
+                                ${requestedM3 > 0 ? `<br><small>Demandé: ${requestedM3.toFixed(4)} m³ (${requestedKg.toFixed(2)} kg)</small>` : ''}
+                            </div>
+                        `;
+                                } else {
+                                    stockInfoHtml = `
+                            <div class="alert chutes-stock-none">
+                                <i class="fas fa-database me-2"></i>
+                                <strong>Stock négatif détecté</strong><br>
+                                <small>Veuillez vérifier l'inventaire des chutes.</small>
+                            </div>
+                        `;
+                                }
+
+                                $('#chutesStockInfo').html(stockInfoHtml);
+                            } else {
+                                $('#chutesStockInfo').html(`
+                        <div class="alert chutes-stock-none">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <strong>Produit "CHUTE-PRODUCTION" non trouvé</strong><br>
+                            <small>Veuillez créer ce produit dans la gestion des matières premières.</small>
+                        </div>
+                    `);
+                            }
+                        },
+                        error: function() {
+                            $('#chutesStockInfo').html(`
+                    <div class="alert chutes-stock-none">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <strong>Erreur de chargement du stock</strong>
+                    </div>
+                `);
+                        }
+                    });
+                }
+            }
+
+            function addType2ProductRow(productData = null) {
+                const index = $('.type2-product-row').length;
+
+                const decoupageProducts = @json($decoupageProducts->where('product_type', 'decoupage')->values());
+
+                let options = '<option value="">Sélectionner un produit découpage</option>';
+                decoupageProducts.forEach(product => {
+                    const selected = productData && productData.product_id == product.product_id ?
+                        'selected' : '';
+                    options += `<option value="${product.product_id}" ${selected}>
+                    ${product.product_code} - ${product.product_name}
+                </option>`;
+                });
+
+                const rowHtml = `
+            <div class="type2-product-row card mb-3" data-index="${index}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Produit Découpage *</label>
+                                <select class="form-control select2 type2-product-select"
+                                        name="type2_products[${index}][product_id]"
+                                        data-index="${index}" required>
+                                    ${options}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">Quantité à Produire *</label>
+                                <input type="number" class="form-control type2-quantity"
+                                       name="type2_products[${index}][quantity_to_produce]"
+                                       value="${productData ? productData.quantity_to_produce : ''}"
+                                       min="0.01" step="0.01"  required>
+                                <small class="form-text text-muted">Nombre de produits découpage</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">Volume/Unité</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control type2-volume"
+                                           data-index="${index}"
+                                           step="0.0001" min="0" readonly>
+                                    <span class="input-group-text">m³</span>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Actions</label>
+                                <button type="button" class="btn btn-sm btn-danger w-100 remove-type2-product" data-index="${index}">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                `;
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <small class="form-text text-muted type2-volume-info" data-index="${index}">
+                                Sélectionnez un produit pour voir son volume
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
 
-                // Add row to container
-                $('#noProductsMessage').addClass('d-none');
-                $('#type3ProductsContainer').append(rowHtml);
+                $('#noType2ProductsMessage').addClass('d-none');
+                $('#type2ProductsContainer').append(rowHtml);
 
-                // Initialize Select2 for the new select
-                $(`select[name="type3_products[${index}][product_id]"]`).select2({
+                $(`select[name="type2_products[${index}][product_id]"]`).select2({
                     language: "fr",
                     placeholder: "Sélectionner un produit",
                     allowClear: true
                 });
 
-                // Trigger calculation
+                updateType2Calculation();
+            }
+
+            function addType3ProductRow(productData = null) {
+                const index = $('.type3-product-row').length;
+
+                const salesProducts = @json($salesProducts->whereIn('product_type', ['finale', 'both'])->values());
+
+                let options = '<option value="">Sélectionner un produit</option>';
+                salesProducts.forEach(product => {
+                    const selected = productData && productData.product_id == product.product_id ?
+                        'selected' : '';
+                    options += `<option value="${product.product_id}" ${selected}>
+                    ${product.product_code} - ${product.product_name}
+                </option>`;
+                });
+
+                const rowHtml = `
+            <div class="type3-product-row card mb-3" data-index="${index}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Produit Final *</label>
+                                <select class="form-control select2 type3-product-select"
+                                        name="type3_products[${index}][product_id]"
+                                        data-index="${index}" required>
+                                    ${options}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">Quantité à Produire *</label>
+                                <input type="number" class="form-control type3-quantity"
+                                       name="type3_products[${index}][quantity_to_produce]"
+                                       value="${productData ? productData.quantity_to_produce : ''}"
+                                       min="0.01" step="0.01"  required>
+                                <small class="form-text text-muted">Nombre de produits finaux</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">Volume/Unité</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control type3-volume"
+                                           data-index="${index}"
+                                           step="0.0001" min="0" readonly>
+                                    <span class="input-group-text">m³</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Actions</label>
+                                <button type="button" class="btn btn-sm btn-danger w-100 remove-type3-product" data-index="${index}">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <small class="form-text text-muted type3-volume-info" data-index="${index}">
+                                Sélectionnez un produit pour voir son volume
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                $('#noProductsMessage').addClass('d-none');
+                $('#type3ProductsContainer').append(rowHtml);
+
+                $('#type3ProductsContainer .type3-product-row').last().find('.type3-product-select').select2({
+                    language: "fr",
+                    placeholder: "Sélectionner un produit",
+                    allowClear: true
+                });
+
                 updateType3Calculation();
             }
 
-            // Event handler for adding Type 3 products
+            function addType5ProductRow(productData = null) {
+                const index = $('.type5-product-row').length;
+
+                const salesProducts = @json($salesProducts->whereIn('product_type', ['finale', 'both'])->values());
+
+                let options = '<option value="">Sélectionner un produit</option>';
+                salesProducts.forEach(product => {
+                    const selected = productData && productData.product_id == product.product_id ?
+                        'selected' : '';
+                    options += `<option value="${product.product_id}" ${selected}>
+                    ${product.product_code} - ${product.product_name}
+                </option>`;
+                });
+
+                const rowHtml = `
+            <div class="type5-product-row card mb-3" data-index="${index}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Produit Final *</label>
+                                <select class="form-control select2 type5-product-select"
+                                        name="type5_products[${index}][product_id]"
+                                        data-index="${index}" required>
+                                    ${options}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">Quantité à Produire *</label>
+                                <input type="number" class="form-control type5-quantity"
+                                       name="type5_products[${index}][quantity_to_produce]"
+                                       value="${productData ? productData.quantity_to_produce : ''}"
+                                       min="0.01" step="0.01"  required>
+                                <small class="form-text text-muted">Nombre de produits finaux</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label">Volume/Unité</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control type5-volume"
+                                           data-index="${index}"
+                                           step="0.0001" min="0" readonly>
+                                    <span class="input-group-text">m³</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Actions</label>
+                                <button type="button" class="btn btn-sm btn-danger w-100 remove-type5-product" data-index="${index}">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <small class="form-text text-muted type5-volume-info" data-index="${index}">
+                                Sélectionnez un produit pour voir son volume
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                $('#noType5ProductsMessage').addClass('d-none');
+                $('#type5ProductsContainer').append(rowHtml);
+
+                $('#type5ProductsContainer .type5-product-row').last().find('.type5-product-select').select2({
+                    language: "fr",
+                    placeholder: "Sélectionner un produit",
+                    allowClear: true
+                });
+
+                updateType5Calculation();
+            }
+
+            // Event handlers for adding products
+            $('#addType2Product').on('click', function() {
+                addType2ProductRow();
+            });
+
             $('#addType3Product').on('click', function() {
-                if (!isDisabled) {
-                    addType3ProductRow();
+                addType3ProductRow();
+            });
+
+            $('#addType5Product').on('click', function() {
+                addType5ProductRow();
+            });
+
+            // Event handlers for removing products
+            $(document).on('click', '.remove-type2-product', function() {
+                const index = $(this).data('index');
+                $(`.type2-product-row[data-index="${index}"]`).remove();
+
+                $('.type2-product-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type2-product-select').attr('name',
+                        `type2_products[${newIndex}][product_id]`).data('index', newIndex);
+                    $(this).find('.type2-quantity').attr('name',
+                        `type2_products[${newIndex}][quantity_to_produce]`);
+                    $(this).find('.type2-volume').attr('data-index', newIndex);
+                    $(this).find('.type2-volume-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type2-product').data('index', newIndex);
+                });
+
+                if ($('.type2-product-row').length === 0) {
+                    $('#noType2ProductsMessage').removeClass('d-none');
+                }
+
+                updateType2Calculation();
+            });
+
+            $(document).on('click', '.remove-type3-product', function() {
+                const index = $(this).data('index');
+                $(`.type3-product-row[data-index="${index}"]`).remove();
+
+                $('.type3-product-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type3-product-select').attr('name',
+                        `type3_products[${newIndex}][product_id]`).data('index', newIndex);
+                    $(this).find('.type3-quantity').attr('name',
+                        `type3_products[${newIndex}][quantity_to_produce]`);
+                    $(this).find('.type3-volume').attr('data-index', newIndex);
+                    $(this).find('.type3-volume-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type3-product').data('index', newIndex);
+                });
+
+                if ($('.type3-product-row').length === 0) {
+                    $('#noProductsMessage').removeClass('d-none');
+                }
+
+                updateType3Calculation();
+            });
+
+            $(document).on('click', '.remove-type5-product', function() {
+                const index = $(this).data('index');
+                $(`.type5-product-row[data-index="${index}"]`).remove();
+
+                $('.type5-product-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type5-product-select').attr('name',
+                        `type5_products[${newIndex}][product_id]`).data('index', newIndex);
+                    $(this).find('.type5-quantity').attr('name',
+                        `type5_products[${newIndex}][quantity_to_produce]`);
+                    $(this).find('.type5-volume').attr('data-index', newIndex);
+                    $(this).find('.type5-volume-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type5-product').data('index', newIndex);
+                });
+
+                if ($('.type5-product-row').length === 0) {
+                    $('#noType5ProductsMessage').removeClass('d-none');
+                }
+
+                updateType5Calculation();
+            });
+
+            // Add sous-bloc row for Type 3
+            function addType3SousBlocRow(productData = null) {
+                const index = $('.type3-sous-bloc-row').length;
+                const decoupageProducts = @json($decoupageProducts->where('product_type', 'decoupage')->values());
+
+                let options = '<option value="">Sélectionner un sous-bloc</option>';
+                decoupageProducts.forEach(product => {
+                    const selected = productData && productData.product_id == product.product_id ? 'selected' : '';
+                    options += `<option value="${product.product_id}" ${selected}>${product.product_code} - ${product.product_name}</option>`;
+                });
+
+                const rowHtml = `
+                    <div class="type3-sous-bloc-row card mb-2" data-index="${index}">
+                        <div class="card-body py-2">
+                            <div class="row align-items-center">
+                                <div class="col-md-5">
+                                    <label class="form-label small">Sous-bloc *</label>
+                                    <select class="form-control select2 type3-sous-bloc-select"
+                                            name="type3_source_products[${index}][product_id]"
+                                            data-index="${index}" required>
+                                        ${options}
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label small">Quantité *</label>
+                                    <input type="number" class="form-control type3-sous-bloc-quantity"
+                                           name="type3_source_products[${index}][quantity]"
+                                           value="${productData ? productData.quantity : '1'}"
+                                           min="0.01" step="0.01" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label small">Volume/Unité</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control type3-sous-bloc-volume"
+                                               data-index="${index}" step="0.0001" min="0" readonly>
+                                        <span class="input-group-text">m³</span>
+                                    </div>
+                                    <small class="form-text text-muted type3-sous-bloc-info" data-index="${index}">
+                                        Sélectionnez un sous-bloc
+                                    </small>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label small">Action</label>
+                                    <button type="button" class="btn btn-sm btn-danger w-100 remove-type3-sous-bloc" data-index="${index}">
+                                        <i class="fas fa-trash"></i> Supprimer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#noSousBlocsMessage').addClass('d-none');
+                $('#type3SousBlocsContainer').append(rowHtml);
+
+                $('#type3SousBlocsContainer .type3-sous-bloc-row').last().find('.type3-sous-bloc-select').select2({
+                    language: "fr",
+                    placeholder: "Sélectionner un sous-bloc",
+                    allowClear: true
+                });
+
+                // Load familles from first sous-bloc
+                if (index === 0 && productData && productData.product_id) {
+                    loadFamilles(productData.product_id, 'type3');
+                }
+
+                updateType3Calculation();
+            }
+
+            $('#addType3SousBloc').on('click', function() {
+                addType3SousBlocRow();
+            });
+
+            $(document).on('click', '.remove-type3-sous-bloc', function() {
+                const index = $(this).data('index');
+                $(`.type3-sous-bloc-row[data-index="${index}"]`).remove();
+
+                // Re-index remaining sous-bloc rows
+                $('.type3-sous-bloc-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type3-sous-bloc-select').attr('name',
+                        `type3_source_products[${newIndex}][product_id]`).data('index', newIndex);
+                    $(this).find('.type3-sous-bloc-quantity').attr('name',
+                        `type3_source_products[${newIndex}][quantity]`);
+                    $(this).find('.type3-sous-bloc-volume').attr('data-index', newIndex);
+                    $(this).find('.type3-sous-bloc-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type3-sous-bloc').data('index', newIndex);
+                });
+
+                if ($('.type3-sous-bloc-row').length === 0) {
+                    $('#noSousBlocsMessage').removeClass('d-none');
+                }
+
+                updateType3Calculation();
+            });
+
+            $(document).on('change', '.type3-sous-bloc-select', function() {
+                const productId = $(this).val();
+                const index = $(this).data('index');
+
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            $(`.type3-sous-bloc-volume[data-index="${index}"]`).val(product.volume_per_unit.toFixed(4));
+                            $(`.type3-sous-bloc-info[data-index="${index}"]`).text(
+                                `${product.display_volume} (${product.dimensions})`
+                            );
+                        }
+                        updateType3Calculation();
+                    });
+                    // Load familles from first sous-bloc only
+                    if (index === 0) {
+                        loadFamilles(productId, 'type3');
+                    }
+                } else {
+                    $(`.type3-sous-bloc-volume[data-index="${index}"]`).val('');
+                    $(`.type3-sous-bloc-info[data-index="${index}"]`).text('Sélectionnez un sous-bloc');
+                    updateType3Calculation();
                 }
             });
 
-            // Event handler for removing Type 3 products
-            $(document).on('click', '.remove-type3-product', function() {
-                if (!isDisabled) {
-                    const index = $(this).data('index');
-                    $(`.type3-product-row[data-index="${index}"]`).remove();
+            $(document).on('input', '.type3-sous-bloc-quantity', function() {
+                updateType3Calculation();
+            });
 
-                    // Reindex remaining rows
-                    $('.type3-product-row').each(function(newIndex) {
-                        $(this).attr('data-index', newIndex);
-                        $(this).find('.type3-product-select').attr('name',
-                            `type3_products[${newIndex}][product_id]`).data('index', newIndex);
-                        $(this).find('.type3-conversion-rate').attr('name',
-                            `type3_products[${newIndex}][conversion_rate]`);
-                        $(this).find('.type3-quantity').attr('name',
-                            `type3_products[${newIndex}][quantity_to_produce]`);
-                        $(this).find('.type3-volume').attr('data-index', newIndex);
-                        $(this).find('.type3-volume-info').attr('data-index', newIndex);
-                        $(this).find('.remove-type3-product').data('index', newIndex);
+            // Event handlers for product selection
+            $(document).on('change', '.type2-product-select', function() {
+                const productId = $(this).val();
+                const index = $(this).data('index');
+
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            $(`.type2-volume[data-index="${index}"]`).val(product.volume_per_unit
+                                .toFixed(4));
+                            $(`.type2-volume-info[data-index="${index}"]`).text(
+                                `${product.display_volume} (${product.dimensions})`
+                            );
+                        }
+                        updateType2Calculation();
                     });
-
-                    // Show message if no products left
-                    if ($('.type3-product-row').length === 0) {
-                        $('#noProductsMessage').removeClass('d-none');
-                    }
-
-                    updateType3Calculation();
+                } else {
+                    $(`.type2-volume[data-index="${index}"]`).val('');
+                    $(`.type2-volume-info[data-index="${index}"]`).text(
+                        'Sélectionnez un produit pour voir son volume');
+                    updateType2Calculation();
                 }
             });
 
@@ -2303,211 +3516,857 @@
                 }
             });
 
-            function loadBOM(productId, quantity) {
-                const materialSource = $('input[name="material_source"]:checked').val();
-                const chutesVolume = $('#chutes_volume').val() || 0;
+            $(document).on('change', '.type5-product-select', function() {
+                const productId = $(this).val();
+                const index = $(this).data('index');
 
-                let bomPercentage = $('#bom_percentage').val() || 100;
-                bomPercentage = Math.round(parseFloat(bomPercentage) || 100);
-
-                $('#bom_percentage').val(bomPercentage);
-                $('#actual_bom_percentage').val(bomPercentage);
-
-                $.ajax({
-                    url: "{{ route('production-orders.get-bom') }}",
-                    type: "GET",
-                    data: {
-                        product_id: productId,
-                        quantity: quantity,
-                        material_source: materialSource,
-                        chutes_volume: chutesVolume,
-                        bom_percentage: bomPercentage,
-                        order_id: orderId
-                    },
-                    beforeSend: function() {
-                        $('#bomTableBody').html(`
-                            <tr>
-                                <td colspan="9" class="text-center">
-                                    <div class="spinner-border spinner-border-sm" role="status"></div>
-                                    Chargement de la nomenclature...
-                                </td>
-                            </tr>
-                        `);
-                        $('#bomCard').removeClass('d-none');
-                        $('#bom-quantity-display').text(quantity);
-
-                        // Update material source info
-                        let sourceInfo = '';
-                        if (materialSource === 'bom_only') {
-                            sourceInfo =
-                                '<span class="badge bg-primary">100% Matières Nouvelles</span>';
-                        } else if (materialSource === 'chutes_only') {
-                            sourceInfo = '<span class="badge bg-warning">100% Chutes Recyclées</span>';
-                        } else if (materialSource === 'both') {
-                            sourceInfo =
-                                `<span class="badge bg-success">${bomPercentage}% Matières Nouvelles + ${100-bomPercentage}% Chutes</span>`;
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            $(`.type5-volume[data-index="${index}"]`).val(product.volume_per_unit
+                                .toFixed(4));
+                            $(`.type5-volume-info[data-index="${index}"]`).text(
+                                `${product.display_volume} (${product.dimensions})`
+                            );
                         }
-                        $('#materialSourceInfo').html(sourceInfo);
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            if (response.html) {
-                                $('#bomCard').removeClass('d-none');
-                                $('#bomTableBody').html(response.html);
-                                $('#noBomAlert').addClass('d-none');
-                                $('#bomStockSummary').removeClass('d-none');
+                        updateType5Calculation();
+                    });
+                    // Load destination famille from the first product row only
+                    if (index === 0) {
+                        loadFamilles(productId, 'type5');
+                    }
+                } else {
+                    $(`.type5-volume[data-index="${index}"]`).val('');
+                    $(`.type5-volume-info[data-index="${index}"]`).text(
+                        'Sélectionnez un produit pour voir son volume');
+                    updateType5Calculation();
+                }
+            });
 
-                                // Update total cost
-                                if (response.total_cost) {
-                                    $('#bomTableFooter').html(`
-                            <tr class="table-primary">
-                                <td colspan="7" class="text-end"><strong>Coût Total Estimé:</strong></td>
-                                <td class="text-end"><strong>${response.total_cost} DH</strong></td>
-                                <td></td>
-                            </tr>
-                        `);
-                                }
+            $(document).on('input', '.type2-quantity', function() {
+                updateType2Calculation();
+            });
 
-                                // Show/hide insufficient materials alert
-                                if (response.insufficient_materials && response.insufficient_materials
-                                    .length > 0) {
-                                    let alertHtml = '<ul class="mb-0 mt-2">';
-                                    let insufficientCount = 0;
-                                    response.insufficient_materials.forEach(function(material) {
-                                        alertHtml +=
-                                            `<li><strong>${material.material}:</strong> Requis ${material.required} ${material.unit}, Disponible ${material.available} ${material.unit}</li>`;
-                                        insufficientCount++;
-                                    });
-                                    alertHtml += '</ul>';
+            $(document).on('input', '.type3-quantity', function() {
+                updateType3Calculation();
+            });
 
-                                    $('#insufficientStockList').html(alertHtml);
-                                    $('#insufficientStockAlert').removeClass('d-none');
+            $(document).on('input', '.type5-quantity', function() {
+                updateType5Calculation();
+            });
 
-                                    // Update stock summary
-                                    let stockSummaryHtml = `
-                            <div class="alert alert-danger">
-                                <h6><i class="fas fa-exclamation-triangle me-2"></i>Stock Insuffisant</h6>
-                                <p class="mb-2">${insufficientCount} matière(s) ont un stock insuffisant:</p>
-                                <ul class="mb-0">
-                        `;
-                                    response.insufficient_materials.forEach(function(material) {
-                                        const shortage = parseFloat(material.required.replace(
-                                            ',', '')) - parseFloat(material.available
-                                            .replace(',', ''));
-                                        stockSummaryHtml += `
-                                <li>
-                                    <strong>${material.material}:</strong>
-                                    <span class="text-danger">Manque ${shortage.toFixed(4)} ${material.unit}</span>
-                                </li>
-                            `;
-                                    });
-                                    stockSummaryHtml += `
-                                </ul>
-                            </div>
-                        `;
+            $('#type2_total_blocks').on('input', function() {
+                updateType2Calculation();
+            });
 
-                                    $('#stockSummaryContent').html(stockSummaryHtml);
-                                } else {
-                                    $('#insufficientStockAlert').addClass('d-none');
+            // Function to add Type 4 source product row
+            function addType4SourceRow(productData = null) {
+                const index = $('.type4-source-row').length;
 
-                                    // Show success stock summary
-                                    let stockSummaryHtml = `
-                            <div class="alert alert-success">
-                                <h6><i class="fas fa-check-circle me-2"></i>Stock Suffisant</h6>
-                                <p class="mb-0">Toutes les matières premières sont disponibles en stock.</p>
-                            </div>
-                            <div class="mt-3">
-                                <h6>Détails Stock:</h6>
-                                <p class="mb-1"><small>Quantité produite: ${quantity} unités</small></p>
-                                <p class="mb-1"><small>Type de production: ${response.material_source === 'bom_only' ? 'Matières Nouvelles' : response.material_source === 'chutes_only' ? 'Chutes Recyclées' : 'Mixte'}</small></p>
-                        `;
+                const salesProducts = @json($salesProducts);
 
-                                    if (response.material_source === 'both') {
-                                        stockSummaryHtml += `
-                                <p class="mb-0"><small>Ratio: ${bomPercentage}% matières nouvelles, ${100-bomPercentage}% chutes</small></p>
-                            `;
-                                    }
-
-                                    stockSummaryHtml += `</div>`;
-
-                                    $('#stockSummaryContent').html(stockSummaryHtml);
-                                }
-
-                                // Update cost summary
-                                let costSummaryHtml = `
-                        <h6>Coût de Production:</h6>
-                        <table class="table table-sm">
-                    `;
-
-                                if (response.material_source === 'bom_only' || response
-                                    .material_source === 'both') {
-                                    costSummaryHtml += `
-                            <tr>
-                                <td>Coût matières:</td>
-                                <td class="text-end">${response.total_cost} DH</td>
-                            </tr>
-                        `;
-                                }
-
-                                if (response.material_source === 'chutes_only' || response
-                                    .material_source === 'both') {
-                                    costSummaryHtml += `
-                            <tr>
-                                <td>Chutes recyclées:</td>
-                                <td class="text-end">0 DH</td>
-                            </tr>
-                        `;
-                                }
-
-                                costSummaryHtml += `
-                            <tr class="table-primary">
-                                <td><strong>Coût total:</strong></td>
-                                <td class="text-end"><strong>${response.total_cost} DH</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Coût unitaire:</td>
-                                <td class="text-end">${(parseFloat(response.total_cost.replace(',', '')) / quantity).toFixed(2)} DH/unité</td>
-                            </tr>
-                        </table>
-                    `;
-
-                                $('#costSummaryContent').html(costSummaryHtml);
-
-                            } else {
-                                $('#bomCard').addClass('d-none');
-                                $('#noBomAlert').removeClass('d-none');
-                                $('#noBomAlert').find('p').text(response.message ||
-                                    'Aucune nomenclature disponible');
-                                $('#insufficientStockAlert').addClass('d-none');
-                                $('#bomStockSummary').addClass('d-none');
-                            }
-                        } else {
-                            $('#bomCard').addClass('d-none');
-                            $('#noBomAlert').removeClass('d-none');
-                            $('#noBomAlert').find('p').text(response.message ||
-                                'Erreur lors du chargement de la BOM');
-                            $('#insufficientStockAlert').addClass('d-none');
-                            $('#bomStockSummary').addClass('d-none');
-                        }
-                    },
-                    error: function(xhr) {
-                        console.error('BOM loading error:', xhr);
-                        $('#bomCard').addClass('d-none');
-                        $('#noBomAlert').removeClass('d-none');
-                        $('#noBomAlert').find('p').text('Erreur lors du chargement de la nomenclature');
-                        $('#insufficientStockAlert').addClass('d-none');
-                        $('#bomStockSummary').addClass('d-none');
+                let options = '<option value="">Sélectionner un produit vente source</option>';
+                salesProducts.forEach(product => {
+                    if (product.product_type === 'finale' || product.product_type === 'both') {
+                        const selected = productData && productData.product_id == product.product_id ?
+                            'selected' : '';
+                        options += `<option value="${product.product_id}" ${selected}>
+                ${product.product_code} - ${product.product_name}
+            </option>`;
                     }
                 });
+
+                const rowHtml = `
+        <div class="type4-source-row card mb-3" data-index="${index}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="form-label">Produit Source *</label>
+                            <select class="form-control select2 type4-source-select"
+                                name="type4_source_products[${index}][product_id]"
+                                data-index="${index}" required>
+                                ${options}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Quantité à Utiliser *</label>
+                            <input type="number" class="form-control type4-source-quantity"
+                                name="type4_source_products[${index}][quantity_to_use]"
+                                value="${productData ? productData.quantity_to_use : '1'}"
+                                min="0.01" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Volume/Unité</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control type4-source-volume"
+                                    data-index="${index}"
+                                    step="0.0001" min="0" readonly>
+                                <span class="input-group-text">m³</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="form-label">Actions</label>
+                            <button type="button" class="btn btn-sm btn-danger w-100 remove-type4-source" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <small class="form-text text-muted type4-source-info" data-index="${index}">
+                            Sélectionnez un produit pour voir ses dimensions
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+                $('#noType4SourceProductsMessage').addClass('d-none');
+                $('#type4SourceProductsContainer').append(rowHtml);
+
+                $(`select[name="type4_source_products[${index}][product_id]"]`).select2({
+                    language: "fr",
+                    placeholder: "Sélectionner un produit",
+                    allowClear: true
+                });
+
+                updateType4Calculation();
             }
 
-            // Event handlers for Type 1
+            // Function to add Type 4 target product row
+            function addType4TargetRow(productData = null) {
+                const index = $('.type4-target-row').length;
+
+                const salesProducts = @json($salesProducts);
+
+                let options = '<option value="">Sélectionner un produit vente cible</option>';
+                salesProducts.forEach(product => {
+                    if (product.product_type === 'finale' || product.product_type === 'both') {
+                        const selected = productData && productData.product_id == product.product_id ?
+                            'selected' : '';
+                        options += `<option value="${product.product_id}" ${selected}>
+                ${product.product_code} - ${product.product_name}
+            </option>`;
+                    }
+                });
+
+                const rowHtml = `
+                    <div class="type4-target-row card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="form-label">Produit Cible *</label>
+                                        <select class="form-control select2 type4-target-select"
+                                            name="type4_target_products[${index}][product_id]"
+                                            data-index="${index}" required>
+                                            ${options}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Quantité à Produire *</label>
+                                        <input type="number" class="form-control type4-target-quantity"
+                                            name="type4_target_products[${index}][quantity_to_produce]"
+                                            value="${productData ? productData.quantity_to_produce : ''}"
+                                            min="0.01" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Volume/Unité</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control type4-target-volume"
+                                                data-index="${index}"
+                                                step="0.0001" min="0" readonly>
+                                            <span class="input-group-text">m³</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="form-label">Actions</label>
+                                        <button type="button" class="btn btn-sm btn-danger w-100 remove-type4-target" data-index="${index}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <small class="form-text text-muted type4-target-info" data-index="${index}">
+                                        Sélectionnez un produit pour voir ses dimensions
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#noType4TargetProductsMessage').addClass('d-none');
+                $('#type4TargetProductsContainer').append(rowHtml);
+
+                $(`select[name="type4_target_products[${index}][product_id]"]`).select2({
+                    language: "fr",
+                    placeholder: "Sélectionner un produit",
+                    allowClear: true
+                });
+
+                updateType4Calculation();
+            }
+
+            function addType4ProductRow(productData = null) {
+                const index = $('.type4-product-row').length;
+
+                const salesProducts = @json($salesProducts);
+
+                let options = '<option value="">Sélectionner un produit vente cible</option>';
+                salesProducts.forEach(product => {
+                    if (product.product_type === 'finale' || product.product_type === 'both') {
+                        const selected = productData && productData.product_id == product.product_id ?
+                            'selected' : '';
+                        options += `<option value="${product.product_id}" ${selected}>
+                ${product.product_code} - ${product.product_name}
+            </option>`;
+                    }
+                });
+
+                const rowHtml = `
+                    <div class="type4-product-row card mb-3" data-index="${index}">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="form-label">Produit Cible *</label>
+                                        <select class="form-control select2 type4-product-select"
+                                            name="type4_products[${index}][product_id]"
+                                            data-index="${index}" required>
+                                            ${options}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Quantité à Produire *</label>
+                                        <input type="number" class="form-control type4-quantity"
+                                            name="type4_products[${index}][quantity_to_produce]"
+                                            value="${productData ? productData.quantity_to_produce : ''}"
+                                            min="0.01" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Volume/Unité</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control type4-volume"
+                                                data-index="${index}"
+                                                step="0.0001" min="0" readonly>
+                                            <span class="input-group-text">m³</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="form-label">Actions</label>
+                                        <button type="button" class="btn btn-sm btn-danger w-100 remove-type4-product" data-index="${index}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <small class="form-text text-muted type4-volume-info" data-index="${index}">
+                                        Sélectionnez un produit pour voir ses dimensions
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#noType4ProductsMessage').addClass('d-none');
+                $('#type4ProductsContainer').append(rowHtml);
+
+                $(`select[name="type4_products[${index}][product_id]"]`).select2({
+                    language: "fr",
+                    placeholder: "Sélectionner un produit",
+                    allowClear: true
+                });
+
+                updateType4Calculation();
+            }
+
+            // Update Type 4 source details
+            function updateType4SourceDetails() {
+                const productId = $('#type4_source_product_id').val();
+                const totalUnits = parseFloat($('#type4_total_units').val()) || 0;
+
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            const volumePerUnit = product.volume_per_unit;
+                            const totalVolume = volumePerUnit * totalUnits;
+
+                            $('#type4_source_volume').val(volumePerUnit.toFixed(4));
+                            $('#type4_source_volume_info').text(
+                                `${product.display_volume} (${product.dimensions})`);
+                            $('#type4_total_source_volume').val(totalVolume.toFixed(4));
+
+                            updateType4Calculation();
+                            checkType4StockAvailability();
+                        }
+                    });
+                }
+            }
+
+            $(document).on('input', '.type4-quantity', function() {
+                updateType4Calculation();
+            });
+
+            $('#type4_source_product_id').on('change', function() {
+                updateType4SourceDetails();
+                loadType4Familles();
+            });
+
+            $('#type4_total_units').on('input', function() {
+                updateType4SourceDetails();
+                checkType4StockAvailability();
+            });
+
+            $('#addType4Product').on('click', function() {
+                addType4ProductRow();
+            });
+
+            $(document).on('change', '.type4-product-select', function() {
+                const productId = $(this).val();
+                const index = $(this).data('index');
+
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            $(`.type4-volume[data-index="${index}"]`).val(product.volume_per_unit
+                                .toFixed(4));
+                            $(`.type4-volume-info[data-index="${index}"]`).text(
+                                `${product.display_volume} (${product.dimensions})`
+                            );
+                            updateType4Calculation();
+                        }
+                    });
+                } else {
+                    $(`.type4-volume[data-index="${index}"]`).val('');
+                    $(`.type4-volume-info[data-index="${index}"]`).text(
+                        'Sélectionnez un produit pour voir ses dimensions');
+                    updateType4Calculation();
+                }
+            });
+
+            function loadType4Familles() {
+                const sourceProductId = $('#type4_source_product_id').val();
+
+                if (sourceProductId) {
+                    $.ajax({
+                        url: "{{ route('production-orders.get-familles') }}",
+                        type: "GET",
+                        data: {
+                            product_id: sourceProductId,
+                            famille_type: 'source'
+                        },
+                        success: function(response) {
+                            if (response.success && response.html) {
+                                const tempDiv = $('<div>').html(response.html);
+                                const selectHtml = tempDiv.find('select').prop('outerHTML');
+                                const newSelect = $(selectHtml);
+                                newSelect.attr('id', 'type4_famille_id');
+                                newSelect.attr('name', 'famille_id');
+                                newSelect.find('option').each(function() {
+                                    if ($(this).val() === '') {
+                                        $(this).text('Sélectionner la famille...');
+                                    }
+                                });
+                                $('#type4_famille_id').replaceWith(newSelect);
+                                if (editFamillePreselectId) {
+                                    $('#type4_famille_id').val(String(editFamillePreselectId));
+                                    editFamillePreselectId = null;
+                                }
+                                $('#type4_famille_id').select2({
+                                    language: "fr",
+                                    placeholder: "Sélectionner la famille",
+                                    allowClear: false
+                                });
+
+                                // Trigger stock check after famille is loaded
+                                if ($('#type4_famille_id').val()) {
+                                    checkType4StockAvailability();
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            async function checkType4StockAvailability() {
+                const sourceProductId = $('#type4_source_product_id').val();
+                const sourceQuantity = parseFloat($('#type4_total_units').val()) || 0;
+                const familleId = $('#type4_famille_id').val();
+
+                if (!sourceProductId || sourceQuantity === 0) {
+                    $('#type4InsufficientStockAlert').addClass('d-none');
+                    return;
+                }
+
+                const stockInfo = await getStockInfo(sourceProductId, familleId);
+                const isSufficient = stockInfo.available >= sourceQuantity;
+
+                if (!isSufficient && stockInfo.available > 0) {
+                    $('#type4InsufficientStockList').html(`
+            <ul class="mb-0 mt-2">
+                <li>Produit source: Requis ${sourceQuantity} unités, Disponible ${stockInfo.available} unités</li>
+            </ul>
+        `);
+                    $('#type4InsufficientStockAlert').removeClass('d-none');
+                } else if (stockInfo.available === 0 && sourceQuantity > 0) {
+                    $('#type4InsufficientStockList').html(`
+            <ul class="mb-0 mt-2">
+                <li>Produit source: Stock vide (0 unités disponible)</li>
+            </ul>
+        `);
+                    $('#type4InsufficientStockAlert').removeClass('d-none');
+                } else {
+                    $('#type4InsufficientStockAlert').addClass('d-none');
+                }
+            }
+
+            // Update Type 4 calculation
+            function updateType4Calculation() {
+                const sourceProductId = $('#type4_source_product_id').val();
+                const totalUnitsRequired = parseFloat($('#type4_total_units').val()) || 0;
+                const sourceVolumePerUnit = parseFloat($('#type4_source_volume').val()) || 0;
+                const totalSourceVolume = totalUnitsRequired * sourceVolumePerUnit;
+                const familleId = $('#type4_famille_id').val();
+
+                let totalFinalProducts = 0;
+                let totalVolume = 0;
+
+                $('.type4-product-row').each(function() {
+                    const quantityToProduce = parseFloat($(this).find('.type4-quantity').val()) || 0;
+                    const volumePerUnit = parseFloat($(this).find('.type4-volume').val()) || 0;
+
+                    totalFinalProducts += quantityToProduce;
+                    totalVolume += quantityToProduce * volumePerUnit;
+                });
+
+                $('#type4_total_volume').val(totalVolume.toFixed(4));
+
+                const wasteVolume = totalSourceVolume - totalVolume;
+
+                // Check if target volume exceeds source volume
+                if (totalVolume > totalSourceVolume && totalSourceVolume > 0) {
+                    const deficit = totalVolume - totalSourceVolume;
+                    $('#type4VolumeExceedMessage').html(`
+            <strong>⚠️ Le volume total des produits (${totalVolume.toFixed(4)} m³)
+            dépasse le volume source disponible (${totalSourceVolume.toFixed(4)} m³).</strong>
+            <br>Déficit: ${deficit.toFixed(4)} m³
+            <br>Veuillez réduire les quantités.
+        `);
+                    $('#type4VolumeExceedAlert').removeClass('d-none');
+                    $('#type4_waste_volume').val('');
+                    $('#type4_waste_info').html('<span class="text-danger">❌ Volume source insuffisant!</span>');
+                } else {
+                    $('#type4VolumeExceedAlert').addClass('d-none');
+                    $('#type4_waste_volume').val(wasteVolume.toFixed(4));
+
+                    if (wasteVolume > 0) {
+                        const wastePercentage = (wasteVolume / totalSourceVolume * 100).toFixed(2);
+                        $('#type4_waste_info').html(
+                            `<span class="text-warning">⚠️ Chute estimée: ${wasteVolume.toFixed(4)} m³ (${wastePercentage}%)</span>`
+                        );
+                    } else if (wasteVolume === 0 && totalSourceVolume > 0) {
+                        $('#type4_waste_info').html(
+                            `<span class="text-success">✓ Aucune chute (volume parfaitement optimisé)</span>`
+                        );
+                    }
+                }
+
+                $('#actual_waste_percentage').val(wasteVolume > 0 ? (wasteVolume / totalSourceVolume * 100).toFixed(
+                    2) : 0);
+                $('#actual_total_source_volume').val(totalSourceVolume);
+                $('#actual_total_produced_volume').val(totalVolume);
+                $('#actual_quantity_to_produce').val(totalFinalProducts);
+                $('#actual_required_quantity').val(totalUnitsRequired);
+
+                if (sourceProductId && familleId) {
+                    getStockInfo(sourceProductId, familleId).then(stockInfo => {
+                        const isSufficient = stockInfo.available >= totalUnitsRequired;
+
+                        if (!isSufficient && stockInfo.available > 0) {
+                            $('#type4InsufficientStockList').html(`
+                    <ul class="mb-0 mt-2">
+                        <li>Produit source: Requis ${totalUnitsRequired} unités, Disponible ${stockInfo.available} unités</li>
+                    </ul>
+                `);
+                            $('#type4InsufficientStockAlert').removeClass('d-none');
+                        } else if (stockInfo.available === 0 && totalUnitsRequired > 0) {
+                            $('#type4InsufficientStockList').html(`
+                    <ul class="mb-0 mt-2">
+                        <li>Produit source: Stock vide (0 unités disponible)</li>
+                    </ul>
+                `);
+                            $('#type4InsufficientStockAlert').removeClass('d-none');
+                        } else {
+                            $('#type4InsufficientStockAlert').addClass('d-none');
+                        }
+                    });
+                }
+            }
+
+
+
+            // Event handlers for Type 4
+            $(document).on('change', '.type4-source-select', function() {
+                const productId = $(this).val();
+                const index = $(this).data('index');
+
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            $(`.type4-source-volume[data-index="${index}"]`).val(product
+                                .volume_per_unit.toFixed(4));
+                            $(`.type4-source-info[data-index="${index}"]`).text(
+                                `${product.display_volume} (${product.dimensions})`
+                            );
+                            updateType4Calculation();
+                        }
+                    });
+                }
+            });
+
+            $(document).on('change', '.type4-target-select', function() {
+                const productId = $(this).val();
+                const index = $(this).data('index');
+
+                if (productId) {
+                    getProductDetails(productId).then(product => {
+                        if (product) {
+                            $(`.type4-target-volume[data-index="${index}"]`).val(product
+                                .volume_per_unit.toFixed(4));
+                            $(`.type4-target-info[data-index="${index}"]`).text(
+                                `${product.display_volume} (${product.dimensions})`
+                            );
+                            updateType4Calculation();
+                        }
+                    });
+                } else {
+                    $(`.type4-target-volume[data-index="${index}"]`).val('');
+                    $(`.type4-target-info[data-index="${index}"]`).text(
+                        'Sélectionnez un produit pour voir ses dimensions');
+                    updateType4Calculation();
+                }
+            });
+
+
+            $(document).on('input', '.type4-source-quantity, .type4-target-quantity', function() {
+                updateType4Calculation();
+            });
+
+            $(document).on('input', '.type4-target-quantity', function() {
+                updateType4Calculation();
+            });
+
+            $('#addType4TargetProduct').on('click', function() {
+                addType4TargetRow();
+            });
+
+            // Remove handlers
+            $(document).on('click', '.remove-type4-product', function() {
+                const index = $(this).data('index');
+                $(`.type4-product-row[data-index="${index}"]`).remove();
+
+                $('.type4-product-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type4-product-select').attr('name',
+                        `type4_products[${newIndex}][product_id]`).data('index', newIndex);
+                    $(this).find('.type4-quantity').attr('name',
+                        `type4_products[${newIndex}][quantity_to_produce]`);
+                    $(this).find('.type4-volume').attr('data-index', newIndex);
+                    $(this).find('.type4-volume-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type4-product').data('index', newIndex);
+                });
+
+                if ($('.type4-product-row').length === 0) {
+                    $('#noType4ProductsMessage').removeClass('d-none');
+                }
+
+                updateType4Calculation();
+            });
+
+            $(document).on('click', '.remove-type4-target', function() {
+                const index = $(this).data('index');
+                $(`.type4-target-row[data-index="${index}"]`).remove();
+
+                $('.type4-target-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type4-target-select').attr('name',
+                        `type4_target_products[${newIndex}][product_id]`).data('index',
+                        newIndex);
+                    $(this).find('.type4-target-quantity').attr('name',
+                        `type4_target_products[${newIndex}][quantity_to_produce]`);
+                    $(this).find('.type4-target-volume').attr('data-index', newIndex);
+                    $(this).find('.type4-target-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type4-target').data('index', newIndex);
+                });
+
+                if ($('.type4-target-row').length === 0) {
+                    $('#noType4TargetProductsMessage').removeClass('d-none');
+                }
+
+                updateType4Calculation();
+            });
+
+            function updateMaterialSourceSections() {
+                const materialSource = $('input[name="material_source"]:checked').val();
+                $('#actual_material_source').val(materialSource);
+
+                if (materialSource === 'bom_only') {
+                    $('#chutesVolumeSection').addClass('d-none');
+                    $('#actual_bom_percentage').val('100');
+                    $('#actual_chutes_volume').val('0');
+                } else if (materialSource === 'chutes_only') {
+                    $('#chutesVolumeSection').removeClass('d-none');
+                    $('#actual_bom_percentage').val('0');
+                    $('#actual_chutes_volume').val($('#chutes_volume').val() || '0');
+                    checkChutesStock();
+                } else if (materialSource === 'both') {
+                    $('#chutesVolumeSection').removeClass('d-none');
+                    $('#actual_bom_percentage').val('0');
+                    $('#actual_chutes_volume').val($('#chutes_volume').val() || '0');
+                    checkChutesStock();
+                }
+
+                const productId = $('#type1_product_id').val();
+                const quantity = $('#type1_quantity').val() || 1;
+                // if (productId && quantity >= 1) {
+                //     loadBOM(productId, quantity);
+                // }
+            }
+
+            function toggleProductionTypeSections(productionType) {
+                // Hide all sections first
+                $('#type1Section').addClass('d-none');
+                $('#type2Section').addClass('d-none');
+                $('#type3Section').addClass('d-none');
+                $('#type4Section').addClass('d-none');
+                $('#type5Section').addClass('d-none');
+                $('#bomCard').addClass('d-none');
+                $('#conversionSection').addClass('d-none');
+                $('#calculatedResultsSection').addClass('d-none');
+
+                // Clear containers
+                $('#familleContainer').empty();
+                $('#insufficientStockAlert').addClass('d-none');
+                $('#noBomAlert').addClass('d-none');
+                $('#type2VolumeExceedAlert').addClass('d-none');
+                $('#type3VolumeExceedAlert').addClass('d-none');
+                $('#type4VolumeExceedAlert').addClass('d-none');
+                $('#type4InsufficientStockAlert').addClass('d-none');
+                $('#type5VolumeExceedAlert').addClass('d-none');
+
+                // Remove required attributes from all Type 4 fields
+                $('#type4_source_product_id, #type4_source_quantity, #type4_famille_id').removeAttr('required');
+                $('#type4_source_product_id, #type4_famille_id').prop('disabled', false);
+
+                // Reset BOM table with empty state message
+                $('#bomTableBody').html(`
+                    <tr>
+                        <td colspan="10" class="text-center text-muted py-4">
+                            <i class="fas fa-box-open me-2"></i>
+                            Aucune matière première. Utilisez "Charger la nomenclature" pour charger les matières du produit, ou "Ajouter" pour ajouter manuellement.
+                        </td>
+                    </tr>
+                `);
+
+                $('#bomTableFooter').html('');
+                $('#actual_total_cost').val(0);
+
+                // Reset Type 2 products container
+                $('#type2ProductsContainer').html(`
+                    <div class="alert alert-info" id="noType2ProductsMessage">
+                        Cliquez sur "Ajouter un Produit" pour ajouter des produits découpage
+                    </div>
+                `);
+
+                // Reset Type 3 containers
+                $('#type3SousBlocsContainer').html(`
+                    <div class="alert alert-info" id="noSousBlocsMessage">
+                        Cliquez sur "Ajouter un Sous-bloc" pour ajouter des sous-blocs sources
+                    </div>
+                `);
+                $('#type3ProductsContainer').html(`
+                    <div class="alert alert-info" id="noProductsMessage">
+                        Cliquez sur "Ajouter un Produit" pour ajouter des produits finaux
+                    </div>
+                `);
+
+                // Reset Type 4 containers
+                $('#type4SourceProductsContainer').html(`
+                    <div class="alert alert-info" id="noType4SourceProductsMessage">
+                        Cliquez sur "Ajouter un produit source" pour sélectionner les produits à transformer
+                    </div>
+                `);
+                $('#type4TargetProductsContainer').html(`
+                    <div class="alert alert-info" id="noType4TargetProductsMessage">
+                        Cliquez sur "Ajouter un produit cible" pour ajouter les produits à produire
+                    </div>
+                `);
+
+                // Reset Type 5 container
+                $('#type5ProductsContainer').html(`
+                    <div class="alert alert-info" id="noType5ProductsMessage">
+                        Cliquez sur "Ajouter un Produit" pour ajouter des produits finaux
+                    </div>
+                `);
+                $('#type5_chutes_volume').val('');
+                $('#type5_chutes_volume_display').val('');
+                $('#type5ChutesStockInfo').html('');
+
+                // Reset input values
+                $('#type2_total_blocks').val('');
+                $('#type2_total_decoupage_products').val('');
+                $('#type2_total_volume').val('');
+                $('#type3_total_final_products').val('');
+                $('#type3_total_volume').val('');
+                $('#type4_total_source_volume').val('');
+                $('#type4_total_target_volume').val('');
+                $('#type4_waste_volume').val('');
+                $('#type5_total_volume').val('');
+                $('#type5_waste_volume').val('');
+                $('#type5_waste_info').html('');
+
+                // Reset hidden fields
+                $('#actual_product_id').val('');
+                $('#actual_source_product_id').val('');
+                $('#actual_quantity_to_produce').val('');
+                $('#actual_required_quantity').val('');
+                $('#actual_decoupage_ratio').val('');
+                $('#actual_conversion_rate').val('');
+                $('#actual_waste_percentage').val('0');
+                $('#actual_material_source').val('bom_only');
+                $('#actual_bom_percentage').val('100');
+                $('#actual_chutes_volume').val('0');
+                $('#actual_total_cost').val('0');
+                $('#actual_total_source_volume').val('0');
+                $('#actual_total_produced_volume').val('0');
+
+                $('#bomOnly').prop('checked', true);
+                updateMaterialSourceSections();
+
+                if (productionType === 'type1') {
+                    $('#type1Section').removeClass('d-none');
+
+                    $('#type4_source_product_id, #type4_source_quantity, #type4_famille_id').removeAttr('required');
+
+                    const productId = $('#type1_product_id').val();
+                    const quantity = $('#type1_quantity').val() || 1;
+
+                    if (productId) {
+                        loadFamilles(productId, 'type1');
+                        updateVolumeCalculations('type1');
+                        checkChutesStock();
+                        $('#bomCard').removeClass('d-none');
+                    }
+
+                } else if (productionType === 'type2') {
+                    $('#type2Section').removeClass('d-none');
+                    $('#bomCard').addClass('d-none');
+                    $('#noBomAlert').addClass('d-none');
+
+                    $('#type4_source_product_id, #type4_source_quantity, #type4_famille_id').removeAttr('required');
+
+                    $('.type2-product-row').remove();
+                    addType2ProductRow();
+
+                    const sourceProductId = $('#type2_source_product_id').val();
+
+                    if (sourceProductId) {
+                        loadFamilles(sourceProductId, 'type2');
+                        updateType2Calculation();
+                        updateVolumeCalculations('type2');
+                    } else {
+                        updateType2Calculation();
+                    }
+
+                } else if (productionType === 'type3') {
+                    $('#type3Section').removeClass('d-none');
+                    $('#bomCard').addClass('d-none');
+                    $('#noBomAlert').addClass('d-none');
+
+                    $('#type4_source_product_id, #type4_source_quantity, #type4_famille_id').removeAttr('required');
+
+                    $('.type3-sous-bloc-row').remove();
+                    $('.type3-product-row').remove();
+                    addType3SousBlocRow();
+                    addType3ProductRow();
+
+                    updateType3Calculation();
+
+                } else if (productionType === 'type4') {
+                    $('#type4Section').removeClass('d-none');
+                    $('#bomCard').addClass('d-none');
+
+                    $('#type4ProductsContainer').html(`
+                        <div class="alert alert-info" id="noType4ProductsMessage">
+                            Cliquez sur "Ajouter un Produit" pour ajouter des produits
+                        </div>
+                    `);
+
+                    $('.type4-product-row').remove();
+                    addType4ProductRow();
+
+                    if ($('#type4_source_product_id').val()) {
+                        updateType4SourceDetails();
+                        loadType4Familles();
+                    }
+
+                    updateType4Calculation();
+
+                } else if (productionType === 'type5') {
+                    $('#type5Section').removeClass('d-none');
+                    $('#bomCard').addClass('d-none');
+                    $('#noBomAlert').addClass('d-none');
+
+                    $('#type4_source_product_id, #type4_source_quantity, #type4_famille_id').removeAttr('required');
+
+                    $('.type5-product-row').remove();
+                    addType5ProductRow();
+
+                    updateType5Calculation();
+                }
+            }
+
             $('#type1_product_id').change(function() {
                 const productId = $(this).val();
                 if (productId) {
                     loadFamilles(productId, 'type1');
-                    const quantity = $('#type1_quantity').val() || 1;
-                    loadBOM(productId, quantity);
+
+                    $('#bomTableBody').html(`
+                        <tr>
+                            <td colspan="10" class="text-center text-muted py-4">
+                                <i class="fas fa-box-open me-2"></i>
+                                Aucune matière première. Cliquez sur "Charger la nomenclature" pour charger les matières du produit.
+                            </td>
+                        </tr>
+                    `);
+                    $('#bomTableFooter').html('');
+                    $('#bomCard').removeClass('d-none');
                     updateVolumeCalculations('type1');
                     checkChutesStock();
                 } else {
@@ -2516,20 +4375,52 @@
                 }
             });
 
+            // $('#loadBomBtn').on('click', function() {
+            //     const productId = $('#type1_product_id').val();
+            //     const quantity = $('#type1_quantity').val() || 1;
+
+            //     if (!productId) {
+            //         showToast('error', 'Veuillez d\'abord sélectionner un produit');
+            //         return;
+            //     }
+
+            //     if (confirm('Charger la nomenclature va remplacer les matières actuelles. Continuer ?')) {
+            //         loadBOM(productId, quantity);
+            //     }
+            // });
+
+            $('#clearBomBtn').on('click', function() {
+                if (confirm(
+                        'Vider la nomenclature va supprimer toutes les matières actuelles. Continuer ?')) {
+                    $('#bomTableBody').html(`
+                    <tr>
+                        <td colspan="10" class="text-center text-muted py-4">
+                            <i class="fas fa-box-open me-2"></i>
+                            Aucune matière première. Utilisez "Charger la nomenclature" pour charger les matières du produit, ou "Ajouter" pour ajouter manuellement.
+                        </td>
+                    </tr>
+                `);
+                    $('#bomTableFooter').html('');
+                    $('#actual_total_cost').val(0);
+
+                    $('input[name^="bom_consumptions"]').remove();
+
+                    showToast('success', 'Nomenclature vidée avec succès');
+                }
+            });
+
             $('#type1_quantity').on('input', function() {
                 const productId = $('#type1_product_id').val();
                 const quantity = $(this).val();
                 if (productId && quantity >= 1) {
-                    loadBOM(productId, quantity);
+                    // loadBOM(productId, quantity);
                     updateVolumeCalculations('type1');
                 }
             });
 
-            // Event handlers for Type 2
             $('#type2_source_product_id').change(function() {
                 const productId = $(this).val();
 
-                // Reset famille selection
                 $('#source_famille_id').val('').trigger('change');
                 $('#familleContainer').empty();
 
@@ -2543,303 +4434,360 @@
                 }
             });
 
-            $('#type2_final_product_id').change(function() {
-                updateType2Calculation();
-                updateVolumeCalculations('type2');
-            });
 
-            $('#type2_quantity, #decoupage_ratio').on('input', function() {
-                updateType2Calculation();
-                updateVolumeCalculations('type2');
-            });
-
-            // Event handlers for Type 3
-            $('#type3_source_product_id').change(function() {
-                const productId = $(this).val();
-
-                // Reset famille selection
-                $('#source_famille_id').val('').trigger('change');
-                $('#familleContainer').empty();
-
-                if (productId) {
-                    loadFamilles(productId, 'type3');
-                    updateType3Calculation();
-                    updateVolumeCalculations('type3');
-                } else {
-                    $('#calculatedResultsSection').addClass('d-none');
-                    $('#insufficientStockAlert').addClass('d-none');
-                }
-            });
-
-            $(document).on('input', '.type3-conversion-rate, .type3-quantity', function() {
-                if (!isDisabled) {
-                    updateType3Calculation();
-                }
-            });
-
-            // Cancel production button
-            $('#cancelProductionBtn').click(function() {
-                $('#cancelProductionModal').modal('show');
-            });
-
-            // Confirm cancel production
-            $('#confirmCancelProduction').click(function() {
-                const reason = $('#cancellationReason').val();
-                const notes = $('#additionalNotes').val();
-
-                if (!reason) {
-                    showToast('error', 'Veuillez sélectionner une raison d\'annulation');
-                    return;
-                }
-
-                const btn = $(this);
-                btn.prop('disabled', true).html(
-                    '<span class="spinner-border spinner-border-sm me-2"></span> Annulation...'
-                );
-
-                $.ajax({
-                    url: "{{ route('production-orders.cancel-production', $order->order_id) }}",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        reason: reason,
-                        additional_notes: notes
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $('#cancelProductionModal').modal('hide');
-                            showToast('success', response.message);
-                            setTimeout(() => {
-                                window.location.href =
-                                    "{{ route('production-orders.index') }}";
-                            }, 1500);
-                        } else {
-                            showToast('error', response.message);
-                        }
-                    },
-                    error: function(xhr) {
-                        showToast('error', xhr.responseJSON?.message ||
-                            'Erreur lors de l\'annulation');
-                    },
-                    complete: function() {
-                        btn.prop('disabled', false).html(
-                            '<i class="fas fa-ban me-2"></i>Annuler la Production'
-                        );
-                    }
-                });
-            });
-
-            // Form submission
-            $('#editProductionOrderForm').submit(function(e) {
+            $('#productionOrderForm').submit(function(e) {
                 e.preventDefault();
 
-                // Clear any previous validation errors
-                $('.is-invalid').removeClass('is-invalid');
-                $('.invalid-feedback').hide();
+                const productionType = $('input[name="production_type"]:checked').val();
+                let hasValidationError = false;
 
-                let isValid = true;
-                let firstInvalidField = null;
+                // First, remove required attributes from all Type 4 fields to prevent browser validation
+                $('#type4_source_product_id, #type4_source_quantity, #type4_famille_id').removeAttr(
+                    'required');
 
-                // Common validation for all types
-                if (!$('#priority').val()) {
-                    $('#priority').addClass('is-invalid');
-                    isValid = false;
-                    if (!firstInvalidField) firstInvalidField = $('#priority');
-                }
-
-                if (!$('#start_date').val()) {
-                    $('#start_date').addClass('is-invalid');
-                    isValid = false;
-                    if (!firstInvalidField) firstInvalidField = $('#start_date');
-                }
-
-                if (!$('#expected_completion_date').val()) {
-                    $('#expected_completion_date').addClass('is-invalid');
-                    isValid = false;
-                    if (!firstInvalidField) firstInvalidField = $('#expected_completion_date');
-                }
-
-                // Validate dates
-                const startDate = new Date($('#start_date').val());
-                const endDate = new Date($('#expected_completion_date').val());
-                if (endDate < startDate) {
-                    $('#expected_completion_date').addClass('is-invalid');
-                    $('#expected_completion_date').siblings('.invalid-feedback').text(
-                        'La date de fin ne peut pas être antérieure à la date de début').show();
-                    isValid = false;
-                    if (!firstInvalidField) firstInvalidField = $('#expected_completion_date');
-                }
-
-                // Type-specific validation - ONLY VALIDATE VISIBLE AND ENABLED FIELDS
-                if (currentProductionType === 'type1') {
-                    // Validate Type 1 fields (only if visible and not disabled)
-                    if ($('#type1_product_id').is(':visible') && !$('#type1_product_id').is(':disabled') &&
-                        !$('#type1_product_id').val()) {
-                        $('#type1_product_id').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#type1_product_id');
-                    }
-
-                    const type1Quantity = $('#type1_quantity').val();
-                    if ($('#type1_quantity').is(':visible') && !$('#type1_quantity').is(':disabled') && (!
-                            type1Quantity || type1Quantity < 1)) {
-                        $('#type1_quantity').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#type1_quantity');
-                    }
-
-                    // Validate material source fields
+                if (productionType === 'type1') {
+                    const productId = $('#type1_product_id').val();
+                    const quantity = $('#type1_quantity').val();
                     const materialSource = $('input[name="material_source"]:checked').val();
-                    if ((materialSource === 'chutes_only' || materialSource === 'both') &&
-                        $('#chutes_volume').is(':visible') && !$('#chutes_volume').is(':disabled')) {
-                        const chutesVolume = $('#chutes_volume').val();
-                        if (!chutesVolume || parseFloat(chutesVolume) <= 0) {
-                            $('#chutes_volume').addClass('is-invalid');
-                            isValid = false;
-                            if (!firstInvalidField) firstInvalidField = $('#chutes_volume');
+
+                    if (!productId) {
+                        showToast('error', 'Veuillez sélectionner un produit à produire');
+                        hasValidationError = true;
+                    }
+                    if (!quantity || parseFloat(quantity) < 0.01) {
+                        showToast('error', 'Veuillez saisir une quantité valide');
+                        hasValidationError = true;
+                    }
+
+                    if (materialSource === 'chutes_only') {
+                        const chutesVolume = $('#chutes_volume').val() || 0;
+                        if (!chutesVolume || chutesVolume <= 0) {
+                            showToast('error', 'Veuillez saisir un volume de chutes valide');
+                            hasValidationError = true;
                         }
                     }
+                } else if (productionType === 'type2') {
+                    // Add required attributes back for Type 2 validation
+                    const sourceProductId = $('#type2_source_product_id').val();
+                    const productRows = $('.type2-product-row');
+                    const totalBlocksRequired = $('#type2_total_blocks').val();
 
-                    if (materialSource === 'both' && $('#bom_percentage').is(':visible') && !$(
-                            '#bom_percentage').is(':disabled')) {
-                        const bomPercentage = $('#bom_percentage').val();
-                        if (!bomPercentage || bomPercentage < 0 || bomPercentage > 100) {
-                            $('#bom_percentage').addClass('is-invalid');
-                            isValid = false;
-                            if (!firstInvalidField) firstInvalidField = $('#bom_percentage');
+                    const totalVolume = parseFloat($('#type2_total_volume').val()) || 0;
+                    const sourceProduct = $('#type2_source_product_id option:selected').text();
+
+                    let sourceVolumePerUnit = 0;
+                    let sourceVolumeTotal = 0;
+
+                    const sourceVolumeValue = $('#type2_source_volume').val();
+                    if (sourceVolumeValue && totalBlocksRequired) {
+                        sourceVolumePerUnit = parseFloat(sourceVolumeValue) || 0;
+                        sourceVolumeTotal = sourceVolumePerUnit * totalBlocksRequired;
+                    }
+
+                    if (!sourceProductId) {
+                        showToast('error', 'Veuillez sélectionner un produit source');
+                        hasValidationError = true;
+                    }
+
+                    if (productRows.length === 0) {
+                        showToast('error', 'Veuillez ajouter au moins un produit découpage');
+                        hasValidationError = true;
+                    }
+
+                    if (!totalBlocksRequired || parseFloat(totalBlocksRequired) < 0.01) {
+                        showToast('error', 'Veuillez saisir le nombre total de blocs requis');
+                        hasValidationError = true;
+                    }
+
+                    if (sourceVolumeTotal > 0 && totalVolume > sourceVolumeTotal) {
+                        showToast('error',
+                            `Le volume total des produits (${totalVolume.toFixed(4)} m³) dépasse le volume source disponible (${sourceVolumeTotal.toFixed(4)} m³). ` +
+                            `Veuillez réduire la quantité à produire ou augmenter le nombre de blocs.`
+                        );
+                        hasValidationError = true;
+                    }
+
+                    productRows.each(function(index) {
+                        const productSelect = $(this).find('.type2-product-select');
+                        const quantityToProduce = $(this).find('.type2-quantity').val();
+
+                        if (!productSelect.val()) {
+                            showToast('error',
+                                'Veuillez sélectionner un produit découpage pour la ligne ' + (
+                                    index + 1));
+                            hasValidationError = true;
                         }
-                    }
-
-                } else if (currentProductionType === 'type2') {
-                    // Validate Type 2 fields (only if visible and not disabled)
-                    if ($('#type2_source_product_id').is(':visible') && !$('#type2_source_product_id').is(
-                            ':disabled') &&
-                        !$('#type2_source_product_id').val()) {
-                        $('#type2_source_product_id').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#type2_source_product_id');
-                    }
-
-                    if ($('#type2_final_product_id').is(':visible') && !$('#type2_final_product_id').is(
-                            ':disabled') &&
-                        !$('#type2_final_product_id').val()) {
-                        $('#type2_final_product_id').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#type2_final_product_id');
-                    }
-
-                    const type2Quantity = $('#type2_quantity').val();
-                    if ($('#type2_quantity').is(':visible') && !$('#type2_quantity').is(':disabled') &&
-                        (!type2Quantity || type2Quantity < 1)) {
-                        $('#type2_quantity').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#type2_quantity');
-                    }
-
-                    const decoupageRatio = $('#decoupage_ratio').val();
-                    if ($('#decoupage_ratio').is(':visible') && !$('#decoupage_ratio').is(':disabled') &&
-                        (!decoupageRatio || decoupageRatio < 1)) {
-                        $('#decoupage_ratio').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#decoupage_ratio');
-                    }
-
-                } else if (currentProductionType === 'type3') {
-                    // Validate Type 3 fields (only if visible and not disabled)
-                    if ($('#type3_source_product_id').is(':visible') && !$('#type3_source_product_id').is(
-                            ':disabled') &&
-                        !$('#type3_source_product_id').val()) {
-                        $('#type3_source_product_id').addClass('is-invalid');
-                        isValid = false;
-                        if (!firstInvalidField) firstInvalidField = $('#type3_source_product_id');
-                    }
-
-                    // Validate Type 3 products
+                        if (!quantityToProduce || parseFloat(quantityToProduce) < 0.01) {
+                            showToast('error',
+                                'Veuillez saisir une quantité à produire valide pour la ligne ' +
+                                (index + 1));
+                            hasValidationError = true;
+                        }
+                    });
+                } else if (productionType === 'type3') {
+                    const sousBlocRows = $('.type3-sous-bloc-row');
                     const productRows = $('.type3-product-row');
+                    const totalVolume = parseFloat($('#type3_total_volume').val()) || 0;
+                    const totalSourceVolume = parseFloat($('#type3_total_source_volume').val()) || 0;
+
+                    if (sousBlocRows.length === 0) {
+                        showToast('error', 'Veuillez ajouter au moins un sous-bloc source');
+                        hasValidationError = true;
+                    }
+
                     if (productRows.length === 0) {
                         showToast('error', 'Veuillez ajouter au moins un produit final');
-                        return;
+                        hasValidationError = true;
                     }
 
-                    productRows.each(function() {
+                    if (totalSourceVolume > 0 && totalVolume > totalSourceVolume) {
+                        showToast('error',
+                            `Le volume total des produits finaux (${totalVolume.toFixed(4)} m³) dépasse le volume source disponible (${totalSourceVolume.toFixed(4)} m³). ` +
+                            `Veuillez réduire les quantités ou ajouter des sous-blocs.`
+                        );
+                        hasValidationError = true;
+                    }
+
+                    sousBlocRows.each(function(index) {
+                        const select = $(this).find('.type3-sous-bloc-select');
+                        const qty = $(this).find('.type3-sous-bloc-quantity').val();
+                        if (!select.val()) {
+                            showToast('error', 'Veuillez sélectionner un sous-bloc pour la ligne ' + (index + 1));
+                            hasValidationError = true;
+                        }
+                        if (!qty || parseFloat(qty) < 0.01) {
+                            showToast('error', 'Veuillez saisir une quantité valide pour le sous-bloc ligne ' + (index + 1));
+                            hasValidationError = true;
+                        }
+                    });
+
+                    productRows.each(function(index) {
                         const productSelect = $(this).find('.type3-product-select');
-                        const conversionRate = $(this).find('.type3-conversion-rate').val();
-                        const quantity = $(this).find('.type3-quantity').val();
+                        const quantityToProduce = $(this).find('.type3-quantity').val();
 
-                        if (productSelect.is(':visible') && !productSelect.is(':disabled') && !
-                            productSelect.val()) {
-                            productSelect.addClass('is-invalid');
-                            isValid = false;
-                            if (!firstInvalidField) firstInvalidField = productSelect;
+                        if (!productSelect.val()) {
+                            showToast('error',
+                                'Veuillez sélectionner un produit final pour la ligne ' + (index + 1));
+                            hasValidationError = true;
                         }
-
-                        if ($(this).find('.type3-conversion-rate').is(':visible') && !$(this).find(
-                                '.type3-conversion-rate').is(':disabled') &&
-                            (!conversionRate || conversionRate < 0.01)) {
-                            $(this).find('.type3-conversion-rate').addClass('is-invalid');
-                            isValid = false;
-                            if (!firstInvalidField) firstInvalidField = $(this).find(
-                                '.type3-conversion-rate');
+                        if (!quantityToProduce || parseFloat(quantityToProduce) < 0.01) {
+                            showToast('error',
+                                'Veuillez saisir une quantité à produire valide pour la ligne ' + (index + 1));
+                            hasValidationError = true;
                         }
+                    });
+                } else if (productionType === 'type4') {
+                    const sourceProductId = $('#type4_source_product_id').val();
+                    const totalUnitsRequired = $('#type4_total_units').val();
+                    const familleId = $('#type4_famille_id').val();
+                    const productRows = $('.type4-product-row');
 
-                        if ($(this).find('.type3-quantity').is(':visible') && !$(this).find(
-                                '.type3-quantity').is(':disabled') &&
-                            (!quantity || quantity < 1)) {
-                            $(this).find('.type3-quantity').addClass('is-invalid');
-                            isValid = false;
-                            if (!firstInvalidField) firstInvalidField = $(this).find(
-                                '.type3-quantity');
+                    const totalVolume = parseFloat($('#type4_total_volume').val()) || 0;
+                    const totalSourceVolume = parseFloat($('#type4_total_source_volume').val()) || 0;
+
+                    if (!sourceProductId) {
+                        showToast('error', 'Veuillez sélectionner un produit source');
+                        hasValidationError = true;
+                    }
+
+                    if (sourceProductId) {
+                        $('input[name="source_product_id"]').remove();
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: 'source_product_id',
+                            value: sourceProductId
+                        }).appendTo('#productionOrderForm');
+                    }
+
+                    if (!totalUnitsRequired || parseFloat(totalUnitsRequired) < 0.01) {
+                        showToast('error', 'Veuillez saisir le nombre total d\'unités requis');
+                        hasValidationError = true;
+                    }
+
+                    if (!familleId) {
+                        showToast('error', 'Veuillez sélectionner une famille');
+                        hasValidationError = true;
+                    }
+
+                    if (productRows.length === 0) {
+                        showToast('error', 'Veuillez ajouter au moins un produit');
+                        hasValidationError = true;
+                    }
+
+                    if (totalVolume > totalSourceVolume && totalSourceVolume > 0) {
+                        showToast('error',
+                            `Le volume total des produits (${totalVolume.toFixed(4)} m³) dépasse le volume source disponible (${totalSourceVolume.toFixed(4)} m³).`
+                        );
+                        hasValidationError = true;
+                    }
+
+                    productRows.each(function(index) {
+                        const productSelect = $(this).find('.type4-product-select');
+                        const quantityToProduce = $(this).find('.type4-quantity').val();
+
+                        if (!productSelect.val()) {
+                            showToast('error', 'Veuillez sélectionner un produit pour la ligne ' + (
+                                index + 1));
+                            hasValidationError = true;
+                        }
+                        if (!quantityToProduce || parseFloat(quantityToProduce) < 0.01) {
+                            showToast('error',
+                                'Veuillez saisir une quantité à produire valide pour la ligne ' +
+                                (index + 1));
+                            hasValidationError = true;
+                        }
+                    });
+                } else if (productionType === 'type5') {
+                    const chutesVolume = parseFloat($('#type5_chutes_volume').val()) || 0;
+                    const familleId = $('#famille_id').val();
+                    const productRows = $('.type5-product-row');
+                    const totalVolume = parseFloat($('#type5_total_volume').val()) || 0;
+
+                    if (!chutesVolume || chutesVolume <= 0) {
+                        showToast('error', 'Veuillez saisir un volume de chutes valide');
+                        hasValidationError = true;
+                    }
+
+                    if (!familleId) {
+                        showToast('error', 'Veuillez sélectionner une famille de destination');
+                        hasValidationError = true;
+                    }
+
+                    if (productRows.length === 0) {
+                        showToast('error', 'Veuillez ajouter au moins un produit final');
+                        hasValidationError = true;
+                    }
+
+                    if (chutesVolume > 0 && totalVolume > chutesVolume) {
+                        showToast('error',
+                            `Le volume total des produits (${totalVolume.toFixed(4)} m³) dépasse le volume de chutes alloué (${chutesVolume.toFixed(4)} m³). ` +
+                            `Veuillez ajouter plus de chutes ou réduire les quantités.`
+                        );
+                        hasValidationError = true;
+                    }
+
+                    productRows.each(function(index) {
+                        const productSelect = $(this).find('.type5-product-select');
+                        const quantityToProduce = $(this).find('.type5-quantity').val();
+
+                        if (!productSelect.val()) {
+                            showToast('error',
+                                'Veuillez sélectionner un produit final pour la ligne ' + (index + 1));
+                            hasValidationError = true;
+                        }
+                        if (!quantityToProduce || parseFloat(quantityToProduce) < 0.01) {
+                            showToast('error',
+                                'Veuillez saisir une quantité à produire valide pour la ligne ' + (index + 1));
+                            hasValidationError = true;
                         }
                     });
                 }
 
-                if (!isValid) {
-                    showToast('error', 'Veuillez corriger les erreurs dans le formulaire.');
-                    if (firstInvalidField) {
-                        firstInvalidField.focus();
-                    }
+                if (hasValidationError) {
                     return;
                 }
 
-                // Prepare data - ensure bom_percentage is integer
-                let bomPercentage = $('#bom_percentage').val();
-                if (bomPercentage) {
-                    bomPercentage = Math.round(parseFloat(bomPercentage) || 0);
-                    $('#bom_percentage').val(bomPercentage);
-                    $('#actual_bom_percentage').val(bomPercentage);
-                }
+                const $form = $(this);
 
-                // Ensure decoupage_ratio is integer
-                let decoupageRatio = $('#decoupage_ratio').val();
-                if (decoupageRatio) {
-                    decoupageRatio = parseInt(decoupageRatio) || 1;
-                    $('#decoupage_ratio').val(decoupageRatio);
-                    $('#actual_decoupage_ratio').val(decoupageRatio);
-                }
+                if (productionType === 'type5') {
+                    const chutesVolume = parseFloat($('#type5_chutes_volume').val()) || 0;
 
-                const formData = $(this).serialize();
+                    $.ajax({
+                        url: "{{ route('raw-materials.get-by-code') }}",
+                        type: "GET",
+                        data: {
+                            material_code: 'CHUTE-PRODUCTION'
+                        },
+                        success: function(response) {
+                            const availableStockM3 = (response.success && response.material) ?
+                                (parseFloat(response.material.current_stock) || 0) : 0;
+
+                            if (availableStockM3 >= chutesVolume) {
+                                submitProductionOrder($form, false);
+                            } else {
+                                confirmChutesOverride($form, chutesVolume, availableStockM3);
+                            }
+                        },
+                        error: function() {
+                            // Can't verify stock right now; don't block submission on a network hiccup.
+                            submitProductionOrder($form, false);
+                        }
+                    });
+                } else {
+                    submitProductionOrder($form, false);
+                }
+            });
+
+            function confirmChutesOverride($form, chutesVolume, availableStockM3) {
+                const deficit = chutesVolume - availableStockM3;
+
+                Swal.fire({
+                    title: 'Stock de chutes insuffisant',
+                    html: `Disponible: <strong>${availableStockM3.toFixed(4)} m³</strong><br>` +
+                        `Demandé: <strong>${chutesVolume.toFixed(4)} m³</strong><br>` +
+                        `Manquant: <strong>${deficit.toFixed(4)} m³</strong>`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Continuer quand même',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (!result.isConfirmed) return;
+
+                    Swal.fire({
+                        title: 'Confirmez à nouveau',
+                        html: 'Le stock de chutes deviendra <strong>négatif</strong> de ' +
+                            `${deficit.toFixed(4)} m³ si vous continuez.<br>Voulez-vous vraiment continuer ?`,
+                        icon: 'error',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Oui, je confirme',
+                        cancelButtonText: 'Annuler'
+                    }).then((result2) => {
+                        if (result2.isConfirmed) {
+                            submitProductionOrder($form, true);
+                        }
+                    });
+                });
+            }
+
+            function submitProductionOrder($form, forceChutes) {
                 const submitBtn = $('#submitBtn');
-
                 submitBtn.prop('disabled', true).html(
-                    '<i class="fas fa-spinner fa-spin me-1"></i> Mise à jour...'
-                );
+                    '<i class="fas fa-spinner fa-spin me-2"></i>Mise à jour en cours...');
+
+                const formData = $form.serializeArray();
+                formData.push({
+                    name: '_method',
+                    value: 'PUT'
+                });
+                if (forceChutes) {
+                    formData.push({
+                        name: 'force_chutes',
+                        value: '1'
+                    });
+                }
 
                 $.ajax({
                     url: "{{ route('production-orders.update', $order->order_id) }}",
                     type: "POST",
-                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: $.param(formData),
                     success: function(response) {
                         if (response.success) {
                             showToast('success', response.message);
-                            setTimeout(() => {
+                            setTimeout(function() {
                                 window.location.href =
                                     "{{ route('production-orders.show', $order->order_id) }}";
                             }, 1500);
                         } else {
                             showToast('error', response.message);
                             submitBtn.prop('disabled', false).html(
-                                '<i class="fas fa-save me-1"></i> Mettre à jour'
-                            );
+                                '<i class="fas fa-save me-2"></i>Mettre à jour l\'Ordre');
                         }
                     },
                     error: function(xhr) {
@@ -2854,193 +4802,16 @@
                             });
                         } else {
                             errorMessage = xhr.responseJSON?.message ||
-                                'Une erreur est survenue lors de la mise à jour';
+                                'Une erreur est survenue';
                         }
 
                         showToast('error', errorMessage);
                         submitBtn.prop('disabled', false).html(
-                            '<i class="fas fa-save me-1"></i> Mettre à jour'
-                        );
+                            '<i class="fas fa-save me-2"></i>Mettre à jour l\'Ordre');
                     }
                 });
-            });
-
-            function updateRequiredFields() {
-                const productionType = currentProductionType;
-                const materialSource = $('input[name="material_source"]:checked').val();
-
-                // Remove all required attributes first
-                $('input, select, textarea').removeAttr('required');
-
-                // Add novalidate to form to disable HTML5 validation
-                $('#editProductionOrderForm').attr('novalidate', 'novalidate');
-
-                // Add required attributes based on production type - ONLY FOR VISIBLE AND ENABLED FIELDS
-                if (productionType === 'type1') {
-                    // Type 1 specific fields
-                    if ($('#type1_product_id').is(':visible') && !$('#type1_product_id').is(':disabled')) {
-                        $('#type1_product_id').attr('required', 'required');
-                    }
-                    if ($('#type1_quantity').is(':visible') && !$('#type1_quantity').is(':disabled')) {
-                        $('#type1_quantity').attr('required', 'required');
-                    }
-
-                    // Material source specific requirements
-                    if ((materialSource === 'chutes_only' || materialSource === 'both') &&
-                        $('#chutes_volume').is(':visible') && !$('#chutes_volume').is(':disabled')) {
-                        $('#chutes_volume').attr('required', 'required');
-                    }
-                    if (materialSource === 'both' &&
-                        $('#bom_percentage').is(':visible') && !$('#bom_percentage').is(':disabled')) {
-                        $('#bom_percentage').attr('required', 'required');
-                    }
-
-                } else if (productionType === 'type2') {
-                    // Type 2 specific fields
-                    if ($('#type2_source_product_id').is(':visible') && !$('#type2_source_product_id').is(
-                            ':disabled')) {
-                        $('#type2_source_product_id').attr('required', 'required');
-                    }
-                    if ($('#type2_final_product_id').is(':visible') && !$('#type2_final_product_id').is(
-                            ':disabled')) {
-                        $('#type2_final_product_id').attr('required', 'required');
-                    }
-                    if ($('#type2_quantity').is(':visible') && !$('#type2_quantity').is(':disabled')) {
-                        $('#type2_quantity').attr('required', 'required');
-                    }
-                    if ($('#decoupage_ratio').is(':visible') && !$('#decoupage_ratio').is(':disabled')) {
-                        $('#decoupage_ratio').attr('required', 'required');
-                    }
-
-                } else if (productionType === 'type3') {
-                    // Type 3 specific fields
-                    if ($('#type3_source_product_id').is(':visible') && !$('#type3_source_product_id').is(
-                            ':disabled')) {
-                        $('#type3_source_product_id').attr('required', 'required');
-                    }
-
-                    // Type 3 product rows - only if visible and not disabled
-                    $('.type3-product-select:visible:not(:disabled), .type3-conversion-rate:visible:not(:disabled), .type3-quantity:visible:not(:disabled)')
-                        .each(function() {
-                            $(this).attr('required', 'required');
-                        });
-                }
-
-                // Common required fields (always visible and not disabled)
-                if (!$('#priority').is(':disabled')) $('#priority').attr('required', 'required');
-                if (!$('#start_date').is(':disabled')) $('#start_date').attr('required', 'required');
-                if (!$('#expected_completion_date').is(':disabled')) $('#expected_completion_date').attr('required',
-                    'required');
             }
 
-            function toggleProductionTypeSections(productionType) {
-                // Reset all dynamic sections
-                $('#type1Section').addClass('d-none');
-                $('#type2Section').addClass('d-none');
-                $('#type3Section').addClass('d-none');
-                $('#chutesSection').addClass('d-none');
-                $('#bomCard').addClass('d-none');
-                $('#conversionSection').addClass('d-none');
-                $('#type2ConversionSection').addClass('d-none');
-                $('#calculatedResultsSection').addClass('d-none');
-                $('#familleContainer').empty();
-                $('#insufficientStockAlert').addClass('d-none');
-                $('#noBomAlert').addClass('d-none');
-
-                // Clear Type 3 products container
-                $('#type3ProductsContainer').html(`
-                    <div class="alert alert-info" id="noProductsMessage">
-                        Cliquez sur "Ajouter un Produit" pour ajouter des produits finaux
-                    </div>
-                `);
-
-                // Clear hidden fields
-                $('#actual_product_id').val('');
-                $('#actual_source_product_id').val('');
-                $('#actual_quantity_to_produce').val('');
-                $('#actual_required_quantity').val('');
-                $('#actual_decoupage_ratio').val('');
-                $('#actual_conversion_rate').val('');
-                $('#actual_waste_percentage').val('0');
-                $('#actual_material_source').val('bom_only');
-                $('#actual_bom_percentage').val('100');
-                $('#actual_chutes_volume').val('0');
-
-                // Reset material source to BOM only for Type 1
-                $('#bomOnly').prop('checked', true);
-                updateMaterialSourceSections();
-
-                // Show selected type section
-                if (productionType === 'type1') {
-                    $('#type1Section').removeClass('d-none');
-                    $('#chutesSection').removeClass('d-none'); // Show chutes section only for Type 1
-
-                    // Load BOM for selected product if exists
-                    const productId = $('#type1_product_id').val();
-                    if (productId) {
-                        loadFamilles(productId, 'type1');
-                        const quantity = $('#type1_quantity').val() || 1;
-                        loadBOM(productId, quantity);
-                        updateVolumeCalculations('type1');
-                        checkChutesStock();
-                    }
-                } else if (productionType === 'type2') {
-                    $('#type2Section').removeClass('d-none');
-                    $('#conversionSection').removeClass('d-none');
-                    $('#type2ConversionSection').removeClass('d-none');
-                    // DO NOT show chutes section or BOM card for Type 2
-                    $('#chutesSection').addClass('d-none');
-                    $('#bomCard').addClass('d-none');
-
-                    // Reset values
-                    $('#decoupage_ratio').val(1);
-
-                    const productId = $('#type2_source_product_id').val();
-                    if (productId) {
-                        loadFamilles(productId, 'type2');
-                        updateType2Calculation();
-                        updateVolumeCalculations('type2');
-                    }
-                } else if (productionType === 'type3') {
-                    $('#type3Section').removeClass('d-none');
-                    $('#conversionSection').addClass('d-none');
-                    // DO NOT show chutes section or BOM card for Type 3
-                    $('#chutesSection').addClass('d-none');
-                    $('#bomCard').addClass('d-none');
-
-                    // Reset values
-                    $('#type3_total_sous_blocs').val('');
-                    $('#type3_total_volume').val('');
-                    $('#type3_total_final_products').val('');
-
-                    const sourceProductId = $('#type3_source_product_id').val();
-                    if (sourceProductId) {
-                        loadFamilles(sourceProductId, 'type3');
-                        updateType3Calculation();
-                        updateVolumeCalculations('type3');
-                    }
-                }
-            }
-
-
-            // Production type change handler
-            $('input[name="production_type"]').change(function() {
-                currentProductionType = $(this).val();
-                toggleProductionTypeSections(currentProductionType);
-                updateRequiredFields();
-            });
-
-            // Material source change handler
-            $('input[name="material_source"]').change(function() {
-                const materialSource = $(this).val();
-                toggleMaterialSourceSections(materialSource);
-                updateRequiredFields();
-            });
-
-            toggleProductionTypeSections(currentProductionType);
-            updateRequiredFields();
-
-            // Toast notification function
             function showToast(type, message) {
                 const toast = $(`
                     <div class="toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -3051,46 +4822,162 @@
                     </div>
                 `);
 
+                if ($('#toast-container').length === 0) {
+                    $('body').append(
+                        '<div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>'
+                    );
+                }
+
                 $('#toast-container').append(toast);
                 const bsToast = new bootstrap.Toast(toast[0]);
                 bsToast.show();
                 setTimeout(() => toast.remove(), 5000);
             }
 
-            // Initial setup based on current production type
-            if (currentProductionType === 'type1') {
-                // Load Type 1 initial data
-                const productId = $('#type1_product_id').val();
-                const quantity = $('#type1_quantity').val() || 1;
-                if (productId) {
-                    loadFamilles(productId, 'type1');
-                    loadBOM(productId, quantity);
-                    checkChutesStock();
-                }
-                updateMaterialSourceSections();
-            } else if (currentProductionType === 'type2') {
-                // Load Type 2 initial data and trigger calculation
-                const sourceProductId = $('#type2_source_product_id').val();
-                if (sourceProductId) {
-                    loadFamilles(sourceProductId, 'type2');
-                    setTimeout(() => {
-                        updateType2Calculation();
-                    }, 500);
-                }
-            } else if (currentProductionType === 'type3') {
-                // Load Type 3 initial data and trigger calculation
-                const sourceProductId = $('#type3_source_product_id').val();
-                if (sourceProductId) {
-                    loadFamilles(sourceProductId, 'type3');
-                    setTimeout(() => {
-                        updateType3Calculation();
-                    }, 500);
-                }
+            // ============================================================
+            // EDIT MODE: render the order's saved articles (sources and
+            // produced products with their quantities) for every type.
+            // toggleProductionTypeSections() is NOT called on load: it
+            // resets the containers and would wipe the saved data.
+            // ============================================================
+            const editData = {
+                productionType: @json($order->production_type),
+                familleId: @json($order->famille_id),
+                sourceFamilleId: @json($order->source_famille_id),
+                orderProducts: @json($orderProducts->values()),
+                sourceProducts: @json($sourceProducts->values()),
+                bomConsumptions: @json($bomConsumptions),
+            };
+
+            // Fetch volumes for prefilled rows (the change handler normally does
+            // this when a user picks a product; prefilled selects never fire it).
+            function refreshPrefilledRowVolumes(selectClass, volumeClass, infoClass, recalculate) {
+                $(selectClass).each(function() {
+                    const productId = $(this).val();
+                    const index = $(this).data('index');
+                    if (productId) {
+                        getProductDetails(productId).then(product => {
+                            if (product) {
+                                $(`${volumeClass}[data-index="${index}"]`).val(product.volume_per_unit.toFixed(4));
+                                $(`${infoClass}[data-index="${index}"]`).text(
+                                    `${product.display_volume} (${product.dimensions})`);
+                            }
+                            recalculate();
+                        });
+                    }
+                });
             }
 
-            // Initialize material source sections
-            updateMaterialSourceSections();
-            updateBomPercentageInfo();
+            function prefillBomRows(consumptions) {
+                if (!consumptions || consumptions.length === 0) return;
+
+                $('#bomTableBody').empty();
+                const productionQty = parseFloat($('#type1_quantity').val()) || 1;
+
+                consumptions.forEach(c => {
+                    const materialId = c.material_id;
+                    const plannedQuantity = parseFloat(c.planned_quantity) || 0;
+                    const quantityPerUnit = plannedQuantity / productionQty;
+                    const unitCost = parseFloat(c.unit_cost) || 0;
+                    const totalCost = plannedQuantity * unitCost;
+                    const stock = parseFloat(c.current_stock) || 0;
+                    const isChutes = c.material_code === 'CHUTE-PRODUCTION';
+                    const displayUnit = isChutes ? 'm³' : (c.unit || 'unité');
+
+                    let stockBadge = '';
+                    if (stock <= 0) {
+                        stockBadge = '<span class="badge bg-danger">Épuisé</span>';
+                    } else if (stock < plannedQuantity) {
+                        stockBadge = '<span class="badge bg-warning">Stock insuffisant</span>';
+                    } else if (stock < 10) {
+                        stockBadge = '<span class="badge bg-warning">Stock faible</span>';
+                    } else {
+                        stockBadge = '<span class="badge bg-success">Stock OK</span>';
+                    }
+
+                    const rowClass = isChutes ? 'table-warning' : '';
+                    const iconClass = isChutes ? 'fas fa-recycle text-warning' : 'fas fa-box text-primary';
+
+                    const rowHtml = `
+    <tr class="bom-item-row ${rowClass}" data-material-id="${materialId}">
+        <td><div class="d-flex align-items-center"><i class="${iconClass} me-2"></i><div><div class="fw-medium">${escapeHtml(c.material_name)}</div><small class="text-muted">${escapeHtml(c.material_code)}</small></div></div></td>
+        <td><code>${escapeHtml(c.material_code)}</code></td>
+        <td class="text-center"><input type="number" class="form-control form-control-sm bom-quantity-required" value="${quantityPerUnit.toFixed(2)}" step="0.0001" min="0" style="width: 100px; display: inline-block;"></td>
+        <td class="text-center bom-stock-available">${stock.toFixed(2)} ${stockBadge}</td>
+        <td class="text-center"><input type="number" class="form-control form-control-sm bom-planned-quantity" value="${plannedQuantity.toFixed(2)}" step="0.0001" min="0" style="width: 120px; display: inline-block;"><input type="hidden" name="bom_consumptions[${materialId}][material_id]" value="${materialId}"><input type="hidden" name="bom_consumptions[${materialId}][planned_quantity]" value="${plannedQuantity.toFixed(2)}"><input type="hidden" name="bom_consumptions[${materialId}][quantity_required]" value="${quantityPerUnit.toFixed(2)}"><input type="hidden" name="bom_consumptions[${materialId}][save_to_product]" value="0"></td>
+        <td class="text-center">${escapeHtml(displayUnit)}</td>
+        <td class="text-center bom-unit-cost">${unitCost.toFixed(2)} DH</td>
+        <td class="text-center bom-item-total">${totalCost.toFixed(2)} DH</td>
+        <td class="text-center"><span class="badge ${stock >= plannedQuantity ? (stock < 10 ? 'bg-warning' : 'bg-success') : 'bg-danger'}">${stock >= plannedQuantity ? (stock < 10 ? '⚠️ Stock faible' : '✓ Suffisant') : '⚠️ Stock insuffisant'}</span></td>
+        <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger remove-bom-item" data-material-id="${materialId}"><i class="fas fa-trash"></i></button></td>
+    </tr>
+`;
+
+                    $('#bomTableBody').append(rowHtml);
+                });
+
+                attachBomEventHandlers();
+                updateBomTotalCost();
+            }
+
+            (function initializeEditMode() {
+                const type = editData.productionType;
+
+                if (type === 'type1') {
+                    editFamillePreselectId = editData.familleId;
+                    const productId = $('#type1_product_id').val();
+                    if (productId) {
+                        loadFamilles(productId, 'type1');
+                        updateVolumeCalculations('type1');
+                    }
+                    $('#bomCard').removeClass('d-none');
+                    prefillBomRows(editData.bomConsumptions);
+                    updateType1Calculation();
+
+                } else if (type === 'type2') {
+                    editFamillePreselectId = editData.sourceFamilleId;
+                    const sourceProductId = $('#type2_source_product_id').val();
+                    if (sourceProductId) {
+                        loadFamilles(sourceProductId, 'type2');
+                        updateVolumeCalculations('type2');
+                    }
+                    editData.orderProducts.forEach(p => addType2ProductRow(p));
+                    refreshPrefilledRowVolumes('.type2-product-select', '.type2-volume',
+                        '.type2-volume-info', updateType2Calculation);
+
+                } else if (type === 'type3') {
+                    editFamillePreselectId = editData.sourceFamilleId;
+                    // First sous-bloc row loads the source familles (see addType3SousBlocRow)
+                    editData.sourceProducts.forEach(sb => addType3SousBlocRow(sb));
+                    editData.orderProducts.forEach(p => addType3ProductRow(p));
+                    refreshPrefilledRowVolumes('.type3-sous-bloc-select', '.type3-sous-bloc-volume',
+                        '.type3-sous-bloc-info', updateType3Calculation);
+                    refreshPrefilledRowVolumes('.type3-product-select', '.type3-volume',
+                        '.type3-volume-info', updateType3Calculation);
+
+                } else if (type === 'type4') {
+                    editFamillePreselectId = editData.familleId;
+                    if ($('#type4_source_product_id').val()) {
+                        updateType4SourceDetails();
+                        loadType4Familles();
+                    }
+                    editData.orderProducts.forEach(p => addType4ProductRow(p));
+                    refreshPrefilledRowVolumes('.type4-product-select', '.type4-volume',
+                        '.type4-volume-info', updateType4Calculation);
+
+                } else if (type === 'type5') {
+                    editFamillePreselectId = editData.familleId;
+                    checkType5ChutesStock();
+                    editData.orderProducts.forEach(p => addType5ProductRow(p));
+                    refreshPrefilledRowVolumes('.type5-product-select', '.type5-volume',
+                        '.type5-volume-info', updateType5Calculation);
+                    // Destination famille comes from the first produced article
+                    if (editData.orderProducts.length > 0) {
+                        loadFamilles(editData.orderProducts[0].product_id, 'type5');
+                    }
+                    updateType5Calculation();
+                }
+            })();
         });
     </script>
 @endpush

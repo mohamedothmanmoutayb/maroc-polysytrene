@@ -385,6 +385,126 @@
                                 <input type="file" class="form-control" id="api_document" name="document" accept=".pdf,.jpg,.jpeg,.png">
                             </div>
                         </div>
+                        <!-- Payment Method Details Section (Cheque/Traite) — same as client page -->
+                        <div id="apiPaymentDetailsSection" style="display: none;">
+                            <!-- Cheque Details -->
+                            <div id="apiChequeDetails" style="display: none;">
+                                <div class="card mt-3 mb-3">
+                                    <div class="card-header bg-light">
+                                        <h6 class="mb-0"><i class="fas fa-check-circle me-2"></i>Détails du Chèque</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="api_check_number" class="form-label">Numéro de chèque *</label>
+                                                <input type="text" class="form-control" id="api_check_number"
+                                                    name="check_number">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="api_check_amount" class="form-label">Montant *</label>
+                                                <input type="number" class="form-control" id="api_check_amount"
+                                                    name="check_amount" step="0.01">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="api_bank_name" class="form-label">Banque *</label>
+                                                <input type="text" class="form-control" id="api_bank_name"
+                                                    name="bank_name">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="api_account_holder" class="form-label">Titulaire du compte
+                                                    *</label>
+                                                <input type="text" class="form-control" id="api_account_holder"
+                                                    name="account_holder">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="api_issue_date" class="form-label">Date d'émission *</label>
+                                                <input type="date" class="form-control" id="api_issue_date"
+                                                    value="{{ date('Y-m-d') }}" name="issue_date">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="api_deposit_date" class="form-label">Date d'échéance *</label>
+                                                <input type="date" class="form-control" id="api_deposit_date"
+                                                    value="{{ date('Y-m-d') }}" name="deposit_date">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="api_check_images" class="form-label">Document (Recto/Verso)</label>
+                                            <input type="file" class="form-control" id="api_check_images"
+                                                name="check_images[]" accept="image/*,application/pdf" multiple>
+                                            <small class="text-muted">Vous pouvez sélectionner plusieurs fichiers (recto,
+                                                verso)</small>
+                                        </div>
+                                        <div id="apiCheckImagesPreview" class="mt-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Traite Details -->
+                            <div id="apiTraiteDetails" style="display: none;">
+                                <div class="card mt-3 mb-3">
+                                    <div class="card-header bg-light">
+                                        <h6 class="mb-0"><i class="fas fa-file-invoice me-2"></i>Détails de la Traite
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="api_traite_number" class="form-label">Numéro de traite *</label>
+                                                <input type="text" class="form-control" id="api_traite_number"
+                                                    name="traite_number">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="api_traite_amount" class="form-label">Montant *</label>
+                                                <input type="number" class="form-control" id="api_traite_amount"
+                                                    name="traite_amount" step="0.01">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="api_traite_bank_name" class="form-label">Banque *</label>
+                                                <input type="text" class="form-control" id="api_traite_bank_name"
+                                                    name="traite_bank_name">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="api_drawee" class="form-label">Tiré (Nom/Entreprise) *</label>
+                                                <input type="text" class="form-control" id="api_drawee"
+                                                    name="drawee">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="api_traite_issue_date" class="form-label">Date d'émission
+                                                    *</label>
+                                                <input type="date" class="form-control" id="api_traite_issue_date"
+                                                    value="{{ date('Y-m-d') }}" name="traite_issue_date">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="api_due_date" class="form-label">Date d'échéance *</label>
+                                                <input type="date" class="form-control" id="api_due_date"
+                                                    value="{{ date('Y-m-d') }}" name="due_date">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="api_drawee_address" class="form-label">Adresse du tiré</label>
+                                            <textarea class="form-control" id="api_drawee_address" name="drawee_address" rows="2"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="api_traite_document" class="form-label">Document (Traite
+                                                scannée)</label>
+                                            <input type="file" class="form-control" id="api_traite_document"
+                                                name="traite_document" accept="image/*,application/pdf">
+                                            <small class="text-muted">Uploader la traite scannée (PDF, JPEG, PNG)</small>
+                                        </div>
+                                        <div id="apiTraiteDocumentPreview" class="mt-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label">Notes</label>
                             <textarea class="form-control" id="api_notes" name="notes" rows="2"></textarea>
@@ -703,7 +823,86 @@
             $('#apiUnpaidOrdersTable tbody').empty();
             $('#apiDistributionPreview').hide();
             $('#api_date').val(new Date().toISOString().split('T')[0]);
+            $('#apiPaymentDetailsSection').hide();
+            $('#apiChequeDetails').hide();
+            $('#apiTraiteDetails').hide();
+            $('#apiCheckImagesPreview').empty();
+            $('#apiTraiteDocumentPreview').empty();
+            $('#api_check_number, #api_check_amount, #api_bank_name, #api_account_holder, #api_issue_date, #api_traite_number, #api_traite_amount, #api_traite_bank_name, #api_drawee, #api_traite_issue_date, #api_due_date')
+                .prop('required', false);
             $('#addPaymentIndexModal').modal('show');
+        });
+
+        // Show cheque/traite details depending on the method — same as client page
+        $('#api_method').on('change', function () {
+            var method = $(this).val();
+            $('#apiPaymentDetailsSection').show();
+
+            if (method === 'check') {
+                $('#apiChequeDetails').show();
+                $('#apiTraiteDetails').hide();
+                $('#api_check_number, #api_check_amount, #api_bank_name, #api_account_holder, #api_issue_date')
+                    .prop('required', true);
+                $('#api_traite_number, #api_traite_amount, #api_traite_bank_name, #api_drawee, #api_traite_issue_date, #api_due_date')
+                    .prop('required', false);
+            } else if (method === 'traite') {
+                $('#apiChequeDetails').hide();
+                $('#apiTraiteDetails').show();
+                $('#api_traite_number, #api_traite_amount, #api_traite_bank_name, #api_drawee, #api_traite_issue_date, #api_due_date')
+                    .prop('required', true);
+                $('#api_check_number, #api_check_amount, #api_bank_name, #api_account_holder, #api_issue_date')
+                    .prop('required', false);
+            } else {
+                $('#apiPaymentDetailsSection').hide();
+                $('#apiChequeDetails').hide();
+                $('#apiTraiteDetails').hide();
+                $('#api_check_number, #api_check_amount, #api_bank_name, #api_account_holder, #api_issue_date, #api_traite_number, #api_traite_amount, #api_traite_bank_name, #api_drawee, #api_traite_issue_date, #api_due_date')
+                    .prop('required', false);
+            }
+        });
+
+        // File previews for cheque images and traite document
+        $('#api_check_images').on('change', function () {
+            var previewContainer = $('#apiCheckImagesPreview');
+            previewContainer.empty();
+            if (this.files) {
+                Array.from(this.files).forEach(function (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewContainer.append($(
+                            '<div class="position-relative d-inline-block me-2 mb-2" style="width:120px;">' +
+                            '<div class="border rounded p-1 bg-light text-center">' +
+                            (file.type.indexOf('image/') === 0
+                                ? '<img src="' + e.target.result + '" class="img-fluid rounded" style="height:80px;object-fit:cover;">'
+                                : '<i class="fas fa-file-pdf fa-3x text-danger"></i>') +
+                            '<div class="small text-truncate mt-1">' + escHtml(file.name) + '</div>' +
+                            '</div></div>'
+                        ));
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+
+        $('#api_traite_document').on('change', function () {
+            var previewContainer = $('#apiTraiteDocumentPreview');
+            previewContainer.empty();
+            if (this.files && this.files[0]) {
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    previewContainer.append($(
+                        '<div class="position-relative d-inline-block me-2 mb-2" style="width:150px;">' +
+                        '<div class="border rounded p-2 bg-light text-center">' +
+                        (file.type.indexOf('image/') === 0
+                            ? '<img src="' + e.target.result + '" class="img-fluid rounded" style="height:100px;object-fit:cover;">'
+                            : '<i class="fas fa-file-pdf fa-4x text-danger"></i>') +
+                        '<div class="small text-truncate mt-1">' + escHtml(file.name) + '</div>' +
+                        '</div></div>'
+                    ));
+                };
+                reader.readAsDataURL(file);
+            }
         });
 
         // Client selected → load balance & unpaid orders
@@ -824,6 +1023,39 @@
         // Submit add payment form — send selected order amounts
         $('#addPaymentIndexForm').submit(function (e) {
             e.preventDefault();
+
+            var amount = parseFloat($('#api_amount').val()) || 0;
+            var paymentMethod = $('#api_method').val();
+
+            // Cheque/traite validation — same rules as the client page
+            if (paymentMethod === 'check') {
+                if (!$('#api_check_number').val()) {
+                    showToast('error', 'Veuillez saisir le numéro de chèque');
+                    return;
+                }
+                if (!$('#api_check_amount').val()) {
+                    showToast('error', 'Veuillez saisir le montant du chèque');
+                    return;
+                }
+                if (parseFloat($('#api_check_amount').val()) !== amount) {
+                    showToast('error', 'Le montant du chèque doit être égal au montant du paiement');
+                    return;
+                }
+            } else if (paymentMethod === 'traite') {
+                if (!$('#api_traite_number').val()) {
+                    showToast('error', 'Veuillez saisir le numéro de traite');
+                    return;
+                }
+                if (!$('#api_traite_amount').val()) {
+                    showToast('error', 'Veuillez saisir le montant de la traite');
+                    return;
+                }
+                if (parseFloat($('#api_traite_amount').val()) !== amount) {
+                    showToast('error', 'Le montant de la traite doit être égal au montant du paiement');
+                    return;
+                }
+            }
+
             var $btn = $(this).find('button[type="submit"]');
             $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Enregistrement...');
 
