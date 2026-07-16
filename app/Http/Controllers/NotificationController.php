@@ -71,11 +71,7 @@ class NotificationController extends Controller
                 ];
             }
 
-            // Sort: unread first, then newest
             usort($notifications, function ($a, $b) {
-                if ($a['is_read'] !== $b['is_read']) {
-                    return $a['is_read'] ? 1 : -1;
-                }
                 return strcmp($b['date'], $a['date']);
             });
 
