@@ -382,6 +382,9 @@ class TraiteController extends Controller
             } elseif ($oldStatus === 'paid' && $request->status !== 'paid') {
                 // Traite was paid but now is not - reverse payment
                 $this->reverseTraitePayment($traite);
+            } elseif ($request->status === 'bounced' && $oldStatus !== 'bounced' && $traite->payment_id) {
+                // Traite bounced but had already been counted as a payment - reverse the client's solde
+                $this->reverseTraitePayment($traite);
             } elseif ($request->status === 'paid' && ($oldAmount != $request->amount || $oldOrderId != $request->order_id || $oldClientId != $clientId)) {
                 // Traite is paid but details changed - update payment
                 $this->updateTraitePayment($traite, $oldAmount, $oldOrderId, $oldClientId);
@@ -516,6 +519,12 @@ class TraiteController extends Controller
                 ], 400);
             }
 
+            // If this traite had already been counted as a payment (e.g. recorded
+            // at order creation), reverse it so the client's solde reflects the bounce.
+            if ($traite->payment_id) {
+                $this->reverseTraitePayment($traite);
+            }
+
             $traite->update([
                 'status' => 'bounced'
             ]);
@@ -524,7 +533,7 @@ class TraiteController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Traite marquée comme rejetée!'
+                'message' => 'Traite marquée comme rejetée! Le solde client a été mis à jour.'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();

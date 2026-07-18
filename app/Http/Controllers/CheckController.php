@@ -6,6 +6,9 @@ use App\Models\Check;
 use App\Models\CheckAllocation;
 use App\Models\RawMaterialPurchase;
 use App\Models\Client;
+use App\Models\ClientBalanceHistory;
+use App\Models\SalesOrder;
+use App\Models\SalesOrderPayment;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;    
 use Illuminate\Support\Facades\DB;
@@ -499,29 +502,106 @@ class CheckController extends Controller
 
     public function markAsBounced($id)
     {
+        DB::beginTransaction();
         try {
             $check = Check::findOrFail($id);
 
             if (in_array($check->status, ['cleared', 'bounced', 'cancelled'])) {
+                DB::rollBack();
                 return response()->json([
                     'success' => false,
                     'message' => 'Ce chèque ne peut pas être marqué comme rebondi.'
                 ], 400);
             }
 
+            // If this check had already been counted as a client payment, reverse it
+            // so the client's solde reflects the bounce.
+            if ($check->check_type === 'client' && $check->payment_id) {
+                $this->reverseCheckPayment($check);
+            }
+
             $check->update(['status' => 'bounced']);
+
+            DB::commit();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Chèque marqué comme rebondi!'
+                'message' => 'Chèque marqué comme rebondi! Le solde client a été mis à jour.'
             ]);
 
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'success' => false,
                 'message' => 'Erreur lors de l\'opération: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Reverse the client payment/balance impact of a bounced client check.
+     */
+    private function reverseCheckPayment($check)
+    {
+        $payment = SalesOrderPayment::find($check->payment_id);
+
+        if ($payment) {
+            $order = $check->order_id ? SalesOrder::find($check->order_id) : null;
+
+            if ($order) {
+                $order->paid_amount -= $payment->amount;
+                $order->save();
+                $order->updatePaymentStatus();
+
+                $client = Client::find($check->client_id);
+                if ($client) {
+                    $client->updateBalanceFromOrder($order, 'payment_deleted', $check->amount);
+                }
+            } else {
+                $this->updateClientBalance(
+                    $check->client_id,
+                    $check->amount,
+                    'debit',
+                    $check,
+                    "Annulation du crédit suite au rejet du chèque #{$check->check_number}"
+                );
+            }
+
+            $payment->delete();
+        }
+
+        $check->update(['payment_id' => null]);
+    }
+
+    /**
+     * Update client balance using the existing Client model methods.
+     */
+    private function updateClientBalance($clientId, $amount, $type, $check, $description = null)
+    {
+        $client = Client::find($clientId);
+        if (!$client) {
+            return;
+        }
+
+        $previousBalance = $client->balance;
+        $newBalance = $type === 'credit' ? $previousBalance + $amount : $previousBalance - $amount;
+
+        $client->balance = $newBalance;
+        $client->save();
+
+        ClientBalanceHistory::create([
+            'client_id' => $clientId,
+            'previous_balance' => $previousBalance,
+            'new_balance' => $newBalance,
+            'amount' => $type === 'credit' ? $amount : -$amount,
+            'type' => $type === 'credit' ? 'check_credit' : 'check_debit',
+            'reference_type' => 'check',
+            'reference_id' => $check->check_id,
+            'description' => $description ?: ($type === 'credit'
+                ? "Crédit via chèque #{$check->check_number}"
+                : "Débit via annulation chèque #{$check->check_number}"),
+            'created_by' => Auth::id(),
+        ]);
     }
 
     public function getStatistics()

@@ -16,6 +16,9 @@ class Check extends Model
     protected $fillable = [
         'check_number',
         'check_type',
+        'client_id',
+        'order_id',
+        'payment_id',
         'amount',
         'remaining_amount',
         'bank_name',
@@ -44,6 +47,21 @@ class Check extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(SalesOrder::class, 'order_id');
+    }
+
+    public function salesOrderPayment()
+    {
+        return $this->belongsTo(SalesOrderPayment::class, 'payment_id');
     }
 
     public function allocations()

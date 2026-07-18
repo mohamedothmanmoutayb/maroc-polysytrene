@@ -59,6 +59,42 @@ class SalesOrder extends Model
         return $this->hasMany(CreditNote::class, 'sales_order_id');
     }
 
+    public function getRemainingAmountAttribute()
+    {
+        return max(0, $this->final_amount - $this->paid_amount);
+    }
+
+    /**
+     * Recompute paid_amount from the payments relation, then refresh payment_status.
+     */
+    public function updatePaidAmount()
+    {
+        $this->paid_amount = $this->payments()->sum('amount');
+        $this->save();
+
+        $this->updatePaymentStatus();
+
+        return $this;
+    }
+
+    /**
+     * Refresh payment_status from the current paid_amount/final_amount (does not touch paid_amount).
+     */
+    public function updatePaymentStatus()
+    {
+        if ($this->paid_amount >= $this->final_amount - 0.01) {
+            $this->payment_status = 'paid';
+        } elseif ($this->paid_amount > 0) {
+            $this->payment_status = 'partial';
+        } else {
+            $this->payment_status = 'pending';
+        }
+
+        $this->save();
+
+        return $this;
+    }
+
     /**
      * Invoice lines that include this vente among their sources (see
      * InvoiceItem::sourceSales() — a line can be sourced from several ventes

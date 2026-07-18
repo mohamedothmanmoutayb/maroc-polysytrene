@@ -738,6 +738,9 @@ class SalesOrderController extends Controller
         $check = new Check();
         $check->check_number = $paymentData['check_number'];
         $check->check_type = 'client';
+        $check->client_id = $order->client_id;
+        $check->order_id = $order->order_id;
+        $check->payment_id = $payment->payment_id;
         $check->amount = $paymentData['amount'];
         $check->remaining_amount = $paymentData['amount'];
         $check->bank_name = $paymentData['bank_name'];
