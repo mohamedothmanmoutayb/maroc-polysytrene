@@ -443,6 +443,7 @@ class PurchaseController extends Controller
                 $check = Check::create([
                     'check_number' => $request->check_number,
                     'check_type' => 'client',
+                    'client_id' => $client->client_id,
                     'amount' => $request->check_amount,
                     'remaining_amount' => $request->check_amount,
                     'bank_name' => $request->bank_name,
@@ -709,12 +710,22 @@ class PurchaseController extends Controller
                 }
             }
 
-            // Link the traite to the payment so the règlement page can find it
-            if ($traite && $firstPayment) {
-                $traite->update([
-                    'payment_id' => $firstPayment->payment_id,
-                    'order_id' => $firstPayment->order_id,
-                ]);
+            // Link the cheque/traite to the payment so the règlement page can find
+            // it, and so a later bounce correctly reverses the client's solde.
+            if ($firstPayment) {
+                if ($traite) {
+                    $traite->update([
+                        'payment_id' => $firstPayment->payment_id,
+                        'order_id' => $firstPayment->order_id,
+                    ]);
+                }
+
+                if (isset($check)) {
+                    $check->update([
+                        'payment_id' => $firstPayment->payment_id,
+                        'order_id' => $firstPayment->order_id,
+                    ]);
+                }
             }
 
             DB::commit();
