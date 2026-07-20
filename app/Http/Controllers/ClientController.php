@@ -599,6 +599,7 @@ class ClientController extends Controller
                 $check = Check::create([
                     'check_number' => $request->check_number,
                     'check_type' => 'client',
+                    'client_id' => $client->client_id,
                     'amount' => $request->check_amount,
                     'remaining_amount' => $request->check_amount,
                     'bank_name' => $request->bank_name,
@@ -661,13 +662,13 @@ class ClientController extends Controller
                     'notes' => $request->notes ?: ($request->reference ? 'Réf: ' . $request->reference : 'Paiement direct sans commande'),
                 ];
 
-                // if ($request->payment_method === 'check') {
-                //     $paymentData['check_id'] = $checkOrTraiteId;
-                // } elseif ($request->payment_method === 'traite') {
-                //     $paymentData['traite_id'] = $checkOrTraiteId;
-                // }
-
                 $payment = SalesOrderPayment::create($paymentData);
+
+                if ($request->payment_method === 'check') {
+                    $check->update(['payment_id' => $payment->payment_id]);
+                } elseif ($request->payment_method === 'traite') {
+                    $traite->update(['payment_id' => $payment->payment_id]);
+                }
 
                 $previousBalance = $client->balance;
                 $newBalance = $previousBalance + $amount;
@@ -729,13 +730,13 @@ class ClientController extends Controller
                     'notes' => $request->notes ?: ($request->reference ? 'Réf: ' . $request->reference : 'Paiement distribué depuis gestion clients'),
                 ];
 
-                // if ($request->payment_method === 'check') {
-                //     $paymentData['check_id'] = $checkOrTraiteId;
-                // } elseif ($request->payment_method === 'traite') {
-                //     $paymentData['traite_id'] = $checkOrTraiteId;
-                // }
-
                 $payment = $order->payments()->create($paymentData);
+
+                if ($request->payment_method === 'check') {
+                    $check->update(['payment_id' => $payment->payment_id, 'order_id' => $order->order_id]);
+                } elseif ($request->payment_method === 'traite') {
+                    $traite->update(['payment_id' => $payment->payment_id, 'order_id' => $order->order_id]);
+                }
 
                 $oldPaidForOrder = $order->paid_amount;
                 $order->paid_amount += $paymentAmount;
@@ -776,13 +777,15 @@ class ClientController extends Controller
                     'notes' => $request->notes ?: ($request->reference ? 'Réf: ' . $request->reference : 'Excédent de paiement') . ' - Excédent de ' . number_format($excessAmount, 2, ',', '.') . ' DH',
                 ];
 
-                // if ($request->payment_method === 'check') {
-                //     $excessPaymentData['check_id'] = $checkOrTraiteId;
-                // } elseif ($request->payment_method === 'traite') {
-                //     $excessPaymentData['traite_id'] = $checkOrTraiteId;
-                // }
-
                 $excessPayment = SalesOrderPayment::create($excessPaymentData);
+
+                // Excess isn't tied to a single order, so link straight to the client (no order_id)
+                // so a later bounce falls back to a direct balance debit for the full amount.
+                if ($request->payment_method === 'check') {
+                    $check->update(['payment_id' => $excessPayment->payment_id, 'order_id' => null]);
+                } elseif ($request->payment_method === 'traite') {
+                    $traite->update(['payment_id' => $excessPayment->payment_id, 'order_id' => null]);
+                }
 
                 $previousBalance = $client->balance;
                 $newBalance = $previousBalance + $excessAmount;

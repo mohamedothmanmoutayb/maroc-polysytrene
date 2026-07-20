@@ -302,6 +302,7 @@ class CheckController extends Controller
 
         DB::beginTransaction();
         try {
+            $oldStatus = $check->status;
             $checkImagePath = $check->check_image;
 
             if ($request->hasFile('check_image')) {
@@ -330,6 +331,17 @@ class CheckController extends Controller
                 'is_active' => $request->has('is_active') ? true : false,
             ]);
 
+            // If this edit moved a client check into bounced/cancelled and it had
+            // already been counted as a payment, reverse it so the solde stays correct.
+            if (
+                $check->check_type === 'client' &&
+                in_array($request->status, ['bounced', 'cancelled']) &&
+                !in_array($oldStatus, ['bounced', 'cancelled']) &&
+                $check->payment_id
+            ) {
+                $this->reverseCheckPayment($check);
+            }
+
             DB::commit();
 
             return response()->json([
@@ -353,10 +365,16 @@ class CheckController extends Controller
             $check = Check::findOrFail($id);
 
             if ($check->allocations()->exists()) {
+                DB::rollBack();
                 return response()->json([
                     'success' => false,
                     'message' => 'Ce chèque ne peut pas être supprimé car il a des allocations associées.'
                 ], 400);
+            }
+
+            // If this check already impacted the client's solde, reverse it first
+            if ($check->check_type === 'client' && $check->payment_id) {
+                $this->reverseCheckPayment($check);
             }
 
             if ($check->check_image && Storage::disk('public')->exists($check->check_image)) {
@@ -443,6 +461,7 @@ class CheckController extends Controller
             $check = Check::findOrFail($id);
 
             if (in_array($check->status, ['cleared', 'bounced', 'cancelled'])) {
+                DB::rollBack();
                 return response()->json([
                     'success' => false,
                     'message' => 'Ce chèque ne peut pas être marqué comme payé.'

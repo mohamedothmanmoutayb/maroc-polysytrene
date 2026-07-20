@@ -376,8 +376,8 @@ class TraiteController extends Controller
             ]);
 
             // Handle payment processing based on status changes
-            if ($request->status === 'paid' && $oldStatus !== 'paid') {
-                // Traite became paid - create payment
+            if ($request->status === 'paid' && $oldStatus !== 'paid' && !$traite->payment_id) {
+                // Traite became paid and has no payment yet - create one
                 $this->processTraitePayment($traite);
             } elseif ($oldStatus === 'paid' && $request->status !== 'paid') {
                 // Traite was paid but now is not - reverse payment
@@ -411,8 +411,8 @@ class TraiteController extends Controller
         try {
             $traite = Traite::findOrFail($id);
 
-            // If traite is paid, reverse payment first
-            if ($traite->status === 'paid' && $traite->payment_id) {
+            // If this traite already impacted the client's solde, reverse it first
+            if ($traite->payment_id) {
                 $this->reverseTraitePayment($traite);
             }
 
@@ -444,11 +444,16 @@ class TraiteController extends Controller
             $traite = Traite::findOrFail($id);
 
             if ($traite->status === 'paid') {
+                DB::rollBack();
                 return response()->json([
                     'success' => false,
                     'message' => 'Cette traite est déjà payée.'
                 ], 400);
             }
+
+            // If this traite already has a payment linked (e.g. recorded at order
+            // creation), it already impacted the solde - avoid crediting it twice.
+            $alreadyLinked = (bool) $traite->payment_id;
 
             // Update traite status to paid
             $traite->update([
@@ -456,14 +461,18 @@ class TraiteController extends Controller
                 'payment_date' => now()
             ]);
 
-            // Process payment creation and client balance update
-            $this->processTraitePayment($traite);
+            if (!$alreadyLinked) {
+                // Process payment creation and client balance update
+                $this->processTraitePayment($traite);
+            }
 
             DB::commit();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Traite marquée comme payée avec succès! Le paiement a été enregistré et le solde client mis à jour.'
+                'message' => $alreadyLinked
+                    ? 'Traite marquée comme payée avec succès!'
+                    : 'Traite marquée comme payée avec succès! Le paiement a été enregistré et le solde client mis à jour.'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -481,6 +490,7 @@ class TraiteController extends Controller
             $traite = Traite::findOrFail($id);
 
             if ($traite->status === 'paid') {
+                DB::rollBack();
                 return response()->json([
                     'success' => false,
                     'message' => 'Une traite payée ne peut pas être marquée comme en retard.'
@@ -513,6 +523,7 @@ class TraiteController extends Controller
             $traite = Traite::findOrFail($id);
 
             if ($traite->status === 'paid') {
+                DB::rollBack();
                 return response()->json([
                     'success' => false,
                     'message' => 'Une traite payée ne peut pas être marquée comme rejetée.'
