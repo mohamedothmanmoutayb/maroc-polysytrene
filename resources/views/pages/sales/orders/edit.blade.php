@@ -372,7 +372,7 @@
                                             value="{{ $order->display_advance }}"
                                             placeholder="Montant de l'avance (affichage uniquement)">
                                         <small class="form-text text-muted">
-                                            Ne modifie aucun calcul — sera simplement affiché sur le bon de livraison.
+                                            Sera simplement affiché sur le bon de livraison.
                                         </small>
                                     </div>
                                 </div>

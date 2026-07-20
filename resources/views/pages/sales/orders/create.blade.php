@@ -197,7 +197,7 @@
                                             name="display_advance" step="0.01" min="0"
                                             placeholder="Montant de l'avance (affichage uniquement)">
                                         <small class="form-text text-muted">
-                                            Ne modifie aucun calcul — sera simplement affiché sur le bon de livraison.
+                                            Sera simplement affiché sur le bon de livraison.
                                         </small>
                                     </div>
                                 </div>
