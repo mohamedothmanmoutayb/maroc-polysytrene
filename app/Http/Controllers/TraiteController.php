@@ -61,11 +61,6 @@ class TraiteController extends Controller
                                     <i class="fas fa-times-circle me-2 text-danger"></i>Marquer Rebondi</a></li>';
                     }
 
-                    if ($traite->status === 'paid' && $traite->payment_id) {
-                        $btn .= '<li><a class="dropdown-item view-payment" href="#" data-id="' . $traite->payment_id . '">
-                                    <i class="fas fa-receipt me-2 text-info"></i>Voir le Paiement</a></li>';
-                    }
-
                     $btn .= '<li><hr class="dropdown-divider"></li>';
                     $btn .= '<li><a class="dropdown-item delete" href="#" data-id="' . $traite->traite_id . '" data-number="' . $traite->traite_number . '">
                                 <i class="fas fa-trash text-danger me-2"></i>Supprimer</a></li>';
