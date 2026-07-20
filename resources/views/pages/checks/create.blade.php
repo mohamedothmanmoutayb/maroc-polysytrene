@@ -67,6 +67,21 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-4" id="client_id_row" style="display: none;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="client_id" class="form-label">Client</label>
+                                        <select class="form-control" id="client_id" name="client_id">
+                                            <option value="">Sélectionner...</option>
+                                            @foreach ($clients as $client)
+                                                <option value="{{ $client->client_id }}">{{ $client->display_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small class="form-text text-muted">Optionnel — permet de rattacher ce chèque à un client.</small>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -179,6 +194,18 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Show the client selector only for client-type checks
+            function toggleClientField() {
+                if ($('#check_type').val() === 'client') {
+                    $('#client_id_row').show();
+                } else {
+                    $('#client_id_row').hide();
+                    $('#client_id').val('');
+                }
+            }
+            $('#check_type').on('change', toggleClientField);
+            toggleClientField();
+
             // Auto-calculate clearing date based on deposit date
             $('#deposit_date').on('change', function() {
                 var depositDate = $(this).val();

@@ -61,11 +61,28 @@
                                         <label for="check_type" class="form-label">Type de Chèque *</label>
                                         <select class="form-control" id="check_type" name="check_type" required>
                                             <option value="">Sélectionner...</option>
+                                            <option value="entreprise" {{ $check->check_type == 'entreprise' ? 'selected' : '' }}>
+                                                Entreprise (Chèque émis par l'entreprise)</option>
                                             <option value="client" {{ $check->check_type == 'client' ? 'selected' : '' }}>
-                                                Client</option>
-                                            <option value="personal"
-                                                {{ $check->check_type == 'personal' ? 'selected' : '' }}>Personnel</option>
+                                                Client (Chèque reçu d'un client)</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4" id="client_id_row" style="display: none;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="client_id" class="form-label">Client</label>
+                                        <select class="form-control" id="client_id" name="client_id">
+                                            <option value="">Sélectionner...</option>
+                                            @foreach ($clients as $client)
+                                                <option value="{{ $client->client_id }}" {{ $check->client_id == $client->client_id ? 'selected' : '' }}>
+                                                    {{ $client->display_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <small class="form-text text-muted">Optionnel — permet de rattacher ce chèque à un client.</small>
                                     </div>
                                 </div>
                             </div>
@@ -214,6 +231,18 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Show the client selector only for client-type checks
+            function toggleClientField() {
+                if ($('#check_type').val() === 'client') {
+                    $('#client_id_row').show();
+                } else {
+                    $('#client_id_row').hide();
+                    $('#client_id').val('');
+                }
+            }
+            $('#check_type').on('change', toggleClientField);
+            toggleClientField();
+
             // Validate check image size
             $('#check_image').on('change', function() {
                 const file = this.files[0];

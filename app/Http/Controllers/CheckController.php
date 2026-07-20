@@ -213,6 +213,7 @@ class CheckController extends Controller
         $request->validate([
             'check_number' => 'required|unique:checks|max:50',
             'check_type' => 'required|in:entreprise,client',
+            'client_id' => 'nullable|exists:clients,client_id',
             'amount' => 'required|numeric|min:0.01',
             'bank_name' => 'required|string|max:100',
             'account_holder' => 'required|string|max:200',
@@ -237,6 +238,7 @@ class CheckController extends Controller
             $check = Check::create([
                 'check_number' => $request->check_number,
                 'check_type' => $request->check_type,
+                'client_id' => $request->check_type === 'client' ? $request->client_id : null,
                 'amount' => $request->amount,
                 'remaining_amount' => $request->amount,
                 'bank_name' => $request->bank_name,
@@ -289,6 +291,7 @@ class CheckController extends Controller
         $request->validate([
             'check_number' => 'required|unique:checks,check_number,'.$id.',check_id|max:50',
             'check_type' => 'required|in:entreprise,client',
+            'client_id' => 'nullable|exists:clients,client_id',
             'amount' => 'required|numeric|min:0.01',
             'bank_name' => 'required|string|max:100',
             'account_holder' => 'required|string|max:200',
@@ -319,6 +322,7 @@ class CheckController extends Controller
             $check->update([
                 'check_number' => $request->check_number,
                 'check_type' => $request->check_type,
+                'client_id' => $request->check_type === 'client' ? $request->client_id : null,
                 'amount' => $request->amount,
                 'bank_name' => $request->bank_name,
                 'account_holder' => $request->account_holder,
