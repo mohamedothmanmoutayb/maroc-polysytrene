@@ -55,6 +55,9 @@
                                 <i class="fas fa-edit me-1"></i> Modifier
                             </a>
                             @endcan
+                            <button type="button" class="btn btn-info btn-sm" onclick="openDeliveryNoteModal({{ $order->order_id }}, '{{ $order->order_number }}')">
+                                <i class="fas fa-truck me-1"></i> Bon de livraison
+                            </button>
                             @if ($order->status == 'completed')
                                 @can('create_sales_invoices')
                                 <a href="{{ route('sales.orders.create-invoice', $order->order_id) }}"
@@ -479,6 +482,124 @@
                     <button type="button" class="btn btn-danger" id="confirmDeletePayment">Supprimer</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Delivery Note Options Modal -->
+    <div class="modal fade" id="deliveryNoteModal" tabindex="-1" aria-labelledby="deliveryNoteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deliveryNoteModalLabel">
+                        <i class="fas fa-truck me-2"></i>Options du Bon de Livraison
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="delivery_order_id" name="order_id">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Type d'affichage des prix</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="show_prices" id="showPricesYes"
+                                        value="1" checked>
+                                    <label class="form-check-label" for="showPricesYes">
+                                        <i class="fas fa-eye text-success me-1"></i>Avec prix
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="show_prices" id="showPricesNo"
+                                        value="0">
+                                    <label class="form-check-label" for="showPricesNo">
+                                        <i class="fas fa-eye-slash text-warning me-1"></i>Sans prix
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Type d'affichage</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="display_type"
+                                        id="displayTypeUnite" value="unite" checked>
+                                    <label class="form-check-label" for="displayTypeUnite">
+                                        <i class="fas fa-weight-hanging text-primary me-1"></i>Avec unité (U)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="display_type"
+                                        id="displayTypeVolume" value="volume">
+                                    <label class="form-check-label" for="displayTypeVolume">
+                                        <i class="fas fa-cube text-success me-1"></i>Avec volume
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Type de prix</label>
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price_type" id="priceTypeTTC"
+                                        value="ttc" checked>
+                                    <label class="form-check-label" for="priceTypeTTC">
+                                        TTC
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price_type" id="priceTypeHT"
+                                        value="ht">
+                                    <label class="form-check-label" for="priceTypeHT">
+                                        HT
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price_type" id="priceTypeBoth"
+                                        value="both">
+                                    <label class="form-check-label" for="priceTypeBoth">
+                                        Les deux
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Annuler
+                    </button>
+                    <button type="button" class="btn btn-info" id="printDeliveryNoteBtn">
+                        <i class="fas fa-print me-1"></i>Imprimer
+                    </button>
+                    <button type="submit" class="btn btn-primary" form="deliveryNoteForm">
+                        <i class="fas fa-file-pdf me-1"></i>Générer le PDF
+                    </button>
+                </div>
+            </div>
+            <!-- Hidden form for download -->
+            <form id="deliveryNoteForm" method="GET" target="_blank" style="display: none;">
+                <input type="hidden" name="order_id" id="form_order_id">
+                <input type="hidden" name="show_prices" id="form_show_prices">
+                <input type="hidden" name="show_logo" id="form_show_logo">
+                <input type="hidden" name="display_type" id="form_display_type">
+                <input type="hidden" name="price_type" id="form_price_type">
+            </form>
         </div>
     </div>
 
@@ -1092,6 +1213,70 @@
                     toast.remove();
                 }, 5000);
             }
+
+            // Handle Download button (Delivery Note)
+            $('#deliveryNoteForm').submit(function(e) {
+                e.preventDefault();
+
+                var orderId = $('#delivery_order_id').val();
+                var showPrices = $('input[name="show_prices"]:checked').val();
+                var showLogo = $('input[name="show_logo"]:checked').val();
+                var displayType = $('input[name="display_type"]:checked').val();
+                var priceType = $('input[name="price_type"]:checked').val();
+
+                var baseUrl = "{{ url('sales/orders/delivery-note') }}";
+                var url = baseUrl + "/" + orderId +
+                    "?show_prices=" + showPrices +
+                    "&show_logo=" + showLogo +
+                    "&display_type=" + displayType +
+                    "&price_type=" + priceType;
+
+                var printWindow = window.open(url, '_blank');
+
+                if (printWindow) {
+                    printWindow.focus();
+                }
+
+                $('#deliveryNoteModal').modal('hide');
+            });
+
+            // Handle Print button (Delivery Note)
+            $(document).on('click', '#printDeliveryNoteBtn', function() {
+                var orderId = $('#delivery_order_id').val();
+                var showPrices = $('input[name="show_prices"]:checked').val();
+                var showLogo = $('input[name="show_logo"]:checked').val();
+                var displayType = $('input[name="display_type"]:checked').val();
+                var priceType = $('input[name="price_type"]:checked').val();
+
+                var baseUrl = "{{ route('sales.orders.delivery-note.view', ['id' => '__ID__']) }}";
+                var url = baseUrl.replace('__ID__', orderId) +
+                    "?show_prices=" + showPrices +
+                    "&show_logo=" + showLogo +
+                    "&display_type=" + displayType +
+                    "&price_type=" + priceType;
+
+                var printWindow = window.open(url, '_blank', 'width=800,height=600');
+
+                if (printWindow) {
+                    printWindow.focus();
+
+                    printWindow.onload = function() {
+                        setTimeout(function() {
+                            printWindow.print();
+                            printWindow.onafterprint = function() {
+                                printWindow.close();
+                            };
+                        }, 1000);
+                    };
+                }
+
+                $('#deliveryNoteModal').modal('hide');
+            });
         });
+
+        function openDeliveryNoteModal(orderId, orderNumber) {
+            $('#delivery_order_id').val(orderId);
+            $('#deliveryNoteModal').modal('show');
+        }
     </script>
 @endpush

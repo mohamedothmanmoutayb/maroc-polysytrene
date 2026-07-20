@@ -190,7 +190,18 @@
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="display_advance" class="form-label">Avance</label>
+                                        <input type="number" class="form-control" id="display_advance"
+                                            name="display_advance" step="0.01" min="0"
+                                            placeholder="Montant de l'avance (affichage uniquement)">
+                                        <small class="form-text text-muted">
+                                            Ne modifie aucun calcul — sera simplement affiché sur le bon de livraison.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="notes" class="form-label">Notes</label>
                                         <textarea class="form-control" id="notes" name="notes" rows="2" placeholder="Notes supplémentaires..."></textarea>

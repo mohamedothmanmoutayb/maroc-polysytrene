@@ -108,6 +108,10 @@
                                 <i class="fas fa-plus me-1"></i> Nouvelle Machine
                             </a>
                             @endcan
+                            <a href="{{ route('machine-maintenance.print-all') }}" target="_blank"
+                                class="btn btn-light btn-sm">
+                                <i class="fas fa-print me-1"></i> Imprimer Maintenance
+                            </a>
                             <div class="btn-group ms-2">
                                 <button type="button" class="btn btn-light btn-sm dropdown-toggle"
                                     data-bs-toggle="dropdown" aria-expanded="false">

@@ -256,11 +256,17 @@
                         <h6 class="mb-0">
                             <i class="fas fa-tools me-2"></i>Maintenance Préventive
                         </h6>
-                        @can('create_machine_maintenance')
-                            <button type="button" class="btn btn-sm btn-dark" onclick="openCreateMaintenance()">
-                                <i class="fas fa-plus me-1"></i> Nouveau Programme
-                            </button>
-                        @endcan
+                        <div>
+                            <a href="{{ route('machine-maintenance.print', $machine->machine_id) }}" target="_blank"
+                                class="btn btn-sm btn-outline-dark">
+                                <i class="fas fa-print me-1"></i> Imprimer
+                            </a>
+                            @can('create_machine_maintenance')
+                                <button type="button" class="btn btn-sm btn-dark" onclick="openCreateMaintenance()">
+                                    <i class="fas fa-plus me-1"></i> Nouveau Programme
+                                </button>
+                            @endcan
+                        </div>
                     </div>
                     <div class="card-body">
                         @if ($machine->maintenanceSchedules->count() > 0)

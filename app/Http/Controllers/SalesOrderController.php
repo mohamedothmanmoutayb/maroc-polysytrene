@@ -517,6 +517,7 @@ class SalesOrderController extends Controller
             'payments.*.due_date' => 'required_if:payments.*.method,traite|date',
             'payments.*.advance_reference' => 'nullable|string',
             'bypass_credit' => 'nullable|in:1',
+            'display_advance' => 'nullable|numeric|min:0',
         ]);
 
         DB::beginTransaction();
@@ -599,6 +600,7 @@ class SalesOrderController extends Controller
                 'paid_amount' => $totalPaid,
                 'payment_status' => $paymentStatus,
                 'notes' => $request->notes,
+                'display_advance' => $request->display_advance,
                 'created_by' => Auth::id(),
             ]);
 
@@ -1030,6 +1032,7 @@ class SalesOrderController extends Controller
             'payments.*.due_date' => 'required_if:payments.*.method,traite|date',
             'payments.*.advance_reference' => 'nullable|string',
             'bypass_credit' => 'nullable|in:1',
+            'display_advance' => 'nullable|numeric|min:0',
         ]);
 
         DB::beginTransaction();
@@ -1138,6 +1141,7 @@ class SalesOrderController extends Controller
                 'paid_amount' => $totalPaid,
                 'payment_status' => $paymentStatus,
                 'notes' => $request->notes,
+                'display_advance' => $request->display_advance,
                 'updated_by' => Auth::id(),
             ]);
 
@@ -2257,7 +2261,8 @@ class SalesOrderController extends Controller
             }
 
             $clientBalance = $order->client->balance ?? 0;
-            $balanceFormatted = number_format(abs($clientBalance), 2, ',', '.') . ' DH';
+            $balanceSign = $clientBalance > 0 ? '+' : ($clientBalance < 0 ? '-' : '');
+            $balanceFormatted = $balanceSign . number_format(abs($clientBalance), 2, ',', '.') . ' DH';
             $balanceStatus = $clientBalance > 0 ? 'Créditeur (Avance)' : ($clientBalance < 0 ? 'Débiteur (Impayé)' : 'Soldé');
             $balanceClass = $clientBalance > 0 ? 'text-success' : ($clientBalance < 0 ? 'text-danger' : 'text-secondary');
 
@@ -2279,6 +2284,7 @@ class SalesOrderController extends Controller
                 'balance_formatted' => $balanceFormatted,
                 'balance_status' => $balanceStatus,
                 'balance_class' => $balanceClass,
+                'display_advance' => $order->display_advance,
                 'totalAmountTTC' => $roundedTotalAmountTTC,
                 'totalAmountHT' => $roundedTotalAmountHT,
                 'tvaRate' => $tvaRate * 100, // 20%
@@ -2387,7 +2393,8 @@ class SalesOrderController extends Controller
             }
 
             $clientBalance = $order->client->balance ?? 0;
-            $balanceFormatted = number_format(abs($clientBalance), 2, ',', '.') . ' DH';
+            $balanceSign = $clientBalance > 0 ? '+' : ($clientBalance < 0 ? '-' : '');
+            $balanceFormatted = $balanceSign . number_format(abs($clientBalance), 2, ',', '.') . ' DH';
             $balanceStatus = $clientBalance > 0 ? 'Créditeur (Avance)' : ($clientBalance < 0 ? 'Débiteur (Impayé)' : 'Soldé');
             $balanceClass = $clientBalance > 0 ? 'text-success' : ($clientBalance < 0 ? 'text-danger' : 'text-secondary');
 
@@ -2409,6 +2416,7 @@ class SalesOrderController extends Controller
                 'balance_formatted' => $balanceFormatted,
                 'balance_status' => $balanceStatus,
                 'balance_class' => $balanceClass,
+                'display_advance' => $order->display_advance,
                 'totalAmountTTC' => $roundedTotalAmountTTC,
                 'totalAmountHT' => $roundedTotalAmountHT,
                 'tvaRate' => $tvaRate * 100,

@@ -468,6 +468,12 @@
                     </div>
                 @endif
 
+                @if ($display_advance)
+                    <div class="amount-in-words" style="margin-top: 5px;">
+                        Avance: {{ number_format($display_advance, 2, ',', '.') }} DH
+                    </div>
+                @endif
+
                 <!-- Client Balance Section -->
                 <div class="client-balance">
                     <strong>Solde du client :</strong>
@@ -482,6 +488,12 @@
         <div class="footer-section">
             <div class="footer-left">
                 <p style="margin: 0;"><strong>Arrêtée le présent bon de livraison</strong></p>
+
+                @if ($display_advance)
+                    <div class="amount-in-words" style="margin-top: 5px;">
+                        Avance: {{ number_format($display_advance, 2, ',', '.') }} DH
+                    </div>
+                @endif
 
                 <!-- Client Balance Section -->
                 <div class="client-balance" style="margin-top: 10px;">

@@ -593,10 +593,12 @@ Route::middleware(['auth'])->group(function () {
     // Machine Maintenance Schedules Routes
     Route::prefix('machine-maintenance')->name('machine-maintenance.')->group(function () {
         Route::post('/', [MachineMaintenanceController::class, 'store'])->name('store');
+        Route::get('/print-all', [MachineMaintenanceController::class, 'printAll'])->name('print-all');
         Route::put('/{id}', [MachineMaintenanceController::class, 'update'])->name('update');
         Route::delete('/{id}', [MachineMaintenanceController::class, 'destroy'])->name('destroy');
         Route::post('/{id}/complete', [MachineMaintenanceController::class, 'complete'])->name('complete');
         Route::get('/{id}/history', [MachineMaintenanceController::class, 'history'])->name('history');
+        Route::get('/{id}/print', [MachineMaintenanceController::class, 'print'])->name('print');
     });
 
 

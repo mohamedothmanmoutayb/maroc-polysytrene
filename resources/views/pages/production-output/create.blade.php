@@ -1231,7 +1231,9 @@
                     success: function(response) {
                         if (response.success) {
                             showToast('success', response.message);
-                            setTimeout(() => window.location.reload(), 1500);
+                            setTimeout(() => {
+                                window.location.href = "{{ route('production-orders.index') }}";
+                            }, 1500);
                         } else {
                             showToast('error', response.message);
                             submitBtn.prop('disabled', false).html(

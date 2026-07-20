@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Machine;
 use App\Models\MachineMaintenanceSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MachineMaintenanceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:view_machine_maintenance')->only(['history']);
+        $this->middleware('can:view_machine_maintenance')->only(['history', 'print', 'printAll']);
         $this->middleware('can:create_machine_maintenance')->only(['store']);
         $this->middleware('can:edit_machine_maintenance')->only(['update']);
         $this->middleware('can:delete_machine_maintenance')->only(['destroy']);
@@ -180,5 +182,48 @@ class MachineMaintenanceController extends Controller
                 'message' => 'Erreur: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Print the preventive maintenance schedule for a single machine.
+     */
+    public function print($machineId)
+    {
+        $machine = Machine::with(['maintenanceSchedules' => function ($query) {
+            $query->active();
+        }])->findOrFail($machineId);
+
+        $pdf = Pdf::loadView('pdf.machine-maintenance', [
+            'machines' => collect([$machine]),
+            'title' => 'Maintenance Préventive — ' . $machine->name,
+            'date' => now()->format('d/m/Y'),
+        ]);
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->stream('maintenance-' . \Illuminate\Support\Str::slug($machine->name) . '.pdf');
+    }
+
+    /**
+     * Print the preventive maintenance schedule for every machine.
+     */
+    public function printAll()
+    {
+        $machines = Machine::with(['maintenanceSchedules' => function ($query) {
+            $query->active();
+        }])
+            ->whereHas('maintenanceSchedules', function ($query) {
+                $query->active();
+            })
+            ->orderBy('name')
+            ->get();
+
+        $pdf = Pdf::loadView('pdf.machine-maintenance', [
+            'machines' => $machines,
+            'title' => 'Maintenance Préventive — Toutes les Machines',
+            'date' => now()->format('d/m/Y'),
+        ]);
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->stream('maintenance-machines.pdf');
     }
 }

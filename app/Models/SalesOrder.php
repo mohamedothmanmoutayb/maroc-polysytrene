@@ -23,6 +23,7 @@ class SalesOrder extends Model
         'paid_amount',
         'payment_status',
         'notes',
+        'display_advance',
         'created_by',
     ];
 
@@ -31,6 +32,7 @@ class SalesOrder extends Model
         'total_amount' => 'decimal:2',
         'final_amount' => 'decimal:2',
         'paid_amount' => 'decimal:2',
+        'display_advance' => 'decimal:2',
         'created_at' => 'datetime',
     ];
 
