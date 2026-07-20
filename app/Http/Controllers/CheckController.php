@@ -188,7 +188,7 @@ class CheckController extends Controller
         $availableAmount = Check::sum('amount') - CheckAllocation::sum('allocated_amount');
         $depositedChecks = Check::where('status', 'deposited')->count();
         $enterpriseChecks = Check::enterprise()->count();
-        $clientChecks = Check::client()->count();
+        $clientChecks = Check::where('check_type', 'client')->count();
 
         return view('pages.checks.index', compact(
             'totalChecks',
@@ -632,7 +632,7 @@ class CheckController extends Controller
         $totalAmount = Check::sum('amount');
         $availableAmount = Check::sum('amount') - CheckAllocation::sum('allocated_amount');
         $enterpriseChecks = Check::enterprise()->count();
-        $clientChecks = Check::client()->count();
+        $clientChecks = Check::where('check_type', 'client')->count();
 
         return response()->json([
             'success' => true,
