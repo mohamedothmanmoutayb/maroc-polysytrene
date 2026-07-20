@@ -135,7 +135,7 @@
                                                             'deposited' => 'info',
                                                             'cleared' => 'success',
                                                             'bounced' => 'danger',
-                                                            'cancelled' => 'secondary',
+                                                            'cancelled' => 'danger',
                                                         ];
                                                         $labels = [
                                                             'pending' => 'En attente',

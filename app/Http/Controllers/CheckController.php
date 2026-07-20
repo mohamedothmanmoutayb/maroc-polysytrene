@@ -153,7 +153,7 @@ class CheckController extends Controller
                         'deposited' => 'info',
                         'cleared' => 'success',
                         'bounced' => 'danger',
-                        'cancelled' => 'secondary'
+                        'cancelled' => 'danger'
                     ];
                     $color = $badges[$row->status] ?? 'secondary';
                     $labels = [
@@ -627,7 +627,34 @@ class CheckController extends Controller
 
                 $client = Client::find($check->client_id);
                 if ($client) {
-                    $client->updateBalanceFromOrder($order, 'payment_deleted', $check->amount);
+                    // updateBalanceFromOrder expects the amount actually applied to
+                    // THIS order, not the full check amount — passing the full
+                    // amount here undercounts the reversal whenever part of the
+                    // check went to this order and the rest was credited as excess.
+                    $client->updateBalanceFromOrder($order, 'payment_deleted', $payment->amount);
+
+                    // Any excess beyond what was applied to this order was credited
+                    // directly to the client's solde — reverse that too.
+                    $excess = round((float) $check->amount - (float) $payment->amount, 2);
+                    if ($excess > 0.005) {
+                        $client->refresh();
+                        $previousBalance = (float) $client->balance;
+                        $newBalance = $previousBalance - $excess;
+                        $client->balance = $newBalance;
+                        $client->save();
+
+                        $client->balanceHistory()->create([
+                            'previous_balance' => $previousBalance,
+                            'new_balance' => $newBalance,
+                            'amount' => -$excess,
+                            'type' => 'payment_deleted',
+                            'reference_type' => 'check',
+                            'reference_id' => $check->check_id,
+                            'description' => "Annulation de l'excédent suite au rejet du chèque #{$check->check_number}: " .
+                                number_format($excess, 2, ',', '.') . ' DH',
+                            'created_by' => Auth::id(),
+                        ]);
+                    }
                 }
             } else {
                 $this->updateClientBalance(

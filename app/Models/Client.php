@@ -491,24 +491,17 @@ class Client extends Model
                 break;
 
             case 'payment_added':
+                // Balance contribution of an order is always (paid - final): negative
+                // while unpaid (a debt), positive once overpaid (a credit). So the
+                // impact of adding a payment is simply the payment amount itself —
+                // it's the same delta whether the order stays underpaid, crosses into
+                // overpaid, or was already overpaid. No branching needed, and the old
+                // branchy version undercounted crossings from underpaid to overpaid.
                 $oldPaid = $oldAmount ?? 0;
                 $newPaid = $order->paid_amount;
                 $paymentAmount = $newPaid - $oldPaid;
 
-                $totalPaid = $order->paid_amount;
-                $orderTotal = $order->final_amount;
-
-                if ($totalPaid > $orderTotal) {
-                    $overpaid = $totalPaid - $orderTotal;
-                    $previousOverpaid = max(0, ($oldPaid - $orderTotal));
-                    $newOverpaid = $overpaid;
-
-                    if ($newOverpaid > $previousOverpaid) {
-                        $impact = $newOverpaid - $previousOverpaid;
-                        $description = "Trop-perçu sur commande #{$order->order_number}: +" .
-                                    number_format($impact, 2) . " DH";
-                    }
-                } else {
+                if ($paymentAmount != 0) {
                     $impact = $paymentAmount;
                     $description = "Paiement ajouté sur commande #{$order->order_number}: +" .
                                 number_format($paymentAmount, 2) . " DH";
@@ -516,21 +509,12 @@ class Client extends Model
                 break;
 
             case 'payment_deleted':
+                // Mirror of payment_added: reversing a payment always subtracts the
+                // full amount from the order's balance contribution, regardless of
+                // whether that crosses back from overpaid into underpaid.
                 $paymentAmount = $oldAmount ?? 0;
-                $totalPaid = $order->paid_amount;
-                $orderTotal = $order->final_amount;
 
-                if ($totalPaid + $paymentAmount > $orderTotal) {
-                    $oldOverpaid = ($totalPaid + $paymentAmount) - $orderTotal;
-                    $newOverpaid = max(0, $totalPaid - $orderTotal);
-                    $overpaidReduction = $oldOverpaid - $newOverpaid;
-
-                    if ($overpaidReduction > 0) {
-                        $impact = -$overpaidReduction;
-                        $description = "Suppression paiement réduit le trop-perçu de " .
-                                    number_format($overpaidReduction, 2) . " DH";
-                    }
-                } else {
+                if ($paymentAmount != 0) {
                     $impact = -$paymentAmount;
                     $description = "Paiement supprimé sur commande #{$order->order_number}: -" .
                                 number_format($paymentAmount, 2) . " DH";

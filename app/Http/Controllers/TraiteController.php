@@ -726,7 +726,34 @@ class TraiteController extends Controller
 
                     $client = Client::find($traite->client_id);
                     if ($client) {
-                        $client->updateBalanceFromOrder($order, 'payment_deleted', $traite->amount);
+                        // updateBalanceFromOrder expects the amount actually applied
+                        // to THIS order, not the full traite amount — passing the
+                        // full amount undercounts the reversal whenever part of the
+                        // traite went to this order and the rest was credited as excess.
+                        $client->updateBalanceFromOrder($order, 'payment_deleted', $payment->amount);
+
+                        // Any excess beyond what was applied to this order was
+                        // credited directly to the client's solde — reverse that too.
+                        $excess = round((float) $traite->amount - (float) $payment->amount, 2);
+                        if ($excess > 0.005) {
+                            $client->refresh();
+                            $previousBalance = (float) $client->balance;
+                            $newBalance = $previousBalance - $excess;
+                            $client->balance = $newBalance;
+                            $client->save();
+
+                            $client->balanceHistory()->create([
+                                'previous_balance' => $previousBalance,
+                                'new_balance' => $newBalance,
+                                'amount' => -$excess,
+                                'type' => 'payment_deleted',
+                                'reference_type' => 'traite',
+                                'reference_id' => $traite->traite_id,
+                                'description' => "Annulation de l'excédent suite à suppression/annulation de la traite #{$traite->traite_number}: " .
+                                    number_format($excess, 2, ',', '.') . ' DH',
+                                'created_by' => Auth::id(),
+                            ]);
+                        }
                     }
                 } else {
                     $this->updateClientBalance(
