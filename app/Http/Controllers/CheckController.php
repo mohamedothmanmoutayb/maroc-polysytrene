@@ -253,6 +253,23 @@ class CheckController extends Controller
                 'created_by' => Auth::id(),
             ]);
 
+            // A client check not tied to a vente still represents money received
+            // from that client, so credit their solde now (mirrors the reversal
+            // markAsBounced()/destroy() perform if it later bounces).
+            if (
+                $check->check_type === 'client' &&
+                $check->client_id &&
+                !in_array($check->status, ['bounced', 'cancelled'])
+            ) {
+                $this->updateClientBalance(
+                    $check->client_id,
+                    $check->amount,
+                    'credit',
+                    $check,
+                    "Chèque #{$check->check_number} reçu du client"
+                );
+            }
+
             DB::commit();
 
             return response()->json([
@@ -336,14 +353,24 @@ class CheckController extends Controller
             ]);
 
             // If this edit moved a client check into bounced/cancelled and it had
-            // already been counted as a payment, reverse it so the solde stays correct.
+            // already been counted as a payment or credit, reverse it so the solde
+            // stays correct.
             if (
                 $check->check_type === 'client' &&
                 in_array($request->status, ['bounced', 'cancelled']) &&
-                !in_array($oldStatus, ['bounced', 'cancelled']) &&
-                $check->payment_id
+                !in_array($oldStatus, ['bounced', 'cancelled'])
             ) {
-                $this->reverseCheckPayment($check);
+                if ($check->payment_id) {
+                    $this->reverseCheckPayment($check);
+                } elseif ($check->client_id) {
+                    $this->updateClientBalance(
+                        $check->client_id,
+                        $check->amount,
+                        'debit',
+                        $check,
+                        "Annulation du crédit suite au rejet du chèque #{$check->check_number}"
+                    );
+                }
             }
 
             DB::commit();
@@ -376,9 +403,21 @@ class CheckController extends Controller
                 ], 400);
             }
 
-            // If this check already impacted the client's solde, reverse it first
-            if ($check->check_type === 'client' && $check->payment_id) {
-                $this->reverseCheckPayment($check);
+            // If this check already impacted the client's solde, reverse it first.
+            // A status of bounced/cancelled means it was already reversed (or never
+            // credited), so skip to avoid double-debiting.
+            if ($check->check_type === 'client') {
+                if ($check->payment_id) {
+                    $this->reverseCheckPayment($check);
+                } elseif ($check->client_id && !in_array($check->status, ['bounced', 'cancelled'])) {
+                    $this->updateClientBalance(
+                        $check->client_id,
+                        $check->amount,
+                        'debit',
+                        $check,
+                        "Suppression du chèque #{$check->check_number}"
+                    );
+                }
             }
 
             if ($check->check_image && Storage::disk('public')->exists($check->check_image)) {
@@ -537,10 +576,20 @@ class CheckController extends Controller
                 ], 400);
             }
 
-            // If this check had already been counted as a client payment, reverse it
-            // so the client's solde reflects the bounce.
-            if ($check->check_type === 'client' && $check->payment_id) {
-                $this->reverseCheckPayment($check);
+            // If this check had already been counted as a client payment or credit,
+            // reverse it so the client's solde reflects the bounce.
+            if ($check->check_type === 'client') {
+                if ($check->payment_id) {
+                    $this->reverseCheckPayment($check);
+                } elseif ($check->client_id) {
+                    $this->updateClientBalance(
+                        $check->client_id,
+                        $check->amount,
+                        'debit',
+                        $check,
+                        "Annulation du crédit suite au rejet du chèque #{$check->check_number}"
+                    );
+                }
             }
 
             $check->update(['status' => 'bounced']);
