@@ -468,18 +468,17 @@
                     </div>
                 @endif
 
-                @if ($display_advance)
-                    <div class="amount-in-words" style="margin-top: 5px;">
-                        Avance: {{ number_format($display_advance, 2, ',', '.') }} DH
-                    </div>
-                @endif
-
                 <!-- Client Balance Section -->
                 <div class="client-balance">
                     <strong>Solde du client :</strong>
                     <span class="{{ $balance_class }}">
                         {{ $balance_formatted }}
                     </span>
+                    @if ($display_advance)
+                        <div style="margin-top: 4px;">
+                            <strong>Avance :</strong> {{ number_format($display_advance, 2, ',', '.') }} DH
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -488,12 +487,6 @@
         <div class="footer-section">
             <div class="footer-left">
                 <p style="margin: 0;"><strong>Arrêtée le présent bon de livraison</strong></p>
-
-                @if ($display_advance)
-                    <div class="amount-in-words" style="margin-top: 5px;">
-                        Avance: {{ number_format($display_advance, 2, ',', '.') }} DH
-                    </div>
-                @endif
 
                 <!-- Client Balance Section -->
                 <div class="client-balance" style="margin-top: 10px;">
@@ -504,6 +497,11 @@
                     {{-- <span style="margin-left: 10px; font-style: italic;">
                         (Client {{ $balance_status }})
                     </span> --}}
+                    @if ($display_advance)
+                        <div style="margin-top: 4px;">
+                            <strong>Avance :</strong> {{ number_format($display_advance, 2, ',', '.') }} DH
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
