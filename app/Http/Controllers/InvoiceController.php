@@ -29,7 +29,7 @@ class InvoiceController extends Controller
 
     
         if ($request->ajax()) {
-            $query = Invoice::with(['client'])->select('invoices.*');
+            $query = Invoice::with(['client'])->select('invoices.*')->orderBy('invoice_date', 'desc');
 
             if ($request->filled('date_from')) {
                 $query->whereDate('invoice_date', '>=', $request->date_from);
