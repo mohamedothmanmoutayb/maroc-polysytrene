@@ -22,6 +22,7 @@ class PurchasePaymentDocument extends Model
         'file_path',
         'original_filename',
         'amount',
+        'paid_amount',
         'payment_method',
         'payment_date',
         'notes',
@@ -30,8 +31,21 @@ class PurchasePaymentDocument extends Model
 
     protected $casts = [
         'amount' => 'decimal:2',
+        'paid_amount' => 'decimal:2',
         'payment_date' => 'date',
     ];
+
+    /** What the supplier actually received (falls back to the applied amount). */
+    public function getActualAmountAttribute()
+    {
+        return (float) ($this->paid_amount ?? $this->amount);
+    }
+
+    /** Part of the payment that was credited to the supplier balance. */
+    public function getExcessAmountAttribute()
+    {
+        return max(0, $this->actual_amount - (float) $this->amount);
+    }
 
     public function purchase()
     {

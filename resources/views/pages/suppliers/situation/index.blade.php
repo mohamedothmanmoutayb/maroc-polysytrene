@@ -131,7 +131,7 @@
 
     {{-- ══════════════════ SUPPLIER DETAILS MODAL ══════════════════ --}}
     <div class="modal fade" id="supplierDetailsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-supplier-details">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white flex-wrap gap-2">
                     <h5 class="modal-title" id="supplierDetailsTitle">
@@ -170,23 +170,67 @@
                     </div>
                     <div id="supplierDetailsContent" style="display:none;">
                         <div class="row mb-3" id="modalSummaryRow"></div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover" id="supplierPurchasesTable">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th>Date</th>
-                                        <th>N° Achat</th>
-                                        <th class="text-end">Montant</th>
-                                        <th class="text-end">Payé</th>
-                                        <th class="text-end">Reste</th>
-                                        <th class="text-center">Statut</th>
-                                        <th class="text-center">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="supplierPurchasesBody"></tbody>
-                                <tfoot id="supplierPurchasesFoot"></tfoot>
-                            </table>
+
+                        <ul class="nav nav-tabs mb-3" id="supplierDetailsTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="tab-paiements-btn" data-bs-toggle="tab"
+                                    data-bs-target="#tab-paiements" type="button" role="tab">
+                                    <i class="fas fa-receipt me-1"></i>Paiements
+                                    <span class="badge bg-success ms-1" id="tabPaiementsCount">0</span>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="tab-achats-btn" data-bs-toggle="tab"
+                                    data-bs-target="#tab-achats" type="button" role="tab">
+                                    <i class="fas fa-shopping-cart me-1"></i>Achats
+                                    <span class="badge bg-primary ms-1" id="tabAchatsCount">0</span>
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="tab-achats" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" id="supplierPurchasesTable">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th>Date</th>
+                                                <th>N° Achat</th>
+                                                <th class="text-end">Montant</th>
+                                                <th class="text-end">Payé</th>
+                                                <th class="text-end">Reste</th>
+                                                <th class="text-center">Statut</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="supplierPurchasesBody"></tbody>
+                                        <tfoot id="supplierPurchasesFoot"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show active" id="tab-paiements" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" id="supplierPaymentsTable">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th>Date</th>
+                                                <th>N° Doc</th>
+                                                <th>Méthode</th>
+                                                <th>N° Achat</th>
+                                                <th class="text-end">Montant Payé</th>
+                                                <th class="text-end">Sur Achat</th>
+                                                <th>Notes</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="supplierPaymentsBody"></tbody>
+                                        <tfoot id="supplierPaymentsFoot"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1026,11 +1070,21 @@
             border-left: 4px solid #28a745;
         }
 
-        #supplierPurchasesTable tbody tr {
+        .modal-supplier-details {
+            max-width: 96vw;
+        }
+
+        .modal-supplier-details .modal-body {
+            max-height: calc(100vh - 210px);
+        }
+
+        #supplierPurchasesTable tbody tr,
+        #supplierPaymentsTable tbody tr {
             cursor: default;
         }
 
-        #supplierPurchasesTable tbody tr:hover {
+        #supplierPurchasesTable tbody tr:hover,
+        #supplierPaymentsTable tbody tr:hover {
             background-color: rgba(0, 0, 0, .04);
         }
 
@@ -1098,6 +1152,8 @@
             $('#supplierDetailsContent').hide();
             $('#supplierPurchasesBody').empty();
             $('#supplierPurchasesFoot').empty();
+            $('#supplierPaymentsBody').empty();
+            $('#supplierPaymentsFoot').empty();
             $('#modalSummaryRow').empty();
 
             $.ajax({
@@ -1123,10 +1179,124 @@
             });
         }
 
+        function loadSupplierBalance() {
+            if (!currentSupplierId) return;
+
+            $.ajax({
+                url: "{{ url('suppliers/situation/supplier') }}/" + currentSupplierId + "/balance",
+                type: 'GET',
+                success: function(res) {
+                    if (!res.success) return;
+                    currentAvailableCredit = parseFloat(res.available_credit) || 0;
+                    if (currentAvailableCredit > 0.005) {
+                        $('#modalSupplierBalance')
+                            .text(currentAvailableCredit.toFixed(2) + ' DH')
+                            .removeClass('text-danger text-muted').addClass('text-success');
+                        $('#supplierBalanceRow').show();
+                    } else {
+                        $('#supplierBalanceRow').hide();
+                    }
+                }
+            });
+        }
+
         function refreshDetailsModal() {
             if (currentSupplierId) {
-                setTimeout(function() { loadSupplierPurchases(); }, 600);
+                setTimeout(function() {
+                    loadSupplierBalance();
+                    loadSupplierPurchases();
+                }, 600);
             }
+        }
+
+        function renderSupplierPayments(purchases) {
+            var tbody = $('#supplierPaymentsBody');
+            var tfoot = $('#supplierPaymentsFoot');
+            tbody.empty(); tfoot.empty();
+
+            // Flatten every purchase's documents into a single payment list
+            var payments = [];
+            purchases.forEach(function(p) {
+                (p.payment_documents || []).forEach(function(doc) {
+                    payments.push($.extend({}, doc, {
+                        purchase_id:     p.purchase_id,
+                        purchase_number: p.purchase_number,
+                        show_url:        p.show_url
+                    }));
+                });
+            });
+
+            // Most recent first (documents without a date fall to the end)
+            payments.sort(function(a, b) {
+                return (b.payment_date_raw || '').localeCompare(a.payment_date_raw || '');
+            });
+
+            $('#tabPaiementsCount').text(payments.length);
+
+            if (payments.length === 0) {
+                tbody.append('<tr><td colspan="9" class="text-center text-muted py-3">Aucun paiement trouvé</td></tr>');
+                return;
+            }
+
+            var totPaid = 0, totApplied = 0;
+
+            payments.forEach(function(doc, i) {
+                totPaid    += doc.actual_amount;
+                totApplied += doc.amount;
+
+                var methodIcon = {
+                    cash: 'fas fa-money-bill-wave text-success',
+                    bank_transfer: 'fas fa-university text-primary',
+                    check: 'fas fa-money-check text-info',
+                    traite: 'fas fa-file-invoice text-warning',
+                    credit_card: 'fas fa-credit-card text-secondary',
+                    balance: 'fas fa-coins text-success',
+                }[doc.payment_method] || 'fas fa-circle text-secondary';
+
+                tbody.append(`
+                    <tr>
+                        <td class="text-center">${i + 1}</td>
+                        <td>${doc.payment_date}</td>
+                        <td><small>${doc.document_number}</small></td>
+                        <td><i class="${methodIcon} me-1"></i>${doc.method_label}</td>
+                        <td><a href="${doc.show_url}" target="_blank"><strong>${doc.purchase_number}</strong></a></td>
+                        <td class="text-end fw-bold text-success">
+                            ${doc.actual_display} DH
+                            ${doc.excess_amount > 0.005
+                                ? `<br><small class="text-info" title="Crédité en solde fournisseur"><i class="fas fa-coins me-1"></i>dont ${doc.excess_display} DH en solde</small>`
+                                : ''}
+                        </td>
+                        <td class="text-end">${doc.amount_display} DH</td>
+                        <td><small class="text-muted">${doc.notes}</small></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-xs btn-warning edit-doc-btn"
+                                data-doc-id="${doc.document_id}"
+                                data-method="${doc.payment_method}"
+                                data-amount="${doc.actual_amount}"
+                                data-date="${doc.payment_date_raw}"
+                                data-notes="${doc.notes}"
+                                title="Modifier">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-xs btn-danger delete-doc-btn ms-1"
+                                data-doc-id="${doc.document_id}"
+                                data-number="${doc.document_number}"
+                                title="Supprimer">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `);
+            });
+
+            tfoot.append(`
+                <tr class="fw-bold">
+                    <td colspan="5" class="text-end">Total Paiements (${payments.length})</td>
+                    <td class="text-end text-success">${totPaid.toLocaleString('de-DE', {minimumFractionDigits:2})} DH</td>
+                    <td class="text-end">${totApplied.toLocaleString('de-DE', {minimumFractionDigits:2})} DH</td>
+                    <td colspan="2"></td>
+                </tr>
+            `);
         }
 
         function renderSupplierPurchases(purchases) {
@@ -1134,6 +1304,10 @@
             var tfoot      = $('#supplierPurchasesFoot');
             var summaryRow = $('#modalSummaryRow');
             tbody.empty(); tfoot.empty(); summaryRow.empty();
+
+            renderSupplierPayments(purchases);
+
+            $('#tabAchatsCount').text(purchases.length);
 
             if (purchases.length === 0) {
                 tbody.append('<tr><td colspan="8" class="text-center text-muted py-3">Aucun achat trouvé</td></tr>');
@@ -1167,14 +1341,6 @@
                         }
                     }
 
-                    var docsCount  = (p.payment_documents || []).length;
-                    var docsToggle = docsCount > 0
-                        ? `<button type="button" class="btn btn-sm btn-outline-secondary toggle-docs-btn ms-1"
-                               data-target="docs-${p.purchase_id}" title="Voir paiements (${docsCount})">
-                               <i class="fas fa-receipt"></i> ${docsCount}
-                           </button>`
-                        : '';
-
                     tbody.append(`
                         <tr>
                             <td class="text-center">${i + 1}</td>
@@ -1188,61 +1354,11 @@
                                 <div class="d-inline-flex gap-1 flex-wrap justify-content-center">
                                     <a href="${p.show_url}" class="btn btn-sm btn-info" title="Voir les détails"><i class="fas fa-eye"></i></a>
                                     ${payBtn}
-                                    ${docsToggle}
                                 </div>
                             </td>
                         </tr>
                     `);
 
-                    if (docsCount > 0) {
-                        var docsHtml = '<table class="table table-sm mb-0 table-bordered">' +
-                            '<thead class="table-secondary"><tr>' +
-                            '<th>N° Doc</th><th>Méthode</th><th class="text-end">Montant</th><th>Date</th><th>Notes</th><th class="text-center">Actions</th>' +
-                            '</tr></thead><tbody>';
-
-                        p.payment_documents.forEach(function(doc) {
-                            var methodIcon = {
-                                cash: 'fas fa-money-bill-wave text-success',
-                                bank_transfer: 'fas fa-university text-primary',
-                                check: 'fas fa-money-check text-info',
-                                traite: 'fas fa-file-invoice text-warning',
-                                credit_card: 'fas fa-credit-card text-secondary',
-                                balance: 'fas fa-coins text-success',
-                            }[doc.payment_method] || 'fas fa-circle text-secondary';
-
-                            docsHtml += `<tr>
-                                <td><small>${doc.document_number}</small></td>
-                                <td><i class="${methodIcon} me-1"></i>${doc.method_label}</td>
-                                <td class="text-end fw-bold">${doc.amount_display} DH</td>
-                                <td>${doc.payment_date}</td>
-                                <td><small class="text-muted">${doc.notes}</small></td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-xs btn-warning edit-doc-btn"
-                                        data-doc-id="${doc.document_id}"
-                                        data-method="${doc.payment_method}"
-                                        data-amount="${doc.amount}"
-                                        data-date="${doc.payment_date_raw}"
-                                        data-notes="${doc.notes}"
-                                        title="Modifier">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-xs btn-danger delete-doc-btn ms-1"
-                                        data-doc-id="${doc.document_id}"
-                                        data-number="${doc.document_number}"
-                                        title="Supprimer">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>`;
-                        });
-
-                        docsHtml += '</tbody></table>';
-                        tbody.append(`
-                            <tr id="docs-${p.purchase_id}" style="display:none;">
-                                <td colspan="8" class="p-0 bg-light">${docsHtml}</td>
-                            </tr>
-                        `);
-                    }
                 });
 
                 tfoot.append(`
@@ -1385,6 +1501,8 @@
                 $('#supplierDetailsContent').hide();
                 $('#supplierPurchasesBody').empty();
                 $('#supplierPurchasesFoot').empty();
+                $('#supplierPaymentsBody').empty();
+                $('#supplierPaymentsFoot').empty();
                 $('#modalSummaryRow').empty();
                 $('#supplierBalanceRow').hide();
                 $('#supplierFullSituationLink').attr('href', "{{ url('suppliers/situation/supplier') }}/" +
@@ -1392,25 +1510,7 @@
                 $('#supplierDetailsModal').modal('show');
 
                 // Load balance first
-                $.ajax({
-                    url: "{{ url('suppliers/situation/supplier') }}/" + currentSupplierId +
-                        "/balance",
-                    type: 'GET',
-                    success: function(res) {
-                        if (res.success) {
-                            currentAvailableCredit = parseFloat(res.available_credit) || 0;
-                            if (currentAvailableCredit > 0.005) {
-                                $('#modalSupplierBalance').text(currentAvailableCredit.toFixed(
-                                        2) + ' DH')
-                                    .removeClass('text-danger text-muted').addClass(
-                                        'text-success');
-                                $('#supplierBalanceRow').show();
-                            } else {
-                                $('#supplierBalanceRow').hide();
-                            }
-                        }
-                    }
-                });
+                loadSupplierBalance();
 
                 // Reset modal date filters when opening
                 $('#modal_date_from').val('');
@@ -2215,14 +2315,6 @@
                         showToast('error', xhr.responseJSON?.message || 'Erreur');
                     }
                 });
-            });
-
-            // ── Toggle payment docs sub-row ───────────────────────────────────
-            $(document).on('click', '.toggle-docs-btn', function() {
-                var target = $(this).data('target');
-                $('#' + target).toggle();
-                var icon = $(this).find('i');
-                icon.toggleClass('fa-receipt fa-chevron-up');
             });
 
             // ── Edit payment document ─────────────────────────────────────────

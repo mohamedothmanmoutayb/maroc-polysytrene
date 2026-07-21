@@ -929,6 +929,7 @@ class RawMaterialPurchaseController extends Controller
                 'file_path'       => $filePath,
                 'original_filename' => $originalFilename,
                 'amount'          => $paymentAmount,
+                'paid_amount'     => $requestedAmount,
                 'payment_method'  => $request->payment_method,
                 'payment_date'    => $request->payment_date,
                 'notes'           => $request->notes,
@@ -1263,6 +1264,8 @@ class RawMaterialPurchaseController extends Controller
             $purchase = $doc->purchase;
             $oldAmount = $doc->amount;
             $oldMethod = $doc->payment_method;
+            // Overpayment already credited to the balance by a previous save
+            $oldExcess = $doc->excess_amount;
 
             // Check payments may only be corrected to cash
             if ($oldMethod === 'check' && !in_array($request->payment_method, ['check', 'cash'])) {
@@ -1272,17 +1275,33 @@ class RawMaterialPurchaseController extends Controller
                 ], 400);
             }
 
-            // Validate new amount doesn't exceed remaining + old amount
-            $otherPaid = $purchase->paymentDocuments()
+            // The document may absorb at most what the other documents leave unpaid.
+            // Beyond that it is an overpayment, credited to the supplier balance
+            // (only for the methods that carry no external document to reconcile).
+            $otherPaid  = $purchase->paymentDocuments()
                 ->where('document_id', '!=', $doc->document_id)
                 ->sum('amount');
-            $maxAllowed = $purchase->final_amount - $otherPaid;
-            if ($request->amount > $maxAllowed) {
+            $maxAllowed = max(0, (float) $purchase->final_amount - (float) $otherPaid);
+
+            $requestedAmount  = (float) $request->amount;
+            $allowOverpayment = in_array($request->payment_method, ['cash', 'bank_transfer', 'credit_card']);
+
+            if (!$allowOverpayment && $requestedAmount > $maxAllowed + 0.005) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Montant trop élevé. Maximum: ' . number_format($maxAllowed, 2, ',', '.') . ' DH'
                 ], 400);
             }
+
+            if ($maxAllowed < 0.01) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cet achat est déjà soldé par les autres paiements. Utilisez « Ajouter du solde » pour créditer le fournisseur.'
+                ], 400);
+            }
+
+            $docAmount = min($requestedAmount, $maxAllowed);
+            $excess    = max(0, $requestedAmount - $docAmount);
 
             // Handle file upload (replaces existing)
             $filePath = $doc->file_path;
@@ -1315,7 +1334,7 @@ class RawMaterialPurchaseController extends Controller
                 CheckAllocation::create([
                     'check_id'         => $check->check_id,
                     'purchase_id'      => $purchase->purchase_id,
-                    'allocated_amount' => $request->amount,
+                    'allocated_amount' => $docAmount,
                     'notes'            => $request->notes ?? 'Modification paiement',
                 ]);
                 $check->remaining_amount = $check->amount - $check->allocations()->sum('allocated_amount');
@@ -1334,7 +1353,7 @@ class RawMaterialPurchaseController extends Controller
                         'traite_number' => $traiteNumber,
                         'order_id'      => null,
                         'client_id'     => null,
-                        'amount'        => $request->amount,
+                        'amount'        => $docAmount,
                         'issue_date'    => $request->payment_date,
                         'due_date'      => $request->traite_due_date ?? $request->payment_date,
                         'bank_name'     => $request->traite_bank,
@@ -1349,7 +1368,8 @@ class RawMaterialPurchaseController extends Controller
             $doc->update([
                 'payment_method' => $request->payment_method,
                 'document_type' => $request->payment_method,
-                'amount' => $request->amount,
+                'amount' => $docAmount,
+                'paid_amount' => $requestedAmount,
                 'payment_date' => $request->payment_date,
                 'notes' => $request->notes,
                 'file_path' => $filePath,
@@ -1369,7 +1389,7 @@ class RawMaterialPurchaseController extends Controller
             $purchase->save();
 
             // Sync supplier balance with the change in amount (only for payments that were tracked when added)
-            $amountDelta = (float) $request->amount - (float) $oldAmount;
+            $amountDelta = (float) $docAmount - (float) $oldAmount;
             if (abs($amountDelta) > 0.005) {
                 $isPaymentTracked = DB::table('supplier_balance_history')
                     ->where('reference_id', $purchase->purchase_id)
@@ -1389,17 +1409,47 @@ class RawMaterialPurchaseController extends Controller
                         'reference_type'   => 'purchase',
                         'reference_id'     => $purchase->purchase_id,
                         'description'      => "Paiement modifié sur achat #{$purchase->purchase_number}: " .
-                            number_format($oldAmount, 2, ',', '.') . ' → ' . number_format($request->amount, 2, ',', '.') . ' DH',
+                            number_format($oldAmount, 2, ',', '.') . ' → ' . number_format($docAmount, 2, ',', '.') . ' DH',
                         'created_by'       => auth()->id(),
                     ]);
                 }
             }
 
+            // Credit only the change in overpayment, so re-saving the same
+            // document never credits the excess twice
+            $excessDelta = $excess - $oldExcess;
+            if (abs($excessDelta) > 0.005) {
+                $supplier        = $purchase->supplier()->first();
+                $previousBalance = (float) $supplier->balance;
+                $newBalance      = $previousBalance - $excessDelta;
+                $supplier->update(['balance' => $newBalance]);
+                $supplier->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance'      => $newBalance,
+                    'amount'           => -$excessDelta,
+                    'type'             => 'overpayment_credit',
+                    'reference_type'   => 'purchase',
+                    'reference_id'     => $purchase->purchase_id,
+                    'description'      => $excessDelta > 0
+                        ? "Excédent paiement achat #{$purchase->purchase_number}: " . number_format($excessDelta, 2) . " DH crédité en solde"
+                        : "Excédent paiement achat #{$purchase->purchase_number} réduit: " . number_format(abs($excessDelta), 2) . " DH repris du solde",
+                    'created_by'       => auth()->id(),
+                ]);
+            }
+
             DB::commit();
 
+            $message = 'Document de paiement mis à jour avec succès.';
+            if ($excessDelta > 0.005) {
+                $message .= ' Excédent de ' . number_format($excessDelta, 2, ',', '.') . ' DH crédité en solde fournisseur.';
+            } elseif ($excessDelta < -0.005) {
+                $message .= ' ' . number_format(abs($excessDelta), 2, ',', '.') . ' DH repris du solde fournisseur.';
+            }
+
             return response()->json([
-                'success' => true,
-                'message' => 'Document de paiement mis à jour avec succès.',
+                'success'         => true,
+                'message'         => $message,
+                'excess_credited' => $excessDelta > 0.005 ? number_format($excessDelta, 2, ',', '.') : null,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();

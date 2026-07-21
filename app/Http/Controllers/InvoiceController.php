@@ -899,7 +899,8 @@ class InvoiceController extends Controller
                     $quotient = floor($num / $divisor);
                     $remainder = $num % $divisor;
 
-                    $quotientText = $quotient == 1 ? 'UN' : $convert($quotient);
+                    // "MILLE"/"MILLION", jamais "UN MILLE"/"UN MILLION"
+                    $quotientText = $quotient == 1 ? '' : $convert($quotient);
 
                     if ($word == 'MILLE') {
                         $word = 'MILLE';
@@ -909,7 +910,7 @@ class InvoiceController extends Controller
                         }
                     }
 
-                    $result = $quotientText . ' ' . $word;
+                    $result = trim($quotientText . ' ' . $word);
 
                     if ($remainder > 0) {
                         $result .= ' ' . $convert($remainder);

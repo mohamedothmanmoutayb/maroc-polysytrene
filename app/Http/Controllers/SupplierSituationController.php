@@ -183,8 +183,13 @@ class SupplierSituationController extends Controller
                 return [
                     'document_id'      => $doc->document_id,
                     'document_number'  => $doc->document_number,
+                    // amount = part applied to the purchase, actual = what the supplier received
                     'amount'           => (float) $doc->amount,
                     'amount_display'   => number_format($doc->amount, 2, ',', '.'),
+                    'actual_amount'    => $doc->actual_amount,
+                    'actual_display'   => number_format($doc->actual_amount, 2, ',', '.'),
+                    'excess_amount'    => $doc->excess_amount,
+                    'excess_display'   => number_format($doc->excess_amount, 2, ',', '.'),
                     'payment_method'   => $doc->payment_method,
                     'method_label'     => $methodLabels[$doc->payment_method] ?? ucfirst($doc->payment_method),
                     'payment_date'     => $doc->payment_date ? $doc->payment_date->format('d/m/Y') : '—',
