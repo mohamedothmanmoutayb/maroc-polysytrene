@@ -16,6 +16,7 @@ class PurchasePaymentDocument extends Model
     protected $fillable = [
         'purchase_id',
         'document_number',
+        'payment_group_id',
         'document_type',
         'check_id',
         'traite_id',
@@ -50,6 +51,39 @@ class PurchasePaymentDocument extends Model
     public function purchase()
     {
         return $this->belongsTo(RawMaterialPurchase::class, 'purchase_id');
+    }
+
+    /**
+     * Every document of the same payment. A document with no group is a payment
+     * on its own, so the collection always contains at least this document.
+     */
+    public function groupDocuments()
+    {
+        if (!$this->payment_group_id) {
+            return collect([$this]);
+        }
+
+        return self::with('purchase')
+            ->where('payment_group_id', $this->payment_group_id)
+            ->orderBy('document_id')
+            ->get();
+    }
+
+    /** True when this document is one slice of a payment spread over several purchases. */
+    public function getIsGroupedAttribute()
+    {
+        return (bool) $this->payment_group_id;
+    }
+
+    /** Identifier used by the UI to act on the whole payment. */
+    public function getPaymentKeyAttribute()
+    {
+        return $this->payment_group_id ?: ('doc-' . $this->document_id);
+    }
+
+    public function scopeForGroup($query, $groupId)
+    {
+        return $query->where('payment_group_id', $groupId);
     }
 
     public function uploader()

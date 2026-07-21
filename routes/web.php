@@ -123,6 +123,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/raw-material-purchases/payment-documents/{documentId}', [RawMaterialPurchaseController::class, 'updatePaymentDocument']);
     Route::delete('/raw-material-purchases/payment-documents/{documentId}', [RawMaterialPurchaseController::class, 'deletePaymentDocument'])->name('raw-material-purchases.delete-payment-document');
 
+    // A distributed payment is edited / deleted as one payment, not per purchase
+    Route::get('/raw-material-purchases/payments/{groupId}', [RawMaterialPurchaseController::class, 'getPaymentGroup'])->name('raw-material-purchases.payment-group');
+    Route::post('/raw-material-purchases/payments/{groupId}', [RawMaterialPurchaseController::class, 'updatePaymentGroup'])->name('raw-material-purchases.update-payment-group');
+    Route::delete('/raw-material-purchases/payments/{groupId}', [RawMaterialPurchaseController::class, 'deletePaymentGroup'])->name('raw-material-purchases.delete-payment-group');
+
     Route::prefix('employees/{employee}')->name('employees.documents.')->group(function () {
         Route::get('/documents', [EmployeeDocumentController::class, 'index'])->name('index');
         Route::post('/documents/upload', [EmployeeDocumentController::class, 'upload'])->name('upload');

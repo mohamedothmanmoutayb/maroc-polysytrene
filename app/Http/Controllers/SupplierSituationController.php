@@ -183,6 +183,9 @@ class SupplierSituationController extends Controller
                 return [
                     'document_id'      => $doc->document_id,
                     'document_number'  => $doc->document_number,
+                    // Documents of one distributed payment share this key
+                    'payment_group_id' => $doc->payment_group_id,
+                    'payment_key'      => $doc->payment_key,
                     // amount = part applied to the purchase, actual = what the supplier received
                     'amount'           => (float) $doc->amount,
                     'amount_display'   => number_format($doc->amount, 2, ',', '.'),

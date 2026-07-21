@@ -219,9 +219,9 @@
                                                 <th>Date</th>
                                                 <th>N° Doc</th>
                                                 <th>Méthode</th>
-                                                <th>N° Achat</th>
+                                                <th>Achats couverts</th>
                                                 <th class="text-end">Montant Payé</th>
-                                                <th class="text-end">Sur Achat</th>
+                                                <th class="text-end">Imputé</th>
                                                 <th>Notes</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
@@ -899,10 +899,20 @@
                 </div>
                 <form id="editPaymentForm" enctype="multipart/form-data">
                     <input type="hidden" id="edit_doc_id">
+                    <input type="hidden" id="edit_group_id">
                     <input type="hidden" id="edit_original_method">
                     <input type="hidden" id="edit_check_id" name="check_id">
                     <input type="hidden" id="edit_traite_id" name="traite_id">
                     <div class="modal-body">
+                        {{-- One payment spread over several purchases: the amount below is the whole payment --}}
+                        <div id="edit_group_info" class="alert alert-info py-2" style="display:none;">
+                            <i class="fas fa-layer-group me-1"></i>
+                            Ce paiement couvre <strong id="edit_group_count"></strong> achat(s) :
+                            <span id="edit_group_purchases"></span>
+                            <div class="small text-muted mt-1">
+                                Le montant modifié sera redistribué sur les achats impayés (du plus ancien au plus récent).
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">Méthode de paiement *</label>
@@ -1123,6 +1133,13 @@
             }, 300);
         }
 
+        function money(value) {
+            return (parseFloat(value) || 0).toLocaleString('de-DE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
         function formatDate(dateString) {
             if (!dateString) return 'N/A';
             var d = new Date(dateString);
@@ -1214,19 +1231,52 @@
             var tfoot = $('#supplierPaymentsFoot');
             tbody.empty(); tfoot.empty();
 
-            // Flatten every purchase's documents into a single payment list
+            // A payment distributed over several purchases wrote one document per
+            // purchase; they share a payment_key and are shown as the single payment
+            // they are.
+            var byKey = {};
             var payments = [];
+
             purchases.forEach(function(p) {
                 (p.payment_documents || []).forEach(function(doc) {
-                    payments.push($.extend({}, doc, {
+                    var line = {
                         purchase_id:     p.purchase_id,
                         purchase_number: p.purchase_number,
-                        show_url:        p.show_url
-                    }));
+                        show_url:        p.show_url,
+                        amount:          doc.amount,
+                        actual_amount:   doc.actual_amount,
+                        excess_amount:   doc.excess_amount
+                    };
+                    var key = doc.payment_key || ('doc-' + doc.document_id);
+                    var payment = byKey[key];
+
+                    if (!payment) {
+                        payment = byKey[key] = {
+                            key:              key,
+                            payment_group_id: doc.payment_group_id || '',
+                            document_id:      doc.document_id,
+                            document_number:  doc.document_number,
+                            payment_method:   doc.payment_method,
+                            method_label:     doc.method_label,
+                            payment_date:     doc.payment_date,
+                            payment_date_raw: doc.payment_date_raw,
+                            notes:            doc.notes,
+                            amount:           0,
+                            actual_amount:    0,
+                            excess_amount:    0,
+                            lines:            []
+                        };
+                        payments.push(payment);
+                    }
+
+                    payment.amount        += doc.amount;
+                    payment.actual_amount += doc.actual_amount;
+                    payment.excess_amount += doc.excess_amount;
+                    payment.lines.push(line);
                 });
             });
 
-            // Most recent first (documents without a date fall to the end)
+            // Most recent first (payments without a date fall to the end)
             payments.sort(function(a, b) {
                 return (b.payment_date_raw || '').localeCompare(a.payment_date_raw || '');
             });
@@ -1253,24 +1303,41 @@
                     balance: 'fas fa-coins text-success',
                 }[doc.payment_method] || 'fas fa-circle text-secondary';
 
+                var purchasesCell = doc.lines.map(function(l) {
+                    return `<a href="${l.show_url}" target="_blank" class="d-inline-block me-1 mb-1">
+                                <span class="badge bg-light border" style="color:black !important;">
+                                    ${l.purchase_number}
+                                    <span class="text-muted">· ${money(l.amount)}</span>
+                                </span>
+                            </a>`;
+                }).join('');
+
+                if (doc.lines.length > 1) {
+                    purchasesCell = `<div class="small text-muted mb-1">
+                                        <i class="fas fa-layer-group me-1"></i>${doc.lines.length} achats
+                                     </div>` + purchasesCell;
+                }
+
                 tbody.append(`
                     <tr>
                         <td class="text-center">${i + 1}</td>
                         <td>${doc.payment_date}</td>
                         <td><small>${doc.document_number}</small></td>
                         <td><i class="${methodIcon} me-1"></i>${doc.method_label}</td>
-                        <td><a href="${doc.show_url}" target="_blank"><strong>${doc.purchase_number}</strong></a></td>
+                        <td>${purchasesCell}</td>
                         <td class="text-end fw-bold text-success">
-                            ${doc.actual_display} DH
+                            ${money(doc.actual_amount)} DH
                             ${doc.excess_amount > 0.005
-                                ? `<br><small class="text-info" title="Crédité en solde fournisseur"><i class="fas fa-coins me-1"></i>dont ${doc.excess_display} DH en solde</small>`
+                                ? `<br><small class="text-info" title="Crédité en solde fournisseur"><i class="fas fa-coins me-1"></i>dont ${money(doc.excess_amount)} DH en solde</small>`
                                 : ''}
                         </td>
-                        <td class="text-end">${doc.amount_display} DH</td>
+                        <td class="text-end">${money(doc.amount)} DH</td>
                         <td><small class="text-muted">${doc.notes}</small></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-xs btn-warning edit-doc-btn"
                                 data-doc-id="${doc.document_id}"
+                                data-group-id="${doc.payment_group_id}"
+                                data-purchases="${$('<div>').text(doc.lines.map(function(l){ return l.purchase_number; }).join(', ')).html()}"
                                 data-method="${doc.payment_method}"
                                 data-amount="${doc.actual_amount}"
                                 data-date="${doc.payment_date_raw}"
@@ -1280,6 +1347,8 @@
                             </button>
                             <button type="button" class="btn btn-xs btn-danger delete-doc-btn ms-1"
                                 data-doc-id="${doc.document_id}"
+                                data-group-id="${doc.payment_group_id}"
+                                data-count="${doc.lines.length}"
                                 data-number="${doc.document_number}"
                                 title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -1411,7 +1480,7 @@
             });
 
             // ── Main DataTable ────────────────────────────────────────────────
-            var table = $('#situationTable').DataTable({ paging: false, lengthChange: false, 
+            var table = $('#situationTable').DataTable({ paging: false, lengthChange: false,
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -2353,12 +2422,26 @@
 
             $(document).on('click', '.edit-doc-btn', function() {
                 var docId = $(this).data('doc-id');
+                var groupId = $(this).data('group-id') || '';
+                var purchases = String($(this).data('purchases') || '');
                 var method = $(this).data('method');
                 var amount = $(this).data('amount');
                 var date = $(this).data('date');
                 var notes = $(this).data('notes');
 
+                var purchaseList = purchases ? purchases.split(', ') : [];
+                if (groupId && purchaseList.length > 1) {
+                    $('#edit_group_count').text(purchaseList.length);
+                    $('#edit_group_purchases').html(purchaseList.map(function(n) {
+                        return '<span class="badge bg-light border me-1" style="color:black !important;">' + n + '</span>';
+                    }).join(''));
+                    $('#edit_group_info').show();
+                } else {
+                    $('#edit_group_info').hide();
+                }
+
                 $('#edit_doc_id').val(docId);
+                $('#edit_group_id').val(groupId);
                 $('#edit_original_method').val(method);
                 $('#edit_amount').val(parseFloat(amount).toFixed(2));
                 $('#edit_date').val(date);
@@ -2521,6 +2604,7 @@
             $('#editPaymentForm').submit(function(e) {
                 e.preventDefault();
                 var docId = $('#edit_doc_id').val();
+                var groupId = $('#edit_group_id').val();
                 var newMethod = $('#edit_method').val();
                 var origMethod = $('#edit_original_method').val();
 
@@ -2542,10 +2626,21 @@
 
                 var fd = new FormData(this);
                 fd.append('_token', '{{ csrf_token() }}');
-                fd.append('_method', 'PATCH');
+
+                var url;
+                if (groupId) {
+                    // One payment over several purchases: replace it as a whole
+                    url = '/raw-material-purchases/payments/' + groupId;
+                    var file = $('#edit_file')[0].files[0];
+                    fd.delete('document');
+                    if (file) fd.append('payment_file', file);
+                } else {
+                    url = '/raw-material-purchases/payment-documents/' + docId + '/payment-method';
+                    fd.append('_method', 'PATCH');
+                }
 
                 $.ajax({
-                    url: '/raw-material-purchases/payment-documents/' + docId + '/payment-method',
+                    url: url,
                     type: 'POST',
                     data: fd,
                     processData: false,
@@ -2574,11 +2669,22 @@
             // ── Delete payment document ───────────────────────────────────────
             $(document).on('click', '.delete-doc-btn', function() {
                 var docId = $(this).data('doc-id');
+                var groupId = $(this).data('group-id') || '';
+                var count = parseInt($(this).data('count'), 10) || 1;
                 var number = $(this).data('number');
-                if (!confirm('Supprimer le paiement ' + number + ' ?')) return;
+
+                var confirmText = count > 1 ?
+                    'Supprimer le paiement ' + number + ' ? Il couvre ' + count +
+                    ' achats, qui redeviendront impayés.' :
+                    'Supprimer le paiement ' + number + ' ?';
+                if (!confirm(confirmText)) return;
+
+                var url = groupId ?
+                    '/raw-material-purchases/payments/' + groupId :
+                    '/raw-material-purchases/payment-documents/' + docId;
 
                 $.ajax({
-                    url: '/raw-material-purchases/payment-documents/' + docId,
+                    url: url,
                     type: 'DELETE',
                     data: {
                         _token: '{{ csrf_token() }}'

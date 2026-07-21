@@ -337,6 +337,13 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($purchase->paymentDocuments as $doc)
+                                                            @php
+                                                                // A payment distributed over several purchases is one
+                                                                // payment: show its whole amount, edit/delete it whole.
+                                                                $group = $doc->groupDocuments();
+                                                                $isGrouped = $group->count() > 1;
+                                                                $groupTotal = (float) $group->sum('amount');
+                                                            @endphp
                                                             <tr>
                                                                 <td>{{ $doc->document_number }}</td>
                                                                 <td>
@@ -367,7 +374,18 @@
                                                                                 class="badge badge-secondary">{{ $doc->payment_method }}</span>
                                                                     @endswitch
                                                                 </td>
-                                                                <td class="text-end">{{ number_format($doc->amount, 2, ',', '.') }}
+                                                                <td class="text-end">
+                                                                    {{ number_format($doc->amount, 2, ',', '.') }}
+                                                                    @if ($isGrouped)
+                                                                        <br>
+                                                                        <small class="text-info"
+                                                                            title="{{ $group->map(fn($g) => optional($g->purchase)->purchase_number)->filter()->implode(', ') }}">
+                                                                            <i class="fas fa-layer-group me-1"></i>
+                                                                            part d'un paiement de
+                                                                            {{ number_format($groupTotal, 2, ',', '.') }} DH
+                                                                            sur {{ $group->count() }} achats
+                                                                        </small>
+                                                                    @endif
                                                                 </td>
                                                                 <td>{{ \Carbon\Carbon::parse($doc->payment_date)->format('d/m/Y') }}
                                                                 </td>
@@ -402,7 +420,10 @@
                                                                     <button type="button"
                                                                         class="btn btn-sm btn-outline-warning edit-payment-doc"
                                                                         data-doc-id="{{ $doc->document_id }}"
-                                                                        data-amount="{{ $doc->amount }}"
+                                                                        data-group-id="{{ $doc->payment_group_id }}"
+                                                                        data-group-count="{{ $group->count() }}"
+                                                                        data-group-purchases="{{ $group->map(fn($g) => optional($g->purchase)->purchase_number)->filter()->implode(', ') }}"
+                                                                        data-amount="{{ $doc->payment_group_id ? $groupTotal : $doc->amount }}"
                                                                         data-method="{{ $doc->payment_method }}"
                                                                         data-date="{{ \Carbon\Carbon::parse($doc->payment_date)->format('Y-m-d') }}"
                                                                         data-notes="{{ e($doc->notes ?? '') }}"
@@ -413,6 +434,8 @@
                                                                     <button type="button"
                                                                         class="btn btn-sm btn-outline-danger delete-payment-doc"
                                                                         data-doc-id="{{ $doc->document_id }}"
+                                                                        data-group-id="{{ $doc->payment_group_id }}"
+                                                                        data-group-count="{{ $group->count() }}"
                                                                         data-doc-number="{{ $doc->document_number }}"
                                                                         title="Supprimer">
                                                                         <i class="fas fa-trash"></i>
@@ -656,7 +679,18 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="edit_doc_id">
+                    <input type="hidden" id="edit_doc_group_id">
                     <div class="modal-body">
+                        {{-- One payment spread over several purchases: the amount is the whole payment --}}
+                        <div id="edit_doc_group_info" class="alert alert-info py-2" style="display:none;">
+                            <i class="fas fa-layer-group me-1"></i>
+                            Ce paiement couvre <strong id="edit_doc_group_count"></strong> achats :
+                            <span id="edit_doc_group_purchases" class="fw-semibold"></span>
+                            <div class="small text-muted mt-1">
+                                Le montant ci-dessous est le paiement complet. Il sera redistribué sur les achats
+                                impayés du fournisseur (du plus ancien au plus récent).
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">Montant (DH) *</label>
@@ -707,6 +741,11 @@
                 </div>
                 <div class="modal-body">
                     <p>Supprimer le document <strong id="delete_doc_number"></strong> ?</p>
+                    <div class="alert alert-danger" id="delete_doc_group_warning" style="display:none;">
+                        <i class="fas fa-layer-group me-1"></i>
+                        Ce paiement couvre <strong id="delete_doc_group_count"></strong> achats : il sera supprimé
+                        en entier et tous ces achats redeviendront impayés.
+                    </div>
                     <div class="alert alert-warning">Le paiement sera annulé et le solde recalculé. Les allocations chèque seront libérées.</div>
                 </div>
                 <div class="modal-footer">
@@ -789,12 +828,26 @@
             // Open edit payment doc modal
             $(document).on('click', '.edit-payment-doc', function() {
                 var $btn = $(this);
+                var groupId = $btn.data('group-id') || '';
+                var groupCount = parseInt($btn.data('group-count'), 10) || 1;
+
                 $('#edit_doc_id').val($btn.data('doc-id'));
+                $('#edit_doc_group_id').val(groupId);
                 $('#edit_doc_amount').val($btn.data('amount'));
                 $('#edit_doc_date').val($btn.data('date'));
                 $('#edit_doc_method').val($btn.data('method'));
                 $('#edit_doc_notes').val($btn.data('notes'));
                 $('#edit_doc_file').val('');
+
+                // Grouped payment: the amount above is the whole payment, not this slice
+                if (groupId && groupCount > 1) {
+                    $('#edit_doc_group_count').text(groupCount);
+                    $('#edit_doc_group_purchases').text($btn.data('group-purchases') || '');
+                    $('#edit_doc_group_info').show();
+                } else {
+                    $('#edit_doc_group_info').hide();
+                }
+
                 $('#editPaymentDocModal').modal('show');
             });
 
@@ -802,11 +855,24 @@
             $('#editPaymentDocForm').on('submit', function(e) {
                 e.preventDefault();
                 var docId = $('#edit_doc_id').val();
+                var groupId = $('#edit_doc_group_id').val();
                 var formData = new FormData(this);
-                formData.append('_method', 'PUT');
+                var url;
+
+                if (groupId) {
+                    // Replace the whole payment and re-spread it
+                    url = "{{ url('raw-material-purchases/payments') }}/" + groupId;
+                    var file = $('#edit_doc_file')[0].files[0];
+                    formData.delete('document');
+                    formData.delete('_method');
+                    if (file) formData.append('payment_file', file);
+                } else {
+                    url = "{{ url('raw-material-purchases/payment-documents') }}/" + docId;
+                    formData.append('_method', 'PUT');
+                }
 
                 $.ajax({
-                    url: "{{ url('raw-material-purchases/payment-documents') }}/" + docId,
+                    url: url,
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -826,9 +892,16 @@
 
             // Delete payment doc
             var deleteDocId = null;
+            var deleteGroupId = '';
             $(document).on('click', '.delete-payment-doc', function() {
                 deleteDocId = $(this).data('doc-id');
+                deleteGroupId = $(this).data('group-id') || '';
+                var groupCount = parseInt($(this).data('group-count'), 10) || 1;
+
                 $('#delete_doc_number').text($(this).data('doc-number'));
+                $('#delete_doc_group_warning')
+                    .toggle(groupCount > 1)
+                    .find('#delete_doc_group_count').text(groupCount);
                 $('#deletePaymentDocModal').modal('show');
             });
 
@@ -837,8 +910,12 @@
                 var $btn = $(this);
                 $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Suppression...');
 
+                var url = deleteGroupId ?
+                    "{{ url('raw-material-purchases/payments') }}/" + deleteGroupId :
+                    "{{ url('raw-material-purchases/payment-documents') }}/" + deleteDocId;
+
                 $.ajax({
-                    url: "{{ url('raw-material-purchases/payment-documents') }}/" + deleteDocId,
+                    url: url,
                     type: 'POST',
                     data: { _method: 'DELETE', _token: '{{ csrf_token() }}' },
                     success: function(res) {

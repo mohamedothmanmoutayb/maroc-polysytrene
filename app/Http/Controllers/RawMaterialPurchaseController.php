@@ -16,6 +16,7 @@ use App\Models\Traite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class RawMaterialPurchaseController extends Controller
@@ -169,30 +170,199 @@ class RawMaterialPurchaseController extends Controller
 
     public function distributeSupplierPayment(Request $request, $supplierId)
     {
-        $request->validate([
+        $request->validate($this->distributionRules());
+
+        $supplier = Supplier::findOrFail($supplierId);
+
+        DB::beginTransaction();
+        try {
+            $payload = $this->distributionPayload($request);
+            $result  = $this->createDistributedPayment($supplier, $payload);
+
+            DB::commit();
+
+            return response()->json([
+                'success'          => true,
+                'message'          => $this->distributionMessage($result),
+                'payment_group_id' => $result['group_id'],
+                'allocations'      => array_map(fn($a) => [
+                    'purchase_number' => $a['purchase']->purchase_number,
+                    'amount'          => number_format($a['amount'], 2, ',', '.'),
+                ], $result['allocations']),
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * A distribution is a single payment: replacing it means undoing every
+     * document it produced and re-spreading the new amount from scratch.
+     */
+    public function updatePaymentGroup(Request $request, $groupId)
+    {
+        $request->validate($this->distributionRules());
+
+        $docs = PurchasePaymentDocument::forGroup($groupId)->with('purchase')->get();
+        if ($docs->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Paiement introuvable.'], 404);
+        }
+
+        $supplier = Supplier::findOrFail($docs->first()->purchase->supplier_id);
+        $previous = $docs->first();
+
+        DB::beginTransaction();
+        try {
+            // Keep the file, the check and the traite of the payment being edited
+            // unless the form supplies new ones.
+            $payload = $this->distributionPayload($request, $previous);
+
+            $this->reversePaymentGroup($docs, $supplier, false);
+            $supplier->refresh();
+
+            $result = $this->createDistributedPayment($supplier, $payload, $groupId, $previous->document_number);
+
+            DB::commit();
+
+            return response()->json([
+                'success'          => true,
+                'message'          => 'Paiement modifié — ' . $this->distributionMessage($result),
+                'payment_group_id' => $groupId,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function deletePaymentGroup($groupId)
+    {
+        $docs = PurchasePaymentDocument::forGroup($groupId)->with('purchase')->get();
+        if ($docs->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Paiement introuvable.'], 404);
+        }
+
+        $supplier = Supplier::findOrFail($docs->first()->purchase->supplier_id);
+        $total    = (float) $docs->sum('amount');
+        $count    = $docs->count();
+
+        DB::beginTransaction();
+        try {
+            $this->reversePaymentGroup($docs, $supplier, true);
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Paiement de ' . number_format($total, 2, ',', '.')
+                    . ' DH supprimé (' . $count . ' achat(s) remis à découvert).',
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /** Payment detail for the edit modal: the total paid and the purchases it covers. */
+    public function getPaymentGroup($groupId)
+    {
+        $docs = PurchasePaymentDocument::forGroup($groupId)->with('purchase')->orderBy('document_id')->get();
+        if ($docs->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Paiement introuvable.'], 404);
+        }
+
+        $first = $docs->first();
+
+        return response()->json([
+            'success' => true,
+            'data'    => [
+                'payment_group_id' => $groupId,
+                'document_number'  => $first->document_number,
+                'payment_method'   => $first->payment_method,
+                'payment_date'     => $first->payment_date ? $first->payment_date->format('Y-m-d') : '',
+                'notes'            => $first->notes ?? '',
+                'check_id'         => $first->check_id,
+                'traite_id'        => $first->traite_id,
+                'total_amount'     => (float) $docs->sum('amount'),
+                'purchases'        => $docs->map(fn($d) => [
+                    'purchase_id'     => $d->purchase_id,
+                    'purchase_number' => $d->purchase ? $d->purchase->purchase_number : '—',
+                    'amount'          => (float) $d->amount,
+                    'amount_display'  => number_format($d->amount, 2, ',', '.'),
+                ])->values(),
+            ],
+        ]);
+    }
+
+    private function distributionRules(): array
+    {
+        return [
             'amount'          => 'required|numeric|min:0.01',
             'payment_method'  => 'required|in:cash,bank_transfer,check,credit_card,traite',
             'payment_date'    => 'required|date',
             'notes'           => 'nullable|string',
-            'check_id'        => 'required_if:payment_method,check|nullable|exists:checks,check_id',
+            'check_id'        => 'nullable|exists:checks,check_id',
             'payment_file'    => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'traite_id'       => 'nullable|exists:traites,traite_id',
             'traite_number'   => 'nullable|string|max:50',
             'traite_due_date' => 'nullable|date',
             'traite_bank'     => 'nullable|string|max:100',
-        ]);
+        ];
+    }
 
-        $supplier = Supplier::findOrFail($supplierId);
+    /**
+     * Normalise the form into the values the distribution needs. When editing an
+     * existing payment, its file / check / traite carry over unless replaced.
+     */
+    private function distributionPayload(Request $request, ?PurchasePaymentDocument $previous = null): array
+    {
+        $filePath         = $previous ? $previous->file_path : null;
+        $originalFilename = $previous ? $previous->original_filename : null;
 
-        $purchases = RawMaterialPurchase::where('supplier_id', $supplierId)
+        if ($request->hasFile('payment_file')) {
+            if ($previous && $previous->file_path) {
+                Storage::disk('public')->delete($previous->file_path);
+            }
+            $file             = $request->file('payment_file');
+            $originalFilename = $file->getClientOriginalName();
+            $filePath         = $file->store('payment-documents/' . date('Y/m'), 'public');
+        }
+
+        $method = $request->payment_method;
+
+        return [
+            'amount'            => (float) $request->amount,
+            'payment_method'    => $method,
+            'payment_date'      => $request->payment_date,
+            'notes'             => $request->notes,
+            'check_id'          => $request->check_id ?: ($previous && $method === 'check' ? $previous->check_id : null),
+            'traite_id'         => $request->traite_id ?: ($previous && $method === 'traite' ? $previous->traite_id : null),
+            'traite_number'     => $request->traite_number,
+            'traite_due_date'   => $request->traite_due_date,
+            'traite_bank'       => $request->traite_bank,
+            'file_path'         => $filePath,
+            'original_filename' => $originalFilename,
+        ];
+    }
+
+    /**
+     * Spread one payment over the supplier's unpaid purchases (FIFO). Every
+     * document written shares a payment_group_id and a document number so the
+     * whole thing reads — and is edited — as the single payment it is.
+     *
+     * Must run inside a transaction.
+     */
+    private function createDistributedPayment(Supplier $supplier, array $p, ?string $groupId = null, ?string $documentNumber = null): array
+    {
+        $purchases = RawMaterialPurchase::where('supplier_id', $supplier->supplier_id)
             ->where('payment_status', '!=', 'paid')
             ->orderBy('purchase_date', 'asc')
             ->orderBy('purchase_id', 'asc')
             ->get();
 
-        $requestedAmount = (float) $request->amount;
+        $requestedAmount = (float) $p['amount'];
         $remainingBudget = $requestedAmount;
-        $allocations = [];
+        $allocations     = [];
 
         foreach ($purchases as $purchase) {
             if ($remainingBudget <= 0) break;
@@ -206,170 +376,258 @@ class RawMaterialPurchaseController extends Controller
         // Anything left over (no unpaid purchase to absorb it, or an overpayment) goes
         // straight to the supplier balance — e.g. old debit balances tracked before
         // purchases existed in the app.
-        $balanceAmount   = $remainingBudget > 0.005 ? $remainingBudget : 0;
+        $balanceAmount      = $remainingBudget > 0.005 ? $remainingBudget : 0;
         $newSupplierBalance = null;
 
-        DB::beginTransaction();
-        try {
-            // Upload file once (shared reference)
-            $filePath = null;
-            $originalFilename = null;
-            if ($request->hasFile('payment_file')) {
-                $file = $request->file('payment_file');
-                $originalFilename = $file->getClientOriginalName();
-                $filePath = $file->store('payment-documents/' . date('Y/m'), 'public');
+        $groupId        = $groupId ?: (string) Str::uuid();
+        $documentNumber = $documentNumber ?: PurchasePaymentDocument::generateDocumentNumber();
+
+        // Resolve check upfront
+        $check = null;
+        if ($p['payment_method'] === 'check') {
+            if (!$p['check_id']) {
+                throw new \RuntimeException('Veuillez sélectionner un chèque.');
             }
+            $check = Check::findOrFail($p['check_id']);
+        }
 
-            // Resolve check upfront
-            $check = null;
-            if ($request->payment_method === 'check') {
-                $check = Check::findOrFail($request->check_id);
-            }
-
-            // Handle traite upfront (existing traite selected → mark paid; new → create as paid)
-            $traiteId = null;
-            if ($request->payment_method === 'traite') {
-                if ($request->traite_id) {
-                    $traite = Traite::findOrFail($request->traite_id);
-                    $traite->status       = 'paid';
-                    $traite->payment_date = now();
-                    $traite->save();
-                    $traiteId = $traite->traite_id;
-                } else {
-                    $traiteNumber    = $request->traite_number ?: ('TR-FOUR-' . date('Ymd') . '-' . str_pad(Traite::count() + 1, 4, '0', STR_PAD_LEFT));
-                    $purchaseNumbers = implode(', ', array_map(fn($a) => $a['purchase']->purchase_number, $allocations));
-                    $traiteNotes     = 'Traite fournisseur – ' . $supplier->display_name . ' – '
-                        . ($purchaseNumbers ? 'achats: ' . $purchaseNumbers : 'solde fournisseur');
-                    $newTraite = Traite::create([
-                        'traite_number' => $traiteNumber,
-                        'order_id'      => null,
-                        'client_id'     => null,
-                        'amount'        => $requestedAmount,
-                        'issue_date'    => $request->payment_date,
-                        'due_date'      => $request->traite_due_date ?? $request->payment_date,
-                        'bank_name'     => $request->traite_bank,
-                        'notes'         => $traiteNotes,
-                        'status'        => 'paid',
-                        'payment_date'  => now(),
-                        'created_by'    => auth()->id(),
-                    ]);
-                    $traiteId = $newTraite->traite_id;
-                }
-            }
-
-            foreach ($allocations as $alloc) {
-                $purchase = $alloc['purchase'];
-                $amount   = $alloc['amount'];
-
-                PurchasePaymentDocument::create([
-                    'purchase_id'       => $purchase->purchase_id,
-                    'document_number'   => PurchasePaymentDocument::generateDocumentNumber(),
-                    'document_type'     => $request->payment_method,
-                    'check_id'          => $check ? $check->check_id : null,
-                    'traite_id'         => $traiteId,
-                    'file_path'         => $filePath,
-                    'original_filename' => $originalFilename,
-                    'amount'            => $amount,
-                    'payment_method'    => $request->payment_method,
-                    'payment_date'      => $request->payment_date,
-                    'notes'             => $request->notes ?? ('Paiement groupé – ' . $supplier->display_name),
-                    'uploaded_by'       => auth()->id(),
+        // Handle traite upfront (existing traite selected → mark paid; new → create as paid)
+        $traiteId = null;
+        if ($p['payment_method'] === 'traite') {
+            if ($p['traite_id']) {
+                $traite = Traite::findOrFail($p['traite_id']);
+                $traite->status       = 'paid';
+                $traite->amount       = $requestedAmount;
+                $traite->payment_date = now();
+                $traite->save();
+                $traiteId = $traite->traite_id;
+            } else {
+                $traiteNumber    = $p['traite_number'] ?: ('TR-FOUR-' . date('Ymd') . '-' . str_pad(Traite::count() + 1, 4, '0', STR_PAD_LEFT));
+                $purchaseNumbers = implode(', ', array_map(fn($a) => $a['purchase']->purchase_number, $allocations));
+                $traiteNotes     = 'Traite fournisseur – ' . $supplier->display_name . ' – '
+                    . ($purchaseNumbers ? 'achats: ' . $purchaseNumbers : 'solde fournisseur');
+                $newTraite = Traite::create([
+                    'traite_number' => $traiteNumber,
+                    'order_id'      => null,
+                    'client_id'     => null,
+                    'amount'        => $requestedAmount,
+                    'issue_date'    => $p['payment_date'],
+                    'due_date'      => $p['traite_due_date'] ?? $p['payment_date'],
+                    'bank_name'     => $p['traite_bank'],
+                    'notes'         => $traiteNotes,
+                    'status'        => 'paid',
+                    'payment_date'  => now(),
+                    'created_by'    => auth()->id(),
                 ]);
+                $traiteId = $newTraite->traite_id;
+            }
+        }
 
-                if ($check) {
-                    CheckAllocation::create([
-                        'check_id'         => $check->check_id,
-                        'purchase_id'      => $purchase->purchase_id,
-                        'allocated_amount' => $amount,
-                        'notes'            => 'Distribution paiement – ' . $purchase->purchase_number,
-                    ]);
-                }
+        foreach ($allocations as $alloc) {
+            $purchase = $alloc['purchase'];
+            $amount   = $alloc['amount'];
 
-                // total_paid accessor already includes the doc created above
-                $newPaid   = (float) $purchase->total_paid;
-                $newStatus = $newPaid >= (float) $purchase->final_amount - 0.01 ? 'paid' : ($newPaid > 0 ? 'partial' : 'pending');
-                $purchase->update(['paid_amount' => $newPaid, 'payment_status' => $newStatus]);
+            PurchasePaymentDocument::create([
+                'purchase_id'       => $purchase->purchase_id,
+                'document_number'   => $documentNumber,
+                'payment_group_id'  => $groupId,
+                'document_type'     => $p['payment_method'],
+                'check_id'          => $check ? $check->check_id : null,
+                'traite_id'         => $traiteId,
+                'file_path'         => $p['file_path'],
+                'original_filename' => $p['original_filename'],
+                'amount'            => $amount,
+                'payment_method'    => $p['payment_method'],
+                'payment_date'      => $p['payment_date'],
+                'notes'             => $p['notes'] ?? ('Paiement groupé – ' . $supplier->display_name),
+                'uploaded_by'       => auth()->id(),
+            ]);
 
-                // Update supplier balance for tracked purchases
-                $isPurchaseTracked = DB::table('supplier_balance_history')
-                    ->where('supplier_id', $supplierId)
-                    ->where('reference_id', $purchase->purchase_id)
-                    ->whereIn('type', ['purchase_unpaid', 'purchase_created'])
-                    ->exists();
-
-                if ($isPurchaseTracked && $amount > 0.005) {
-                    $previousBalance = (float) $supplier->balance;
-                    $newBalance      = $previousBalance - $amount;
-                    $supplier->update(['balance' => $newBalance]);
-                    $supplier->balanceHistory()->create([
-                        'previous_balance' => $previousBalance,
-                        'new_balance'      => $newBalance,
-                        'amount'           => -$amount,
-                        'type'             => 'payment_added',
-                        'reference_type'   => 'purchase',
-                        'reference_id'     => $purchase->purchase_id,
-                        'description'      => "Paiement groupé achat #{$purchase->purchase_number}: " . number_format($amount, 2) . " DH",
-                        'created_by'       => auth()->id(),
-                    ]);
-                    $supplier->refresh();
-                }
+            if ($check) {
+                CheckAllocation::create([
+                    'check_id'         => $check->check_id,
+                    'purchase_id'      => $purchase->purchase_id,
+                    'allocated_amount' => $amount,
+                    'notes'            => 'Distribution paiement – ' . $purchase->purchase_number,
+                ]);
             }
 
-            // Leftover with no unpaid purchase to absorb it (or an overpayment) is credited
-            // directly to the supplier balance — covers old debit balances tracked before
-            // any purchase existed in the app.
-            if ($balanceAmount > 0.005) {
+            // total_paid accessor already includes the doc created above
+            $newPaid   = (float) $purchase->total_paid;
+            $newStatus = $newPaid >= (float) $purchase->final_amount - 0.01 ? 'paid' : ($newPaid > 0 ? 'partial' : 'pending');
+            $purchase->update(['paid_amount' => $newPaid, 'payment_status' => $newStatus]);
+
+            // Update supplier balance for tracked purchases
+            if ($this->purchaseTracksBalance($supplier->supplier_id, $purchase->purchase_id) && $amount > 0.005) {
                 $previousBalance = (float) $supplier->balance;
-                $newBalance      = $previousBalance - $balanceAmount;
+                $newBalance      = $previousBalance - $amount;
                 $supplier->update(['balance' => $newBalance]);
                 $supplier->balanceHistory()->create([
                     'previous_balance' => $previousBalance,
                     'new_balance'      => $newBalance,
-                    'amount'           => -$balanceAmount,
+                    'amount'           => -$amount,
                     'type'             => 'payment_added',
-                    'reference_type'   => 'direct',
-                    'reference_id'     => 0,
-                    'description'      => $request->notes ?: ('Paiement fournisseur (solde): ' . number_format($balanceAmount, 2, ',', '.') . ' DH'),
+                    'reference_type'   => 'purchase',
+                    'reference_id'     => $purchase->purchase_id,
+                    'description'      => "Paiement groupé achat #{$purchase->purchase_number}: " . number_format($amount, 2) . " DH",
                     'created_by'       => auth()->id(),
                 ]);
                 $supplier->refresh();
-                $newSupplierBalance = $newBalance;
             }
-
-            if ($check) {
-                $check->remaining_amount = max(0, $check->remaining_amount - $requestedAmount);
-                if ($check->remaining_amount <= 0) $check->status = 'allocated';
-                $check->deposit_date  = $request->payment_date;
-                $check->clearing_date = $request->payment_date;
-                $check->save();
-            }
-
-            DB::commit();
-
-            $totalDistributed = array_sum(array_column($allocations, 'amount'));
-            $message = [];
-            if (count($allocations) > 0) {
-                $message[] = number_format($totalDistributed, 2, ',', '.') . ' DH distribués sur ' . count($allocations) . ' achat(s)';
-            }
-            if ($balanceAmount > 0.005) {
-                $message[] = number_format($balanceAmount, 2, ',', '.')
-                    . ' DH ajoutés au solde fournisseur (nouveau solde: '
-                    . number_format(abs($newSupplierBalance), 2, ',', '.') . ' DH '
-                    . ($newSupplierBalance > 0.01 ? 'dû' : ($newSupplierBalance < -0.01 ? 'crédit' : 'soldé')) . ')';
-            }
-
-            return response()->json([
-                'success'     => true,
-                'message'     => implode(' + ', $message),
-                'allocations' => array_map(fn($a) => [
-                    'purchase_number' => $a['purchase']->purchase_number,
-                    'amount'          => number_format($a['amount'], 2, ',', '.'),
-                ], $allocations),
-            ]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()], 500);
         }
+
+        // Leftover with no unpaid purchase to absorb it (or an overpayment) is credited
+        // directly to the supplier balance — covers old debit balances tracked before
+        // any purchase existed in the app.
+        if ($balanceAmount > 0.005) {
+            $previousBalance = (float) $supplier->balance;
+            $newBalance      = $previousBalance - $balanceAmount;
+            $supplier->update(['balance' => $newBalance]);
+            $supplier->balanceHistory()->create([
+                'previous_balance' => $previousBalance,
+                'new_balance'      => $newBalance,
+                'amount'           => -$balanceAmount,
+                'type'             => 'payment_added',
+                'reference_type'   => 'direct',
+                'reference_id'     => 0,
+                'description'      => $p['notes'] ?: ('Paiement fournisseur (solde): ' . number_format($balanceAmount, 2, ',', '.') . ' DH'),
+                'created_by'       => auth()->id(),
+            ]);
+            $supplier->refresh();
+            $newSupplierBalance = $newBalance;
+        }
+
+        if ($check) {
+            $check->remaining_amount = max(0, $check->remaining_amount - $requestedAmount);
+            if ($check->remaining_amount <= 0) $check->status = 'allocated';
+            $check->deposit_date  = $p['payment_date'];
+            $check->clearing_date = $p['payment_date'];
+            $check->save();
+        }
+
+        return [
+            'group_id'          => $groupId,
+            'document_number'   => $documentNumber,
+            'allocations'       => $allocations,
+            'total_distributed' => array_sum(array_column($allocations, 'amount')),
+            'balance_amount'    => $balanceAmount,
+            'new_balance'       => $newSupplierBalance,
+        ];
+    }
+
+    /**
+     * Undo every document of a payment. `$bounce` marks the check / traite as
+     * bounced (deletion); an edit only releases them so they can be re-applied.
+     *
+     * Must run inside a transaction.
+     */
+    private function reversePaymentGroup($docs, Supplier $supplier, bool $bounce): void
+    {
+        $purchases = [];
+
+        foreach ($docs as $doc) {
+            $purchase = $doc->purchase;
+            $amount   = (float) $doc->amount;
+
+            if ($purchase) {
+                $purchases[$purchase->purchase_id] = $purchase;
+            }
+
+            if ($doc->payment_method === 'check' && $purchase) {
+                $allocation = CheckAllocation::where('purchase_id', $purchase->purchase_id)
+                    ->where('allocated_amount', $doc->amount)
+                    ->when($doc->check_id, fn($q) => $q->where('check_id', $doc->check_id))
+                    ->first();
+
+                if ($allocation) {
+                    $check = $allocation->check;
+                    if ($check) {
+                        $check->remaining_amount += (float) $allocation->allocated_amount;
+                        if ($bounce) {
+                            $check->status = 'bounced';
+                        } elseif ($check->status === 'allocated') {
+                            $check->status = 'deposited';
+                        }
+                        $check->save();
+                    }
+                    $allocation->delete();
+                }
+            }
+
+            if ($bounce && $doc->payment_method === 'traite' && $doc->traite_id) {
+                $traite = Traite::find($doc->traite_id);
+                if ($traite) {
+                    $traite->status = 'bounced';
+                    $traite->save();
+                }
+            }
+
+            // The file is shared by the whole payment; an edit keeps it.
+            if ($bounce && $doc->file_path) {
+                Storage::disk('public')->delete($doc->file_path);
+            }
+
+            $doc->delete();
+
+            // Undoing the payment means the supplier is owed that amount again
+            if ($amount > 0.005 && $purchase
+                && $this->purchaseTracksBalance($supplier->supplier_id, $purchase->purchase_id)) {
+                $previousBalance = (float) $supplier->balance;
+                $newBalance      = $previousBalance + $amount;
+                $supplier->update(['balance' => $newBalance]);
+                $supplier->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance'      => $newBalance,
+                    'amount'           => $amount,
+                    'type'             => $bounce ? 'payment_deleted' : 'payment_updated',
+                    'reference_type'   => 'purchase',
+                    'reference_id'     => $purchase->purchase_id,
+                    'description'      => ($bounce ? 'Paiement supprimé' : 'Paiement modifié (annulation)')
+                        . " sur achat #{$purchase->purchase_number}: +" . number_format($amount, 2, ',', '.') . ' DH',
+                    'created_by'       => auth()->id(),
+                ]);
+                $supplier->refresh();
+            }
+        }
+
+        foreach ($purchases as $purchase) {
+            $totalPaid = (float) $purchase->paymentDocuments()->sum('amount');
+            $purchase->paid_amount    = $totalPaid;
+            $purchase->payment_status = $totalPaid <= 0
+                ? 'pending'
+                : ($totalPaid >= (float) $purchase->final_amount - 0.01 ? 'paid' : 'partial');
+            $purchase->save();
+        }
+    }
+
+    /** Purchases booked into the supplier balance are the only ones a payment may unwind. */
+    private function purchaseTracksBalance($supplierId, $purchaseId): bool
+    {
+        return DB::table('supplier_balance_history')
+            ->where('supplier_id', $supplierId)
+            ->where('reference_id', $purchaseId)
+            ->whereIn('type', ['purchase_unpaid', 'purchase_created'])
+            ->exists();
+    }
+
+    private function distributionMessage(array $result): string
+    {
+        $message = [];
+
+        if (count($result['allocations']) > 0) {
+            $message[] = number_format($result['total_distributed'], 2, ',', '.')
+                . ' DH distribués sur ' . count($result['allocations']) . ' achat(s)';
+        }
+
+        if ($result['balance_amount'] > 0.005) {
+            $newBalance = $result['new_balance'];
+            $message[] = number_format($result['balance_amount'], 2, ',', '.')
+                . ' DH ajoutés au solde fournisseur (nouveau solde: '
+                . number_format(abs($newBalance), 2, ',', '.') . ' DH '
+                . ($newBalance > 0.01 ? 'dû' : ($newBalance < -0.01 ? 'crédit' : 'soldé')) . ')';
+        }
+
+        return implode(' + ', $message);
     }
 
     public function create()
@@ -1258,6 +1516,16 @@ class RawMaterialPurchaseController extends Controller
             'traite_bank'     => 'nullable|string|max:100',
         ]);
 
+        // A slice of a distributed payment is not a payment of its own
+        $grouped = PurchasePaymentDocument::findOrFail($documentId);
+        if ($grouped->payment_group_id) {
+            return response()->json([
+                'success'          => false,
+                'message'          => 'Ce paiement couvre plusieurs achats — modifiez-le en entier.',
+                'payment_group_id' => $grouped->payment_group_id,
+            ], 409);
+        }
+
         DB::beginTransaction();
         try {
             $doc = PurchasePaymentDocument::findOrFail($documentId);
@@ -1462,6 +1730,12 @@ class RawMaterialPurchaseController extends Controller
 
     public function deletePaymentDocument($documentId)
     {
+        // Deleting one slice would leave the rest of the payment dangling
+        $grouped = PurchasePaymentDocument::findOrFail($documentId);
+        if ($grouped->payment_group_id) {
+            return $this->deletePaymentGroup($grouped->payment_group_id);
+        }
+
         DB::beginTransaction();
         try {
             $doc = PurchasePaymentDocument::findOrFail($documentId);
