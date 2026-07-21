@@ -410,6 +410,20 @@
             </div>
         </div>
 
+        @if (!empty($paymentReferences) && count($paymentReferences) > 0)
+        <div class="footer-section" style="margin-top: 10px;">
+            @foreach ($paymentReferences as $ref)
+            <p style="margin: 3px 0;">
+                <strong>Réf Paiement :</strong>
+                {{ $ref['method_label'] }}
+                @if ($ref['reference'])
+                    N° {{ $ref['reference'] }}
+                @endif
+            </p>
+            @endforeach
+        </div>
+        @endif
+
         <!-- Signature, right below "Arrêtée la présente..." -->
         <div class="signature-section">
             @if ($showCacher && $cacherBase64)

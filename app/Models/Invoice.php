@@ -88,4 +88,44 @@ class Invoice extends Model
 
         return !$query->exists();
     }
+
+    /**
+     * Get payment references for this invoice (from its linked sales orders).
+     * Returns an array of ['method_label' => '...', 'reference' => '...'].
+     */
+    public function getPaymentReferences()
+    {
+        $orderIds = $this->items()->pluck('source_sale_id')->unique()->filter()->values();
+
+        if ($orderIds->isEmpty()) {
+            return [];
+        }
+
+        $payments = SalesOrderPayment::whereIn('order_id', $orderIds)->get();
+
+        $references = [];
+        foreach ($payments as $payment) {
+            $methodLabel = $payment->method_label;
+            $refNumber = null;
+
+            if ($payment->payment_method === 'check') {
+                $check = Check::where('payment_id', $payment->payment_id)->first();
+                if ($check && $check->check_number) {
+                    $refNumber = $check->check_number;
+                }
+            } elseif ($payment->payment_method === 'traite') {
+                $traite = Traite::where('payment_id', $payment->payment_id)->first();
+                if ($traite && $traite->traite_number) {
+                    $refNumber = $traite->traite_number;
+                }
+            }
+
+            $references[] = [
+                'method_label' => $methodLabel,
+                'reference' => $refNumber,
+            ];
+        }
+
+        return $references;
+    }
 }

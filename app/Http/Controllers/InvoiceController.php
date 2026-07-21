@@ -806,7 +806,8 @@ class InvoiceController extends Controller
                 'cacherBase64' => $cacherBase64,
                 'numberToFrench' => function ($number) {
                     return $this->numberToFrench($number);
-                }
+                },
+                'paymentReferences' => $invoice->getPaymentReferences(),
             ];
 
             $pdf = Pdf::loadView('pdf.invoice', $data);
