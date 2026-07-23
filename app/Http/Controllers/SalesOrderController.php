@@ -455,6 +455,14 @@ class SalesOrderController extends Controller
                 'total' => (float) ($clientCheckRow->total ?? 0),
             ];
 
+            // ── Entreprise cheque supplier payments (not part of caisse cheque balance) ──
+            $supplierEntrCheckQuery = PurchasePaymentDocument::join('checks', 'purchase_payment_documents.check_id', '=', 'checks.check_id')
+                ->where('checks.check_type', 'entreprise');
+            if ($dateFrom) $supplierEntrCheckQuery->whereDate('purchase_payment_documents.payment_date', '>=', $dateFrom);
+            if ($dateTo)   $supplierEntrCheckQuery->whereDate('purchase_payment_documents.payment_date', '<=', $dateTo);
+
+            $supplierEntrCheckTotal = (float) $supplierEntrCheckQuery->sum('purchase_payment_documents.amount');
+
             // ── Totals ───────────────────────────────────────────────────
             $totalIn  = array_sum(array_column($salesIncome, 'total'));
             // Solde caisse excludes bank transfers (like getRevenueStatistics)
@@ -475,9 +483,10 @@ class SalesOrderController extends Controller
                     'supplier_payments_total'  => $totalSupplierPayments,
                     'total_out'                => $totalOut,
                     'net_cash_flow'            => $netCashFlow,
-                    'client_checks'            => $clientChecks,
-                    'date_from'                => $dateFrom,
-                    'date_to'                  => $dateTo,
+                    'client_checks'                        => $clientChecks,
+                    'supplier_entr_check_total'          => $supplierEntrCheckTotal,
+                    'date_from'                           => $dateFrom,
+                    'date_to'                             => $dateTo,
                 ]
             ]);
         } catch (\Exception $e) {
