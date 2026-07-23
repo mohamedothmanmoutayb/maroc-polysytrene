@@ -819,14 +819,14 @@
                     };
 
                     // Calculate outgoing for each method (expenses + supplier payments)
-                    // Entreprise cheques issued to suppliers are bank instruments,
-                    // not caisse cheque receivables — they must not reduce Solde Chèques.
-                    const entrCheckTotal = d.supplier_entr_check_total || 0;
+                    // Supplier payments by cheque are NOT subtracted from Solde Chèques
+                    // because the caisse tracks cheque receivables on-hand. Issuing a
+                    // cheque to a supplier does not reduce held receivables — it is a
+                    // bank instrument that draws from the company's bank account.
                     const outgoing = {
                         especes: (expensesByMethod['cash']?.total || 0) + (supplierByMethod['cash']
                             ?.total || 0),
-                        cheques: (expensesByMethod['check']?.total || 0) + (supplierByMethod['check']
-                            ?.total || 0) - entrCheckTotal,
+                        cheques: (expensesByMethod['check']?.total || 0),
                         virements: (expensesByMethod['transfer']?.total || 0) + (supplierByMethod[
                             'transfer']?.total || 0),
                         traites: (expensesByMethod['traite']?.total || 0) + (supplierByMethod['traite']
