@@ -236,6 +236,19 @@
         .sidebar-link.has-arrow[aria-expanded="true"]::after {
             transform: translateY(-50%) rotate(50deg);
         }
+
+        /* Row action menus in tables.
+           The theme sets `.table-responsive { overflow-x: clip }`, which cut the menus
+           off at the edge of the table. While a menu is open the container stops
+           clipping, so the menu paints in front of the table instead. Paired with the
+           Popper "fixed" strategy applied in the script at the end of the body. */
+        .table-responsive.dropdown-open {
+            overflow: visible;
+        }
+
+        .table-responsive .dropdown-menu.show {
+            z-index: 1060;
+        }
     </style>
 
 </head>
@@ -692,6 +705,62 @@
         });
         @endif
     </script>
+    <script>
+        /**
+         * Row action menus in tables (DataTables and plain tables alike).
+         *
+         * The menus are rendered inside .table-responsive, which clips its overflow, so
+         * they were being cut off at the edge of the table. Two things fix that:
+         *  1. Popper positions the menu with the "fixed" strategy, anchoring it to the
+         *     viewport rather than to the clipping container.
+         *  2. The container stops clipping while a menu is open.
+         *
+         * This is applied globally, and only to dropdowns inside a .table-responsive, so
+         * the header/sidebar dropdowns keep their default behaviour.
+         */
+        (function() {
+            function tableDropdownContainer(element) {
+                return element && element.closest ? element.closest('.table-responsive') : null;
+            }
+
+            // Capture phase, so this runs before Bootstrap's own click handler builds the
+            // Dropdown: the instance then already carries our Popper configuration.
+            // Rows are re-rendered on every DataTables draw, so this cannot be done once
+            // up front.
+            document.addEventListener('click', function(event) {
+                if (!event.target || !event.target.closest) {
+                    return;
+                }
+
+                var toggle = event.target.closest('[data-bs-toggle="dropdown"]');
+
+                if (toggle && tableDropdownContainer(toggle)) {
+                    bootstrap.Dropdown.getOrCreateInstance(toggle, {
+                        popperConfig: {
+                            strategy: 'fixed'
+                        }
+                    });
+                }
+            }, true);
+
+            document.addEventListener('show.bs.dropdown', function(event) {
+                var container = tableDropdownContainer(event.target);
+
+                if (container) {
+                    container.classList.add('dropdown-open');
+                }
+            });
+
+            document.addEventListener('hidden.bs.dropdown', function(event) {
+                var container = tableDropdownContainer(event.target);
+
+                if (container) {
+                    container.classList.remove('dropdown-open');
+                }
+            });
+        })();
+    </script>
+
     @stack('scripts')
 </body>
 
