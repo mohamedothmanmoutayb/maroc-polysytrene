@@ -299,6 +299,13 @@
                                 </span>
                             @endif
                         </div>
+                        @if ($plannedOpenQty > 0)
+                            <div class="small text-warning mt-1">
+                                <i class="fas fa-hourglass-half me-1"></i>
+                                {{ number_format($plannedOpenQty, 2, ',', '.') }} {{ $unitLabel }} planifié(s) —
+                                {{ $openOrdersCount }} ordre(s) en cours
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -957,7 +964,13 @@
                         @else
                             <div class="text-center text-muted py-5">
                                 <i class="fas fa-industry fs-1 d-block mb-3"></i>
-                                Aucune production enregistrée pour cet article sur la période.
+                                @if ($plannedOpenQty > 0)
+                                    Aucune sortie de production saisie pour cet article :
+                                    {{ $openOrdersCount }} ordre(s) encore ouvert(s) pour
+                                    {{ number_format($plannedOpenQty, 2, ',', '.') }} {{ $unitLabel }} planifié(s).
+                                @else
+                                    Aucune production enregistrée pour cet article sur la période.
+                                @endif
                             </div>
                         @endif
                     </div>

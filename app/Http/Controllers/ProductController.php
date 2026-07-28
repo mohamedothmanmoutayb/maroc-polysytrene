@@ -810,15 +810,50 @@ class ProductController extends Controller
             ->orderByDesc('po.output_id')
             ->get();
 
-        $productionOrdersByStatus = DB::table('production_orders')
-            ->where('product_id', $product->product_id)
+        // Les ordres multi-articles stockent la quantité par article dans
+        // production_order_products ; l'en-tête production_orders porte le total
+        // de l'ordre. On prend donc la ligne article quand elle existe, et on
+        // retombe sur l'en-tête pour les anciens ordres mono-article.
+        $plannedFromItems = DB::table('production_order_products as pop')
+            ->join('production_orders as o', 'o.order_id', '=', 'pop.production_order_id')
+            ->where('pop.product_id', $product->product_id)
             ->select(
-                'status',
-                DB::raw('COUNT(*) as orders_count'),
-                DB::raw('COALESCE(SUM(quantity_to_produce), 0) as planned_qty')
+                'o.order_id',
+                'o.status',
+                DB::raw('COALESCE(pop.quantity_to_produce, 0) as planned_qty')
+            );
+
+        $plannedFromOrders = DB::table('production_orders as o')
+            ->where('o.product_id', $product->product_id)
+            ->whereNotExists(function ($q) {
+                $q->select(DB::raw(1))
+                    ->from('production_order_products as p')
+                    ->whereColumn('p.production_order_id', 'o.order_id');
+            })
+            ->select(
+                'o.order_id',
+                'o.status',
+                DB::raw('COALESCE(o.quantity_to_produce, 0) as planned_qty')
+            );
+
+        $productionOrdersByStatus = DB::query()
+            ->fromSub($plannedFromItems->unionAll($plannedFromOrders), 'po')
+            ->select(
+                'po.status',
+                DB::raw('COUNT(DISTINCT po.order_id) as orders_count'),
+                DB::raw('COALESCE(SUM(po.planned_qty), 0) as planned_qty')
             )
-            ->groupBy('status')
+            ->groupBy('po.status')
             ->get();
+
+        // Quantité encore planifiée mais pas encore produite (ordres ouverts).
+        $plannedOpenQty = (float) $productionOrdersByStatus
+            ->whereIn('status', ['pending', 'in_progress'])
+            ->sum('planned_qty');
+
+        $openOrdersCount = (int) $productionOrdersByStatus
+            ->whereIn('status', ['pending', 'in_progress'])
+            ->sum('orders_count');
 
         /* ---------------------------------------------------------------
          | PRODUCTION - article consommé comme source
@@ -945,6 +980,8 @@ class ProductController extends Controller
             'productionByFamille',
             'productionLines',
             'productionOrdersByStatus',
+            'plannedOpenQty',
+            'openOrdersCount',
             'consumptionLines',
             'movementsByType',
             'movements'
