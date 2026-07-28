@@ -207,8 +207,7 @@
                         <div class="text-muted small text-uppercase">Clients</div>
                         <h3 class="mb-0 mt-1">{{ (int) ($stats['sales']->clients_count ?? 0) }}</h3>
                         <div class="text-muted small">
-                            {{ (int) ($stats['sales']->orders_count ?? 0) }} vente(s) —
-                            {{ (int) ($stats['sales']->lines_count ?? 0) }} ligne(s)
+                            {{ (int) ($stats['sales']->orders_count ?? 0) }} vente(s)
                         </div>
                         <hr class="my-2">
                         <div class="small text-muted">
