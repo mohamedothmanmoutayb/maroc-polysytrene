@@ -22,7 +22,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:view_products')->only(['index', 'show', 'getStatistics', 'getStockInfo', 'checkLowStock', 'getFamilleStockDetails', 'getFamillesForProduct', 'getProductionTime']);
+        $this->middleware('can:view_products')->only(['index', 'show', 'statistics', 'getStatistics', 'getStockInfo', 'checkLowStock', 'getFamilleStockDetails', 'getFamillesForProduct', 'getProductionTime']);
         $this->middleware('can:create_products')->only(['create', 'store']);
         $this->middleware('can:edit_products')->only(['edit', 'update', 'toggleFamilles', 'updateFamilyPrices']);
         $this->middleware('can:delete_products')->only(['destroy']);
@@ -100,6 +100,12 @@ class ProductController extends Controller
                     $dropdown .= '<li>
                                 <a class="dropdown-item d-flex align-items-center gap-3" href="'.route('products.show', $row->product_id).'">
                                     <i class="fs-4 ti ti-eye"></i>Voir Détails
+                                </a>
+                            </li>';
+
+                    $dropdown .= '<li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" href="'.route('products.article-statistics', $row->product_id).'">
+                                    <i class="fs-4 ti ti-chart-histogram text-primary"></i><span class="text-primary">Statistiques</span>
                                 </a>
                             </li>';
 
@@ -472,6 +478,494 @@ class ProductController extends Controller
         ])->findOrFail($id);
 
         return view('pages.products.show', compact('product'));
+    }
+
+    /**
+     * Fiche statistique complète d'un article : ventes, factures, avoirs,
+     * production et mouvements de stock.
+     */
+    public function statistics(Request $request, $id)
+    {
+        $product = Product::with(['stock', 'familles', 'familleStocks.famille'])->findOrFail($id);
+
+        $dateFrom = $request->filled('date_from') ? $request->date_from : null;
+        $dateTo   = $request->filled('date_to') ? $request->date_to : null;
+
+        $unitLabel = $this->resolveUnitLabel($product);
+        $volumePerUnit = $product->getVolumePerUnitInM3();
+        $weightPerUnit = $product->getWeightPerUnitInKg();
+
+        $productTypes = ['production', 'decoupage', 'finale'];
+
+        /* ---------------------------------------------------------------
+         | VENTES
+         --------------------------------------------------------------- */
+        $salesQuery = function () use ($product, $productTypes, $dateFrom, $dateTo) {
+            $query = DB::table('sales_order_items as soi')
+                ->join('sales_orders as so', 'so.order_id', '=', 'soi.order_id')
+                ->where('soi.item_id', $product->product_id)
+                ->whereIn('soi.item_type', $productTypes);
+
+            if ($dateFrom) {
+                $query->whereDate('so.order_date', '>=', $dateFrom);
+            }
+            if ($dateTo) {
+                $query->whereDate('so.order_date', '<=', $dateTo);
+            }
+
+            return $query;
+        };
+
+        $salesSummary = $salesQuery()
+            ->select(
+                DB::raw('COALESCE(SUM(soi.quantity), 0) as total_qty'),
+                DB::raw('COALESCE(SUM(soi.total_price), 0) as total_amount'),
+                DB::raw('COUNT(*) as lines_count'),
+                DB::raw('COUNT(DISTINCT so.order_id) as orders_count'),
+                DB::raw('COUNT(DISTINCT so.client_id) as clients_count'),
+                DB::raw('MIN(so.order_date) as first_sale_date'),
+                DB::raw('MAX(so.order_date) as last_sale_date')
+            )
+            ->first();
+
+        $topClients = $salesQuery()
+            ->join('clients as c', 'c.client_id', '=', 'so.client_id')
+            ->select(
+                'c.client_id',
+                'c.name',
+                'c.entreprise_name',
+                'c.client_type',
+                'c.phone',
+                DB::raw('SUM(soi.quantity) as total_qty'),
+                DB::raw('SUM(soi.total_price) as total_amount'),
+                DB::raw('COUNT(DISTINCT so.order_id) as orders_count'),
+                DB::raw('MIN(so.order_date) as first_order_date'),
+                DB::raw('MAX(so.order_date) as last_order_date')
+            )
+            ->groupBy('c.client_id', 'c.name', 'c.entreprise_name', 'c.client_type', 'c.phone')
+            ->orderByDesc('total_qty')
+            ->get();
+
+        $salesByFamille = $salesQuery()
+            ->select(
+                'soi.family_id',
+                DB::raw("COALESCE(soi.family_name, 'Sans famille') as family_name"),
+                DB::raw('SUM(soi.quantity) as total_qty'),
+                DB::raw('SUM(soi.total_price) as total_amount'),
+                DB::raw('COUNT(DISTINCT so.order_id) as orders_count'),
+                DB::raw('COUNT(DISTINCT so.client_id) as clients_count')
+            )
+            ->groupBy('soi.family_id', 'soi.family_name')
+            ->orderByDesc('total_qty')
+            ->get();
+
+        $salesByClientType = $salesQuery()
+            ->join('clients as c', 'c.client_id', '=', 'so.client_id')
+            ->select(
+                'c.client_type',
+                DB::raw('SUM(soi.quantity) as total_qty'),
+                DB::raw('SUM(soi.total_price) as total_amount'),
+                DB::raw('COUNT(DISTINCT c.client_id) as clients_count')
+            )
+            ->groupBy('c.client_type')
+            ->orderByDesc('total_qty')
+            ->get();
+
+        $salesMonthly = $salesQuery()
+            ->select(
+                DB::raw("DATE_FORMAT(so.order_date, '%Y-%m') as period"),
+                DB::raw('SUM(soi.quantity) as total_qty'),
+                DB::raw('SUM(soi.total_price) as total_amount')
+            )
+            ->groupBy('period')
+            ->orderBy('period')
+            ->get();
+
+        $salesLines = $salesQuery()
+            ->leftJoin('clients as c', 'c.client_id', '=', 'so.client_id')
+            ->select(
+                'so.order_id',
+                'so.order_number',
+                'so.order_date',
+                'so.payment_status',
+                'c.client_id',
+                'c.name as client_name',
+                'c.entreprise_name',
+                'soi.quantity',
+                'soi.unit_price',
+                'soi.total_price',
+                'soi.family_name'
+            )
+            ->orderByDesc('so.order_date')
+            ->orderByDesc('so.order_id')
+            ->get();
+
+        /* ---------------------------------------------------------------
+         | FACTURES
+         --------------------------------------------------------------- */
+        $invoiceQuery = function () use ($product, $productTypes, $dateFrom, $dateTo) {
+            $query = DB::table('invoice_items as ii')
+                ->join('invoices as i', 'i.invoice_id', '=', 'ii.invoice_id')
+                ->where('ii.item_id', $product->product_id)
+                ->whereIn('ii.item_type', $productTypes);
+
+            if ($dateFrom) {
+                $query->whereDate('i.invoice_date', '>=', $dateFrom);
+            }
+            if ($dateTo) {
+                $query->whereDate('i.invoice_date', '<=', $dateTo);
+            }
+
+            return $query;
+        };
+
+        $invoiceSummary = $invoiceQuery()
+            ->select(
+                DB::raw('COALESCE(SUM(ii.quantity), 0) as total_qty'),
+                DB::raw('COALESCE(SUM(ii.total_price), 0) as total_amount'),
+                DB::raw('COUNT(DISTINCT i.invoice_id) as invoices_count'),
+                DB::raw('COUNT(DISTINCT i.client_id) as clients_count')
+            )
+            ->first();
+
+        $invoiceLines = $invoiceQuery()
+            ->leftJoin('clients as c', 'c.client_id', '=', 'i.client_id')
+            ->select(
+                'i.invoice_id',
+                'i.invoice_number',
+                'i.invoice_date',
+                'c.client_id',
+                'c.name as client_name',
+                'c.entreprise_name',
+                'ii.quantity',
+                'ii.unit_price',
+                'ii.total_price',
+                'ii.family_name'
+            )
+            ->orderByDesc('i.invoice_date')
+            ->orderByDesc('i.invoice_id')
+            ->get();
+
+        /* ---------------------------------------------------------------
+         | AVOIRS
+         --------------------------------------------------------------- */
+        $creditQuery = function () use ($product, $dateFrom, $dateTo) {
+            $query = DB::table('credit_note_items as cni')
+                ->join('credit_notes as cn', 'cn.credit_note_id', '=', 'cni.credit_note_id')
+                ->whereNull('cn.deleted_at')
+                ->where('cni.item_id', $product->product_id);
+
+            if ($dateFrom) {
+                $query->whereDate('cn.credit_note_date', '>=', $dateFrom);
+            }
+            if ($dateTo) {
+                $query->whereDate('cn.credit_note_date', '<=', $dateTo);
+            }
+
+            return $query;
+        };
+
+        $creditSummary = $creditQuery()
+            ->select(
+                DB::raw('COALESCE(SUM(cni.quantity), 0) as total_qty'),
+                DB::raw('COALESCE(SUM(cni.total_price), 0) as total_amount'),
+                DB::raw('COUNT(DISTINCT cn.credit_note_id) as credit_notes_count'),
+                DB::raw('COUNT(DISTINCT cn.client_id) as clients_count')
+            )
+            ->first();
+
+        $creditByClient = $creditQuery()
+            ->join('clients as c', 'c.client_id', '=', 'cn.client_id')
+            ->select(
+                'c.client_id',
+                'c.name',
+                'c.entreprise_name',
+                DB::raw('SUM(cni.quantity) as total_qty'),
+                DB::raw('SUM(cni.total_price) as total_amount'),
+                DB::raw('COUNT(DISTINCT cn.credit_note_id) as credit_notes_count')
+            )
+            ->groupBy('c.client_id', 'c.name', 'c.entreprise_name')
+            ->orderByDesc('total_qty')
+            ->get();
+
+        $creditLines = $creditQuery()
+            ->leftJoin('clients as c', 'c.client_id', '=', 'cn.client_id')
+            ->leftJoin('sales_orders as so', 'so.order_id', '=', 'cn.sales_order_id')
+            ->select(
+                'cn.credit_note_id',
+                'cn.credit_note_number',
+                'cn.credit_note_date',
+                'cn.status',
+                'cn.disposition',
+                'cn.reason as credit_reason',
+                'so.order_id',
+                'so.order_number',
+                'c.client_id',
+                'c.name as client_name',
+                'c.entreprise_name',
+                'cni.quantity',
+                'cni.unit_price',
+                'cni.total_price',
+                'cni.family_name',
+                'cni.reason as item_reason'
+            )
+            ->orderByDesc('cn.credit_note_date')
+            ->orderByDesc('cn.credit_note_id')
+            ->get();
+
+        /* ---------------------------------------------------------------
+         | DEVIS
+         --------------------------------------------------------------- */
+        $quotationQuery = DB::table('quotation_items as qi')
+            ->join('quotations as q', 'q.quote_id', '=', 'qi.quote_id')
+            ->where('qi.item_id', $product->product_id)
+            ->whereIn('qi.item_type', $productTypes);
+
+        if ($dateFrom) {
+            $quotationQuery->whereDate('q.quote_date', '>=', $dateFrom);
+        }
+        if ($dateTo) {
+            $quotationQuery->whereDate('q.quote_date', '<=', $dateTo);
+        }
+
+        $quotationSummary = $quotationQuery
+            ->select(
+                DB::raw('COALESCE(SUM(qi.quantity), 0) as total_qty'),
+                DB::raw('COALESCE(SUM(qi.total_price), 0) as total_amount'),
+                DB::raw('COUNT(DISTINCT q.quote_id) as quotes_count'),
+                DB::raw('COUNT(DISTINCT q.client_id) as clients_count')
+            )
+            ->first();
+
+        /* ---------------------------------------------------------------
+         | PRODUCTION - article produit
+         --------------------------------------------------------------- */
+        $outputQuery = function () use ($product, $dateFrom, $dateTo) {
+            $query = DB::table('production_output as po')
+                ->join('production_orders as o', 'o.order_id', '=', 'po.production_order_id')
+                ->where('po.product_id', $product->product_id);
+
+            if ($dateFrom) {
+                $query->whereDate('po.production_date', '>=', $dateFrom);
+            }
+            if ($dateTo) {
+                $query->whereDate('po.production_date', '<=', $dateTo);
+            }
+
+            return $query;
+        };
+
+        $productionSummary = $outputQuery()
+            ->select(
+                DB::raw('COALESCE(SUM(po.quantity_produced), 0) as total_produced'),
+                DB::raw('COALESCE(SUM(po.quantity_defective), 0) as total_defective'),
+                DB::raw('COALESCE(SUM(po.total_volume_m3), 0) as total_volume'),
+                DB::raw('COALESCE(SUM(po.waste_volume_m3), 0) as waste_volume'),
+                DB::raw('COUNT(*) as outputs_count'),
+                DB::raw('COUNT(DISTINCT po.production_order_id) as orders_count'),
+                DB::raw('MIN(po.production_date) as first_production_date'),
+                DB::raw('MAX(po.production_date) as last_production_date')
+            )
+            ->first();
+
+        $productionMonthly = $outputQuery()
+            ->select(
+                DB::raw("DATE_FORMAT(po.production_date, '%Y-%m') as period"),
+                DB::raw('SUM(po.quantity_produced) as total_produced'),
+                DB::raw('SUM(po.quantity_defective) as total_defective')
+            )
+            ->groupBy('period')
+            ->orderBy('period')
+            ->get();
+
+        $productionByFamille = $outputQuery()
+            ->select(
+                DB::raw("COALESCE(po.famille_name, 'Sans famille') as famille_name"),
+                DB::raw('SUM(po.quantity_produced) as total_produced'),
+                DB::raw('SUM(po.quantity_defective) as total_defective'),
+                DB::raw('COUNT(DISTINCT po.production_order_id) as orders_count')
+            )
+            ->groupBy('po.famille_name')
+            ->orderByDesc('total_produced')
+            ->get();
+
+        $productionLines = $outputQuery()
+            ->leftJoin('products as sp', 'sp.product_id', '=', 'o.source_product_id')
+            ->select(
+                'po.output_id',
+                'po.production_date',
+                'po.quantity_produced',
+                'po.quantity_defective',
+                'po.quality_grade',
+                'po.famille_name',
+                'po.total_volume_m3',
+                'po.output_type',
+                'o.order_id',
+                'o.order_number',
+                'o.status',
+                'o.production_type',
+                'sp.product_name as source_product_name'
+            )
+            ->orderByDesc('po.production_date')
+            ->orderByDesc('po.output_id')
+            ->get();
+
+        $productionOrdersByStatus = DB::table('production_orders')
+            ->where('product_id', $product->product_id)
+            ->select(
+                'status',
+                DB::raw('COUNT(*) as orders_count'),
+                DB::raw('COALESCE(SUM(quantity_to_produce), 0) as planned_qty')
+            )
+            ->groupBy('status')
+            ->get();
+
+        /* ---------------------------------------------------------------
+         | PRODUCTION - article consommé comme source
+         --------------------------------------------------------------- */
+        $consumptionQuery = function () use ($product, $dateFrom, $dateTo) {
+            $query = DB::table('production_output as po')
+                ->join('production_orders as o', 'o.order_id', '=', 'po.production_order_id')
+                ->where('o.source_product_id', $product->product_id);
+
+            if ($dateFrom) {
+                $query->whereDate('po.production_date', '>=', $dateFrom);
+            }
+            if ($dateTo) {
+                $query->whereDate('po.production_date', '<=', $dateTo);
+            }
+
+            return $query;
+        };
+
+        $consumptionSummary = $consumptionQuery()
+            ->select(
+                DB::raw('COALESCE(SUM(po.quantity_consumed), 0) as total_consumed'),
+                DB::raw('COUNT(DISTINCT po.production_order_id) as orders_count')
+            )
+            ->first();
+
+        $consumptionLines = $consumptionQuery()
+            ->leftJoin('products as fp', 'fp.product_id', '=', 'po.product_id')
+            ->select(
+                'po.output_id',
+                'po.production_date',
+                'po.quantity_consumed',
+                'po.quantity_produced',
+                'po.output_type',
+                'o.order_id',
+                'o.order_number',
+                'o.status',
+                'o.production_type',
+                'fp.product_id as produced_product_id',
+                'fp.product_name as produced_product_name'
+            )
+            ->where('po.quantity_consumed', '>', 0)
+            ->orderByDesc('po.production_date')
+            ->orderByDesc('po.output_id')
+            ->get();
+
+        /* ---------------------------------------------------------------
+         | MOUVEMENTS DE STOCK
+         --------------------------------------------------------------- */
+        $movementQuery = function () use ($product, $dateFrom, $dateTo) {
+            $query = DB::table('product_stock_movements as m')
+                ->where('m.product_id', $product->product_id);
+
+            if ($dateFrom) {
+                $query->whereDate('m.movement_date', '>=', $dateFrom);
+            }
+            if ($dateTo) {
+                $query->whereDate('m.movement_date', '<=', $dateTo);
+            }
+
+            return $query;
+        };
+
+        $movementsByType = $movementQuery()
+            ->select(
+                'm.movement_type',
+                DB::raw('COUNT(*) as movements_count'),
+                DB::raw('SUM(m.quantity) as total_qty')
+            )
+            ->groupBy('m.movement_type')
+            ->orderByDesc('movements_count')
+            ->get();
+
+        $movements = $movementQuery()
+            ->leftJoin('users as u', 'u.id', '=', 'm.performed_by')
+            ->select(
+                'm.movement_id',
+                'm.movement_type',
+                'm.quantity',
+                'm.previous_stock',
+                'm.new_stock',
+                'm.reference_type',
+                'm.reference_id',
+                'm.reference_number',
+                'm.famille_name',
+                'm.movement_date',
+                'm.notes',
+                'u.username as performed_by_name'
+            )
+            ->orderByDesc('m.movement_date')
+            ->orderByDesc('m.movement_id')
+            ->limit(300)
+            ->get();
+
+        $stats = [
+            'unit_label'      => $unitLabel,
+            'volume_per_unit' => $volumePerUnit,
+            'weight_per_unit' => $weightPerUnit,
+            'sales'           => $salesSummary,
+            'invoices'        => $invoiceSummary,
+            'credits'         => $creditSummary,
+            'quotations'      => $quotationSummary,
+            'production'      => $productionSummary,
+            'consumption'     => $consumptionSummary,
+        ];
+
+        return view('pages.products.statistics', compact(
+            'product',
+            'stats',
+            'dateFrom',
+            'dateTo',
+            'unitLabel',
+            'volumePerUnit',
+            'weightPerUnit',
+            'topClients',
+            'salesByFamille',
+            'salesByClientType',
+            'salesMonthly',
+            'salesLines',
+            'invoiceLines',
+            'creditByClient',
+            'creditLines',
+            'productionMonthly',
+            'productionByFamille',
+            'productionLines',
+            'productionOrdersByStatus',
+            'consumptionLines',
+            'movementsByType',
+            'movements'
+        ));
+    }
+
+    /**
+     * Libellé d'unité affiché selon le type d'article.
+     */
+    private function resolveUnitLabel(Product $product)
+    {
+        switch ($product->product_type) {
+            case 'production':
+                return 'bloc';
+            case 'decoupage':
+                return 'sous bloc';
+            case 'finale':
+                return 'pièce';
+            default:
+                return $product->unit_of_measure ?: 'unité';
+        }
     }
 
     public function edit($id)

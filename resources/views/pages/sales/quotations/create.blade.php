@@ -676,8 +676,16 @@
             }
 
             // Form submission
+            let isSubmitting = false;
+
             $('#quotationForm').submit(function(e) {
                 e.preventDefault();
+
+                // Guard against double submits (double-click, Enter key, …):
+                // a second devis must never be created from one form.
+                if (isSubmitting) {
+                    return;
+                }
 
                 // Validate items
                 if ($('#items-body tr').length === 0) {
@@ -716,6 +724,7 @@
                 if (!valid) return;
 
                 // Show loading
+                isSubmitting = true;
                 const submitBtn = $(this).find('button[type="submit"]');
                 const originalText = submitBtn.html();
                 submitBtn.prop('disabled', true).html(
@@ -739,6 +748,7 @@
                             }, 1500);
                         } else {
                             showToast('error', response.message);
+                            isSubmitting = false;
                             submitBtn.prop('disabled', false).html(originalText);
                         }
                     },
@@ -755,6 +765,7 @@
                         }
 
                         showToast('error', errorMessage);
+                        isSubmitting = false;
                         submitBtn.prop('disabled', false).html(originalText);
                     }
                 });

@@ -277,6 +277,34 @@
                                 <span id="displayTypeHelp">Unité: Affiche l'unité de mesure standard</span>
                             </small>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Type de prix</label>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="price_type"
+                                            id="priceTypeTTC" value="ttc" checked>
+                                        <label class="form-check-label" for="priceTypeTTC">
+                                            <i class="fas fa-tag text-primary me-1"></i>TTC
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="price_type" id="priceTypeHT"
+                                            value="ht">
+                                        <label class="form-check-label" for="priceTypeHT">
+                                            <i class="fas fa-tag text-secondary me-1"></i>HT
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="text-muted d-block mt-2">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Change uniquement le libellé imprimé (TTC / HT), les montants restent identiques.
+                            </small>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -532,9 +560,10 @@
                 const showPrices = $('input[name="show_prices"]:checked').val();
                 const showLogo = $('input[name="show_logo"]:checked').val();
                 const displayType = $('input[name="display_type"]:checked').val();
+                const priceType = $('input[name="price_type"]:checked').val();
 
                 const url =
-                    `/sales/quotations/${currentQuoteId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}`;
+                    `/sales/quotations/${currentQuoteId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}&price_type=${priceType}`;
 
                 const printWindow = window.open(url, '_blank', 'width=800,height=600');
 
@@ -563,6 +592,39 @@
                     $('#displayTypeHelp').text(
                         'Volume: Affiche le volume total (quantité × volume unitaire)');
                 }
+            });
+
+            // Handle duplicate button click — this creates a brand new devis,
+            // so it is confirmed first and posted (never a plain link).
+            $(document).on('click', '.duplicate-quote', function(e) {
+                e.preventDefault();
+
+                var link = $(this);
+                if (link.data('busy')) {
+                    return;
+                }
+
+                var id = link.data('id');
+                var number = link.data('number');
+
+                if (!confirm('Dupliquer le devis ' + number +
+                        ' ?\nUn nouveau devis sera créé.')) {
+                    return;
+                }
+
+                link.data('busy', true);
+
+                var form = $('<form>', {
+                    method: 'POST',
+                    action: "{{ url('sales/quotations') }}/" + id + "/duplicate"
+                }).append($('<input>', {
+                    type: 'hidden',
+                    name: '_token',
+                    value: '{{ csrf_token() }}'
+                }));
+
+                $('body').append(form);
+                form.submit();
             });
 
             // Handle delete button click

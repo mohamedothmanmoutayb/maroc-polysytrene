@@ -286,7 +286,7 @@
                         @else
                             <th class="col-unit">UNITE</th>
                         @endif
-                        <th class="col-total">TOTALE</th>
+                        <th class="col-total">TOTALE {{ ($priceType ?? 'ttc') === 'ht' ? 'HT' : 'TTC' }}</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -42,6 +42,9 @@
                             <i class="fas fa-info-circle me-2"></i>Produit : {{ $product->product_name }}
                         </h5>
                         <div>
+                            <a href="{{ route('products.article-statistics', $product->product_id) }}" class="btn btn-light btn-sm me-2">
+                                <i class="fas fa-chart-line me-1"></i> Statistiques
+                            </a>
                             @can('edit_products')
                             <a href="{{ route('products.edit', $product->product_id) }}" class="btn btn-light btn-sm me-2">
                                 <i class="fas fa-edit me-1"></i> Modifier

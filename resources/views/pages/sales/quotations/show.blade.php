@@ -292,6 +292,16 @@
                                 <option value="volume">Volume</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Type de prix</label>
+                            <select id="priceType" class="form-select">
+                                <option value="ttc">TTC</option>
+                                <option value="ht">HT</option>
+                            </select>
+                            <small class="text-muted d-block mt-1">
+                                Change uniquement le libellé imprimé, les montants restent identiques.
+                            </small>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -362,9 +372,10 @@
                 const showPrices = $('#showPrices').val();
                 const showLogo = $('#showLogo').val();
                 const displayType = $('#displayType').val();
+                const priceType = $('#priceType').val();
 
                 const url =
-                    `/sales/quotations/${quoteId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}`;
+                    `/sales/quotations/${quoteId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}&price_type=${priceType}`;
 
                 const printWindow = window.open(url, '_blank', 'width=800,height=600');
 

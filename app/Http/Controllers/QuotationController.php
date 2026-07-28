@@ -55,9 +55,14 @@ class QuotationController extends Controller
                                 <i class="fas fa-print me-2"></i>Imprimer
                             </a></li>';
 
-                    // Duplicate quote
-                    $btn .= '<li><a class="dropdown-item" href="'.route('sales.quotations.duplicate', $quote->quote_id).'">
-                                <i class="fas fa-copy me-2"></i>Modifier</a></li>';
+                    // Edit quote
+                    $btn .= '<li><a class="dropdown-item" href="'.route('sales.quotations.edit', $quote->quote_id).'">
+                                <i class="fas fa-edit me-2"></i>Modifier</a></li>';
+
+                    // Duplicate quote (creates a new devis, hence the confirmation)
+                    $btn .= '<li><a class="dropdown-item duplicate-quote" href="javascript:void(0)"
+                                data-id="'.$quote->quote_id.'" data-number="'.$quote->quote_number.'">
+                                <i class="fas fa-copy me-2"></i>Dupliquer</a></li>';
 
                     $btn .= '<li><hr class="dropdown-divider"></li>';
                     $btn .= '<li><a class="dropdown-item delete" href="#" data-id="'.$quote->quote_id.'" data-number="'.$quote->quote_number.'">
@@ -535,6 +540,9 @@ class QuotationController extends Controller
             $showPrices = $request->query('show_prices', 1);
             $showLogo = $request->query('show_logo', 1);
             $displayType = $request->query('display_type', 'unite');
+            // Label only: switches the wording TTC/HT on the PDF, the amounts
+            // themselves are never recalculated.
+            $priceType = $request->query('price_type', 'ttc') === 'ht' ? 'ht' : 'ttc';
 
             $totalQuantity = $quotation->items->sum('quantity');
 
@@ -573,6 +581,7 @@ class QuotationController extends Controller
                 'showPrices' => (bool) $showPrices,
                 'showLogo' => (bool) $showLogo,
                 'displayType' => $displayType,
+                'priceType' => $priceType,
                 'totalVolume' => $totalVolume,
                 'date' => now()->format('d/m/Y'),
                 'time' => now()->format('H:i'),

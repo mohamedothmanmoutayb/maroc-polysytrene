@@ -150,6 +150,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('products/check-low-stock', [ProductController::class, 'checkLowStock'])->name('products.check-low-stock');
     Route::get('/products/export/excel', [ProductController::class, 'exportExcel'])->name('products.export.excel');
     Route::get('/products/export/pdf', [ProductController::class, 'exportPdf'])->name('products.export.pdf');
+    Route::get('products/{id}/statistics', [ProductController::class, 'statistics'])->name('products.article-statistics');
     Route::get('products/{id}/production-time', [ProductController::class, 'getProductionTime'])->name('products.production-time');
     Route::get('products/famille-stock/{id}', [ProductController::class, 'getFamilleStockDetails'])->name('products.famille-stock');
     Route::put('products/{id}/toggle-familles', [ProductController::class, 'toggleFamilles'])->name('products.toggle-familles');
@@ -398,7 +399,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/edit', [QuotationController::class, 'edit'])->name('edit');
             Route::put('/{id}', [QuotationController::class, 'update'])->name('update');
             Route::patch('/{id}/status', [QuotationController::class, 'updateStatus'])->name('update-status');
-            Route::get('/{id}/duplicate', [QuotationController::class, 'duplicate'])->name('duplicate');
+            // POST, not GET: duplicating creates a real devis, so it must never
+            // be reachable by a plain link, a prefetch or a double-click.
+            Route::post('/{id}/duplicate', [QuotationController::class, 'duplicate'])->name('duplicate');
             Route::get('/{id}/pdf', [QuotationController::class, 'generatePdf'])->name('pdf');
 
             // Generic {id} route should be last
