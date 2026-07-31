@@ -819,18 +819,16 @@
                     };
 
                     // Calculate outgoing for each method (expenses + supplier payments)
-                    // Supplier payments by cheque are NOT subtracted from Solde Chèques
-                    // because the caisse tracks cheque receivables on-hand. Issuing a
-                    // cheque to a supplier does not reduce held receivables — it is a
-                    // bank instrument that draws from the company's bank account.
+                    // Supplier payments by cheque/traite are NOT subtracted from the
+                    // caisse instrument balances. They settle a fournisseur using an
+                    // instrument already tracked by the system, not cash leaving caisse.
                     const outgoing = {
                         especes: (expensesByMethod['cash']?.total || 0) + (supplierByMethod['cash']
                             ?.total || 0),
                         cheques: (expensesByMethod['check']?.total || 0),
                         virements: (expensesByMethod['transfer']?.total || 0) + (supplierByMethod[
                             'transfer']?.total || 0),
-                        traites: (expensesByMethod['traite']?.total || 0) + (supplierByMethod['traite']
-                            ?.total || 0)
+                        traites: (expensesByMethod['traite']?.total || 0)
                     };
 
                     // Calculate balance for each method
