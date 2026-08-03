@@ -133,7 +133,7 @@ class ExpenseController extends Controller
     public function create()
     {
         $categories = ExpenseCategory::where('is_active', true)->get();
-        $nextExpenseNumber = 'DEP-' . date('Ymd') . '-' . str_pad(Expense::count() + 1, 4, '0', STR_PAD_LEFT);
+        $nextExpenseNumber = Expense::generateNextExpenseNumber();
 
         return view('pages.expenses.create', compact('categories', 'nextExpenseNumber'));
     }
@@ -141,7 +141,7 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'expense_number' => 'required|unique:expenses|max:50',
+            'expense_number' => 'required|max:50',
             'expense_date' => 'required|date',
             'category_id' => 'required|exists:expense_categories,category_id',
             'amount' => 'required|numeric|min:0.01',
@@ -154,8 +154,14 @@ class ExpenseController extends Controller
 
         DB::beginTransaction();
         try {
+            $expenseNumber = $request->expense_number;
+
+            if (Expense::where('expense_number', $expenseNumber)->exists()) {
+                $expenseNumber = Expense::generateNextExpenseNumber();
+            }
+
             $expense = Expense::create([
-                'expense_number' => $request->expense_number,
+                'expense_number' => $expenseNumber,
                 'expense_date' => $request->expense_date,
                 'category_id' => $request->category_id,
                 'amount' => $request->amount,
