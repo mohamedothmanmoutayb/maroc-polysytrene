@@ -168,7 +168,7 @@
                         </div>
                         <div class="alert alert-info py-2 mb-3" id="dist_no_unpaid_info" style="display:none;">
                             <i class="fas fa-info-circle me-1"></i>Ce fournisseur n'a aucun achat impayé. Le montant sera
-                            entièrement ajouté à son solde.<br>
+                            appliqué directement au solde fournisseur.<br>
                             Solde actuel : <strong id="dist_current_balance_display">—</strong>
                             <span id="dist_new_balance_wrap"> → Nouveau solde : <strong id="dist_new_balance_display">—</strong></span>
                         </div>

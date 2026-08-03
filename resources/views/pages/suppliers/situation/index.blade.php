@@ -1109,12 +1109,14 @@
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         let currentPurchaseData = {};
         let currentSupplierId = null;
         let currentSupplierName = '';
         let currentAvailableCredit = 0;
+        let currentSupplierBalance = 0;
 
         // ── Helpers ────────────────────────────────────────────────────────────
         function showPaymentMethodModal() {
@@ -1204,6 +1206,7 @@
                 type: 'GET',
                 success: function(res) {
                     if (!res.success) return;
+                    currentSupplierBalance = parseFloat(res.balance) || 0;
                     currentAvailableCredit = parseFloat(res.available_credit) || 0;
                     if (currentAvailableCredit > 0.005) {
                         $('#modalSupplierBalance')
@@ -1304,6 +1307,11 @@
                 }[doc.payment_method] || 'fas fa-circle text-secondary';
 
                 var purchasesCell = doc.lines.map(function(l) {
+                    if ((parseFloat(l.amount) || 0) <= 0.005) {
+                        return `<span class="badge bg-info-subtle border text-info d-inline-block me-1 mb-1">
+                                    Solde fournisseur
+                                </span>`;
+                    }
                     return `<a href="${l.show_url}" target="_blank" class="d-inline-block me-1 mb-1">
                                 <span class="badge bg-light border" style="color:black !important;">
                                     ${l.purchase_number}
@@ -1410,6 +1418,20 @@
                         }
                     }
 
+                    var deleteBtn = p.can_delete
+                        ? `<button type="button" class="btn btn-sm btn-danger delete-purchase-btn ms-1"
+                                    data-id="${p.purchase_id}"
+                                    data-number="${p.purchase_number}"
+                                    data-delete-url="${p.delete_url}"
+                                    title="Supprimer l'achat">
+                                    <i class="fas fa-trash"></i>
+                                  </button>`
+                        : `<button type="button" class="btn btn-sm btn-outline-danger ms-1"
+                                    disabled
+                                    title="${p.delete_block_reason || 'Suppression indisponible'}">
+                                    <i class="fas fa-trash"></i>
+                                  </button>`;
+
                     tbody.append(`
                         <tr>
                             <td class="text-center">${i + 1}</td>
@@ -1423,6 +1445,7 @@
                                 <div class="d-inline-flex gap-1 flex-wrap justify-content-center">
                                     <a href="${p.show_url}" class="btn btn-sm btn-info" title="Voir les détails"><i class="fas fa-eye"></i></a>
                                     ${payBtn}
+                                    ${deleteBtn}
                                 </div>
                             </td>
                         </tr>
@@ -1439,6 +1462,9 @@
                         <td colspan="2"></td>
                     </tr>
                 `);
+
+                var balanceDebt = Math.max(0, parseFloat(currentSupplierBalance) || 0);
+                var modalTotalUnpaid = Math.max(totRest, balanceDebt);
 
                 summaryRow.html(`
                     <div class="col-md-4">
@@ -1458,10 +1484,10 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card border-${totRest > 0 ? 'danger' : 'success'} mb-0">
+                        <div class="card border-${modalTotalUnpaid > 0 ? 'danger' : 'success'} mb-0">
                             <div class="card-body py-2 px-3">
-                                <small class="text-muted">Reste à Payer</small>
-                                <div class="fw-bold text-${totRest > 0 ? 'danger' : 'success'}">${totRest.toLocaleString('de-DE', {minimumFractionDigits:2})} DH</div>
+                                <small class="text-muted">Total Impayé</small>
+                                <div class="fw-bold text-${modalTotalUnpaid > 0 ? 'danger' : 'success'}">${modalTotalUnpaid.toLocaleString('de-DE', {minimumFractionDigits:2})} DH</div>
                             </div>
                         </div>
                     </div>
@@ -1563,6 +1589,7 @@
             $(document).on('click', '.view-details-btn', function() {
                 currentSupplierId = $(this).data('id');
                 currentSupplierName = $(this).data('name');
+                currentSupplierBalance = parseFloat($(this).data('balance')) || 0;
 
                 $('#supplierDetailsTitle').html('<i class="fas fa-list me-2"></i>Achats : ' +
                     currentSupplierName);
@@ -1702,6 +1729,7 @@
             $(document).on('click', '.pay-supplier-all-btn', function() {
                 currentSupplierId = $(this).data('id');
                 currentSupplierName = $(this).data('name');
+                currentSupplierBalance = parseFloat($(this).data('balance')) || 0;
                 var totalRest = parseFloat($(this).data('rest')) || 0;
                 var balance   = parseFloat($(this).data('balance')) || 0;
                 var credit    = balance < -0.01 ? Math.abs(balance) : 0;
@@ -2199,6 +2227,45 @@
                     }
                 });
             }
+
+            $(document).on('click', '.delete-purchase-btn', function() {
+                var purchaseNumber = $(this).data('number');
+                var deleteUrl = $(this).data('delete-url');
+
+                Swal.fire({
+                    title: 'Supprimer cet achat ?',
+                    text: 'Achat ' + purchaseNumber + ' sera supprimé définitivement.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then(function(result) {
+                    if (!result.isConfirmed) return;
+
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(res) {
+                            if (res.success) {
+                                Swal.fire('Supprimé', res.message, 'success');
+                                table.draw();
+                                refreshDetailsModal();
+                            } else {
+                                Swal.fire('Erreur', res.message, 'error');
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire('Erreur', xhr.responseJSON?.message ||
+                                'Erreur lors de la suppression', 'error');
+                        }
+                    });
+                });
+            });
 
             // ── Available checks ──────────────────────────────────────────────
             function loadAvailableChecks(type) {

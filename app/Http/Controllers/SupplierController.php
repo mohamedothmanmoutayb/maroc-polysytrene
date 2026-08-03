@@ -35,6 +35,8 @@ class SupplierController extends Controller
                 ->addColumn('action', function ($row) {
                     $user = auth()->user();
                     $actualUnpaid = (float) ($row->actual_unpaid_rest ?? 0);
+                    $balanceDebt = max(0, (float) ($row->balance ?? 0));
+                    $totalImpaye = max($actualUnpaid, $balanceDebt);
                     $dropdown = '<div class="dropdown dropstart">
                         <a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="ti ti-dots-vertical fs-6"></i>
@@ -49,7 +51,7 @@ class SupplierController extends Controller
                                 <a class="dropdown-item d-flex align-items-center gap-3 pay-supplier-all-btn" href="javascript:void(0)"
                                    data-id="' . $row->supplier_id . '"
                                    data-name="' . e($row->display_name) . '"
-                                   data-rest="' . $actualUnpaid . '"
+                                   data-rest="' . $totalImpaye . '"
                                    data-balance="' . (float)$row->balance . '">
                                     <i class="fs-4 ti ti-cash text-success"></i>Ajouter Paiement
                                 </a>

@@ -232,7 +232,7 @@ class Supplier extends Model
             ->where('raw_material_purchases.supplier_id', $this->supplier_id)
             ->select('purchase_payment_documents.payment_method',
                      DB::raw('COUNT(*) as count'),
-                     DB::raw('SUM(purchase_payment_documents.amount) as total'))
+                     DB::raw('SUM(COALESCE(purchase_payment_documents.paid_amount, purchase_payment_documents.amount)) as total'))
             ->groupBy('purchase_payment_documents.payment_method')
             ->get();
     }

@@ -72,8 +72,9 @@ class RawMaterialPurchaseController extends Controller
                     return '<span class="text-success fw-bold">' . number_format($row->total_paid, 2, ',', '.') . ' DH</span>';
                 })
                 ->addColumn('total_rest_display', function ($row) {
-                    $class = $row->total_rest > 0 ? 'text-danger' : 'text-success';
-                    return '<span class="' . $class . ' fw-bold">' . number_format($row->total_rest, 2, ',', '.') . ' DH</span>';
+                    $actualRest = max((float) $row->total_rest, max(0, (float) ($row->balance ?? 0)));
+                    $class = $actualRest > 0 ? 'text-danger' : 'text-success';
+                    return '<span class="' . $class . ' fw-bold">' . number_format($actualRest, 2, ',', '.') . ' DH</span>';
                 })
                 ->addColumn('balance_display', function ($row) {
                     $b = (float) $row->balance;
@@ -92,11 +93,13 @@ class RawMaterialPurchaseController extends Controller
                     return $badges ?: '<span class="badge bg-secondary">-</span>';
                 })
                 ->addColumn('action', function ($row) {
-                    $hasUnpaid = ($row->total_rest > 0);
+                    $actualRest = max((float) $row->total_rest, max(0, (float) ($row->balance ?? 0)));
+                    $hasUnpaid = ($actualRest > 0);
                     $btn = '<div class="d-flex gap-1 justify-content-center">';
                     $btn .= '<button type="button" class="btn btn-sm btn-primary view-supplier-btn"
                                 data-id="' . $row->supplier_id . '"
                                 data-name="' . htmlspecialchars($row->supplier_name, ENT_QUOTES) . '"
+                                data-balance="' . (float) $row->balance . '"
                                 title="Voir les achats">
                                 <i class="fas fa-eye"></i>
                             </button>';
@@ -104,7 +107,8 @@ class RawMaterialPurchaseController extends Controller
                         $btn .= '<button type="button" class="btn btn-sm btn-success pay-supplier-btn"
                                     data-id="' . $row->supplier_id . '"
                                     data-name="' . htmlspecialchars($row->supplier_name, ENT_QUOTES) . '"
-                                    data-rest="' . $row->total_rest . '"
+                                    data-rest="' . $actualRest . '"
+                                    data-balance="' . (float) $row->balance . '"
                                     title="Payer (distribution FIFO)">
                                     <i class="fas fa-money-bill-wave"></i>
                                 </button>';
@@ -143,6 +147,13 @@ class RawMaterialPurchaseController extends Controller
 
         $data = $purchases->map(function ($purchase) {
             $rest = $purchase->final_amount - $purchase->total_paid;
+            $deleteBlockReason = null;
+            if ($purchase->actual_delivery_date) {
+                $deleteBlockReason = 'Impossible de supprimer une commande déjà livrée.';
+            } elseif ((float) $purchase->total_paid > 0.005) {
+                $deleteBlockReason = 'Impossible de supprimer une commande avec des paiements effectués.';
+            }
+
             return [
                 'purchase_id'          => $purchase->purchase_id,
                 'purchase_number'      => $purchase->purchase_number,
@@ -158,12 +169,16 @@ class RawMaterialPurchaseController extends Controller
                 'payment_status_label' => $purchase->payment_status_label,
                 'show_url'             => route('raw-material-purchases.show', $purchase->purchase_id),
                 'edit_url'             => route('raw-material-purchases.edit', $purchase->purchase_id),
+                'delete_url'           => route('raw-material-purchases.destroy', $purchase->purchase_id),
+                'can_delete'           => !$deleteBlockReason,
+                'delete_block_reason'  => $deleteBlockReason,
             ];
         });
 
         return response()->json([
             'success'  => true,
             'supplier' => $supplier->display_name,
+            'balance'  => (float) $supplier->balance,
             'data'     => $data,
         ]);
     }
@@ -245,6 +260,7 @@ class RawMaterialPurchaseController extends Controller
 
         $supplier = Supplier::findOrFail($docs->first()->purchase->supplier_id);
         $total    = (float) $docs->sum('amount');
+        $actualTotal = (float) $docs->sum(fn($doc) => $doc->actual_amount);
         $count    = $docs->count();
 
         DB::beginTransaction();
@@ -254,7 +270,7 @@ class RawMaterialPurchaseController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Paiement de ' . number_format($total, 2, ',', '.')
+                'message' => 'Paiement de ' . number_format($actualTotal ?: $total, 2, ',', '.')
                     . ' DH supprimé (' . $count . ' achat(s) remis à découvert).',
             ]);
         } catch (\Exception $e) {
@@ -283,7 +299,7 @@ class RawMaterialPurchaseController extends Controller
                 'notes'            => $first->notes ?? '',
                 'check_id'         => $first->check_id,
                 'traite_id'        => $first->traite_id,
-                'total_amount'     => (float) $docs->sum('amount'),
+                'total_amount'     => (float) $docs->sum(fn($doc) => $doc->actual_amount),
                 'purchases'        => $docs->map(fn($d) => [
                     'purchase_id'     => $d->purchase_id,
                     'purchase_number' => $d->purchase ? $d->purchase->purchase_number : '—',
@@ -423,9 +439,12 @@ class RawMaterialPurchaseController extends Controller
             }
         }
 
+        $firstAllocation = true;
         foreach ($allocations as $alloc) {
             $purchase = $alloc['purchase'];
             $amount   = $alloc['amount'];
+            $actualAmount = $amount + ($firstAllocation ? $balanceAmount : 0);
+            $firstAllocation = false;
 
             PurchasePaymentDocument::create([
                 'purchase_id'       => $purchase->purchase_id,
@@ -437,6 +456,7 @@ class RawMaterialPurchaseController extends Controller
                 'file_path'         => $p['file_path'],
                 'original_filename' => $p['original_filename'],
                 'amount'            => $amount,
+                'paid_amount'       => $actualAmount,
                 'payment_method'    => $p['payment_method'],
                 'payment_date'      => $p['payment_date'],
                 'notes'             => $p['notes'] ?? ('Paiement groupé – ' . $supplier->display_name),
@@ -473,6 +493,32 @@ class RawMaterialPurchaseController extends Controller
                     'created_by'       => auth()->id(),
                 ]);
                 $supplier->refresh();
+            }
+        }
+
+        if (count($allocations) === 0 && $balanceAmount > 0.005) {
+            $anchorPurchase = RawMaterialPurchase::where('supplier_id', $supplier->supplier_id)
+                ->orderBy('purchase_date', 'desc')
+                ->orderBy('purchase_id', 'desc')
+                ->first();
+
+            if ($anchorPurchase) {
+                PurchasePaymentDocument::create([
+                    'purchase_id'       => $anchorPurchase->purchase_id,
+                    'document_number'   => $documentNumber,
+                    'payment_group_id'  => $groupId,
+                    'document_type'     => $p['payment_method'],
+                    'check_id'          => $check ? $check->check_id : null,
+                    'traite_id'         => $traiteId,
+                    'file_path'         => $p['file_path'],
+                    'original_filename' => $p['original_filename'],
+                    'amount'            => 0,
+                    'paid_amount'       => $balanceAmount,
+                    'payment_method'    => $p['payment_method'],
+                    'payment_date'      => $p['payment_date'],
+                    'notes'             => $p['notes'] ?? ('Paiement fournisseur (solde) – ' . $supplier->display_name),
+                    'uploaded_by'       => auth()->id(),
+                ]);
             }
         }
 
@@ -528,6 +574,7 @@ class RawMaterialPurchaseController extends Controller
         foreach ($docs as $doc) {
             $purchase = $doc->purchase;
             $amount   = (float) $doc->amount;
+            $excess   = (float) $doc->excess_amount;
 
             if ($purchase) {
                 $purchases[$purchase->purchase_id] = $purchase;
@@ -551,6 +598,20 @@ class RawMaterialPurchaseController extends Controller
                         $check->save();
                     }
                     $allocation->delete();
+                }
+            }
+
+            if ($doc->payment_method === 'check' && $excess > 0.005 && $doc->check_id) {
+                $check = Check::find($doc->check_id);
+                if ($check) {
+                    $check->remaining_amount += $excess;
+                    if (!$bounce && $check->status === 'allocated') {
+                        $check->status = 'deposited';
+                    }
+                    if ($bounce) {
+                        $check->status = 'bounced';
+                    }
+                    $check->save();
                 }
             }
 
@@ -584,6 +645,24 @@ class RawMaterialPurchaseController extends Controller
                     'reference_id'     => $purchase->purchase_id,
                     'description'      => ($bounce ? 'Paiement supprimé' : 'Paiement modifié (annulation)')
                         . " sur achat #{$purchase->purchase_number}: +" . number_format($amount, 2, ',', '.') . ' DH',
+                    'created_by'       => auth()->id(),
+                ]);
+                $supplier->refresh();
+            }
+
+            if ($excess > 0.005) {
+                $previousBalance = (float) $supplier->balance;
+                $newBalance      = $previousBalance + $excess;
+                $supplier->update(['balance' => $newBalance]);
+                $supplier->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance'      => $newBalance,
+                    'amount'           => $excess,
+                    'type'             => $bounce ? 'payment_deleted' : 'payment_updated',
+                    'reference_type'   => $purchase ? 'purchase' : 'direct',
+                    'reference_id'     => $purchase ? $purchase->purchase_id : 0,
+                    'description'      => ($bounce ? 'Paiement supprimé' : 'Paiement modifié (annulation)')
+                        . ' sur solde fournisseur: +' . number_format($excess, 2, ',', '.') . ' DH',
                     'created_by'       => auth()->id(),
                 ]);
                 $supplier->refresh();
@@ -1068,6 +1147,25 @@ class RawMaterialPurchaseController extends Controller
                     'success' => false,
                     'message' => 'Impossible de supprimer une commande avec des paiements effectués.'
                 ], 400);
+            }
+
+            $supplier = $purchase->supplier;
+            $remainingAmount = (float) $purchase->final_amount - (float) $purchase->total_paid;
+            if ($supplier && abs($remainingAmount) > 0.005 && $this->purchaseTracksBalance($supplier->supplier_id, $purchase->purchase_id)) {
+                $previousBalance = (float) $supplier->balance;
+                $newBalance      = $previousBalance - $remainingAmount;
+                $supplier->update(['balance' => $newBalance]);
+                $supplier->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance'      => $newBalance,
+                    'amount'           => -$remainingAmount,
+                    'type'             => 'purchase_deleted',
+                    'reference_type'   => 'purchase',
+                    'reference_id'     => $purchase->purchase_id,
+                    'description'      => "Achat #{$purchase->purchase_number} supprimé: " .
+                        number_format($remainingAmount, 2, ',', '.') . ' DH retiré du solde fournisseur',
+                    'created_by'       => auth()->id(),
+                ]);
             }
 
             $purchase->items()->delete();
@@ -1741,6 +1839,7 @@ class RawMaterialPurchaseController extends Controller
             $doc = PurchasePaymentDocument::findOrFail($documentId);
             $purchase = $doc->purchase;
             $deletedAmount = (float) $doc->amount;
+            $deletedExcess = (float) $doc->excess_amount;
 
             // Mark check/traite as bounced on deletion
             if ($doc->payment_method === 'check') {
@@ -1806,6 +1905,24 @@ class RawMaterialPurchaseController extends Controller
                         'created_by'       => auth()->id(),
                     ]);
                 }
+            }
+
+            if ($deletedExcess > 0.005) {
+                $supplier        = $purchase->supplier;
+                $previousBalance = (float) $supplier->balance;
+                $newBalance      = $previousBalance + $deletedExcess;
+                $supplier->update(['balance' => $newBalance]);
+                $supplier->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance'      => $newBalance,
+                    'amount'           => $deletedExcess,
+                    'type'             => 'payment_deleted',
+                    'reference_type'   => 'purchase',
+                    'reference_id'     => $purchase->purchase_id,
+                    'description'      => "Excédent paiement supprimé sur achat #{$purchase->purchase_number}: +" .
+                        number_format($deletedExcess, 2, ',', '.') . ' DH repris du solde',
+                    'created_by'       => auth()->id(),
+                ]);
             }
 
             DB::commit();

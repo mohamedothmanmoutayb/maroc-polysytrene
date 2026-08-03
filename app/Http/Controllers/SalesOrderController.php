@@ -290,8 +290,9 @@ class SalesOrderController extends Controller
             if ($request->filled('date_to')) {
                 $supplierPaymentQuery->whereDate('payment_date', '<=', $request->date_to);
             }
-            $totalSupplierPayments = $supplierPaymentQuery->sum('amount');
-            $supplierPaymentsCount = $supplierPaymentQuery->count();
+            $supplierPaymentGroups = $supplierPaymentQuery->orderBy('document_id')->get()->groupBy('payment_key');
+            $totalSupplierPayments = $supplierPaymentGroups->sum(fn($docs) => $docs->sum(fn($doc) => $doc->actual_amount));
+            $supplierPaymentsCount = $supplierPaymentGroups->count();
 
             $netRevenue = $totalRevenue - $totalExpenses - $totalSupplierPayments;
 
@@ -428,18 +429,15 @@ class SalesOrderController extends Controller
             if ($dateFrom) $supplierQuery->whereDate('payment_date', '>=', $dateFrom);
             if ($dateTo)   $supplierQuery->whereDate('payment_date', '<=', $dateTo);
 
-            $supplierRaw = $supplierQuery
-                ->select('payment_method', DB::raw('SUM(amount) as total'), DB::raw('COUNT(*) as cnt'))
-                ->groupBy('payment_method')
-                ->get();
-
             $supplierPayments = [];
-            foreach ($supplierRaw as $row) {
-                $supplierPayments[$row->payment_method] = [
-                    'total' => (float) $row->total,
-                    'count' => (int)   $row->cnt,
+            $supplierQuery->orderBy('document_id')->get()->groupBy('payment_key')->each(function ($docs) use (&$supplierPayments) {
+                $first = $docs->first();
+                $method = $first->payment_method;
+                $supplierPayments[$method] = [
+                    'total' => (float) ($supplierPayments[$method]['total'] ?? 0) + (float) $docs->sum(fn($doc) => $doc->actual_amount),
+                    'count' => (int) ($supplierPayments[$method]['count'] ?? 0) + 1,
                 ];
-            }
+            });
 
             // ── Client cheques (check_type = 'client') ──────────────────
             $clientCheckQuery = Check::where('check_type', 'client');
@@ -461,7 +459,7 @@ class SalesOrderController extends Controller
             if ($dateFrom) $supplierEntrCheckQuery->whereDate('purchase_payment_documents.payment_date', '>=', $dateFrom);
             if ($dateTo)   $supplierEntrCheckQuery->whereDate('purchase_payment_documents.payment_date', '<=', $dateTo);
 
-            $supplierEntrCheckTotal = (float) $supplierEntrCheckQuery->sum('purchase_payment_documents.amount');
+            $supplierEntrCheckTotal = (float) $supplierEntrCheckQuery->sum(DB::raw('COALESCE(purchase_payment_documents.paid_amount, purchase_payment_documents.amount)'));
 
             // ── Totals ───────────────────────────────────────────────────
             $totalIn  = array_sum(array_column($salesIncome, 'total'));

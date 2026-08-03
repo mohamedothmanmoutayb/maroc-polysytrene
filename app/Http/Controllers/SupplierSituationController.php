@@ -70,12 +70,15 @@ class SupplierSituationController extends Controller
                 })
                 ->addColumn('total_rest_display', function($row) {
                     $actual = (float) ($row->actual_unpaid_rest ?? 0);
+                    $balanceDebt = max(0, (float) ($row->balance ?? 0));
+                    $actual = max($actual, $balanceDebt);
                     $class  = $actual > 0.01 ? 'text-danger' : 'text-success';
                     return '<span class="' . $class . ' fw-bold">' . number_format($actual, 2, ',', '.') . ' DH</span>';
                 })
                 ->addColumn('actions', function($row) {
                     $balance      = (float) ($row->balance ?? 0);
-                    $actualUnpaid = (float) ($row->actual_unpaid_rest ?? 0);
+                    $balanceDebt  = max(0, $balance);
+                    $actualUnpaid = max((float) ($row->actual_unpaid_rest ?? 0), $balanceDebt);
                     $btn = '<div class="d-flex gap-1 flex-wrap justify-content-center">';
                     $btn .= '<button type="button" class="btn btn-sm btn-primary view-details-btn"
                                 data-id="' . $row->supplier_id . '"
@@ -114,12 +117,21 @@ class SupplierSituationController extends Controller
 
         $suppliers = Supplier::where('is_active', true)->orderBy('company_name')->get();
 
+        $purchaseUnpaid = (float) RawMaterialPurchase::sum(DB::raw('final_amount - paid_amount'));
+        $extraSupplierDebt = DB::table('suppliers')
+            ->leftJoin(DB::raw('(SELECT supplier_id, COALESCE(SUM(final_amount - paid_amount), 0) AS unpaid FROM raw_material_purchases GROUP BY supplier_id) AS unpaid_purchases'), 'suppliers.supplier_id', '=', 'unpaid_purchases.supplier_id')
+            ->select('suppliers.balance', DB::raw('COALESCE(unpaid_purchases.unpaid, 0) AS purchase_unpaid'))
+            ->whereNull('suppliers.deleted_at')
+            ->where('suppliers.balance', '>', 0)
+            ->get()
+            ->sum(fn($row) => max(0, (float) $row->balance - (float) $row->purchase_unpaid));
+
         // Get summary statistics
         $summary = [
             'total_purchases' => RawMaterialPurchase::count(),
             'total_amount' => RawMaterialPurchase::sum('final_amount'),
             'total_paid' => RawMaterialPurchase::sum('paid_amount'),
-            'total_unpaid' => RawMaterialPurchase::sum(DB::raw('final_amount - paid_amount')),
+            'total_unpaid' => $purchaseUnpaid + $extraSupplierDebt,
             'pending_purchases' => RawMaterialPurchase::where('payment_status', 'pending')->count(),
             'partial_purchases' => RawMaterialPurchase::where('payment_status', 'partial')->count(),
             'paid_purchases' => RawMaterialPurchase::where('payment_status', 'paid')->count(),
@@ -178,6 +190,12 @@ class SupplierSituationController extends Controller
 
         $data = $purchases->map(function($purchase) use ($methodLabels) {
             $rest = $purchase->final_amount - $purchase->total_paid;
+            $deleteBlockReason = null;
+            if ($purchase->actual_delivery_date) {
+                $deleteBlockReason = 'Impossible de supprimer une commande déjà livrée.';
+            } elseif ((float) $purchase->total_paid > 0.005) {
+                $deleteBlockReason = 'Impossible de supprimer une commande avec des paiements effectués.';
+            }
 
             $docs = $purchase->paymentDocuments->map(function($doc) use ($methodLabels) {
                 return [
@@ -215,6 +233,9 @@ class SupplierSituationController extends Controller
                 'payment_status'       => $purchase->payment_status,
                 'payment_status_label' => $purchase->payment_status_label,
                 'show_url'             => route('raw-material-purchases.show', $purchase->purchase_id),
+                'delete_url'           => route('raw-material-purchases.destroy', $purchase->purchase_id),
+                'can_delete'           => !$deleteBlockReason,
+                'delete_block_reason'  => $deleteBlockReason,
                 'payment_documents'    => $docs,
             ];
         });
@@ -374,13 +395,14 @@ class SupplierSituationController extends Controller
                 'file_path'         => null,
                 'original_filename' => null,
                 'amount'            => $applyAmount,
+                'paid_amount'       => $applyAmount,
                 'payment_method'    => 'balance',
                 'payment_date'      => $request->payment_date,
                 'notes'             => 'Paiement par solde fournisseur',
                 'uploaded_by'       => auth()->id(),
             ]);
 
-            $newPaid   = (float) $purchase->total_paid + $applyAmount;
+            $newPaid   = (float) $purchase->total_paid;
             $newStatus = $newPaid >= (float) $purchase->final_amount - 0.01 ? 'paid' : ($newPaid > 0 ? 'partial' : 'pending');
             $purchase->update(['paid_amount' => $newPaid, 'payment_status' => $newStatus]);
 
