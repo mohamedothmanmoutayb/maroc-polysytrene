@@ -591,10 +591,10 @@
                         </span>
                         <h4 class="text-white fw-normal mt-2 mt-md-3 mb-1">
                             Chute Totale <span
-                                class="fw-bolder">{{ number_format($chuteStats['totale'], 2) }} m³</span>
+                                class="fw-bolder">{{ $chuteStats['pct_totale'] }} %</span>
                         </h4>
                         <h6 class="opacity-75 fw-normal text-white mb-3 mb-md-4">
-                            <span style="color:black !important;" class="badge bg-white">{{ $chuteStats['pct_totale'] }} %</span>
+                            <span style="color:black !important;" class="badge bg-white">{{ number_format($chuteStats['totale'], 2) }} m³</span>
                             · Matière entrée {{ number_format($chuteStats['matiere_entree'], 2) }} m³
                         </h6>
                         <div class="row g-2 mt-2">
