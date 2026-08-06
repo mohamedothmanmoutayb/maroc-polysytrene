@@ -585,32 +585,30 @@
                     <div class="card-body p-3 p-md-4">
                         <span class="badge bg-white bg-opacity-25 d-inline-flex align-items-center gap-2 mb-3">
                             <iconify-icon icon="solar:check-circle-outline" class="fs-5"></iconify-icon>
-                            <span class="fw-normal">Ce mois <span
-                                    class="fw-semibold">+{{ $stats['new_clients_this_month'] }} nouveaux
-                                    clients</span></span>
+                            <span class="fw-normal">Revalorisée <span
+                                    class="fw-semibold">{{ number_format($chuteStats['revalorisee'], 2) }} m³
+                                    ({{ $chuteStats['pct_revalorisee'] }} %)</span></span>
                         </span>
                         <h4 class="text-white fw-normal mt-2 mt-md-3 mb-1">
-                            Bonjour, <span
-                                class="fw-bolder">{{ $stats['user']->employee->full_name ?? $stats['user']->username }}</span>
+                            Chute Totale <span
+                                class="fw-bolder">{{ number_format($chuteStats['totale'], 2) }} m³</span>
                         </h4>
                         <h6 class="opacity-75 fw-normal text-white mb-3 mb-md-4">
-                            @if ($stats['user']->role)
-                                <span style="color:black !important;" class="badge bg-white">{{ ucfirst($stats['user']->role) }}</span>
-                            @endif
-                            · {{ date('l d F Y') }}
+                            <span style="color:black !important;" class="badge bg-white">{{ $chuteStats['pct_totale'] }} %</span>
+                            · Matière entrée {{ number_format($chuteStats['matiere_entree'], 2) }} m³
                         </h6>
                         <div class="row g-2 mt-2">
                             <div class="col-4 text-center">
-                                <div class="fs-5 fw-bold">{{ number_format($stats['today_sales'], 0) }}</div>
-                                <small class="opacity-75" style="font-size: 0.7rem;">CA Jour</small>
+                                <div class="fs-5 fw-bold">{{ number_format($chuteStats['production'], 2) }}</div>
+                                <small class="opacity-75" style="font-size: 0.7rem;">Chute prod. m³</small>
                             </div>
                             <div class="col-4 text-center border-start border-end border-white border-opacity-25">
-                                <div class="fs-5 fw-bold">{{ $stats['in_progress_orders'] }}</div>
-                                <small class="opacity-75" style="font-size: 0.7rem;">Prod. cours</small>
+                                <div class="fs-5 fw-bold">{{ number_format($chuteStats['revalorisee'], 2) }}</div>
+                                <small class="opacity-75" style="font-size: 0.7rem;">Revalorisée m³</small>
                             </div>
                             <div class="col-4 text-center">
-                                <div class="fs-5 fw-bold">{{ $stats['active_clients'] }}</div>
-                                <small class="opacity-75" style="font-size: 0.7rem;">Clients actifs</small>
+                                <div class="fs-5 fw-bold">{{ number_format($chuteStats['perdue'], 4) }}</div>
+                                <small class="opacity-75" style="font-size: 0.7rem;">Chute perdue m³</small>
                             </div>
                         </div>
                     </div>
@@ -626,27 +624,37 @@
                                 <div>
                                     <a href="{{ route('production-orders.index') }}"
                                         class="text-dark fw-semibold text-decoration-none stretched-link"
-                                        style="font-size: 0.8rem;">Ordres
+                                        style="font-size: 0.8rem;">Chute par Type
                                         Production</a>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <h5 class="fw-semibold mb-0">
-                                            {{ number_format($stats['total_production_orders']) }}
+                                            {{ number_format($chuteStats['production'], 2) }} m³
                                         </h5>
-                                        <span class="fs-11 text-muted">{{ $stats['in_progress_orders'] }} en
-                                            cours</span>
+                                        <span class="fs-11 text-muted">{{ $chuteStats['pct_production'] }} % matière</span>
                                     </div>
                                 </div>
                                 <span class="round-48 d-flex align-items-center justify-content-center bg-white rounded">
                                     <iconify-icon icon="solar:box-linear" class="text-info"></iconify-icon>
                                 </span>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between gap-1">
-                                <span class="badge bg-success">{{ $stats['completed_production_orders'] }} term.</span>
-                                <span class="badge bg-warning text-dark">{{ $stats['pending_production_orders'] }}
-                                    attente</span>
-                                @if ($stats['late_production_orders'] > 0)
-                                    <span class="badge bg-danger">{{ $stats['late_production_orders'] }} retard</span>
-                                @endif
+                            <div class="row row-cols-2 row-cols-md-5 g-1">
+                                @foreach ($chuteStats['by_type'] as $chuteType)
+                                    <div class="col">
+                                        <div class="bg-white rounded px-2 py-1 h-100"
+                                            title="{{ $chuteType['is_recovery'] ? 'Chutes reconsommées et rendues en produits finis' : 'Chute déclarée sur les ordres ' . $chuteType['label'] }} · {{ $chuteType['pct'] }} % {{ $chuteType['pct_label'] }}">
+                                            <div class="text-muted text-truncate" style="font-size: 0.65rem;">
+                                                {{ $chuteType['label'] }}</div>
+                                            <div class="d-flex align-items-baseline gap-1">
+                                                <span
+                                                    class="fw-semibold {{ $chuteType['is_recovery'] ? 'text-success' : 'text-dark' }}"
+                                                    style="font-size: 0.85rem;">{{ $chuteType['is_recovery'] ? '−' : '' }}{{ number_format($chuteType['value'], 2) }}</span>
+                                                <span class="text-muted" style="font-size: 0.6rem;">m³</span>
+                                            </div>
+                                            <div class="{{ $chuteType['is_recovery'] ? 'text-success' : 'text-warning' }}"
+                                                style="font-size: 0.65rem;">{{ $chuteType['pct'] }} %</div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -658,12 +666,13 @@
                                     class="round-48 d-flex align-items-center justify-content-center rounded bg-white">
                                     <iconify-icon icon="solar:wallet-linear" class="fs-7 text-success"></iconify-icon>
                                 </span>
-                                <a href="{{ route('purchases.index') }}"
-                                    class="mb-0 fw-medium h6 text-reset text-decoration-none stretched-link">Total
-                                    Paiements</a>
+                                <a href="{{ route('production-orders.index') }}"
+                                    class="mb-0 fw-medium h6 text-reset text-decoration-none stretched-link">Chute
+                                    Totale Nette</a>
                             </div>
-                            <h4 class="mb-2">{{ number_format($stats['completed_payments'], 0) }} <small
-                                    class="fs-12 text-muted">DH</small></h4>
+                            <h4 class="mb-2">{{ number_format($chuteStats['totale'], 2) }} <small
+                                    class="fs-12 text-muted">m³ · {{ $chuteStats['pct_totale'] }} % · stock chutes
+                                    {{ number_format($chuteStats['stock_dormant'], 2) }} m³</small></h4>
                         </div>
                     </div>
                 </div>

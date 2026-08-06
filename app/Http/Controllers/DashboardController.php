@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductionOrder;
 use App\Models\ProductionOutput;
+use App\Models\ProductionWaste;
 use App\Models\ProductionConsumption;
 use App\Models\Product;
 use App\Models\RawMaterial;
@@ -429,6 +430,80 @@ class DashboardController extends Controller
             ->take(10)
             ->values();
 
+        // 6. CHUTES : chute de production, chute totale (nette) et chute perdue
+        //    Dénominateur = volume de blocs fabriqués (type1) : la matière n'entre qu'une
+        //    seule fois, alors qu'un même m³ traverse ensuite type2 → type3 → type4.
+        $chuteMatiereEntree = (float) ProductionOutput::where('output_type', 'type1')->sum('total_volume_m3');
+
+        // Chute déclarée par type de production (production_wastes rattachées aux ordres)
+        $chuteByTypeRaw = ProductionWaste::join('production_orders', 'production_orders.order_id', '=', 'production_wastes.production_order_id')
+            ->groupBy('production_orders.production_type')
+            ->selectRaw('production_orders.production_type as production_type,
+                SUM(production_wastes.volume_m3) as volume,
+                SUM(CASE WHEN production_wastes.waste_type = "waste" AND production_wastes.is_recovered = 0
+                         THEN production_wastes.volume_m3 ELSE 0 END) as volume_perdue')
+            ->pluck('volume', 'production_type');
+
+        // Volume produit par type (sert au taux par étape et à la revalorisation type5)
+        $volumeByType = ProductionOutput::groupBy('output_type')
+            ->selectRaw('output_type, SUM(total_volume_m3) as volume')
+            ->pluck('volume', 'output_type');
+
+        // Chute générée par la production, toutes étapes confondues
+        $chuteProduction = (float) ProductionWaste::sum('volume_m3');
+
+        // Chute revalorisée : les ordres type5 transforment la chute en produits finis
+        $chuteRevalorisee = (float) ($volumeByType['type5'] ?? 0);
+
+        // Chute perdue : déchet pur uniquement (jamais entré en stock chute).
+        // Les ajustements négatifs du stock chute ne sont pas comptés ici : ils servent
+        // aussi aux corrections d'inventaire, il faudrait un motif de rebut dédié.
+        $chutePerdue = (float) ProductionWaste::where('waste_type', 'waste')
+            ->where('is_recovered', 0)
+            ->sum('volume_m3');
+
+        $chuteTotale = max(0, $chuteProduction - $chuteRevalorisee);
+        $chutePct = fn ($value) => $chuteMatiereEntree > 0 ? round($value / $chuteMatiereEntree * 100, 2) : 0;
+
+        $chuteByType = collect($typeLabels)->map(function ($label, $type) use ($chuteByTypeRaw, $volumeByType, $chuteRevalorisee, $chuteMatiereEntree) {
+            $volume = (float) ($chuteByTypeRaw[$type] ?? 0);
+            $produced = (float) ($volumeByType[$type] ?? 0);
+            // Le type5 ne génère pas de chute : il en consomme pour la rendre en produits finis
+            $isRecovery = $type === 'type5';
+
+            return [
+                'type'        => $type,
+                'label'       => $label,
+                'volume'      => $volume,
+                'produced'    => $produced,
+                'is_recovery' => $isRecovery,
+                'recovered'   => $isRecovery ? $chuteRevalorisee : 0,
+                // Volume affiché : chute générée, ou chute rendue aux produits finis pour le type5
+                'value'       => $isRecovery ? $chuteRevalorisee : $volume,
+                // % affiché : taux de chute de l'étape, ou part de matière revalorisée pour le type5
+                'pct'         => $isRecovery
+                    ? ($chuteMatiereEntree > 0 ? round($chuteRevalorisee / $chuteMatiereEntree * 100, 1) : 0)
+                    : ($produced + $volume > 0 ? round($volume / ($produced + $volume) * 100, 1) : 0),
+                'pct_label'   => $isRecovery ? 'de la matière' : "de l'étape",
+            ];
+        })->values();
+
+        $chuteStats = [
+            'matiere_entree'    => round($chuteMatiereEntree, 2),
+            'production'        => round($chuteProduction, 2),
+            'revalorisee'       => round($chuteRevalorisee, 2),
+            'totale'            => round($chuteTotale, 2),
+            'perdue'            => round($chutePerdue, 4),
+            // current_stock est un accesseur FIFO (StockMovementDetail) : il faut le modèle,
+            // value() ne sélectionne pas material_id et renverrait 0.
+            'stock_dormant'     => (float) (RawMaterial::where('material_code', 'CHUTE-PRODUCTION')->first()?->current_stock ?? 0),
+            'pct_production'    => $chutePct($chuteProduction),
+            'pct_revalorisee'   => $chutePct($chuteRevalorisee),
+            'pct_totale'        => $chutePct($chuteTotale),
+            'pct_perdue'        => $chutePct($chutePerdue),
+            'by_type'           => $chuteByType,
+        ];
+
         // ── Alerts ────────────────────────────────────────────────────────────
         $totalAlerts = $lowStockProducts->count()
             + $lowStockMaterials->count()
@@ -510,6 +585,7 @@ class DashboardController extends Controller
             'productionByProduct',
             'materialConsumption',
             'capacityByType',
+            'chuteStats',
             'echeances'
         ));
     }
