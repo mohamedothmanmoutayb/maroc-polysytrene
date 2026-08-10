@@ -75,19 +75,25 @@ class RawMaterialPurchase extends Model
 
     /**
      * Warning shown before deleting the purchase: a paid purchase takes its
-     * payments down with it and gives their amount back to the supplier balance.
+     * payments down with it and gives their amount back to the supplier balance,
+     * and a delivered purchase takes back the stock it added on reception.
      */
     public function getDeleteWarningAttribute()
     {
+        $parts = [];
+
         $documents = $this->paymentDocuments;
         $paid      = (float) $documents->sum(fn($doc) => $doc->actual_amount);
-
-        if ($documents->isEmpty() || $paid <= 0.005) {
-            return null;
+        if ($documents->isNotEmpty() && $paid > 0.005) {
+            $parts[] = $documents->count() . ' paiement(s) de ' . number_format($paid, 2, ',', '.')
+                . ' DH seront également supprimés et retirés du solde fournisseur.';
         }
 
-        return $documents->count() . ' paiement(s) de ' . number_format($paid, 2, ',', '.')
-            . ' DH seront également supprimés et retirés du solde fournisseur.';
+        if ($this->actual_delivery_date) {
+            $parts[] = 'Cette commande a déjà été livrée: le stock reçu sera retiré du magasin.';
+        }
+
+        return $parts ? implode(' ', $parts) : null;
     }
 
     public function getRemainingAmountAttribute()

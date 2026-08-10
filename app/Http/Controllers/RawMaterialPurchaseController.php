@@ -145,9 +145,11 @@ class RawMaterialPurchaseController extends Controller
 
         $purchases = $query->with('paymentDocuments')->orderBy('purchase_date', 'asc')->orderBy('purchase_id', 'asc')->get();
 
-        $data = $purchases->map(function ($purchase) {
+        $isAdmin = auth()->user() && auth()->user()->isAdmin();
+
+        $data = $purchases->map(function ($purchase) use ($isAdmin) {
             $rest = $purchase->final_amount - $purchase->total_paid;
-            $deleteBlockReason = $purchase->actual_delivery_date
+            $deleteBlockReason = ($purchase->actual_delivery_date && !$isAdmin)
                 ? 'Impossible de supprimer une commande déjà livrée.'
                 : null;
 
@@ -1168,12 +1170,70 @@ class RawMaterialPurchaseController extends Controller
         DB::beginTransaction();
         try {
             $purchase = RawMaterialPurchase::findOrFail($id);
+            $isAdmin  = auth()->user() && auth()->user()->isAdmin();
 
-            if ($purchase->actual_delivery_date) {
+            if ($purchase->actual_delivery_date && !$isAdmin) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Impossible de supprimer une commande déjà livrée.'
                 ], 400);
+            }
+
+            // Admin override: a delivered order can be deleted, but the stock it
+            // added on reception must come back out first. Refuse if any of it was
+            // already consumed, to avoid pushing stock negative or corrupting FIFO cost history.
+            if ($purchase->actual_delivery_date) {
+                foreach ($purchase->items as $item) {
+                    if ((float) $item->received_quantity <= 0) {
+                        continue;
+                    }
+
+                    $movement = RawMaterialStockMovement::where('reference_type', 'purchase')
+                        ->where('reference_id', $purchase->purchase_id)
+                        ->where('material_id', $item->material_id)
+                        ->with('details')
+                        ->first();
+                    $detail = $movement?->details->first();
+
+                    if ($detail && (float) $detail->remaining_quantity < (float) $detail->quantity - 0.005) {
+                        DB::rollBack();
+                        $material = $item->rawMaterial;
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Impossible de supprimer: le stock reçu pour ' .
+                                ($material->material_name ?? 'cette matière') . ' a déjà été utilisé.'
+                        ], 400);
+                    }
+
+                    $material = RawMaterial::find($item->material_id);
+                    if (!$material) {
+                        continue;
+                    }
+
+                    $oldStock = (float) $material->current_stock;
+                    $newStock = $oldStock - (float) $item->received_quantity;
+
+                    RawMaterialStockMovement::create([
+                        'material_id'       => $item->material_id,
+                        'movement_type'     => 'cancellation',
+                        'quantity'          => $item->received_quantity,
+                        'previous_stock'    => $oldStock,
+                        'new_stock'         => $newStock,
+                        'reference_type'    => 'purchase',
+                        'reference_id'      => $purchase->purchase_id,
+                        'reference_number'  => $purchase->purchase_number,
+                        'movement_date'     => now(),
+                        'performed_by'      => auth()->id(),
+                        'notes'             => 'Annulation réception commande ' . $purchase->purchase_number,
+                    ]);
+
+                    if ($detail) {
+                        $detail->delete();
+                    }
+
+                    $material->current_stock = $newStock;
+                    $material->save();
+                }
             }
 
             $supplier   = $purchase->supplier;

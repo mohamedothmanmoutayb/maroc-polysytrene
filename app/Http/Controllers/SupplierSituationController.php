@@ -188,9 +188,11 @@ class SupplierSituationController extends Controller
             'balance'       => 'Solde',
         ];
 
-        $data = $purchases->map(function($purchase) use ($methodLabels) {
+        $isAdmin = auth()->user() && auth()->user()->isAdmin();
+
+        $data = $purchases->map(function($purchase) use ($methodLabels, $isAdmin) {
             $rest = $purchase->final_amount - $purchase->total_paid;
-            $deleteBlockReason = $purchase->actual_delivery_date
+            $deleteBlockReason = ($purchase->actual_delivery_date && !$isAdmin)
                 ? 'Impossible de supprimer une commande déjà livrée.'
                 : null;
 
