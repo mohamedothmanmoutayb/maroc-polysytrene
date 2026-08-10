@@ -18,7 +18,7 @@
         }
 
         /* ── Filtres de dates : période personnalisée + badge alignés sur les
-               boutons rapides (.btn : padding 9px 16px, font .875rem, radius 8px) ── */
+                   boutons rapides (.btn : padding 9px 16px, font .875rem, radius 8px) ── */
         .dashboard-period-input {
             width: auto;
             min-width: 220px;
@@ -392,18 +392,23 @@
                 <form method="GET" action="{{ route('dashboard') }}" id="dashboardFilterForm">
                     <div class="d-flex flex-wrap align-items-center gap-2">
                         <div class="d-flex align-items-center gap-2 flex-wrap me-auto">
-                            <iconify-icon icon="solar:calendar-bold" class="text-primary fs-8 d-none d-md-inline"></iconify-icon>
+                            <iconify-icon icon="solar:calendar-bold"
+                                class="text-primary fs-8 d-none d-md-inline"></iconify-icon>
                             <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="Filtres rapides">
                                 <button type="submit" name="quick_filter" value="today"
                                     class="btn btn-outline-primary {{ $quickFilter === 'today' ? 'active' : '' }}">Aujourd'hui</button>
                                 <button type="submit" name="quick_filter" value="this_week"
-                                    class="btn btn-outline-primary {{ $quickFilter === 'this_week' ? 'active' : '' }}">Cette semaine</button>
+                                    class="btn btn-outline-primary {{ $quickFilter === 'this_week' ? 'active' : '' }}">Cette
+                                    semaine</button>
                                 <button type="submit" name="quick_filter" value="last_week"
-                                    class="btn btn-outline-primary {{ $quickFilter === 'last_week' ? 'active' : '' }}">Semaine dernière</button>
+                                    class="btn btn-outline-primary {{ $quickFilter === 'last_week' ? 'active' : '' }}">Semaine
+                                    dernière</button>
                                 <button type="submit" name="quick_filter" value="this_month"
-                                    class="btn btn-outline-primary {{ $quickFilter === 'this_month' ? 'active' : '' }}">Ce mois</button>
+                                    class="btn btn-outline-primary {{ $quickFilter === 'this_month' ? 'active' : '' }}">Ce
+                                    mois</button>
                                 <button type="submit" name="quick_filter" value="last_month"
-                                    class="btn btn-outline-primary {{ $quickFilter === 'last_month' ? 'active' : '' }}">Mois dernier</button>
+                                    class="btn btn-outline-primary {{ $quickFilter === 'last_month' ? 'active' : '' }}">Mois
+                                    dernier</button>
                                 <button type="submit" name="quick_filter" value="all_time"
                                     class="btn btn-outline-primary {{ $quickFilter === 'all_time' ? 'active' : '' }}">Tout</button>
                             </div>
@@ -417,12 +422,15 @@
                                 value="{{ $quickFilter === 'custom' ? $periodStart->format('Y-m-d') : '' }}">
                             <input type="hidden" name="date_to" id="dashboardDateTo"
                                 value="{{ $quickFilter === 'custom' ? $periodEnd->format('Y-m-d') : '' }}">
-                            <span class="badge bg-primary text-primary dashboard-period-badge d-none d-lg-inline-flex align-items-center gap-1">
+                            <span
+                                class="badge bg-primary text-primary dashboard-period-badge d-none d-lg-inline-flex align-items-center gap-1">
                                 <iconify-icon icon="solar:calendar-linear"></iconify-icon>
                                 @if ($quickFilter === 'all_time')
                                     Tout le temps
                                 @else
-                                    {{ $periodStart->format('d/m/Y') }}@if (!$periodStart->isSameDay($periodEnd)) → {{ $periodEnd->format('d/m/Y') }}@endif
+                                    {{ $periodStart->format('d/m/Y') }}@if (!$periodStart->isSameDay($periodEnd))
+                                        → {{ $periodEnd->format('d/m/Y') }}
+                                    @endif
                                 @endif
                             </span>
                         </div>
@@ -464,7 +472,10 @@
         ═══════════════════════════════════════════════════════════════════════ --}}
         <p class="section-title">Vue d'ensemble · {{ $periodLabel }}
             @if ($quickFilter !== 'all_time')
-                <span class="text-muted fw-normal" style="font-size:.75rem;">({{ $periodStart->format('d/m/Y') }}@if (!$periodStart->isSameDay($periodEnd)) → {{ $periodEnd->format('d/m/Y') }}@endif)</span>
+                <span class="text-muted fw-normal" style="font-size:.75rem;">({{ $periodStart->format('d/m/Y') }}
+                    @if (!$periodStart->isSameDay($periodEnd))
+                        → {{ $periodEnd->format('d/m/Y') }}
+                    @endif)</span>
             @endif
         </p>
         <div class="row g-2 g-md-3 mb-3 mb-md-4">
@@ -478,13 +489,15 @@
                                 <iconify-icon icon="solar:calendar-bold" class="text-primary fs-5"></iconify-icon>
                             </div>
                             <a href="{{ route('sales.orders.index') }}"
-                                class="kpi-label text-decoration-none text-reset stretched-link">CA · {{ $periodLabel }}</a>
+                                class="kpi-label text-decoration-none text-reset stretched-link">CA ·
+                                {{ $periodLabel }}</a>
                         </div>
                         <div class="kpi-value text-primary mb-1">{{ number_format($stats['period_sales'], 0) }}<small
                                 class="fs-11 fw-normal text-muted"> DH</small></div>
                         <div class="kpi-sub text-muted"><strong
                                 class="text-dark">{{ $stats['period_sales_count'] }}</strong> commande(s) · Auj:
-                            <strong class="text-dark">{{ number_format($stats['today_sales'], 0) }} DH</strong></div>
+                            <strong class="text-dark">{{ number_format($stats['today_sales'], 0) }} DH</strong>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -565,7 +578,8 @@
                             {{ $stats['total_alerts'] }}</div>
                         <div class="kpi-sub text-muted">
                             @if ($stats['total_alerts'] == 0)
-                                <iconify-icon icon="solar:check-circle-linear" class="text-success"></iconify-icon> Tout OK
+                                <iconify-icon icon="solar:check-circle-linear" class="text-success"></iconify-icon> Tout
+                                OK
                             @else
                                 Stock: {{ $lowStockProducts->count() + $lowStockMaterials->count() }}
                             @endif
@@ -591,7 +605,8 @@
                             <iconify-icon
                                 icon="{{ $chuteAlerte ? 'solar:danger-triangle-bold' : 'solar:check-circle-outline' }}"
                                 class="fs-5"></iconify-icon>
-                            <span class="fw-semibold">{{ $chuteAlerte ? 'Seuil dépassé — plus de 3 %' : 'Sous le seuil de 3 %' }}</span>
+                            <span
+                                class="fw-semibold">{{ $chuteAlerte ? 'Seuil dépassé — plus de 3 %' : 'Sous le seuil de 3 %' }}</span>
                         </span>
                         <h4 class="text-white fw-normal mb-1">Chute Totale</h4>
                         <div class="fw-bolder lh-1 mb-3"
@@ -624,8 +639,10 @@
                                         <h5 class="fw-semibold mb-0">
                                             {{ number_format($chuteStats['production'], 2) }} m³
                                         </h5>
-                                        <span class="fs-11 text-muted">{{ $chuteStats['pct_production'] }} % matière</span>
-                                        <span class="badge bg-success-subtle fw-semibold" style="color: #55793c !important;"
+                                        <span class="fs-11 text-muted">{{ $chuteStats['pct_production'] }} %
+                                            matière</span>
+                                        <span class="badge bg-success-subtle fw-semibold"
+                                            style="color: #55793c !important;"
                                             title="Déchet pur, jamais entré en stock chute">
                                             Chute perdue {{ number_format($chuteStats['perdue'], 4) }} m³ ·
                                             {{ $chuteStats['pct_perdue'] }} %
@@ -647,9 +664,9 @@
                                                 class="fw-semibold {{ $chuteType['is_recovery'] ? 'text-success' : 'text-dark' }}"
                                                 style="font-size: 0.9rem;">{{ $chuteType['is_recovery'] ? '−' : '' }}{{ number_format($chuteType['value'], 2) }}</span>
                                             <span class="text-muted" style="font-size: 0.65rem;">m³</span>
-                                            <span
+                                            {{-- <span
                                                 class="{{ $chuteType['is_recovery'] ? 'text-success' : 'text-warning' }} fw-semibold"
-                                                style="font-size: 0.75rem;">{{ $chuteType['pct'] }} %</span>
+                                                style="font-size: 0.75rem;">{{ $chuteType['pct'] }} %</span> --}}
                                         </div>
                                     </div>
                                 @endforeach
@@ -838,12 +855,18 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $sumCash = 0; $sumCheck = 0; $sumTraite = 0; $sumTransfer = 0; $sumTotal = 0;
+                                        $sumCash = 0;
+                                        $sumCheck = 0;
+                                        $sumTraite = 0;
+                                        $sumTransfer = 0;
+                                        $sumTotal = 0;
                                     @endphp
                                     @foreach ($dailyPayments as $row)
                                         @php
-                                            $sumCash += $row['cash']; $sumCheck += $row['check'];
-                                            $sumTraite += $row['traite']; $sumTransfer += $row['transfer'];
+                                            $sumCash += $row['cash'];
+                                            $sumCheck += $row['check'];
+                                            $sumTraite += $row['traite'];
+                                            $sumTransfer += $row['transfer'];
                                             $sumTotal += $row['total'];
                                         @endphp
                                         <tr class="{{ $row['is_today'] ? 'table-primary' : '' }}">
@@ -857,7 +880,8 @@
                                             <td class="text-end">{{ number_format($row['check'], 0, ',', ' ') }}</td>
                                             <td class="text-end">{{ number_format($row['traite'], 0, ',', ' ') }}</td>
                                             <td class="text-end">{{ number_format($row['transfer'], 0, ',', ' ') }}</td>
-                                            <td class="text-end fw-bold">{{ number_format($row['total'], 0, ',', ' ') }}</td>
+                                            <td class="text-end fw-bold">{{ number_format($row['total'], 0, ',', ' ') }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -868,7 +892,8 @@
                                         <td class="text-end">{{ number_format($sumCheck, 0, ',', ' ') }}</td>
                                         <td class="text-end">{{ number_format($sumTraite, 0, ',', ' ') }}</td>
                                         <td class="text-end">{{ number_format($sumTransfer, 0, ',', ' ') }}</td>
-                                        <td class="text-end text-primary">{{ number_format($sumTotal, 0, ',', ' ') }} DH</td>
+                                        <td class="text-end text-primary">{{ number_format($sumTotal, 0, ',', ' ') }} DH
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -893,7 +918,8 @@
                                     <iconify-icon icon="solar:calendar-bold" class="text-info fs-5"></iconify-icon>
                                 </div>
                                 <a href="{{ route('production-consumption.index') }}"
-                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production · {{ $periodLabel }}</a>
+                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production ·
+                                    {{ $periodLabel }}</a>
                             </div>
                             <div class="kpi-value text-info mb-0">{{ number_format($prodCostPeriod, 0, ',', ' ') }}<small
                                     class="fs-11 fw-normal text-muted"> DH</small></div>
@@ -903,12 +929,15 @@
                         <div class="card-body p-3">
                             <div class="d-flex align-items-center gap-2 mb-2">
                                 <div class="kpi-icon bg-primary-subtle">
-                                    <iconify-icon icon="solar:calendar-mark-bold" class="text-primary fs-5"></iconify-icon>
+                                    <iconify-icon icon="solar:calendar-mark-bold"
+                                        class="text-primary fs-5"></iconify-icon>
                                 </div>
                                 <a href="{{ route('production-consumption.index') }}"
-                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production Mois</a>
+                                    class="kpi-label text-decoration-none text-reset stretched-link">Coût Production
+                                    Mois</a>
                             </div>
-                            <div class="kpi-value text-primary mb-0">{{ number_format($prodCostMonth, 0, ',', ' ') }}<small
+                            <div class="kpi-value text-primary mb-0">
+                                {{ number_format($prodCostMonth, 0, ',', ' ') }}<small
                                     class="fs-11 fw-normal text-muted"> DH</small></div>
                         </div>
                     </div>
@@ -923,7 +952,8 @@
                             <a href="{{ route('production-output.index') }}"
                                 class="text-reset text-decoration-none stretched-link">
                                 <iconify-icon icon="solar:box-bold" class="text-success me-1"></iconify-icon>
-                                Qté Produite en m³ par Article <small class="text-muted fw-normal">· {{ $periodLabel }}</small>
+                                Qté Produite en m³ par Article <small class="text-muted fw-normal">·
+                                    {{ $periodLabel }}</small>
                             </a>
                         </h5>
                         <div class="table-responsive-stack">
@@ -950,7 +980,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune production sur
+                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune production
+                                                sur
                                                 cette période</td>
                                         </tr>
                                     @endforelse
@@ -969,7 +1000,8 @@
                             <a href="{{ route('production-consumption.index') }}"
                                 class="text-reset text-decoration-none stretched-link">
                                 <iconify-icon icon="solar:test-tube-bold" class="text-warning me-1"></iconify-icon>
-                                Matière Première Consommée <small class="text-muted fw-normal">· {{ $periodLabel }}</small>
+                                Matière Première Consommée <small class="text-muted fw-normal">·
+                                    {{ $periodLabel }}</small>
                             </a>
                         </h5>
                         <div class="table-responsive-stack">
@@ -999,7 +1031,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune consommation sur
+                                            <td colspan="3" class="text-center py-3 text-muted small">Aucune
+                                                consommation sur
                                                 cette période</td>
                                         </tr>
                                     @endforelse
@@ -1052,7 +1085,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center py-3 text-muted small">Aucune production sur
+                                            <td colspan="5" class="text-center py-3 text-muted small">Aucune production
+                                                sur
                                                 cette période</td>
                                         </tr>
                                     @endforelse
@@ -1273,7 +1307,7 @@
                                         class="{{ $cashFlowData['taux_couverture_class'] == 'success' ? 'table-success' : ($cashFlowData['taux_couverture_class'] == 'warning' ? 'table-warning' : ($cashFlowData['taux_couverture_class'] == 'info' ? 'table-info' : 'table-danger')) }}">
                                         <td class="fw-bold">
                                             Taux de couverture
-                                            <small class="text-muted d-block">= (Résultat NET /  II) × 100</small>
+                                            <small class="text-muted d-block">= (Résultat NET / II) × 100</small>
                                         </td>
                                         <td class="text-end fw-bold fs-3">
                                             {{ $cashFlowData['taux_couverture'] > 0 ? '+' : '' }}{{ number_format($cashFlowData['taux_couverture'], 2, ',', '.') }}%
@@ -1384,16 +1418,19 @@
                                         @endphp
                                         <tr>
                                             <td>
-                                                <span class="badge {{ $e['instrument'] === 'Chèque' ? 'bg-primary' : 'bg-info' }}"
+                                                <span
+                                                    class="badge {{ $e['instrument'] === 'Chèque' ? 'bg-primary' : 'bg-info' }}"
                                                     style="font-size:.65rem;">{{ $e['instrument'] }}</span>
                                             </td>
                                             <td>
-                                                <span class="badge {{ $e['sens'] === 'Client' ? 'bg-success text-success' : 'bg-danger text-danger' }}"
+                                                <span
+                                                    class="badge {{ $e['sens'] === 'Client' ? 'bg-success text-success' : 'bg-danger text-danger' }}"
                                                     style="font-size:.65rem;">{{ $e['sens'] }}</span>
                                             </td>
                                             <td class="fw-semibold">{{ $e['party'] }}</td>
                                             <td class="text-muted" style="font-size:.72rem;">{{ $e['reference'] }}</td>
-                                            <td class="text-end fw-bold">{{ number_format($e['amount'], 2, ',', ' ') }}</td>
+                                            <td class="text-end fw-bold">{{ number_format($e['amount'], 2, ',', ' ') }}
+                                            </td>
                                             <td class="{{ $isOverdue ? 'text-danger fw-bold' : '' }}">
                                                 @if ($e['date'])
                                                     {{ $e['date']->format('d/m/Y') }}
@@ -1410,7 +1447,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center py-3 text-muted small">Aucune échéance en
+                                            <td colspan="7" class="text-center py-3 text-muted small">Aucune échéance
+                                                en
                                                 attente</td>
                                         </tr>
                                     @endforelse
@@ -1542,7 +1580,8 @@
                             <iconify-icon icon="solar:box-bold" class="text-success"></iconify-icon>
                         </div>
                         <h5 class="mb-2" style="font-size: 1rem;"><a href="{{ route('production-output.index') }}"
-                                class="text-reset text-decoration-none stretched-link">Production · {{ $periodLabel }}</a></h5>
+                                class="text-reset text-decoration-none stretched-link">Production ·
+                                {{ $periodLabel }}</a></h5>
                         <div class="row g-0 mt-2">
                             <div class="col-6 border-end">
                                 <h3 class="text-success mb-0" style="font-size: 1.3rem;">
@@ -1588,7 +1627,8 @@
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <iconify-icon icon="solar:box-outline" class="text-secondary"></iconify-icon>
                             <a href="{{ route('production-orders.index') }}"
-                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 0.95rem;">Ordres Récents</a>
+                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 0.95rem;">Ordres
+                                Récents</a>
                         </div>
                         @forelse($recentProductionOrders as $order)
                             <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
@@ -1618,7 +1658,8 @@
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <iconify-icon icon="solar:settings-bold" class="text-warning"></iconify-icon>
                             <a href="{{ route('machines.index') }}"
-                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 0.95rem;">Machines</a>
+                                class="card-title mb-0 text-reset text-decoration-none"
+                                style="font-size: 0.95rem;">Machines</a>
                         </div>
                         @if ($machinesInMaint->count() > 0)
                             @foreach ($machinesInMaint as $machine)
@@ -1672,7 +1713,8 @@
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="{{ route('sales.orders.index') }}"
-                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 1rem;">Ventes Récentes</a>
+                                class="card-title mb-0 text-reset text-decoration-none" style="font-size: 1rem;">Ventes
+                                Récentes</a>
                             <a href="{{ route('sales.orders.index') }}" class="btn btn-sm btn-outline-primary">Voir</a>
                         </div>
                         <div class="overflow-auto-mobile" style="max-height:340px; overflow-y:auto;">
@@ -1708,7 +1750,8 @@
                 <div class="card h-100">
                     <div class="card-body p-3">
                         <a href="{{ route('sales.situation.index') }}"
-                            class="card-title mb-2 d-block text-reset text-decoration-none" style="font-size: 1rem;">Suivi Paiements</a>
+                            class="card-title mb-2 d-block text-reset text-decoration-none" style="font-size: 1rem;">Suivi
+                            Paiements</a>
                         <p class="text-muted" style="font-size:.75rem;">
                             {{ number_format($stats['completed_payments'], 0) }} DH encaissés</p>
 
@@ -1950,7 +1993,8 @@
                 <div class="card h-100">
                     <div class="card-body p-3">
                         <a href="{{ route('clients.index') }}"
-                            class="card-title mb-3 d-block text-reset text-decoration-none" style="font-size: 1rem;">Répartition Clients</a>
+                            class="card-title mb-3 d-block text-reset text-decoration-none"
+                            style="font-size: 1rem;">Répartition Clients</a>
                         <div class="bg-primary bg-opacity-10 rounded overflow-hidden mb-3">
                             <div class="p-2 p-md-3">
                                 <div class="d-flex align-items-center justify-content-between">
@@ -2180,8 +2224,12 @@
                 autoUpdateInput: false,
                 showDropdowns: true,
                 opens: 'left',
-                startDate: moment('{{ $quickFilter === 'all_time' ? now()->format('Y-m-d') : $periodStart->format('Y-m-d') }}'),
-                endDate: moment('{{ $quickFilter === 'all_time' ? now()->format('Y-m-d') : $periodEnd->format('Y-m-d') }}'),
+                startDate: moment(
+                    '{{ $quickFilter === 'all_time' ? now()->format('Y-m-d') : $periodStart->format('Y-m-d') }}'
+                    ),
+                endDate: moment(
+                    '{{ $quickFilter === 'all_time' ? now()->format('Y-m-d') : $periodEnd->format('Y-m-d') }}'
+                    ),
                 locale: {
                     format: 'DD/MM/YYYY',
                     separator: ' - ',
@@ -2197,8 +2245,10 @@
             });
 
             $('#dashboardDateRange').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-                window.loadDashboard('{{ route('dashboard') }}?date_from=' + picker.startDate.format('YYYY-MM-DD') +
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format(
+                    'DD/MM/YYYY'));
+                window.loadDashboard('{{ route('dashboard') }}?date_from=' + picker.startDate.format(
+                        'YYYY-MM-DD') +
                     '&date_to=' + picker.endDate.format('YYYY-MM-DD'));
             });
         });
@@ -2310,7 +2360,8 @@
             document.querySelectorAll('#caModeMonth, #caModeDay').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     const mode = this.dataset.mode;
-                    document.getElementById('caModeMonth').classList.toggle('active', mode === 'month');
+                    document.getElementById('caModeMonth').classList.toggle('active', mode ===
+                        'month');
                     document.getElementById('caModeDay').classList.toggle('active', mode === 'day');
                     revenueChart.updateOptions({
                         series: [{
