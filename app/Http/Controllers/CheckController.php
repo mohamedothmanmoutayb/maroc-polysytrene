@@ -14,9 +14,12 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\ReversesClientPayments;
 
 class CheckController extends Controller
 {
+    use ReversesClientPayments;
+
     public function __construct()
     {
         $this->middleware('can:view_checks')->only(['index', 'show', 'getStatistics']);
@@ -612,64 +615,14 @@ class CheckController extends Controller
 
     /**
      * Reverse the client payment/balance impact of a bounced client check.
+     *
+     * The reversal itself lives in ReversesClientPayments: a client cheque endorsed
+     * to a supplier can also be flagged impayé from the supplier situation, and the
+     * money has to be undone the same way wherever that happens.
      */
     private function reverseCheckPayment($check)
     {
-        $payment = SalesOrderPayment::find($check->payment_id);
-
-        if ($payment) {
-            $order = $check->order_id ? SalesOrder::find($check->order_id) : null;
-
-            if ($order) {
-                $order->paid_amount -= $payment->amount;
-                $order->save();
-                $order->updatePaymentStatus();
-
-                $client = Client::find($check->client_id);
-                if ($client) {
-                    // updateBalanceFromOrder expects the amount actually applied to
-                    // THIS order, not the full check amount — passing the full
-                    // amount here undercounts the reversal whenever part of the
-                    // check went to this order and the rest was credited as excess.
-                    $client->updateBalanceFromOrder($order, 'payment_deleted', $payment->amount);
-
-                    // Any excess beyond what was applied to this order was credited
-                    // directly to the client's solde — reverse that too.
-                    $excess = round((float) $check->amount - (float) $payment->amount, 2);
-                    if ($excess > 0.005) {
-                        $client->refresh();
-                        $previousBalance = (float) $client->balance;
-                        $newBalance = $previousBalance - $excess;
-                        $client->balance = $newBalance;
-                        $client->save();
-
-                        $client->balanceHistory()->create([
-                            'previous_balance' => $previousBalance,
-                            'new_balance' => $newBalance,
-                            'amount' => -$excess,
-                            'type' => 'payment_deleted',
-                            'reference_type' => 'check',
-                            'reference_id' => $check->check_id,
-                            'description' => "Annulation de l'excédent suite au rejet du chèque #{$check->check_number}: " .
-                                number_format($excess, 2, ',', '.') . ' DH',
-                            'created_by' => Auth::id(),
-                        ]);
-                    }
-                }
-            } else {
-                $this->updateClientBalance(
-                    $check->client_id,
-                    $check->amount,
-                    'debit',
-                    $check,
-                    "Annulation du crédit suite au rejet du chèque #{$check->check_number}"
-                );
-            }
-
-            $payment->delete();
-        }
-
-        $check->update(['payment_id' => null]);
+        $this->reverseClientCheckPayment($check);
     }
 
     /**

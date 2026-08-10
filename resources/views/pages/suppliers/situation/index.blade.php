@@ -1058,6 +1058,7 @@
                                     <small class="text-muted">
                                         Le chèque / la traite passe en <strong>impayé</strong> et le paiement est annulé :
                                         les achats concernés redeviennent impayés et le montant revient au solde fournisseur.
+                                        S'il provient d'un client, son solde est également corrigé.
                                     </small>
                                 </div>
                                 <button type="button" class="btn btn-danger" id="edit_reject_btn">
@@ -2602,7 +2603,8 @@
                         '<div class="alert alert-warning mt-3 mb-0 text-start">' +
                         '<i class="fas fa-exclamation-triangle me-1"></i>' +
                         'Le paiement sera annulé : les achats concernés redeviennent impayés ' +
-                        'et le montant revient au solde fournisseur.</div>',
+                        'et le montant revient au solde fournisseur. ' +
+                        "S'il provient d'un client, son solde sera également corrigé.</div>",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

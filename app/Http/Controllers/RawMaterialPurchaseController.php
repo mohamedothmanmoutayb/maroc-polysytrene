@@ -13,6 +13,7 @@ use App\Models\RawMaterialStockMovement;
 use App\Models\StockMovementDetail;
 use App\Models\Supplier;
 use App\Models\Traite;
+use App\Traits\ReversesClientPayments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class RawMaterialPurchaseController extends Controller
 {
+    use ReversesClientPayments;
+
     public function __construct()
     {
         $this->middleware('can:view_raw_material_purchases')->only(['index', 'show', 'getStatistics', 'generatePdf', 'getPurchaseDetails', 'getAvailableChecks', 'getAvailableTraites']);
@@ -314,6 +317,12 @@ class RawMaterialPurchaseController extends Controller
             $checkIds  = $docs->pluck('check_id')->filter()->unique();
             $traiteIds = $docs->pluck('traite_id')->filter()->unique();
 
+            // Read where the chèque / traite stood before anything is undone: the
+            // reversal below already flags it bounced, and a client credit may only be
+            // taken back if it had not been taken back before.
+            $checkStatusBefore  = Check::whereIn('check_id', $checkIds)->pluck('status', 'check_id');
+            $traiteStatusBefore = Traite::whereIn('traite_id', $traiteIds)->pluck('status', 'traite_id');
+
             // A purchase paid at creation was never booked into the balance, so the
             // reversal has nothing to give back for it — its amount has to be booked
             // as owed now that the payment fell through.
@@ -346,25 +355,54 @@ class RawMaterialPurchaseController extends Controller
             }
 
             // The reversal only bounces the chèque it reaches through its allocation;
-            // a rejection must flag the chèque / traite whatever state it is in.
-            if ($checkIds->isNotEmpty()) {
-                Check::whereIn('check_id', $checkIds)->update(['status' => 'bounced']);
+            // a rejection must flag the chèque / traite whatever state it is in. A
+            // chèque that came from a client was credited to that client when it was
+            // received, so the client is debited again here — exactly as the chèques
+            // module does when the same chèque is rejected from there.
+            $refunded = 0.0;
+
+            foreach (Check::whereIn('check_id', $checkIds)->get() as $check) {
+                $refunded += $this->reverseClientCreditOnce($check, $checkStatusBefore[$check->check_id] ?? null);
+                $check->update(['status' => 'bounced']);
             }
-            if ($traiteIds->isNotEmpty()) {
-                Traite::whereIn('traite_id', $traiteIds)->update(['status' => 'bounced']);
+
+            foreach (Traite::whereIn('traite_id', $traiteIds)->get() as $traite) {
+                $refunded += $this->reverseClientCreditOnce($traite, $traiteStatusBefore[$traite->traite_id] ?? null);
+                $traite->update(['status' => 'bounced']);
             }
 
             DB::commit();
 
+            $message = $label . ' marqué impayé — paiement de ' . number_format($total, 2, ',', '.')
+                . ' DH annulé : ' . $docs->count() . ' achat(s) remis à impayé et le montant est revenu au solde fournisseur.';
+
+            if ($refunded > 0.005) {
+                $message .= ' ' . number_format($refunded, 2, ',', '.')
+                    . ' DH ont également été retirés du solde du client qui a remis ce paiement.';
+            }
+
             return response()->json([
                 'success' => true,
-                'message' => $label . ' marqué impayé — paiement de ' . number_format($total, 2, ',', '.')
-                    . ' DH annulé : ' . $docs->count() . ' achat(s) remis à impayé et le montant est revenu au solde fournisseur.',
+                'message' => $message,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()], 500);
         }
+    }
+
+    /**
+     * Take back the client credit of a chèque / traite being flagged impayé. One that
+     * was already impayé (rejected from the chèques module, say) had its credit taken
+     * back then, so it must not be debited a second time.
+     */
+    private function reverseClientCreditOnce($instrument, ?string $statusBefore): float
+    {
+        if (in_array($statusBefore, ['bounced', 'cancelled'], true)) {
+            return 0.0;
+        }
+
+        return $this->reverseBouncedClientCredit($instrument);
     }
 
     /** Payment detail for the edit modal: the total paid and the purchases it covers. */
