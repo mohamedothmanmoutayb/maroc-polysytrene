@@ -279,6 +279,94 @@ class RawMaterialPurchaseController extends Controller
         }
     }
 
+    /**
+     * A chèque / traite that came back unpaid. Flagging it rejected undoes the
+     * payment it stood for: the purchases it covered go back to impayé and the
+     * amount returns to the supplier balance.
+     */
+    public function rejectPaymentDocument($documentId)
+    {
+        $doc = PurchasePaymentDocument::with('purchase')->findOrFail($documentId);
+
+        if (!in_array($doc->payment_method, ['check', 'traite'], true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Seuls les paiements par chèque ou traite peuvent être marqués impayés.',
+            ], 400);
+        }
+
+        if (!$doc->purchase) {
+            return response()->json(['success' => false, 'message' => 'Achat introuvable pour ce paiement.'], 404);
+        }
+
+        // A distributed payment bounces as a whole: every purchase it covered
+        // loses it, not just the one the rejection was triggered from.
+        $docs = $doc->payment_group_id
+            ? PurchasePaymentDocument::forGroup($doc->payment_group_id)->with('purchase')->orderBy('document_id')->get()
+            : collect([$doc]);
+
+        $supplier = Supplier::findOrFail($doc->purchase->supplier_id);
+        $total    = (float) $docs->sum(fn($d) => $d->actual_amount);
+        $label    = $doc->payment_method === 'check' ? 'Chèque' : 'Traite';
+
+        DB::beginTransaction();
+        try {
+            $checkIds  = $docs->pluck('check_id')->filter()->unique();
+            $traiteIds = $docs->pluck('traite_id')->filter()->unique();
+
+            // A purchase paid at creation was never booked into the balance, so the
+            // reversal has nothing to give back for it — its amount has to be booked
+            // as owed now that the payment fell through.
+            $toBook = $docs->filter(fn($d) => $d->purchase
+                    && (float) $d->amount > 0.005
+                    && !$this->purchaseTracksBalance($supplier->supplier_id, $d->purchase_id))
+                ->map(fn($d) => ['purchase' => $d->purchase, 'amount' => (float) $d->amount])
+                ->values();
+
+            $this->reversePaymentGroup($docs, $supplier, true);
+            $supplier->refresh();
+
+            foreach ($toBook as $booking) {
+                $purchase        = $booking['purchase'];
+                $previousBalance = (float) $supplier->balance;
+                $newBalance      = $previousBalance + $booking['amount'];
+                $supplier->update(['balance' => $newBalance]);
+                $supplier->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance'      => $newBalance,
+                    'amount'           => $booking['amount'],
+                    'type'             => 'purchase_unpaid',
+                    'reference_type'   => 'purchase',
+                    'reference_id'     => $purchase->purchase_id,
+                    'description'      => "Achat #{$purchase->purchase_number} impayé suite au rejet du paiement: "
+                        . number_format($booking['amount'], 2, ',', '.') . ' DH remis au solde fournisseur',
+                    'created_by'       => auth()->id(),
+                ]);
+                $supplier->refresh();
+            }
+
+            // The reversal only bounces the chèque it reaches through its allocation;
+            // a rejection must flag the chèque / traite whatever state it is in.
+            if ($checkIds->isNotEmpty()) {
+                Check::whereIn('check_id', $checkIds)->update(['status' => 'bounced']);
+            }
+            if ($traiteIds->isNotEmpty()) {
+                Traite::whereIn('traite_id', $traiteIds)->update(['status' => 'bounced']);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => $label . ' marqué impayé — paiement de ' . number_format($total, 2, ',', '.')
+                    . ' DH annulé : ' . $docs->count() . ' achat(s) remis à impayé et le montant est revenu au solde fournisseur.',
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()], 500);
+        }
+    }
+
     /** Payment detail for the edit modal: the total paid and the purchases it covers. */
     public function getPaymentGroup($groupId)
     {

@@ -237,16 +237,11 @@
             transform: translateY(-50%) rotate(50deg);
         }
 
-        /* Row action menus in tables.
-           The theme sets `.table-responsive { overflow-x: clip }`, which cut the menus
-           off at the edge of the table. While a menu is open the container stops
-           clipping, so the menu paints in front of the table instead. Paired with the
-           Popper "fixed" strategy applied in the script at the end of the body. */
-        .table-responsive.dropdown-open {
-            overflow: visible;
-        }
-
-        .table-responsive .dropdown-menu.show {
+        /* Row action menus in tables. The menu is moved to <body> while it is open
+           (see the script at the end of the page), so it escapes the table's own
+           scrolling box instead of being cut off by it. It only needs to paint above
+           the table once it is there. */
+        .dropdown-menu.table-action-menu {
             z-index: 1060;
         }
     </style>
@@ -709,53 +704,95 @@
         /**
          * Row action menus in tables (DataTables and plain tables alike).
          *
-         * The menus are rendered inside .table-responsive, which clips its overflow, so
-         * they were being cut off at the edge of the table. Two things fix that:
-         *  1. Popper positions the menu with the "fixed" strategy, anchoring it to the
-         *     viewport rather than to the clipping container.
-         *  2. The container stops clipping while a menu is open.
+         * A .table-responsive is a scrolling box, so a menu opened inside it is cut off
+         * at the edge of the table. Letting that box stop clipping is not an option: it
+         * loses its horizontal scroll offset, the table jumps sideways under the menu
+         * and spills out of .page-wrapper, which has overflow-x: hidden and can no
+         * longer be scrolled back.
          *
-         * This is applied globally, and only to dropdowns inside a .table-responsive, so
-         * the header/sidebar dropdowns keep their default behaviour.
+         * So the menu is moved to <body> for as long as it is open, and put back where
+         * it belongs on close. Popper is built by Bootstrap right after the "show"
+         * event, i.e. once the menu already sits on <body>, so it positions it against
+         * the toggle with nothing left to clip it.
+         *
+         * Only dropdowns inside a .table-responsive are touched; the header and sidebar
+         * menus keep their default behaviour.
          */
         (function() {
-            function tableDropdownContainer(element) {
-                return element && element.closest ? element.closest('.table-responsive') : null;
+            // The menu currently living on <body>, and where to put it back.
+            var parked = null;
+            var watcher = null;
+
+            function inTable(element) {
+                return !!(element && element.closest && element.closest('.table-responsive'));
             }
 
-            // Capture phase, so this runs before Bootstrap's own click handler builds the
-            // Dropdown: the instance then already carries our Popper configuration.
-            // Rows are re-rendered on every DataTables draw, so this cannot be done once
-            // up front.
-            document.addEventListener('click', function(event) {
-                if (!event.target || !event.target.closest) {
+            function restore() {
+                if (watcher) {
+                    watcher.disconnect();
+                    watcher = null;
+                }
+
+                if (!parked) {
                     return;
                 }
 
-                var toggle = event.target.closest('[data-bs-toggle="dropdown"]');
+                var menu = parked.menu;
+                menu.classList.remove('table-action-menu');
+                menu.classList.remove('show');
 
-                if (toggle && tableDropdownContainer(toggle)) {
-                    bootstrap.Dropdown.getOrCreateInstance(toggle, {
-                        popperConfig: {
-                            strategy: 'fixed'
-                        }
-                    });
+                // The row may have been re-rendered (a DataTables draw) while the menu
+                // was open — then there is nothing left to put it back into.
+                if (parked.parent && parked.parent.isConnected) {
+                    parked.parent.insertBefore(menu, parked.next);
+                } else {
+                    menu.remove();
                 }
-            }, true);
+
+                parked = null;
+            }
 
             document.addEventListener('show.bs.dropdown', function(event) {
-                var container = tableDropdownContainer(event.target);
+                var toggle = event.target;
 
-                if (container) {
-                    container.classList.add('dropdown-open');
+                if (!inTable(toggle) || !toggle.parentElement) {
+                    return;
                 }
+
+                var menu = toggle.parentElement.querySelector('.dropdown-menu');
+
+                if (!menu) {
+                    return;
+                }
+
+                // Only one row menu is ever open at a time.
+                restore();
+
+                parked = {
+                    menu: menu,
+                    parent: menu.parentElement,
+                    next: menu.nextSibling
+                };
+                menu.classList.add('table-action-menu');
+                document.body.appendChild(menu);
+
+                // A table redraw (search, sort, paging, ajax reload) throws the row away
+                // without Bootstrap ever closing the menu, which would leave it stranded
+                // on <body>. Drop it as soon as its row is gone.
+                watcher = new MutationObserver(function() {
+                    if (!toggle.isConnected) {
+                        restore();
+                    }
+                });
+                watcher.observe(toggle.closest('.table-responsive'), {
+                    childList: true,
+                    subtree: true
+                });
             });
 
             document.addEventListener('hidden.bs.dropdown', function(event) {
-                var container = tableDropdownContainer(event.target);
-
-                if (container) {
-                    container.classList.remove('dropdown-open');
+                if (inTable(event.target)) {
+                    restore();
                 }
             });
         })();

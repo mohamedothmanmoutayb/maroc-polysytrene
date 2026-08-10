@@ -53,6 +53,32 @@ class PurchasePaymentDocument extends Model
         return $this->belongsTo(RawMaterialPurchase::class, 'purchase_id');
     }
 
+    public function check()
+    {
+        return $this->belongsTo(Check::class, 'check_id');
+    }
+
+    public function traite()
+    {
+        return $this->belongsTo(Traite::class, 'traite_id');
+    }
+
+    /** The chèque or the traite the payment was made with, when there is one. */
+    public function getInstrumentAttribute()
+    {
+        if ($this->payment_method === 'check') {
+            return $this->check;
+        }
+
+        return $this->payment_method === 'traite' ? $this->traite : null;
+    }
+
+    /** A chèque / traite that came back unpaid leaves its payment standing until it is reversed. */
+    public function getIsRejectedAttribute()
+    {
+        return optional($this->instrument)->status === 'bounced';
+    }
+
     /**
      * Every document of the same payment. A document with no group is a payment
      * on its own, so the collection always contains at least this document.

@@ -1043,6 +1043,28 @@
                                     accept=".pdf,.jpg,.jpeg,.png">
                             </div>
                         </div>
+
+                        {{-- Chèque / traite revenu impayé : le paiement est annulé --}}
+                        <div id="edit_reject_section" class="border border-danger rounded p-3 mt-3" style="display:none;">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <div>
+                                    <h6 class="text-danger mb-1">
+                                        <i class="fas fa-ban me-1"></i>Chèque / traite impayé
+                                    </h6>
+                                    <div class="mb-1">
+                                        <span id="edit_reject_instrument" class="fw-bold"></span>
+                                        <span id="edit_reject_status" class="badge bg-secondary ms-1"></span>
+                                    </div>
+                                    <small class="text-muted">
+                                        Le chèque / la traite passe en <strong>impayé</strong> et le paiement est annulé :
+                                        les achats concernés redeviennent impayés et le montant revient au solde fournisseur.
+                                    </small>
+                                </div>
+                                <button type="button" class="btn btn-danger" id="edit_reject_btn">
+                                    <i class="fas fa-times-circle me-1"></i>Marquer impayé
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -1264,6 +1286,11 @@
                             payment_date:     doc.payment_date,
                             payment_date_raw: doc.payment_date_raw,
                             notes:            doc.notes,
+                            // Chèque / traite behind the payment
+                            instrument_label:        doc.instrument_label,
+                            instrument_status_label: doc.instrument_status_label,
+                            is_rejected:             doc.is_rejected,
+                            can_reject:              doc.can_reject,
                             amount:           0,
                             actual_amount:    0,
                             excess_amount:    0,
@@ -1331,7 +1358,13 @@
                         <td class="text-center">${i + 1}</td>
                         <td>${doc.payment_date}</td>
                         <td><small>${doc.document_number}</small></td>
-                        <td><i class="${methodIcon} me-1"></i>${doc.method_label}</td>
+                        <td>
+                            <i class="${methodIcon} me-1"></i>${doc.method_label}
+                            ${doc.instrument_label
+                                ? `<div class="small text-muted">${doc.instrument_label}</div>` : ''}
+                            ${doc.is_rejected
+                                ? `<span class="badge bg-danger mt-1"><i class="fas fa-ban me-1"></i>Impayé</span>` : ''}
+                        </td>
                         <td>${purchasesCell}</td>
                         <td class="text-end fw-bold text-success">
                             ${money(doc.actual_amount)} DH
@@ -1350,6 +1383,10 @@
                                 data-amount="${doc.actual_amount}"
                                 data-date="${doc.payment_date_raw}"
                                 data-notes="${doc.notes}"
+                                data-instrument="${doc.instrument_label || ''}"
+                                data-instrument-status="${doc.instrument_status_label || ''}"
+                                data-instrument-rejected="${doc.is_rejected ? 1 : 0}"
+                                data-can-reject="${doc.can_reject ? 1 : 0}"
                                 title="Modifier">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -2499,6 +2536,10 @@
                 var amount = $(this).data('amount');
                 var date = $(this).data('date');
                 var notes = $(this).data('notes');
+                var instrument = String($(this).data('instrument') || '');
+                var instrumentStatus = String($(this).data('instrument-status') || '');
+                var instrumentRejected = String($(this).data('instrument-rejected')) === '1';
+                var canReject = String($(this).data('can-reject')) === '1';
 
                 var purchaseList = purchases ? purchases.split(', ') : [];
                 if (groupId && purchaseList.length > 1) {
@@ -2535,7 +2576,71 @@
                 });
                 $('#edit_method_hint').toggle(method === 'check');
 
+                // Rejection is offered for any chèque / traite payment — one already
+                // flagged impayé still has its payment standing here.
+                $('#edit_reject_instrument').text(instrument);
+                $('#edit_reject_status')
+                    .text(instrumentStatus)
+                    .toggleClass('bg-danger', instrumentRejected)
+                    .toggleClass('bg-secondary', !instrumentRejected)
+                    .toggle(!!instrumentStatus);
+                $('#edit_reject_btn').html(instrumentRejected
+                    ? '<i class="fas fa-undo me-1"></i>Annuler le paiement impayé'
+                    : '<i class="fas fa-times-circle me-1"></i>Marquer impayé');
+                $('#edit_reject_section').toggle(canReject && (method === 'check' || method === 'traite'));
+
                 $('#editPaymentModal').modal('show');
+            });
+
+            $('#edit_reject_btn').click(function() {
+                var docId = $('#edit_doc_id').val();
+                var instrument = $('#edit_reject_instrument').text() || 'Ce paiement';
+
+                Swal.fire({
+                    title: 'Marquer comme impayé ?',
+                    html: '<strong>' + instrument + '</strong> sera marqué impayé (rejeté).' +
+                        '<div class="alert alert-warning mt-3 mb-0 text-start">' +
+                        '<i class="fas fa-exclamation-triangle me-1"></i>' +
+                        'Le paiement sera annulé : les achats concernés redeviennent impayés ' +
+                        'et le montant revient au solde fournisseur.</div>',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Oui, marquer impayé',
+                    cancelButtonText: 'Annuler'
+                }).then(function(result) {
+                    if (!result.isConfirmed) return;
+
+                    var $btn = $('#edit_reject_btn');
+                    var btnLabel = $btn.html();
+                    $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>...');
+
+                    $.ajax({
+                        url: '/raw-material-purchases/payment-documents/' + docId + '/reject',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(res) {
+                            if (res.success) {
+                                $('#editPaymentModal').modal('hide');
+                                Swal.fire('Impayé', res.message, 'success');
+                                table.draw();
+                                refreshDetailsModal();
+                            } else {
+                                showToast('error', res.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            showToast('error', xhr.responseJSON?.message ||
+                                'Erreur lors du rejet du paiement');
+                        },
+                        complete: function() {
+                            $btn.prop('disabled', false).html(btnLabel);
+                        }
+                    });
+                });
             });
 
             // Show/hide check or traite picker when method changes in edit modal

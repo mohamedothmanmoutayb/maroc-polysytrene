@@ -122,6 +122,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/raw-material-purchases/payment-documents/{documentId}/payment-method', [RawMaterialPurchaseController::class, 'updatePaymentDocument'])->name('raw-material-purchases.update-payment-document');
     Route::put('/raw-material-purchases/payment-documents/{documentId}', [RawMaterialPurchaseController::class, 'updatePaymentDocument']);
     Route::delete('/raw-material-purchases/payment-documents/{documentId}', [RawMaterialPurchaseController::class, 'deletePaymentDocument'])->name('raw-material-purchases.delete-payment-document');
+    // Chèque / traite revenu impayé: le paiement est annulé et remis au solde
+    Route::post('/raw-material-purchases/payment-documents/{documentId}/reject', [RawMaterialPurchaseController::class, 'rejectPaymentDocument'])->name('raw-material-purchases.reject-payment-document');
 
     // A distributed payment is edited / deleted as one payment, not per purchase
     Route::get('/raw-material-purchases/payments/{groupId}', [RawMaterialPurchaseController::class, 'getPaymentGroup'])->name('raw-material-purchases.payment-group');

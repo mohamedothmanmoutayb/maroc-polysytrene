@@ -177,7 +177,9 @@ class SupplierSituationController extends Controller
             $query->whereDate('purchase_date', '<=', $request->date_to);
         }
 
-        $purchases = $query->with('paymentDocuments')->orderBy('purchase_date', 'desc')->get();
+        $purchases = $query->with(['paymentDocuments.check', 'paymentDocuments.traite'])
+            ->orderBy('purchase_date', 'desc')
+            ->get();
 
         $methodLabels = [
             'cash'          => 'Espèces',
@@ -197,6 +199,11 @@ class SupplierSituationController extends Controller
                 : null;
 
             $docs = $purchase->paymentDocuments->map(function($doc) use ($methodLabels) {
+                // A chèque / traite payment can be rejected: the instrument comes
+                // back unpaid and the payment has to be undone.
+                $instrument = $doc->instrument;
+                $isRejected = $doc->is_rejected;
+
                 return [
                     'document_id'      => $doc->document_id,
                     'document_number'  => $doc->document_number,
@@ -215,6 +222,14 @@ class SupplierSituationController extends Controller
                     'payment_date'     => $doc->payment_date ? $doc->payment_date->format('d/m/Y') : '—',
                     'payment_date_raw' => $doc->payment_date ? $doc->payment_date->format('Y-m-d') : '',
                     'notes'            => $doc->notes ?? '',
+                    // Chèque / traite behind the payment and where it stands today
+                    'instrument_label'        => $this->instrumentLabel($doc, $instrument),
+                    'instrument_status'       => $instrument ? $instrument->status : null,
+                    'instrument_status_label' => $instrument ? $this->instrumentStatusLabel($doc->payment_method, $instrument->status) : null,
+                    'is_rejected'             => $isRejected,
+                    // A chèque / traite already flagged impayé elsewhere still carries a
+                    // standing payment here, so the reversal stays available.
+                    'can_reject'              => (bool) $instrument,
                 ];
             })->values()->toArray();
 
@@ -245,6 +260,40 @@ class SupplierSituationController extends Controller
             'supplier' => $supplier->display_name,
             'data'     => $data,
         ]);
+    }
+
+    /** "Chèque N° 1234" / "Traite N° TR-2026-0007" behind a payment. */
+    private function instrumentLabel($doc, $instrument): ?string
+    {
+        if (!$instrument) {
+            return null;
+        }
+
+        return $doc->payment_method === 'check'
+            ? 'Chèque N° ' . ($instrument->check_number ?: $instrument->check_id)
+            : 'Traite N° ' . ($instrument->traite_number ?: $instrument->traite_id);
+    }
+
+    /** Where the chèque / traite stands, worded for the supplier side. */
+    private function instrumentStatusLabel(?string $method, ?string $status): string
+    {
+        $labels = $method === 'check'
+            ? [
+                'pending'   => 'En attente',
+                'deposited' => 'Déposé',
+                'cleared'   => 'Encaissé',
+                'allocated' => 'Affecté',
+                'bounced'   => 'Impayé (rejeté)',
+                'cancelled' => 'Annulé',
+            ]
+            : [
+                'pending' => 'En attente',
+                'paid'    => 'Payée',
+                'overdue' => 'En retard',
+                'bounced' => 'Impayée (rejetée)',
+            ];
+
+        return $labels[$status] ?? ucfirst((string) $status);
     }
 
     public function export(Request $request)
