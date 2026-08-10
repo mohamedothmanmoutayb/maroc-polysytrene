@@ -190,12 +190,9 @@ class SupplierSituationController extends Controller
 
         $data = $purchases->map(function($purchase) use ($methodLabels) {
             $rest = $purchase->final_amount - $purchase->total_paid;
-            $deleteBlockReason = null;
-            if ($purchase->actual_delivery_date) {
-                $deleteBlockReason = 'Impossible de supprimer une commande déjà livrée.';
-            } elseif ((float) $purchase->total_paid > 0.005) {
-                $deleteBlockReason = 'Impossible de supprimer une commande avec des paiements effectués.';
-            }
+            $deleteBlockReason = $purchase->actual_delivery_date
+                ? 'Impossible de supprimer une commande déjà livrée.'
+                : null;
 
             $docs = $purchase->paymentDocuments->map(function($doc) use ($methodLabels) {
                 return [
@@ -236,6 +233,7 @@ class SupplierSituationController extends Controller
                 'delete_url'           => route('raw-material-purchases.destroy', $purchase->purchase_id),
                 'can_delete'           => !$deleteBlockReason,
                 'delete_block_reason'  => $deleteBlockReason,
+                'delete_warning'       => $purchase->delete_warning,
                 'payment_documents'    => $docs,
             ];
         });

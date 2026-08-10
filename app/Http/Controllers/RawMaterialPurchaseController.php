@@ -143,16 +143,13 @@ class RawMaterialPurchaseController extends Controller
             $query->whereDate('purchase_date', '<=', $request->date_to);
         }
 
-        $purchases = $query->orderBy('purchase_date', 'asc')->orderBy('purchase_id', 'asc')->get();
+        $purchases = $query->with('paymentDocuments')->orderBy('purchase_date', 'asc')->orderBy('purchase_id', 'asc')->get();
 
         $data = $purchases->map(function ($purchase) {
             $rest = $purchase->final_amount - $purchase->total_paid;
-            $deleteBlockReason = null;
-            if ($purchase->actual_delivery_date) {
-                $deleteBlockReason = 'Impossible de supprimer une commande déjà livrée.';
-            } elseif ((float) $purchase->total_paid > 0.005) {
-                $deleteBlockReason = 'Impossible de supprimer une commande avec des paiements effectués.';
-            }
+            $deleteBlockReason = $purchase->actual_delivery_date
+                ? 'Impossible de supprimer une commande déjà livrée.'
+                : null;
 
             return [
                 'purchase_id'          => $purchase->purchase_id,
@@ -172,6 +169,7 @@ class RawMaterialPurchaseController extends Controller
                 'delete_url'           => route('raw-material-purchases.destroy', $purchase->purchase_id),
                 'can_delete'           => !$deleteBlockReason,
                 'delete_block_reason'  => $deleteBlockReason,
+                'delete_warning'       => $purchase->delete_warning,
             ];
         });
 
@@ -679,6 +677,42 @@ class RawMaterialPurchaseController extends Controller
         }
     }
 
+    /**
+     * Undo every payment applied to a purchase that is being deleted.
+     *
+     * A payment covering this purchase alone is undone like a deleted payment —
+     * the chèque / traite is bounced and the file removed. A payment spread over
+     * several purchases keeps its chèque, traite and file for the purchases that
+     * survive: only the slice of the deleted purchase is released.
+     *
+     * Must run inside a transaction.
+     */
+    private function reversePurchasePayments($docs, Supplier $supplier, $purchaseId): void
+    {
+        $groupIds = $docs->pluck('payment_group_id')->filter()->unique();
+
+        $sharedGroups = $groupIds->isEmpty()
+            ? collect()
+            : PurchasePaymentDocument::whereIn('payment_group_id', $groupIds)
+                ->where('purchase_id', '!=', $purchaseId)
+                ->pluck('payment_group_id')
+                ->unique();
+
+        [$shared, $exclusive] = $docs->partition(
+            fn($doc) => $doc->payment_group_id && $sharedGroups->contains($doc->payment_group_id)
+        );
+
+        if ($exclusive->isNotEmpty()) {
+            $this->reversePaymentGroup($exclusive, $supplier, true);
+            $supplier->refresh();
+        }
+
+        if ($shared->isNotEmpty()) {
+            $this->reversePaymentGroup($shared, $supplier, false);
+            $supplier->refresh();
+        }
+    }
+
     /** Purchases booked into the supplier balance are the only ones a payment may unwind. */
     private function purchaseTracksBalance($supplierId, $purchaseId): bool
     {
@@ -1142,14 +1176,19 @@ class RawMaterialPurchaseController extends Controller
                 ], 400);
             }
 
-            if ($purchase->total_paid > 0) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossible de supprimer une commande avec des paiements effectués.'
-                ], 400);
+            $supplier   = $purchase->supplier;
+            $docs       = $purchase->paymentDocuments()->with('purchase')->orderBy('document_id')->get();
+            $paidCount  = $docs->count();
+            $paidAmount = (float) $docs->sum(fn($doc) => $doc->actual_amount);
+
+            // A paid purchase can still be deleted: every payment it carries is undone
+            // first (chèque / traite released, amount given back to the supplier
+            // balance), then the purchase itself leaves the balance below.
+            if ($supplier && $docs->isNotEmpty()) {
+                $this->reversePurchasePayments($docs, $supplier, $purchase->purchase_id);
             }
 
-            $supplier = $purchase->supplier;
+            $purchase->refresh();
             $remainingAmount = (float) $purchase->final_amount - (float) $purchase->total_paid;
             if ($supplier && abs($remainingAmount) > 0.005 && $this->purchaseTracksBalance($supplier->supplier_id, $purchase->purchase_id)) {
                 $previousBalance = (float) $supplier->balance;
@@ -1168,14 +1207,31 @@ class RawMaterialPurchaseController extends Controller
                 ]);
             }
 
+            // Nothing may point at the purchase once it is gone: hand back whatever a
+            // leftover allocation still holds on its chèque.
+            foreach (CheckAllocation::where('purchase_id', $purchase->purchase_id)->get() as $allocation) {
+                if ($check = $allocation->check) {
+                    $check->remaining_amount += (float) $allocation->allocated_amount;
+                    $check->save();
+                }
+                $allocation->delete();
+            }
+
+            $purchase->paymentDocuments()->delete();
             $purchase->items()->delete();
             $purchase->delete();
 
             DB::commit();
 
+            $message = 'Commande d\'achat supprimée avec succès!';
+            if ($paidCount > 0) {
+                $message .= ' ' . $paidCount . ' paiement(s) de ' . number_format($paidAmount, 2, ',', '.')
+                    . ' DH supprimé(s) et retiré(s) du solde fournisseur.';
+            }
+
             return response()->json([
                 'success' => true,
-                'message' => 'Commande d\'achat supprimée avec succès!'
+                'message' => $message,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();

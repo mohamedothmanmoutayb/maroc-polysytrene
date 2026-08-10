@@ -73,6 +73,23 @@ class RawMaterialPurchase extends Model
         return $this->paymentDocuments()->sum('amount');
     }
 
+    /**
+     * Warning shown before deleting the purchase: a paid purchase takes its
+     * payments down with it and gives their amount back to the supplier balance.
+     */
+    public function getDeleteWarningAttribute()
+    {
+        $documents = $this->paymentDocuments;
+        $paid      = (float) $documents->sum(fn($doc) => $doc->actual_amount);
+
+        if ($documents->isEmpty() || $paid <= 0.005) {
+            return null;
+        }
+
+        return $documents->count() . ' paiement(s) de ' . number_format($paid, 2, ',', '.')
+            . ' DH seront également supprimés et retirés du solde fournisseur.';
+    }
+
     public function getRemainingAmountAttribute()
     {
         $remaining = $this->final_amount - $this->total_paid;

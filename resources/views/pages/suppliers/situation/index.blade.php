@@ -1423,6 +1423,7 @@
                                     data-id="${p.purchase_id}"
                                     data-number="${p.purchase_number}"
                                     data-delete-url="${p.delete_url}"
+                                    data-warning="${p.delete_warning || ''}"
                                     title="Supprimer l'achat">
                                     <i class="fas fa-trash"></i>
                                   </button>`
@@ -2231,10 +2232,13 @@
             $(document).on('click', '.delete-purchase-btn', function() {
                 var purchaseNumber = $(this).data('number');
                 var deleteUrl = $(this).data('delete-url');
+                var warning = $(this).data('warning');
 
                 Swal.fire({
                     title: 'Supprimer cet achat ?',
-                    text: 'Achat ' + purchaseNumber + ' sera supprimé définitivement.',
+                    html: 'Achat <strong>' + purchaseNumber + '</strong> sera supprimé définitivement.' +
+                        (warning ? '<div class="alert alert-warning mt-3 mb-0 text-start">' +
+                            '<i class="fas fa-exclamation-triangle me-1"></i>' + warning + '</div>' : ''),
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
