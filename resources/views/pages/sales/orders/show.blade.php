@@ -186,7 +186,10 @@
                                                 <th>Montant Payé</th>
                                                 <td>
                                                     @php
-                                                        $totalReceived = $order->payments->sum('display_amount');
+                                                        // Règlements revenus impayés: affichés plus bas, jamais comptés
+                                                        $totalReceived = $order->payments
+                                                            ->reject(fn($p) => $p->is_bounced)
+                                                            ->sum('display_amount');
                                                         $excessToBalance = max(0, $totalReceived - $order->paid_amount);
                                                     @endphp
                                                     <span class="text-success"
@@ -385,7 +388,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($order->payments as $payment)
-                                                            <tr>
+                                                            <tr @class(['table-danger' => $payment->is_bounced])>
                                                                 <td>{{ $payment->payment_date->format('d/m/Y') }}</td>
                                                                 <td>
                                                                     @switch($payment->payment_method)
@@ -415,14 +418,33 @@
                                                                     @endswitch
                                                                 </td>
                                                                 <td class="text-end">
-                                                                    {{ number_format($payment->display_amount, 2, ',', '.') }} DH</td>
-                                                                <td>{{ $payment->notes ?? '-' }}</td>
+                                                                    <span @class(['text-decoration-line-through text-muted' => $payment->is_bounced])>
+                                                                        {{ number_format($payment->display_amount, 2, ',', '.') }} DH
+                                                                    </span>
+                                                                    @if ($payment->is_bounced)
+                                                                        <br><span class="badge bg-danger"><i
+                                                                                class="fas fa-ban me-1"></i>Impayé</span>
+                                                                    @endif
+                                                                </td>
                                                                 <td>
-                                                                    <button type="button"
-                                                                        class="btn btn-sm btn-danger delete-payment"
-                                                                        data-payment-id="{{ $payment->payment_id }}">
-                                                                        <i class="fas fa-trash"></i>
-                                                                    </button>
+                                                                    {{ $payment->notes ?? '-' }}
+                                                                    @if ($payment->is_bounced && $payment->bounce_reason)
+                                                                        <div class="small text-danger">
+                                                                            {{ $payment->bounce_reason }}
+                                                                            @if ($payment->bounced_at)
+                                                                                ({{ $payment->bounced_at->format('d/m/Y') }})
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    @unless ($payment->is_bounced)
+                                                                        <button type="button"
+                                                                            class="btn btn-sm btn-danger delete-payment"
+                                                                            data-payment-id="{{ $payment->payment_id }}">
+                                                                            <i class="fas fa-trash"></i>
+                                                                        </button>
+                                                                    @endunless
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -432,7 +454,7 @@
                                                             <td colspan="2" class="text-end"><strong>Total
                                                                     Payé:</strong></td>
                                                             <td class="text-end">
-                                                                <strong>{{ number_format($order->payments->sum('display_amount'), 2, ',', '.') }}
+                                                                <strong>{{ number_format($order->payments->reject(fn($p) => $p->is_bounced)->sum('display_amount'), 2, ',', '.') }}
                                                                     DH</strong>
                                                             </td>
                                                             <td colspan="2"></td>

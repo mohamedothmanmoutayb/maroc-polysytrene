@@ -996,7 +996,15 @@ class SalesOrderController extends Controller
 
     public function show($id)
     {
-        $order = SalesOrder::with(['client', 'creator', 'items', 'payments', 'creditNotes.items'])->findOrFail($id);
+        $order = SalesOrder::with(['client', 'creator', 'items', 'creditNotes.items'])->findOrFail($id);
+
+        // Règlements that came back unpaid are hidden everywhere else; here they are
+        // shown, flagged impayé, so the client's payment history stays readable.
+        $order->setRelation(
+            'payments',
+            $order->payments()->withBounced()->orderBy('payment_id')->get()
+        );
+
         return view('pages.sales.orders.show', compact('order'));
     }
 

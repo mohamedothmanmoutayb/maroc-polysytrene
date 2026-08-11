@@ -329,10 +329,19 @@
                                                         <i
                                                             class="fas {{ $m['icon'] }} {{ $m['color'] }} me-1"></i>{{ $m['label'] }}
                                                     </td>
-                                                    <td class="text-end fw-bold text-success">
+                                                    <td class="text-end fw-bold {{ $payment->is_bounced ? 'text-danger text-decoration-line-through' : 'text-success' }}">
                                                         {{ number_format($payment->amount, 2, ',', '.') }} DH
+                                                        @if ($payment->is_bounced)
+                                                            <br><span class="badge bg-danger"><i
+                                                                    class="fas fa-ban me-1"></i>Impayé</span>
+                                                        @endif
                                                     </td>
-                                                    <td class="text-muted small">{{ $payment->notes ?? '-' }}</td>
+                                                    <td class="text-muted small">
+                                                        {{ $payment->notes ?? '-' }}
+                                                        @if ($payment->is_bounced && $payment->bounce_reason)
+                                                            <div class="text-danger">{{ $payment->bounce_reason }}</div>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @empty
                                                 <tr>

@@ -37,6 +37,7 @@ trait ReversesClientPayments
             'debit_type'     => 'check_debit',
             'credit_note'    => "Annulation du crédit suite au rejet du chèque #{$check->check_number}",
             'excess_note'    => "Annulation de l'excédent suite au rejet du chèque #{$check->check_number}",
+            'payment_note'   => "Chèque #{$check->check_number} revenu impayé",
         ]);
 
         $check->update(['payment_id' => null]);
@@ -59,6 +60,7 @@ trait ReversesClientPayments
             'debit_type'     => 'traite_debit',
             'credit_note'    => "Annulation du crédit suite à suppression/annulation de la traite #{$traite->traite_number}",
             'excess_note'    => "Annulation de l'excédent suite à suppression/annulation de la traite #{$traite->traite_number}",
+            'payment_note'   => "Traite #{$traite->traite_number} revenue impayée",
         ]);
 
         $traite->update([
@@ -118,8 +120,8 @@ trait ReversesClientPayments
     }
 
     /**
-     * The shared body of both reversals: drop the vente payment the instrument
-     * created, put the order back to unpaid and debit the client for it.
+     * The shared body of both reversals: flag the vente règlement the instrument
+     * paid as impayé, put the order back to unpaid and debit the client for it.
      */
     private function reverseClientInstrumentPayment(array $meta): float
     {
@@ -135,11 +137,21 @@ trait ReversesClientPayments
 
         $reversed = 0.0;
         $order    = $meta['order_id'] ? SalesOrder::find($meta['order_id']) : null;
+        $applied  = (float) $payment->amount;
+
+        // The règlement is kept, flagged impayé: the client's payment history has to
+        // show what came back unpaid instead of the line simply disappearing. The
+        // model filters flagged règlements out of every total from here on.
+        $payment->update([
+            'status'        => 'bounced',
+            'bounced_at'    => now(),
+            'bounce_reason' => $meta['payment_note'],
+        ]);
 
         if ($order) {
-            $order->paid_amount -= $payment->amount;
-            $order->save();
-            $order->updatePaymentStatus();
+            // Recomputed from the règlements that still count, so the vente goes back
+            // to impayé / partiel on its own.
+            $order->updatePaidAmount();
 
             $client = Client::find($meta['client_id']);
             if ($client) {
@@ -147,12 +159,12 @@ trait ReversesClientPayments
                 // order, not the full instrument amount — passing the full amount
                 // undercounts the reversal whenever part of it went to this order and
                 // the rest was credited as excess.
-                $client->updateBalanceFromOrder($order, 'payment_deleted', $payment->amount);
-                $reversed += (float) $payment->amount;
+                $client->updateBalanceFromOrder($order, 'payment_deleted', $applied);
+                $reversed += $applied;
 
                 // Anything beyond what was applied to the order was credited straight
                 // to the solde — take that back too.
-                $excess = round($meta['amount'] - (float) $payment->amount, 2);
+                $excess = round($meta['amount'] - $applied, 2);
                 if ($excess > 0.005) {
                     $client->refresh();
                     $previousBalance = (float) $client->balance;
@@ -183,8 +195,6 @@ trait ReversesClientPayments
                 $meta['credit_note']
             );
         }
-
-        $payment->delete();
 
         return $reversed;
     }

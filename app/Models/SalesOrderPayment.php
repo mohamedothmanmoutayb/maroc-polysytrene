@@ -18,6 +18,9 @@ class SalesOrderPayment extends Model
         'client_id',
         'credit_note_id',
         'payment_method',
+        'status',
+        'bounced_at',
+        'bounce_reason',
         'amount',
         'received_amount',
         'payment_date',
@@ -30,7 +33,38 @@ class SalesOrderPayment extends Model
         'amount' => 'decimal:2',
         'received_amount' => 'decimal:2',
         'payment_date' => 'date',
+        'bounced_at' => 'datetime',
     ];
+
+    /**
+     * A règlement whose chèque / traite came back unpaid is kept for the record but
+     * is no longer money: it must not count anywhere. Rather than hunting down every
+     * sum in the app, it is filtered out by default — the few screens that show it as
+     * "impayé" ask for it explicitly with withBounced().
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('valid', function ($query) {
+            $query->where('sales_order_payments.status', 'valid');
+        });
+    }
+
+    /** Include the règlements that came back unpaid (they are hidden by default). */
+    public function scopeWithBounced($query)
+    {
+        return $query->withoutGlobalScope('valid');
+    }
+
+    /** Only the règlements that came back unpaid. */
+    public function scopeOnlyBounced($query)
+    {
+        return $query->withoutGlobalScope('valid')->where('sales_order_payments.status', 'bounced');
+    }
+
+    public function getIsBouncedAttribute()
+    {
+        return $this->status === 'bounced';
+    }
 
     /**
      * Amount actually handed over by the client for this transaction. Falls back to

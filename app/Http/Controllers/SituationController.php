@@ -242,7 +242,9 @@ class SituationController extends Controller
 
         $totalsQuery       = $totalsRow;
         $orders            = $ordersQuery->paginate(20);
-        $standalonePayments = (clone $standaloneQuery)->paginate(20, ['*'], 'pay_page');
+        // The list shows the règlements that came back unpaid, flagged as such; the
+        // total above stays on the règlements that still count.
+        $standalonePayments = (clone $standaloneQuery)->withBounced()->paginate(20, ['*'], 'pay_page');
 
         $mixedPage   = LengthAwarePaginator::resolveCurrentPage('mixed_page');
         $mixedPerPage = 20;
