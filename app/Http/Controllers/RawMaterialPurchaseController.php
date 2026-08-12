@@ -130,6 +130,90 @@ class RawMaterialPurchaseController extends Controller
         return view('pages.raw-material-purchases.index', compact('suppliers', 'materials', 'magazines'));
     }
 
+    /**
+     * Cartes de statistiques de la liste des achats. Reprend exactement les filtres
+     * du tableau (fournisseur, statut, période) pour que les cartes et les lignes
+     * parlent toujours du même ensemble d'achats.
+     */
+    public function getStatistics(Request $request)
+    {
+        $query = DB::table('raw_material_purchases as p')
+            ->join('suppliers as s', 's.supplier_id', '=', 'p.supplier_id')
+            ->whereNull('s.deleted_at');
+
+        if ($request->filled('supplier_id')) {
+            $query->where('p.supplier_id', $request->supplier_id);
+        }
+
+        if ($request->filled('payment_status')) {
+            $query->where('p.payment_status', $request->payment_status);
+        }
+
+        if ($request->filled('date_from')) {
+            $query->whereDate('p.purchase_date', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('p.purchase_date', '<=', $request->date_to);
+        }
+
+        // Agrégé par fournisseur, comme le tableau: sa colonne "Reste" retient le
+        // plus grand du reste calculé sur les achats et du solde dû au fournisseur.
+        // Sommer ligne à ligne donnerait un total qui ne colle pas à la colonne.
+        $perSupplier = $query->select(
+            'p.supplier_id',
+            's.balance',
+            DB::raw('COUNT(*) as purchases_count'),
+            DB::raw('COALESCE(SUM(p.final_amount), 0) as total_amount'),
+            DB::raw('COALESCE(SUM(p.paid_amount), 0) as total_paid'),
+            DB::raw('COALESCE(SUM(p.final_amount - p.paid_amount), 0) as total_rest'),
+            DB::raw("SUM(CASE WHEN p.payment_status = 'pending' THEN 1 ELSE 0 END) as pending_count"),
+            DB::raw("SUM(CASE WHEN p.payment_status = 'partial' THEN 1 ELSE 0 END) as partial_count"),
+            DB::raw("SUM(CASE WHEN p.payment_status = 'paid' THEN 1 ELSE 0 END) as paid_count"),
+            DB::raw('SUM(CASE WHEN p.actual_delivery_date IS NULL THEN 1 ELSE 0 END) as not_delivered_count')
+        )
+            ->groupBy('p.supplier_id', 's.balance')
+            ->get();
+
+        $purchases = $suppliers = $pending = $partial = $paid = $notDelivered = 0;
+        $totalAmount = $totalPaid = $totalRest = $totalDue = 0.0;
+
+        foreach ($perSupplier as $row) {
+            $suppliers++;
+            $purchases    += (int) $row->purchases_count;
+            $pending      += (int) $row->pending_count;
+            $partial      += (int) $row->partial_count;
+            $paid         += (int) $row->paid_count;
+            $notDelivered += (int) $row->not_delivered_count;
+
+            $rest = (float) $row->total_rest;
+            $totalAmount += (float) $row->total_amount;
+            $totalPaid   += (float) $row->total_paid;
+            $totalRest   += max(0, $rest);
+            $totalDue    += max($rest, max(0, (float) $row->balance));
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'purchases'      => $purchases,
+                'suppliers'      => $suppliers,
+                'pending'        => $pending,
+                'partial'        => $partial,
+                'paid'           => $paid,
+                'unpaid'         => $pending + $partial,
+                'not_delivered'  => $notDelivered,
+                'total_amount'   => $totalAmount,
+                'total_paid'     => $totalPaid,
+                // total_due = ce qu'affiche la colonne "Reste"; total_rest = ce qui
+                // reste réellement imputé aux achats, hors solde fournisseur.
+                'total_rest'     => $totalDue,
+                'purchases_rest' => $totalRest,
+                'paid_percent'   => $totalAmount > 0 ? round(($totalPaid / $totalAmount) * 100, 1) : 0,
+            ],
+        ]);
+    }
+
     public function getSupplierPurchasesList(Request $request, $supplierId)
     {
         $supplier = Supplier::findOrFail($supplierId);

@@ -81,6 +81,9 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('raw-materials/list', [SalesOrderController::class, 'getRawMaterialsList'])->name('raw-materials.list');
     Route::get('/raw-materials/{id}/stock-movements', [RawMaterialController::class, 'stockMovements'])
     ->name('raw-materials.stock-movements');
+    // Avant la resource: sinon "raw-materials/statistics" est capturé par show({id}).
+    Route::get('raw-materials/statistics', [RawMaterialController::class, 'getStatistics'])->name('raw-materials.statistics');
+    Route::get('raw-materials/{id}/statistics', [RawMaterialController::class, 'statistics'])->name('raw-materials.material-statistics');
     Route::resource('raw-materials', RawMaterialController::class);
     Route::post('raw-materials/{id}/adjust-stock', [RawMaterialController::class, 'adjustStock'])->name('raw-materials.adjust-stock');
     Route::get('raw-materials-data/autocomplete', [RawMaterialController::class, 'autocomplete'])->name('raw-materials.autocomplete');
@@ -108,10 +111,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/raw-material-purchases/available-traites', [RawMaterialPurchaseController::class, 'getAvailableTraites'])->name('raw-material-purchases.available-traites');
     Route::get('/raw-material-purchases/supplier/{supplierId}/purchases', [RawMaterialPurchaseController::class, 'getSupplierPurchasesList'])->name('raw-material-purchases.supplier-purchases');
     Route::post('/raw-material-purchases/supplier/{supplierId}/distribute-payment', [RawMaterialPurchaseController::class, 'distributeSupplierPayment'])->name('raw-material-purchases.distribute-payment');
+    // Avant la resource: sinon "raw-material-purchases/statistics" est capturé par show({id}).
+    Route::get('/raw-material-purchases/statistics', [RawMaterialPurchaseController::class, 'getStatistics'])->name('raw-material-purchases.statistics');
     Route::resource('raw-material-purchases', RawMaterialPurchaseController::class);
     Route::get('raw-material-purchases/{id}/receipt', [RawMaterialPurchaseController::class, 'showReceiptForm'])->name('raw-material-purchases.receipt');
     Route::post('raw-material-purchases/{id}/receipt', [RawMaterialPurchaseController::class, 'processReceipt'])->name('raw-material-purchases.process-receipt');
-    Route::get('raw-material-purchases/statistics', [RawMaterialPurchaseController::class, 'getStatistics'])->name('raw-material-purchases.statistics');
     Route::get('raw-material-purchases/{id}/pdf', [RawMaterialPurchaseController::class, 'generatePdf'])->name('raw-material-purchases.pdf');
     Route::get('raw-materials/{id}/details', [RawMaterialController::class, 'getDetails'])->name('raw-materials.details');
     Route::get('raw-materials/{id}/stock', [RawMaterialController::class, 'getStockInfo'])->name('raw-materials.stock');
@@ -327,6 +331,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/client/{clientId}/all-orders', [CreditNoteController::class, 'getClientOrders'])->name('client.all-orders');
         Route::put('/{id}/approve', [CreditNoteController::class, 'approve'])->name('approve');
         Route::put('/{id}/reject', [CreditNoteController::class, 'reject'])->name('reject');
+        Route::put('/{id}/cancel', [CreditNoteController::class, 'cancel'])->name('cancel');
         Route::put('/{id}/process', [CreditNoteController::class, 'process'])->name('process');
         Route::get('/{id}/pdf', [CreditNoteController::class, 'generatePdf'])->name('pdf');
         Route::get('/{id}/edit', [CreditNoteController::class, 'edit'])->name('edit');

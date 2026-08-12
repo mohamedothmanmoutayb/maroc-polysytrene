@@ -22,7 +22,7 @@ class CreditNoteController extends Controller
     {
         $this->middleware('can:view_credit_notes')->only(['index', 'show', 'getStatistics', 'getClientOrders', 'getOrderItems', 'getClientInfo', 'generatePdf']);
         $this->middleware('can:create_credit_notes')->only(['create', 'store']);
-        $this->middleware('can:edit_credit_notes')->only(['edit', 'update', 'approve', 'reject', 'process']);
+        $this->middleware('can:edit_credit_notes')->only(['edit', 'update', 'approve', 'reject', 'process', 'cancel']);
         $this->middleware('can:delete_credit_notes')->only(['destroy']);
     }
 
@@ -63,7 +63,7 @@ class CreditNoteController extends Controller
                                     <i class="fas fa-edit me-2"></i>Modifier</a></li>';
                     }
 
-                    if (in_array($creditNote->status, ['draft', 'pending', 'rejected'])) {
+                    if (in_array($creditNote->status, ['draft', 'pending', 'rejected', 'cancelled'])) {
                         $btn .= '<li><hr class="dropdown-divider"></li>';
                         $btn .= '<li><a class="dropdown-item delete-credit-note" href="javascript:void(0)" data-id="'.$creditNote->credit_note_id.'" data-number="'.$creditNote->credit_note_number.'">
                                     <i class="fas fa-trash text-danger me-2"></i>Supprimer</a></li>';
@@ -79,6 +79,13 @@ class CreditNoteController extends Controller
                     if ($creditNote->status === 'approved') {
                         $btn .= '<li><a class="dropdown-item process-credit-note" href="javascript:void(0)" data-id="'.$creditNote->credit_note_id.'" data-number="'.$creditNote->credit_note_number.'">
                                     <i class="fas fa-check-double text-success me-2"></i>Traiter</a></li>';
+                    }
+
+                    // Un avoir approuvé ou déjà traité reste annulable: l'annulation
+                    // remet la vente, le stock et le solde client dans leur état d'avant.
+                    if (in_array($creditNote->status, ['approved', 'processed'])) {
+                        $btn .= '<li><a class="dropdown-item cancel-credit-note" href="javascript:void(0)" data-id="'.$creditNote->credit_note_id.'" data-number="'.$creditNote->credit_note_number.'" data-status="'.$creditNote->status.'" data-disposition="'.$creditNote->disposition.'">
+                                    <i class="fas fa-ban text-danger me-2"></i>Annuler</a></li>';
                     }
 
                     if (in_array($creditNote->status, ['approved', 'processed'])) {
@@ -100,6 +107,7 @@ class CreditNoteController extends Controller
                         'approved' => 'info',
                         'rejected' => 'danger',
                         'processed' => 'success',
+                        'cancelled' => 'dark',
                     ];
                     $labels = [
                         'draft' => 'Brouillon',
@@ -107,6 +115,7 @@ class CreditNoteController extends Controller
                         'approved' => 'Approuvé',
                         'rejected' => 'Rejeté',
                         'processed' => 'Traité',
+                        'cancelled' => 'Annulé',
                     ];
                     $color = $badges[$row->status] ?? 'secondary';
                     $label = $labels[$row->status] ?? $row->status;
@@ -633,7 +642,7 @@ class CreditNoteController extends Controller
     {
         DB::beginTransaction();
         try {
-            $creditNote = CreditNote::findOrFail($id);
+            $creditNote = CreditNote::with(['items', 'client'])->findOrFail($id);
 
             if ($creditNote->status !== 'pending') {
                 return response()->json([
@@ -641,6 +650,11 @@ class CreditNoteController extends Controller
                     'message' => 'Cet avoir ne peut pas être rejeté.'
                 ], 400);
             }
+
+            // Un avoir "crédit" a déjà réglé une vente au moment de sa création:
+            // le rejeter doit reprendre cet argent, sinon la vente reste payée
+            // par un avoir refusé.
+            $undone = $this->rollbackCreditNote($creditNote, 'Rejet');
 
             $creditNote->update([
                 'status' => 'rejected',
@@ -652,16 +666,177 @@ class CreditNoteController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Avoir rejeté!'
+                'message' => 'Avoir rejeté!' . $this->rollbackSummary($undone)
             ]);
 
         } catch (\Exception $e) {
             DB::rollBack();
+            \Log::error('Credit note reject error: ' . $e->getMessage());
+
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Cancel a credit note that is already approved or processed, and undo
+     * everything it moved (vente, stock, solde client).
+     */
+    public function cancel(Request $request, $id)
+    {
+        $request->validate([
+            'cancellation_reason' => 'nullable|string|max:1000',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $creditNote = CreditNote::with(['items', 'client'])->findOrFail($id);
+
+            if (in_array($creditNote->status, ['cancelled', 'rejected'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cet avoir est déjà ' . ($creditNote->status === 'cancelled' ? 'annulé' : 'rejeté') . '.'
+                ], 400);
+            }
+
+            if ($creditNote->status === 'draft') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Un avoir en brouillon n\'a rien impacté: supprimez-le au lieu de l\'annuler.'
+                ], 400);
+            }
+
+            $undone = $this->rollbackCreditNote($creditNote, 'Annulation');
+
+            $creditNote->update([
+                'status' => 'cancelled',
+                'cancelled_by' => Auth::id(),
+                'cancelled_at' => now(),
+                'cancellation_reason' => $request->cancellation_reason,
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Avoir annulé!' . $this->rollbackSummary($undone)
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Credit note cancel error: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'annulation de l\'avoir: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Undo everything an avoir has already moved. Rejet, Annuler and Supprimer all
+     * come through here so an avoir is only ever unwound in one place.
+     *
+     * What has to come back depends on where the avoir got to:
+     *  - disposition "credit": le règlement posé sur la vente à la création, quel que
+     *    soit le statut (il est appliqué avant même l'approbation);
+     *  - statut "processed": le stock remis et le solde client crédité au traitement.
+     *
+     * Must run inside a transaction, and before the status is changed (it reads the
+     * current status to know what was applied). Idempotent: once the applications
+     * sont supprimées et le statut n'est plus "processed", repasser ici ne fait rien.
+     *
+     * @return array<string> ce qui a été défait, pour le message de confirmation
+     */
+    private function rollbackCreditNote(CreditNote $creditNote, $actionLabel = 'Annulation')
+    {
+        $undone = [];
+        $client = $creditNote->client;
+
+        $applications = DB::table('credit_note_order_applications')
+            ->where('credit_note_id', $creditNote->credit_note_id)
+            ->get();
+
+        foreach ($applications as $application) {
+            $targetOrder = SalesOrder::find($application->order_id);
+
+            if (!$targetOrder) {
+                continue;
+            }
+
+            $wasFullyPaid = $targetOrder->payment_status === 'paid';
+
+            $targetOrder->payments()->where('credit_note_id', $creditNote->credit_note_id)->delete();
+            // Recalculé depuis les règlements qui restent: la vente repasse toute
+            // seule en impayé / partiel.
+            $targetOrder->updatePaidAmount();
+
+            // La vente redevient impayée: le crédit qu'elle avait libéré est de
+            // nouveau utilisé par le client.
+            if ($wasFullyPaid && $targetOrder->payment_status !== 'paid' && $client) {
+                $client->useCredit(
+                    $application->amount,
+                    $targetOrder,
+                    "{$actionLabel} Avoir N°{$creditNote->credit_note_number}"
+                );
+            }
+
+            $undone[] = 'Règlement de ' . number_format($application->amount, 2, ',', '.') .
+                ' DH retiré de la vente ' . $targetOrder->order_number;
+        }
+
+        DB::table('credit_note_order_applications')
+            ->where('credit_note_id', $creditNote->credit_note_id)
+            ->delete();
+
+        // Le stock et le solde ne bougent qu'au traitement: avant ça il n'y a
+        // rien à reprendre de ce côté.
+        if ($creditNote->status === 'processed') {
+            foreach ($creditNote->items as $item) {
+                if ($item->item_type !== 'raw_material' && !empty($item->family_id)) {
+                    $this->updateProductStock($item, false);
+                }
+            }
+            $undone[] = 'Quantités retournées retirées du stock';
+
+            // Seules ces deux dispositions créditent le solde au traitement;
+            // "credit" a été réglé sur la vente et est déjà repris ci-dessus.
+            if (in_array($creditNote->disposition, ['refund', 'balance']) && $client) {
+                $previousBalance = (float) $client->balance;
+                $client->balance = $previousBalance - (float) $creditNote->total_amount;
+                $client->save();
+
+                $client->balanceHistory()->create([
+                    'previous_balance' => $previousBalance,
+                    'new_balance' => $client->balance,
+                    'amount' => -$creditNote->total_amount,
+                    'type' => 'credit_note_reversed',
+                    'reference_type' => 'credit_note',
+                    'reference_id' => $creditNote->credit_note_id,
+                    'description' => "{$actionLabel} Avoir N°{$creditNote->credit_note_number}: solde client débité",
+                    'created_by' => Auth::id(),
+                ]);
+
+                $undone[] = 'Solde client débité de ' .
+                    number_format($creditNote->total_amount, 2, ',', '.') . ' DH';
+            }
+        }
+
+        return $undone;
+    }
+
+    /**
+     * Phrase de confirmation détaillant ce que le rollback a repris.
+     */
+    private function rollbackSummary(array $undone)
+    {
+        if (empty($undone)) {
+            return ' Aucun mouvement à reprendre: cet avoir n\'avait encore rien impacté.';
+        }
+
+        return ' ' . implode('. ', $undone) . '.';
     }
 
     /**
@@ -796,46 +971,18 @@ class CreditNoteController extends Controller
     {
         DB::beginTransaction();
         try {
-            $creditNote = CreditNote::findOrFail($id);
+            $creditNote = CreditNote::with(['items', 'client'])->findOrFail($id);
 
-            if (!in_array($creditNote->status, ['draft', 'pending', 'rejected'])) {
+            if (!in_array($creditNote->status, ['draft', 'pending', 'rejected', 'cancelled'])) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Seuls les avoirs en brouillon, en attente ou rejetés peuvent être supprimés.'
+                    'message' => 'Seuls les avoirs en brouillon, en attente, rejetés ou annulés peuvent être supprimés.'
                 ], 400);
             }
 
-            // Disposition "credit" is applied to a sales order at creation time (before
-            // approval), so deleting the credit note must undo that payment/credit usage.
-            if ($creditNote->disposition === 'credit') {
-                $applications = DB::table('credit_note_order_applications')
-                    ->where('credit_note_id', $creditNote->credit_note_id)
-                    ->get();
-
-                foreach ($applications as $application) {
-                    $targetOrder = SalesOrder::find($application->order_id);
-                    if ($targetOrder) {
-                        $wasFullyPaid = $targetOrder->payment_status === 'paid';
-
-                        $targetOrder->payments()->where('credit_note_id', $creditNote->credit_note_id)->delete();
-                        $targetOrder->paid_amount = max(0, $targetOrder->paid_amount - $application->amount);
-                        if ($targetOrder->paid_amount <= 0) {
-                            $targetOrder->payment_status = 'pending';
-                        } elseif ($targetOrder->paid_amount < $targetOrder->final_amount - 0.01) {
-                            $targetOrder->payment_status = 'partial';
-                        } else {
-                            $targetOrder->payment_status = 'paid';
-                        }
-                        $targetOrder->save();
-
-                        if ($wasFullyPaid && $targetOrder->payment_status !== 'paid') {
-                            $creditNote->client->useCredit($application->amount, $targetOrder, "Annulation Avoir N°{$creditNote->credit_note_number}");
-                        }
-                    }
-                }
-
-                DB::table('credit_note_order_applications')->where('credit_note_id', $creditNote->credit_note_id)->delete();
-            }
+            // Un avoir déjà rejeté / annulé a été repris à ce moment-là: le rollback
+            // ne retrouve alors plus rien à défaire.
+            $this->rollbackCreditNote($creditNote, 'Suppression');
 
             $creditNote->items()->delete();
             $creditNote->delete();

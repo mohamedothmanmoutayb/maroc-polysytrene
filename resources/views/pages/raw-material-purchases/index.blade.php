@@ -26,6 +26,123 @@
             </div>
         </div>
 
+        <!-- Statistics Cards -->
+        <div class="row mb-4 achats-stats">
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Total Achats</span>
+                                <h3 class="mb-0" id="statPurchases">0</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-shopping-cart fs-1 text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Fournisseurs</span>
+                                <h3 class="mb-0" id="statSuppliers">0</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-truck fs-1 text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Achats Impayés</span>
+                                <h3 class="mb-0" id="statUnpaid">0</h3>
+                                <small class="text-muted" id="statUnpaidDetail">0 impayé · 0 avance</small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-hourglass-half fs-1 text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Non Livrés</span>
+                                <h3 class="mb-0" id="statNotDelivered">0</h3>
+                                <small class="text-muted">Sans date de réception</small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-dolly fs-1 text-secondary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Amount Cards -->
+        <div class="row mb-4 achats-stats">
+            <div class="col-xl-4 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Montant Total</span>
+                                <h2 class="mb-0" id="statTotalAmount">0,00 DH</h2>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-file-invoice-dollar fs-1 text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Total Payé</span>
+                                <h2 class="mb-0 text-success" id="statTotalPaid">0,00 DH</h2>
+                                <small class="text-muted" id="statPaidPercent">0 % du montant total</small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-money-bill-wave fs-1 text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Reste à Payer</span>
+                                <h2 class="mb-0 text-danger" id="statTotalRest">0,00 DH</h2>
+                                <small class="text-muted" id="statRestDetail"></small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-hand-holding-usd fs-1 text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -252,6 +369,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <style>
+        .achats-stats .fas { font-size: 38px !important; }
         .card-header-custom { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); border-bottom:0; }
         .badge { font-size:.75rem; padding:.35rem .65rem; }
         .table td { vertical-align:middle; }
@@ -270,14 +388,56 @@
     let currentSupplierId = null;
     let currentSupplierBalance = 0;
 
+    // ── Statistics cards ─────────────────────────────────────────────────────
+    // Mêmes filtres que le tableau: les cartes décrivent toujours les achats affichés.
+    function formatDH(amount) {
+        return Number(amount || 0).toLocaleString('fr-FR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + ' DH';
+    }
+
+    function loadStatistics() {
+        $.get("{{ route('raw-material-purchases.statistics') }}", {
+            supplier_id:    $('#filterSupplier').val(),
+            payment_status: $('#filterStatus').val(),
+            date_from:      $('#dateFrom').val(),
+            date_to:        $('#dateTo').val()
+        }, function (res) {
+            if (!res.success) return;
+            var d = res.data;
+
+            $('#statPurchases').text(d.purchases);
+            $('#statSuppliers').text(d.suppliers);
+            $('#statUnpaid').text(d.unpaid);
+            $('#statUnpaidDetail').text(d.pending + ' impayé · ' + d.partial + ' avance');
+            $('#statNotDelivered').text(d.not_delivered);
+            $('#statTotalAmount').text(formatDH(d.total_amount));
+            $('#statTotalPaid').text(formatDH(d.total_paid));
+            $('#statPaidPercent').text(d.paid_percent + ' % du montant total');
+            $('#statTotalRest').text(formatDH(d.total_rest));
+
+            // Comme la colonne "Reste", le total retient le solde fournisseur quand
+            // il dépasse le reste imputé aux achats: on le dit plutôt que de laisser
+            // deux chiffres inexpliqués.
+            $('#statRestDetail').text(
+                Math.abs(d.total_rest - d.purchases_rest) > 0.01
+                    ? 'dont ' + formatDH(d.purchases_rest) + ' sur les achats, le reste au solde fournisseur'
+                    : ''
+            );
+        });
+    }
+
     $(document).ready(function () {
 
         // ── Select2 ──────────────────────────────────────────────────────────
         $('.select2').select2({ language: 'fr', placeholder: 'Sélectionner...', allowClear: true });
 
+        loadStatistics();
+
         // ── Toggle filters ────────────────────────────────────────────────────
         $('#filterBtn').click(function () { $('#filtersSection').slideToggle(); });
-        $('#applyFilters').click(function () { table.ajax.reload(); });
+        $('#applyFilters').click(function () { table.ajax.reload(); loadStatistics(); });
 
         // ── DataTable (grouped by supplier) ───────────────────────────────────
         table = $('#purchasesTable').DataTable({ paging: false, lengthChange: false, 
@@ -495,6 +655,7 @@
                     if (res.success) {
                         $('#supplierPaymentModal').modal('hide');
                         table.ajax.reload();
+                        loadStatistics();
 
                         // Show allocation result
                         $('#allocationMessage').text(res.message);
@@ -552,6 +713,7 @@
                         if (res.success) {
                             Swal.fire('Supprimé', res.message, 'success');
                             table.ajax.reload();
+                            loadStatistics();
                             if (currentSupplierId) {
                                 $('.view-supplier-btn[data-id="' + currentSupplierId + '"]').trigger('click');
                             }

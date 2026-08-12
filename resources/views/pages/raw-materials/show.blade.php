@@ -68,6 +68,10 @@
                             <i class="fas fa-info-circle me-2"></i>Informations Générales
                         </h5>
                         <div>
+                            <a href="{{ route('raw-materials.material-statistics', $material->material_id) }}"
+                                class="btn btn-light btn-sm me-2">
+                                <i class="fas fa-chart-line me-1"></i> Statistiques
+                            </a>
                             @can('edit_raw_materials')
                             <a href="{{ route('raw-materials.edit', $material->material_id) }}"
                                 class="btn btn-light btn-sm">

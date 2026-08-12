@@ -28,12 +28,16 @@ class CreditNote extends Model
         'created_by',
         'approved_by',
         'approved_at',
+        'cancelled_by',
+        'cancelled_at',
+        'cancellation_reason',
     ];
 
     protected $casts = [
         'credit_note_date' => 'date',
         'total_amount' => 'decimal:2',
         'approved_at' => 'datetime',
+        'cancelled_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -66,6 +70,11 @@ class CreditNote extends Model
         return $this->belongsTo(User::class, 'approved_by');
     }
 
+    public function canceller()
+    {
+        return $this->belongsTo(User::class, 'cancelled_by');
+    }
+
     /**
      * ACCESSORS
      */
@@ -77,6 +86,7 @@ class CreditNote extends Model
             'approved' => 'Approuvé',
             'rejected' => 'Rejeté',
             'processed' => 'Traité',
+            'cancelled' => 'Annulé',
         ];
         return $labels[$this->status] ?? $this->status;
     }
@@ -89,6 +99,7 @@ class CreditNote extends Model
             'approved' => 'info',
             'rejected' => 'danger',
             'processed' => 'success',
+            'cancelled' => 'dark',
         ];
         $class = $badges[$this->status] ?? 'secondary';
         return '<span class="badge badge-' . $class . '">' . $this->status_label . '</span>';

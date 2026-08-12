@@ -280,6 +280,38 @@
         </div>
     </div>
 
+    <!-- Cancel Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">Annuler l'avoir</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir annuler l'avoir : <strong id="cancelCreditNoteNumber"></strong> ?</p>
+                    <p>Tout ce que cet avoir a déjà impacté sera repris :</p>
+                    <ul id="cancelRollbackList">
+                        <li>Le règlement posé sur la vente est retiré (la vente redevient impayée)</li>
+                        <li>Les quantités retournées sont retirées du stock</li>
+                        <li>Le solde du client est débité du montant crédité</li>
+                    </ul>
+                    <div class="mb-2">
+                        <label class="form-label small text-muted mb-1">Motif de l'annulation (facultatif)</label>
+                        <textarea class="form-control form-control-sm" id="cancelReason" rows="2"
+                            placeholder="Ex: avoir créé par erreur"></textarea>
+                    </div>
+                    <p class="text-danger mb-0">Un remboursement déjà versé en espèces au client n'est pas repris
+                        automatiquement.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="button" class="btn btn-dark" id="confirmCancelBtn">Annuler l'avoir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast container -->
     <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
 @endsection
@@ -328,6 +360,14 @@
 
         .badge-badge-success {
             background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .badge-badge-dark {
+            background-color: #343a40;
             color: white;
             padding: 5px 10px;
             border-radius: 4px;
@@ -640,6 +680,70 @@
                     error: function(xhr) {
                         showToast('error', xhr.responseJSON?.message ||
                             'Erreur lors du traitement');
+                    }
+                });
+            });
+
+            // Cancel button click
+            $(document).on('click', '.cancel-credit-note', function(e) {
+                e.preventDefault();
+                currentActionId = $(this).data('id');
+                currentActionNumber = $(this).data('number');
+
+                // On n'annonce que ce que cet avoir a réellement impacté: le stock et
+                // le solde ne bougent qu'au traitement, et un avoir "crédit" a payé une
+                // vente au lieu de créditer le solde.
+                var status = $(this).data('status');
+                var disposition = $(this).data('disposition');
+                var lines = [];
+
+                if (disposition === 'credit') {
+                    lines.push('Le règlement posé sur la vente est retiré (la vente redevient impayée)');
+                }
+                if (status === 'processed') {
+                    lines.push('Les quantités retournées sont retirées du stock');
+                    if (disposition !== 'credit') {
+                        lines.push('Le solde du client est débité du montant crédité');
+                    }
+                }
+                if (lines.length === 0) {
+                    lines.push('Cet avoir n\'a encore rien impacté : rien à reprendre');
+                }
+
+                $('#cancelRollbackList').html(lines.map(function(line) {
+                    return '<li>' + line + '</li>';
+                }).join(''));
+
+                $('#cancelCreditNoteNumber').text(currentActionNumber);
+                $('#cancelReason').val('');
+                $('#cancelModal').modal('show');
+            });
+
+            // Confirm cancel
+            $('#confirmCancelBtn').click(function() {
+                if (!currentActionId) return;
+
+                $.ajax({
+                    url: "{{ url('credit-notes') }}/" + currentActionId + "/cancel",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        _method: 'PUT',
+                        cancellation_reason: $('#cancelReason').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#cancelModal').modal('hide');
+                            table.ajax.reload();
+                            loadStatistics();
+                            showToast('success', response.message);
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        showToast('error', xhr.responseJSON?.message ||
+                            'Erreur lors de l\'annulation');
                     }
                 });
             });

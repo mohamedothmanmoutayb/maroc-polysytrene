@@ -40,7 +40,7 @@
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div
-                                    class="alert alert-{{ $creditNote->status === 'processed' ? 'success' : ($creditNote->status === 'rejected' ? 'danger' : ($creditNote->status === 'pending' ? 'warning' : 'info')) }}">
+                                    class="alert alert-{{ $creditNote->status === 'processed' ? 'success' : ($creditNote->status === 'rejected' ? 'danger' : ($creditNote->status === 'pending' ? 'warning' : ($creditNote->status === 'cancelled' ? 'dark' : 'info'))) }}">
                                     <strong>Statut:</strong> {{ $creditNote->status_label }}
                                     @if ($creditNote->status === 'pending')
                                         <span class="float-end">En attente d'approbation</span>
@@ -51,6 +51,18 @@
                                     @elseif($creditNote->status === 'processed')
                                         <span class="float-end">Traité le
                                             {{ $creditNote->updated_at->format('d/m/Y H:i') }}</span>
+                                    @elseif($creditNote->status === 'cancelled')
+                                        <span class="float-end">Annulé le
+                                            {{ $creditNote->cancelled_at ? $creditNote->cancelled_at->format('d/m/Y H:i') : $creditNote->updated_at->format('d/m/Y H:i') }}
+                                            par {{ $creditNote->canceller->name ?? '' }}</span>
+                                    @endif
+                                    @if ($creditNote->status === 'cancelled')
+                                        <div class="mt-2 small">
+                                            Vente, stock et solde client ont été remis dans leur état d'avant l'avoir.
+                                            @if ($creditNote->cancellation_reason)
+                                                <br><strong>Motif:</strong> {{ $creditNote->cancellation_reason }}
+                                            @endif
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -211,6 +223,15 @@
                             @endif
 
                             @if (in_array($creditNote->status, ['approved', 'processed']))
+                                @can('edit_credit_notes')
+                                <button type="button" class="btn btn-dark"
+                                    onclick="cancelCreditNote({{ $creditNote->credit_note_id }})">
+                                    <i class="fas fa-ban me-1"></i> Annuler l'avoir
+                                </button>
+                                @endcan
+                            @endif
+
+                            @if (in_array($creditNote->status, ['approved', 'processed']))
                                 <a href="{{ route('credit-notes.pdf', $creditNote->credit_note_id) }}"
                                     class="btn btn-danger" target="_blank">
                                     <i class="fas fa-file-pdf me-1"></i> PDF
@@ -324,6 +345,44 @@
                     }
                 });
             }
+        }
+
+        function cancelCreditNote(id) {
+            if (!confirm(
+                    'Annuler cet avoir ? Tout ce qu\'il a impacté sera repris : règlement retiré de la vente, stock et solde client remis à l\'état d\'avant.'
+                )) {
+                return;
+            }
+
+            var reason = prompt('Motif de l\'annulation (facultatif) :', '');
+
+            // prompt() renvoie null quand l'utilisateur fait Annuler: on ne poursuit pas.
+            if (reason === null) {
+                return;
+            }
+
+            $.ajax({
+                url: "{{ url('credit-notes') }}/" + id + "/cancel",
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    _method: 'PUT',
+                    cancellation_reason: reason
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showToast('success', response.message);
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        showToast('error', response.message);
+                    }
+                },
+                error: function(xhr) {
+                    showToast('error', xhr.responseJSON?.message || 'Erreur lors de l\'annulation');
+                }
+            });
         }
     </script>
 @endpush

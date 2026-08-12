@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
     <style>
+        .matieres-stats .fas {
+            font-size: 38px !important;
+        }
+
         .stock-low {
             background-color: rgba(255, 193, 7, 0.1) !important;
         }
@@ -43,6 +47,107 @@
                                 </li>
                             </ol>
                         </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4 matieres-stats">
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Total Matières</span>
+                                <h3 class="mb-0" id="statTotal">0</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-boxes fs-1 text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Matières Actives</span>
+                                <h3 class="mb-0" id="statActive">0</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-check-circle fs-1 text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Stock Bas</span>
+                                <h3 class="mb-0" id="statLowStock">0</h3>
+                                <small class="text-muted">Sous le seuil minimum</small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-exclamation-triangle fs-1 text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="text-muted">Rupture de Stock</span>
+                                <h3 class="mb-0" id="statOutOfStock">0</h3>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-ban fs-1 text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Amount Cards -->
+        <div class="row mb-4 matieres-stats">
+            <div class="col-xl-6 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Valeur du Stock</span>
+                                <h2 class="mb-0" id="statStockValue">0,00 DH</h2>
+                                <small class="text-muted">Lots restants à leur prix d'achat</small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-warehouse fs-1 text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Achats du Mois</span>
+                                <h2 class="mb-0" id="statMonthPurchases">0,00 DH</h2>
+                                <small class="text-muted">Matières uniquement, hors charges</small>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-cart-shopping fs-1 text-primary"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -196,7 +301,30 @@
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js"></script>
     <script>
+        function formatDH(amount) {
+            return Number(amount || 0).toLocaleString('fr-FR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' DH';
+        }
+
+        function loadStatistics() {
+            $.get("{{ route('raw-materials.statistics') }}", function(res) {
+                if (!res.success) return;
+                var d = res.data;
+
+                $('#statTotal').text(d.total);
+                $('#statActive').text(d.active);
+                $('#statLowStock').text(d.low_stock);
+                $('#statOutOfStock').text(d.out_of_stock);
+                $('#statStockValue').text(formatDH(d.stock_value));
+                $('#statMonthPurchases').text(formatDH(d.month_purchases));
+            });
+        }
+
         $(document).ready(function() {
+            loadStatistics();
+
             // Initialiser DataTable
             var table = $('#materials-table').DataTable({ paging: false, lengthChange: false, 
                 processing: true,
@@ -417,6 +545,7 @@
                         if (response.success) {
                             $('#deleteModal').modal('hide');
                             table.draw();
+                            loadStatistics();
                             showToast('success', response.message);
                         } else {
                             showToast('error', response.message);
