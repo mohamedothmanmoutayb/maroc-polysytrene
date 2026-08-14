@@ -502,7 +502,7 @@
                             <td class="text-center">${item.quantity_formatted}</td>
                             <td class="text-center">
                                 <input type="number" class="form-control form-control-sm return-qty text-center"
-                                    min="0" max="${item.quantity}" step="0.0001"
+                                    min="0" max="${item.quantity}" step="any"
                                     data-max="${item.quantity}" value="0" disabled>
                             </td>
                             <td class="text-end">${item.unit_price_formatted}</td>

@@ -281,12 +281,12 @@
                     </td>
                     <td>
                         <input type="number" class="form-control item-quantity"
-                            name="items[${itemIndex}][quantity]" min="0.0001" step="0.0001"
+                            name="items[${itemIndex}][quantity]" min="0.0001" step="any"
                             value="${item ? item.quantity : 1}" required ${item ? '' : 'disabled'}>
                     </td>
                     <td>
                         <input type="number" class="form-control item-price"
-                            name="items[${itemIndex}][unit_price]" min="0" step="0.01"
+                            name="items[${itemIndex}][unit_price]" min="0" step="any"
                             value="${item ? item.unit_price : 0}" required ${item ? '' : 'disabled'}>
                     </td>
                     <td class="item-total">${item ? (item.quantity * item.unit_price).toFixed(2) : '0.00'} DH</td>
@@ -545,6 +545,19 @@
                 calculateItemTotal(rowId);
                 updateOrderTotal();
             }
+
+            // Quantité / prix: accepter n'importe quelle valeur décimale, seule condition: positive
+            $(document).on('change', '.item-quantity, .item-price', function() {
+                let raw = $(this).val();
+                if (raw === '') return;
+
+                let val = parseFloat(raw);
+                if (isNaN(val) || val < 0) {
+                    $(this).val('');
+                    $(this).trigger('input');
+                    showToast('warning', 'Veuillez saisir une valeur positive');
+                }
+            });
 
             function calculateItemTotal(rowId) {
                 let quantity = parseFloat($(`#${rowId} .item-quantity`).val()) || 0;

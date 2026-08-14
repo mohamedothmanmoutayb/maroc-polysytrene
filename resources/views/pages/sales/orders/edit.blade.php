@@ -157,13 +157,13 @@
                                                         <td>
                                                             <input type="number" class="form-control item-quantity"
                                                                 name="items[{{ $index }}][quantity]"
-                                                                min="0.0001" step="0.0001"
+                                                                min="0.0001" step="any"
                                                                 value="{{ $item->quantity }}" required>
                                                         </td>
                                                         <td>
                                                             <input type="number" class="form-control item-price"
                                                                 name="items[{{ $index }}][unit_price]"
-                                                                min="0" step="0.01"
+                                                                min="0" step="any"
                                                                 value="{{ $item->unit_price }}" required>
                                                         </td>
                                                         <td class="item-total">{{ number_format($item->total_price, 2, ',', '.') }}
@@ -837,12 +837,12 @@
                         </td>
                         <td>
                             <input type="number" class="form-control item-quantity"
-                                name="items[${index}][quantity]" min="0.0001" step="0.0001"
+                                name="items[${index}][quantity]" min="0.0001" step="any"
                                 value="1" required disabled>
                         </td>
                         <td>
                             <input type="number" class="form-control item-price"
-                                name="items[${index}][unit_price]" min="0" step="0.01"
+                                name="items[${index}][unit_price]" min="0" step="any"
                                 value="0" required disabled>
                         </td>
                         <td class="item-total">0.00 DH</td>
@@ -1737,10 +1737,16 @@
                 showToast('warning', 'Veuillez modifier les articles de la commande');
             };
 
-            $(document).on('change', '.item-quantity', function() {
-                let val = parseFloat($(this).val());
-                if (!isNaN(val)) {
-                    $(this).val(val.toFixed(1));
+            // Quantité / prix: accepter n'importe quelle valeur décimale, seule condition: positive
+            $(document).on('change', '.item-quantity, .item-price', function() {
+                let raw = $(this).val();
+                if (raw === '') return;
+
+                let val = parseFloat(raw);
+                if (isNaN(val) || val < 0) {
+                    $(this).val('');
+                    $(this).trigger('input');
+                    showToast('warning', 'Veuillez saisir une valeur positive');
                 }
             });
 

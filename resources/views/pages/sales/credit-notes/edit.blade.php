@@ -166,16 +166,16 @@
                                                         <td>
                                                             <input type="number" class="form-control return-quantity"
                                                                 min="0" max="{{ $item->quantity }}"
-                                                                step="0.0001" value="{{ $item->quantity }}"
+                                                                step="any" value="{{ $item->quantity }}"
                                                                 data-max="{{ $item->quantity }}">
                                                         </td>
                                                         <td>
                                                             <input type="number" class="form-control unit-price"
-                                                                value="{{ ceil($item->unit_price) }}" step="0.01"
+                                                                value="{{ $item->unit_price }}" step="any"
                                                                 readonly>
                                                         </td>
                                                         <td class="item-total">
-                                                            {{ number_format(ceil($item->unit_price) * $item->quantity, 2, ',', '.') }}
+                                                            {{ number_format($item->unit_price * $item->quantity, 2, ',', '.') }}
                                                             DH</td>
                                                     </tr>
                                                 @endforeach
@@ -449,14 +449,14 @@
                     </td>
                     <td>
                         <input type="number" class="form-control return-quantity"
-                               min="0" max="${item.quantity}" step="0.0001"
+                               min="0" max="${item.quantity}" step="any"
                                value="${returnedQty}" data-max="${item.quantity}">
                     </td>
                     <td>
                         <input type="number" class="form-control unit-price"
-                               value="${Math.ceil(item.unit_price)}" step="0.01" readonly>
+                               value="${item.unit_price}" step="any" readonly>
                     </td>
-                    <td class="item-total">${formatNumber(Math.ceil(item.unit_price) * (returnedQty || 0))} DH</td>
+                    <td class="item-total">${formatNumber(parseFloat(item.unit_price) * (returnedQty || 0))} DH</td>
                 </tr>
             `;
                 });
@@ -472,6 +472,9 @@
                     if (quantity > max) {
                         $(this).val(max);
                         quantity = max;
+                    } else if (quantity < 0) {
+                        $(this).val(0);
+                        quantity = 0;
                     }
 
                     let price = parseFloat(row.find('.unit-price').val()) || 0;

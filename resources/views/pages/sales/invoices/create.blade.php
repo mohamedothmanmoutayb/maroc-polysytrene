@@ -690,12 +690,12 @@
                         </td>
                         <td>
                             <input type="number" class="form-control item-quantity"
-                                name="items[${itemIndex}][quantity]" min="0.0001" step="0.0001"
+                                name="items[${itemIndex}][quantity]" min="0.0001" step="any"
                                 value="${itemData.quantity}" required>
                         </td>
                         <td>
                             <input type="number" class="form-control item-price"
-                                name="items[${itemIndex}][unit_price]" min="0" step="0.01"
+                                name="items[${itemIndex}][unit_price]" min="0" step="any"
                                 value="${itemData.unit_price}" required>
                         </td>
                         <td class="item-total">${(itemData.quantity * itemData.unit_price).toFixed(2)} DH</td>
@@ -786,11 +786,11 @@
                         </td>
                         <td>
                             <input type="number" class="form-control item-quantity"
-                                name="items[${itemIndex}][quantity]" min="0.0001" step="0.0001" value="1" required disabled>
+                                name="items[${itemIndex}][quantity]" min="0.0001" step="any" value="1" required disabled>
                         </td>
                         <td>
                             <input type="number" class="form-control item-price"
-                                name="items[${itemIndex}][unit_price]" min="0" step="0.01" value="0" required disabled>
+                                name="items[${itemIndex}][unit_price]" min="0" step="any" value="0" required disabled>
                         </td>
                         <td class="item-total">0.00 DH</td>
                         <td>
@@ -1151,6 +1151,19 @@
                     loadProductsForType(type, rowId, existingItem);
                 });
             }
+
+            // Quantité / prix: accepter n'importe quelle valeur décimale, seule condition: positive
+            $(document).on('change', '.item-quantity, .item-price', function() {
+                let raw = $(this).val();
+                if (raw === '') return;
+
+                let val = parseFloat(raw);
+                if (isNaN(val) || val < 0) {
+                    $(this).val('');
+                    $(this).trigger('input');
+                    showToast('warning', 'Veuillez saisir une valeur positive');
+                }
+            });
 
             function calculateItemTotal(rowId) {
                 let quantity = parseFloat($(`#${rowId} .item-quantity`).val()) || 0;
