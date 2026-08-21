@@ -383,8 +383,14 @@ class TraiteController extends Controller
             } elseif ($request->status === 'bounced' && $oldStatus !== 'bounced' && $traite->payment_id) {
                 // Traite bounced but had already been counted as a payment - reverse the client's solde
                 $this->reverseTraitePayment($traite);
-            } elseif ($request->status === 'paid' && ($oldAmount != $request->amount || $oldOrderId != $request->order_id || $oldClientId != $clientId)) {
-                // Traite is paid but details changed - update payment
+            } elseif (
+                $traite->payment_id && $oldStatus !== 'bounced' && $request->status !== 'bounced'
+                && ($oldAmount != $request->amount || $oldOrderId != $request->order_id || $oldClientId != $clientId)
+            ) {
+                // Traite already impacted the client's solde since creation (payment_id is
+                // set the moment it's recorded, regardless of pending/paid status) - any
+                // correction to its amount/order/client must keep the solde in sync, not
+                // just while the traite happens to be marked "paid".
                 $this->updateTraitePayment($traite, $oldAmount, $oldOrderId, $oldClientId);
             }
 
@@ -640,6 +646,28 @@ class TraiteController extends Controller
         $payment = SalesOrderPayment::find($traite->payment_id);
         if (!$payment) {
             $this->processTraitePayment($traite);
+            return;
+        }
+
+        // A traite can be split across several orders via the "distribute payment"
+        // flow (gestion clients), which creates one sales_order_payments row per
+        // order but only ever back-fills traites.payment_id with one of them. If
+        // the linked payment's amount doesn't match what this traite was recorded
+        // as before the edit, payment_id is not a faithful 1:1 mirror of this
+        // traite - rewriting that single payment/order would corrupt it. Apply
+        // the amount correction straight to the client's solde instead.
+        if (abs((float) $payment->amount - (float) $oldAmount) > 0.01) {
+            $delta = (float) $traite->amount - (float) $oldAmount;
+            if (abs($delta) > 0.01) {
+                $this->updateClientBalance(
+                    $traite->client_id,
+                    abs($delta),
+                    $delta > 0 ? 'credit' : 'debit',
+                    $traite,
+                    "Correction du montant de la traite #{$traite->traite_number} (répartie sur plusieurs paiements): " .
+                        number_format($oldAmount, 2, ',', '.') . ' DH -> ' . number_format($traite->amount, 2, ',', '.') . ' DH'
+                );
+            }
             return;
         }
 

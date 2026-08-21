@@ -64,12 +64,60 @@ class SupplierBalanceHistory extends Model
 
     public function getAmountFormattedAttribute()
     {
-        $prefix = $this->amount >= 0 ? '+' : '';
-        return $prefix . number_format($this->amount, 2) . ' DH';
+        // Amount is the raw balance delta: positive means what we owe the
+        // supplier went up (bad, shown as a debit "-"), negative means it
+        // went down (good, shown as a credit "+").
+        if ($this->amount > 0) {
+            return '-' . number_format($this->amount, 2) . ' DH';
+        } elseif ($this->amount < 0) {
+            return '+' . number_format(abs($this->amount), 2) . ' DH';
+        }
+        return number_format(0, 2) . ' DH';
     }
 
     public function getAmountClassAttribute()
     {
-        return $this->amount >= 0 ? 'text-success' : 'text-danger';
+        return $this->amount > 0 ? 'text-danger' : 'text-success';
+    }
+
+    public function getPreviousBalanceFormattedAttribute()
+    {
+        return $this->formatBalance($this->previous_balance);
+    }
+
+    public function getNewBalanceFormattedAttribute()
+    {
+        return $this->formatBalance($this->new_balance);
+    }
+
+    public function getPreviousBalanceClassAttribute()
+    {
+        return $this->balanceClass($this->previous_balance);
+    }
+
+    public function getNewBalanceClassAttribute()
+    {
+        return $this->balanceClass($this->new_balance);
+    }
+
+    private function balanceClass($balance)
+    {
+        if ($balance > 0) {
+            return 'text-danger';
+        } elseif ($balance < 0) {
+            return 'text-success';
+        }
+        return 'text-muted';
+    }
+
+    private function formatBalance($balance)
+    {
+        // Same "debt shown as -" convention as amount_formatted.
+        if ($balance > 0) {
+            return '-' . number_format($balance, 2, ',', '.') . ' DH';
+        } elseif ($balance < 0) {
+            return '+' . number_format(abs($balance), 2, ',', '.') . ' DH';
+        }
+        return number_format(0, 2, ',', '.') . ' DH';
     }
 }

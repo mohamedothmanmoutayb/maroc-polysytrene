@@ -326,6 +326,9 @@ class CheckController extends Controller
         DB::beginTransaction();
         try {
             $oldStatus = $check->status;
+            $oldAmount = $check->amount;
+            $oldCheckType = $check->check_type;
+            $oldClientId = $check->client_id;
             $checkImagePath = $check->check_image;
 
             if ($request->hasFile('check_image')) {
@@ -374,6 +377,20 @@ class CheckController extends Controller
                         "Annulation du crédit suite au rejet du chèque #{$check->check_number}"
                     );
                 }
+            } elseif (
+                $check->check_type === 'client' &&
+                $oldCheckType === 'client' &&
+                $oldClientId == $check->client_id &&
+                !in_array($oldStatus, ['bounced', 'cancelled']) &&
+                !in_array($check->status, ['bounced', 'cancelled']) &&
+                abs((float) $oldAmount - (float) $check->amount) > 0.01
+            ) {
+                // Any active (non-bounced/cancelled) client check has already had its
+                // amount credited to the client's solde, whether tied to an order,
+                // recorded directly, or split across several orders (gestion clients
+                // distribution). Correcting the amount here must keep the solde in
+                // sync the same way, not just when it happens to bounce.
+                $this->updateCheckPayment($check, $oldAmount);
             }
 
             DB::commit();
@@ -610,6 +627,53 @@ class CheckController extends Controller
                 'success' => false,
                 'message' => 'Erreur lors de l\'opération: ' . $e->getMessage()
             ], 500);
+        }
+    }
+
+    /**
+     * Keep the client's solde in sync when an already-active client check's
+     * amount is corrected.
+     */
+    private function updateCheckPayment($check, $oldAmount)
+    {
+        $delta = (float) $check->amount - (float) $oldAmount;
+        if (abs($delta) < 0.01) {
+            return;
+        }
+
+        $payment = $check->payment_id ? SalesOrderPayment::find($check->payment_id) : null;
+
+        // A check can be split across several orders via the "distribute payment"
+        // flow (gestion clients), which creates one sales_order_payments row per
+        // order but only ever back-fills checks.payment_id with the last one
+        // written. If there's no linked payment, or its amount doesn't match what
+        // this check was recorded as before the edit, payment_id isn't a faithful
+        // 1:1 mirror of this check - rewriting that single payment/order would
+        // corrupt it. Apply the correction straight to the client's solde instead.
+        if (!$payment || !$payment->order_id || abs((float) $payment->amount - (float) $oldAmount) > 0.01) {
+            $this->updateClientBalance(
+                $check->client_id,
+                abs($delta),
+                $delta > 0 ? 'credit' : 'debit',
+                $check,
+                "Correction du montant du chèque #{$check->check_number}: " .
+                    number_format($oldAmount, 2, ',', '.') . ' DH -> ' . number_format($check->amount, 2, ',', '.') . ' DH'
+            );
+            return;
+        }
+
+        $order = SalesOrder::find($payment->order_id);
+        if (!$order) {
+            return;
+        }
+
+        $oldPaidAmount = $order->paid_amount;
+        $payment->update(['amount' => $check->amount]);
+        $order->updatePaidAmount();
+
+        $client = Client::find($check->client_id);
+        if ($client) {
+            $client->updateBalanceFromOrder($order, 'payment_added', $oldPaidAmount);
         }
     }
 

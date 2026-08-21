@@ -124,7 +124,13 @@ class Supplier extends Model
      */
     public function getBalanceFormattedAttribute()
     {
-        $class = $this->balance >= 0 ? 'text-success' : 'text-danger';
+        if ($this->balance > 0) {
+            $class = 'text-danger';
+        } elseif ($this->balance < 0) {
+            $class = 'text-success';
+        } else {
+            $class = 'text-muted';
+        }
         return '<span class="' . $class . '">' . number_format($this->balance, 2) . ' DH</span>';
     }
 

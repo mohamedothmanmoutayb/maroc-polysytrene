@@ -127,8 +127,10 @@
                                                 <td>{{ $history->description }}</td>
                                                 <td class="{{ $history->amount_class }}">
                                                     {{ $history->amount_formatted }}</td>
-                                                <td>{{ number_format($history->previous_balance, 2, ',', '.') }} DH</td>
-                                                <td>{{ number_format($history->new_balance, 2, ',', '.') }} DH</td>
+                                                <td class="{{ $history->previous_balance_class }}">
+                                                    {{ $history->previous_balance_formatted }}</td>
+                                                <td class="{{ $history->new_balance_class }}">
+                                                    {{ $history->new_balance_formatted }}</td>
                                                 <td>{{ $history->creator->name ?? 'Système' }}</td>
                                             </tr>
                                         @empty
