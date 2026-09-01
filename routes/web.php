@@ -25,6 +25,7 @@ use App\Http\Controllers\ProductConversionController;
 use App\Http\Controllers\ProductionConsumptionController;
 use App\Http\Controllers\ProductionOrderController;
 use App\Http\Controllers\ProductionOutputController;
+use App\Http\Controllers\ProductStockMovementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\QuotationController;
@@ -40,9 +41,10 @@ use App\Http\Controllers\SupplierSituationController;
 use App\Http\Controllers\TraiteController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleDocumentTypeController;
+use App\Models\Product;
+use App\Models\ProductFamilleStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductStockMovementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +82,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/raw-materials/list-for-sale', [RawMaterialController::class, 'getListForSale'])->name('raw-materials.getListForSale');
     // Route::get('raw-materials/list', [SalesOrderController::class, 'getRawMaterialsList'])->name('raw-materials.list');
     Route::get('/raw-materials/{id}/stock-movements', [RawMaterialController::class, 'stockMovements'])
-    ->name('raw-materials.stock-movements');
+        ->name('raw-materials.stock-movements');
     // Avant la resource: sinon "raw-materials/statistics" est capturé par show({id}).
     Route::get('raw-materials/statistics', [RawMaterialController::class, 'getStatistics'])->name('raw-materials.statistics');
     Route::get('raw-materials/{id}/statistics', [RawMaterialController::class, 'statistics'])->name('raw-materials.material-statistics');
@@ -119,7 +121,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('raw-material-purchases/{id}/pdf', [RawMaterialPurchaseController::class, 'generatePdf'])->name('raw-material-purchases.pdf');
     Route::get('raw-materials/{id}/details', [RawMaterialController::class, 'getDetails'])->name('raw-materials.details');
     Route::get('raw-materials/{id}/stock', [RawMaterialController::class, 'getStockInfo'])->name('raw-materials.stock');
-    Route::post('/checks/store', [RawMaterialPurchaseController::class, 'storeCheck'])->name('checks.store');
+    Route::post('/checks/store', [RawMaterialPurchaseController::class, 'storeCheck'])->name('purchase-checks.store');
     Route::post('/purchases/update-payment-status', [RawMaterialPurchaseController::class, 'updatePaymentStatus'])->name('purchases.update-payment-status');
     Route::post('/raw-material-purchases/add-payment', [RawMaterialPurchaseController::class, 'addPayment'])->name('raw-material-purchases.add-payment');
     Route::get('/raw-material-purchases/{id}/details', [RawMaterialPurchaseController::class, 'getPurchaseDetails'])->name('raw-material-purchases.details');
@@ -138,7 +140,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/documents', [EmployeeDocumentController::class, 'index'])->name('index');
         Route::post('/documents/upload', [EmployeeDocumentController::class, 'upload'])->name('upload');
     });
-
 
     Route::prefix('documents')->name('employees.documents.')->group(function () {
         Route::get('/{document}/download', [EmployeeDocumentController::class, 'download'])->name('download');
@@ -161,7 +162,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('products/famille-stock/{id}', [ProductController::class, 'getFamilleStockDetails'])->name('products.famille-stock');
     Route::put('products/{id}/toggle-familles', [ProductController::class, 'toggleFamilles'])->name('products.toggle-familles');
     Route::get('/products/get-familles/{id}', [ProductController::class, 'getFamillesForProduct'])
-    ->name('products.get-familles');
+        ->name('products.get-familles');
     Route::post('/products/add-stock/{id}', [ProductController::class, 'addStock'])
         ->name('products.add-stock');
     Route::post('/products/{id}/update-family-prices', [ProductController::class, 'updateFamilyPrices'])->name('products.update-family-prices');
@@ -169,7 +170,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Product Categories
     Route::resource('product-categories', ProductCategoryController::class)->except(['create', '    show']);
-
 
     Route::get('production-orders/get-bom-materials', [ProductionOrderController::class, 'getBomMaterials'])->name('production-orders.get-bom-materials');
 
@@ -190,7 +190,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/{id}/waste-declaration', [ProductionOrderController::class, 'handleWasteDeclaration'])->name('waste-declaration');
         Route::get('/needing-waste-declaration', [ProductionOrderController::class, 'getOrdersNeedingWasteDeclaration'])->name('needing-waste');
 
-
         // Data routes
         Route::get('/get-bom', [ProductionOrderController::class, 'getBom'])->name('get-bom');
         Route::get('/get-conversions', [ProductionOrderController::class, 'getConversions'])->name('get-conversions');
@@ -201,7 +200,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get-conversion-details', [ProductionOrderController::class, 'getConversionDetails'])->name('get-conversion-details');
         Route::get('/{id}/bom', [ProductionOrderController::class, 'getOrderBom'])->name('bom');
         Route::get('/get-familles', [ProductionOrderController::class, 'getFamilles'])
-         ->name('get-familles');
+            ->name('get-familles');
 
         Route::get('/statistics', [ProductionOrderController::class, 'getStatistics'])->name('statistics');
         Route::get('/employee-report', [ProductionOrderController::class, 'employeeReport'])->name('employee-report');
@@ -219,7 +218,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{id}/cancellation-preview', [ProductionOrderController::class, 'getCancellationPreview'])->name('cancellation-preview');
     });
 
-    //Production Conversions
+    // Production Conversions
     Route::get('products/{id}/conversions', [ProductConversionController::class, 'getConversionInfo']);
     Route::get('product-conversions/statistics', [ProductConversionController::class, 'getStatistics'])->name('product-conversions.statistics');
     Route::resource('product-conversions', ProductConversionController::class);
@@ -230,9 +229,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('production-output/batch', [ProductionOutputController::class, 'batchStore'])->name('production-output.batch-store');
     Route::get('production-output/batch/create', [ProductionOutputController::class, 'batchCreate'])->name('production-output.batch-create');
     Route::get('production-output/type3/{order_id}/create', [ProductionOutputController::class, 'createType3'])
-    ->name('production-output.create-type3');
+        ->name('production-output.create-type3');
     Route::get('/production-output/create-type2/{order_id}', [ProductionOutputController::class, 'createType2'])
-    ->name('production-output.create-type2');
+        ->name('production-output.create-type2');
     Route::get('/production-output/create-type4/{order_id}', [ProductionOutputController::class, 'createType4'])->name('production-output.create-type4');
     Route::post('/production-output/store-type4', [ProductionOutputController::class, 'storeType4'])->name('production-output.store-type4');
     Route::get('production-output/type5/{order_id}/create', [ProductionOutputController::class, 'createType5'])->name('production-output.create-type5');
@@ -242,7 +241,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('production-orders/{id}/output-summary', [ProductionOrderController::class, 'getOutputSummary'])->name('production-orders.output-summary');
     Route::get('production-orders/{order_id}/bom/{material_id}', [ProductionOrderController::class, 'getBomForMaterial'])->name('production-orders.bom-material');
     Route::post('production-orders/{id}/complete-with-consumption', [ProductionOrderController::class, 'completeWithConsumption'])
-    ->name('production-orders.complete-with-consumption');
+        ->name('production-orders.complete-with-consumption');
     Route::get('/production-orders/{id}/edit-order', [ProductionOrderController::class, 'editOrder'])->name('production-orders.edit-order');
     Route::post('/production-orders/{id}/cancel-production', [ProductionOrderController::class, 'cancelProduction'])->name('production-orders.cancel-production');
     Route::get('production-output/order-outputs/{orderId}', [ProductionOutputController::class, 'getOrderOutputs'])->name('production-output.order-outputs');
@@ -315,8 +314,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/situation/statistics', [SupplierSituationController::class, 'getStatistics'])->name('situation.statistics');
     });
 
-
-    Route::prefix('credit-notes')->name('credit-notes.')->group(function() {
+    Route::prefix('credit-notes')->name('credit-notes.')->group(function () {
         Route::get('/', [CreditNoteController::class, 'index'])->name('index');
         Route::get('/create', [CreditNoteController::class, 'create'])->name('create');
         Route::post('/', [CreditNoteController::class, 'store'])->name('store');
@@ -340,7 +338,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{id}', [CreditNoteController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('attendance')->name('attendance.')->group(function() {
+    Route::prefix('attendance')->name('attendance.')->group(function () {
         Route::get('/', [AttendanceController::class, 'monthlyCalendar'])->name('index');
         Route::post('/mark-today', [AttendanceController::class, 'markToday'])->name('mark-today');
         Route::get('/get-by-date', [AttendanceController::class, 'getByDate'])->name('get-by-date');
@@ -530,7 +528,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class)->middleware(['admin']);
     Route::post('/{id}/create-user', [EmployeeController::class, 'createUser'])->name('employees.create-user')->middleware(['admin']);
 
-
     // Expense Routes
     Route::resource('expenses', ExpenseController::class)->middleware(['admin']);
     Route::post('/expenses/approve/{id}', [ExpenseController::class, 'approve'])->name('expenses.approve')->middleware(['admin']);
@@ -540,8 +537,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
-    // Roles
-    Route::prefix('roles')->name('roles.')->group(function () {
+        // Roles
+        Route::prefix('roles')->name('roles.')->group(function () {
             Route::get('/', [RolePermissionController::class, 'rolesIndex'])->name('index');
             Route::get('/create', [RolePermissionController::class, 'rolesCreate'])->name('create');
             Route::post('/', [RolePermissionController::class, 'rolesStore'])->name('store');
@@ -616,7 +613,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{id}/print', [MachineMaintenanceController::class, 'print'])->name('print');
     });
 
-
     // Drivers
     Route::get('/drivers/statistics', [DriverController::class, 'getStatistics'])->name('drivers.statistics');
     Route::get('/drivers/export/excel', [DriverController::class, 'exportExcel'])->name('drivers.export.excel');
@@ -636,7 +632,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('recharge-parts-statistics', [RechargePartController::class, 'getStatistics'])->name('recharge-parts.statistics');
     Route::get('recharge-parts-low-stock', [RechargePartController::class, 'getLowStock'])->name('recharge-parts.low-stock');
     Route::resource('recharge-parts', RechargePartController::class);
-
 
     // Admin Routes with permissions
     Route::middleware(['auth', 'permission:manage_roles'])->prefix('admin')->name('admin.')->group(function () {
@@ -670,42 +665,43 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('api')->name('api.')->group(function () {
-        Route::get('/production-orders/{id}', [ProductionOrderController::class, 'apiShow']);
+        Route::get('/production-orders/{id}', [ProductionOrderController::class, 'apiShow'])->name('production-orders.show');
 
         Route::get('production-orders/{id}/wastes', [ProductionOrderController::class, 'getWastes'])
-        ->name('api.production-orders.wastes');
+            ->name('production-orders.wastes');
 
         Route::get('/products/{id}/production-time', function ($id) {
-            $product = \App\Models\Product::find($id);
+            $product = Product::find($id);
+
             return response()->json([
                 'success' => true,
-                'production_time_days' => $product->production_time_days ?? 7
+                'production_time_days' => $product->production_time_days ?? 7,
             ]);
         })->name('products.production-time');
 
         Route::get('/products/stock', function (Request $request) {
             $id = $request->get('id');
 
-            if (!$id) {
+            if (! $id) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Product ID is required'
+                    'message' => 'Product ID is required',
                 ], 400);
             }
 
-            $product = \App\Models\Product::with(['stock', 'familleStocks.famille'])->find($id);
+            $product = Product::with(['stock', 'familleStocks.famille'])->find($id);
 
-            if (!$product) {
+            if (! $product) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Product not found'
+                    'message' => 'Product not found',
                 ], 404);
             }
 
             $response = [
                 'success' => true,
                 'has_familles' => $product->has_familles,
-                'unit' => $product->unit_of_measure
+                'unit' => $product->unit_of_measure,
             ];
 
             if ($product->has_familles) {
@@ -747,23 +743,23 @@ Route::middleware(['auth'])->group(function () {
         })->name('products.stock');
 
         Route::get('/products/{product}/famille/{famille}/stock', function ($productId, $familleId) {
-            $product = \App\Models\Product::find($productId);
+            $product = Product::find($productId);
 
-            if (!$product) {
+            if (! $product) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Product not found'
+                    'message' => 'Product not found',
                 ], 404);
             }
 
-            $familleStock = \App\Models\ProductFamilleStock::where('product_id', $productId)
+            $familleStock = ProductFamilleStock::where('product_id', $productId)
                 ->where('famille_id', $familleId)
                 ->first();
 
-            if (!$familleStock) {
+            if (! $familleStock) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Famille stock not found'
+                    'message' => 'Famille stock not found',
                 ], 404);
             }
 
@@ -778,19 +774,19 @@ Route::middleware(['auth'])->group(function () {
                     'reserved_quantity' => $familleStock->reserved_quantity,
                     'available_quantity' => $available,
                     'location' => $familleStock->location,
-                ]
+                ],
             ]);
         })->name('products.famille.stock');
 
-        Route::get('/products/{product}/familles', [ProductionOrderController::class, 'getProductFamilles']);
+        Route::get('/products/{product}/familles', [ProductionOrderController::class, 'getProductFamilles'])->name('products.familles');
 
         Route::get('/products/{id}', function ($id) {
-            $product = \App\Models\Product::with('stock')->find($id);
+            $product = Product::with('stock')->find($id);
 
-            if (!$product) {
+            if (! $product) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Product not found'
+                    'message' => 'Product not found',
                 ], 404);
             }
 
@@ -799,7 +795,7 @@ Route::middleware(['auth'])->group(function () {
                 'product' => $product,
                 'stock' => $product->stock,
                 'unit_of_measure' => $product->unit_of_measure,
-                'production_time_days' => $product->production_time_days
+                'production_time_days' => $product->production_time_days,
             ]);
         })->name('products.show');
     });

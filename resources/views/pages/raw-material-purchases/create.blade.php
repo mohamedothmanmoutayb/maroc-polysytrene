@@ -1160,7 +1160,7 @@
                 }
 
                 $.ajax({
-                    url: "{{ route('checks.store') }}",
+                    url: "{{ route('purchase-checks.store') }}",
                     type: "POST",
                     data: formData,
                     processData: false,

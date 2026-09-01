@@ -2,6 +2,10 @@
 
 @section('title', 'Tableau de Bord')
 
+@push('vendor-scripts')
+    <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+@endpush
+
 @push('stylesheets')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
     <style>
@@ -2131,7 +2135,6 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.45.2/apexcharts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     {{-- Script persistant: chargement AJAX du tableau de bord (ne se ré-exécute pas) --}}

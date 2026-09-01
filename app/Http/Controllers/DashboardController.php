@@ -2,33 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\Check;
+use App\Models\Client;
+use App\Models\Expense;
+use App\Models\Machine;
+use App\Models\Product;
+use App\Models\ProductionConsumption;
 use App\Models\ProductionOrder;
 use App\Models\ProductionOutput;
 use App\Models\ProductionWaste;
-use App\Models\ProductionConsumption;
-use App\Models\Product;
 use App\Models\RawMaterial;
-use App\Models\StockMovementDetail;
+use App\Models\RawMaterialPurchase;
 use App\Models\SalesOrder;
 use App\Models\SalesOrderItem;
-use App\Models\Client;
-use App\Models\Expense;
-use App\Models\Payment;
-use App\Models\Check;
-use App\Models\Traite;
-use App\Models\Supplier;
-use App\Models\Employee;
-use App\Models\Attendance;
-use App\Models\Machine;
 use App\Models\SalesOrderPayment;
-use App\Models\PurchasePaymentDocument;
-use App\Models\RawMaterialPurchase;
-use App\Models\ProductStock;
-use App\Models\ProductFamilleStock;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use App\Models\StockMovementDetail;
+use App\Models\Traite;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -40,57 +34,82 @@ class DashboardController extends Controller
         [$periodStart, $periodEnd, $quickFilter, $periodLabel] = $this->resolvePeriod($request);
 
         // ── Client stats ──────────────────────────────────────────────────────
+        $clientTypeCounts = Client::where('is_active', true)
+            ->selectRaw('client_type, COUNT(*) as total')
+            ->groupBy('client_type')
+            ->pluck('total', 'client_type');
+
         $clientTypeStats = collect([
             ['type' => 'client',      'label' => 'Clients',      'color' => '#0d6efd'],
             ['type' => 'commerciale', 'label' => 'Commerciales', 'color' => '#198754'],
             ['type' => 'grossiste',   'label' => 'Grossistes',   'color' => '#ffc107'],
             ['type' => 'special',     'label' => 'Spéciaux',     'color' => '#fd7e14'],
-        ])->map(function ($item) {
-            $item['count'] = Client::where('client_type', $item['type'])->where('is_active', true)->count();
+        ])->map(function ($item) use ($clientTypeCounts) {
+            $item['count'] = (int) ($clientTypeCounts[$item['type']] ?? 0);
+
             return $item;
         });
 
         $totalClients = $clientTypeStats->sum('count');
+        $clientSummary = Client::selectRaw('COUNT(*) as total_count, SUM(CASE WHEN created_at BETWEEN ? AND ? THEN 1 ELSE 0 END) as new_this_month', [
+            now()->startOfMonth(),
+            now()->endOfMonth(),
+        ])->first();
         $clientTypeStats = $clientTypeStats->map(function ($item) use ($totalClients) {
             $item['percentage'] = $totalClients > 0 ? round(($item['count'] / $totalClients) * 100) : 0;
+
             return $item;
         });
 
-        $clientMonthlyGrowth = [];
-        for ($i = 5; $i >= 0; $i--) {
-            $month = now()->subMonths($i);
-            $clientMonthlyGrowth[] = Client::whereYear('created_at', $month->year)
-                ->whereMonth('created_at', $month->month)
-                ->count();
-        }
+        $clientMonths = collect(range(5, 0))->map(fn ($offset) => now()->subMonths($offset));
+        $clientGrowthByMonth = Client::whereBetween('created_at', [
+            $clientMonths->first()->copy()->startOfMonth(),
+            $clientMonths->last()->copy()->endOfMonth(),
+        ])
+            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month_key, COUNT(*) as total")
+            ->groupBy('month_key')
+            ->pluck('total', 'month_key');
+        $clientMonthlyGrowth = $clientMonths
+            ->map(fn ($month) => (int) ($clientGrowthByMonth[$month->format('Y-m')] ?? 0))
+            ->all();
 
         // ── Monthly sales (12 months) ─────────────────────────────────────────
-        $monthlySalesData = [];
-        $monthsLabels = [];
-        for ($i = 0; $i < 12; $i++) {
-            $month = now()->subMonths(11 - $i);
-            $monthsLabels[] = $month->format('M');
-            $monthlySalesData[] = (float) SalesOrder::whereYear('order_date', $month->year)
-                ->whereMonth('order_date', $month->month)
-                ->sum('final_amount');
-        }
+        $chartMonths = collect(range(11, 0))->map(fn ($offset) => now()->subMonths($offset));
+        $chartStart = $chartMonths->first()->copy()->startOfMonth();
+        $chartEnd = $chartMonths->last()->copy()->endOfMonth();
+        $salesByMonth = SalesOrder::whereBetween('order_date', [$chartStart, $chartEnd])
+            ->selectRaw("DATE_FORMAT(order_date, '%Y-%m') as month_key, SUM(final_amount) as total")
+            ->groupBy('month_key')
+            ->pluck('total', 'month_key');
+        $monthsLabels = $chartMonths->map(fn ($month) => $month->format('M'))->all();
+        $monthlySalesData = $chartMonths
+            ->map(fn ($month) => (float) ($salesByMonth[$month->format('Y-m')] ?? 0))
+            ->all();
 
         // ── Monthly expenses (12 months) ──────────────────────────────────────
-        $monthlyExpensesData = [];
-        for ($i = 0; $i < 12; $i++) {
-            $month = now()->subMonths(11 - $i);
-            $monthlyExpensesData[] = (float) Expense::whereYear('expense_date', $month->year)
-                ->whereMonth('expense_date', $month->month)
-                ->sum('amount');
-        }
+        $expensesByMonth = Expense::whereBetween('expense_date', [$chartStart, $chartEnd])
+            ->selectRaw("DATE_FORMAT(expense_date, '%Y-%m') as month_key, SUM(amount) as total")
+            ->groupBy('month_key')
+            ->pluck('total', 'month_key');
+        $monthlyExpensesData = $chartMonths
+            ->map(fn ($month) => (float) ($expensesByMonth[$month->format('Y-m')] ?? 0))
+            ->all();
 
         // ── Payment stats ─────────────────────────────────────────────────────
-        $paymentStatusStats = [
-            'paid'    => ['count' => SalesOrder::where('payment_status', 'paid')->count(),    'amount' => SalesOrder::where('payment_status', 'paid')->sum('final_amount')],
-            'pending' => ['count' => SalesOrder::where('payment_status', 'pending')->count(), 'amount' => SalesOrder::where('payment_status', 'pending')->sum('final_amount')],
-            'partial' => ['count' => SalesOrder::where('payment_status', 'partial')->count(), 'amount' => SalesOrder::where('payment_status', 'partial')->sum('final_amount')],
-            'overdue' => ['count' => SalesOrder::where('payment_status', 'overdue')->count(), 'amount' => SalesOrder::where('payment_status', 'overdue')->sum('final_amount')],
-        ];
+        $paymentStatusAggregates = SalesOrder::selectRaw('payment_status, COUNT(*) as total_count, SUM(final_amount) as total_amount')
+            ->groupBy('payment_status')
+            ->get()
+            ->keyBy('payment_status');
+        $paymentStatusStats = collect(['paid', 'pending', 'partial', 'overdue'])
+            ->mapWithKeys(function ($status) use ($paymentStatusAggregates) {
+                $aggregate = $paymentStatusAggregates->get($status);
+
+                return [$status => [
+                    'count' => (int) ($aggregate->total_count ?? 0),
+                    'amount' => (float) ($aggregate->total_amount ?? 0),
+                ]];
+            })
+            ->all();
 
         $paymentMethods = [
             ['method' => 'cash',          'label' => 'Espèces',  'color' => '#198754'],
@@ -99,27 +118,30 @@ class DashboardController extends Controller
             ['method' => 'credit_card',   'label' => 'Carte',    'color' => '#ffc107'],
         ];
 
-        $paymentMethodStats = collect($paymentMethods)->map(function ($item) {
-            $total = SalesOrderPayment::where('payment_method', $item['method'])->sum('amount');
-            $item['total'] = (float) $total;
+        $paymentTotalsByMethod = SalesOrderPayment::selectRaw('payment_method, SUM(amount) as total')
+            ->groupBy('payment_method')
+            ->pluck('total', 'payment_method');
+        $paymentMethodStats = collect($paymentMethods)->map(function ($item) use ($paymentTotalsByMethod) {
+            $item['total'] = (float) ($paymentTotalsByMethod[$item['method']] ?? 0);
+
             return $item;
         });
 
         $totalPayments = $paymentMethodStats->sum('total');
         $paymentMethodStats = $paymentMethodStats->map(function ($item) use ($totalPayments) {
             $item['percentage'] = $totalPayments > 0 ? round(($item['total'] / $totalPayments) * 100) : 0;
+
             return $item;
         });
 
         // ── Top & low selling products ────────────────────────────────────────
-        $topSellingProducts = $this->getTopSellingProducts();
-        $lowSellingProducts = $this->getLowSellingProducts();
+        [$topSellingProducts, $lowSellingProducts] = $this->getProductSalesRankings();
 
         $topClients = Client::select(
-                'clients.*',
-                DB::raw('SUM(sales_orders.final_amount) as total_purchases'),
-                DB::raw('COUNT(sales_orders.order_id) as orders_count')
-            )
+            'clients.*',
+            DB::raw('SUM(sales_orders.final_amount) as total_purchases'),
+            DB::raw('COUNT(sales_orders.order_id) as orders_count')
+        )
             ->join('sales_orders', 'clients.client_id', '=', 'sales_orders.client_id')
             ->where('clients.is_active', true)
             ->groupBy('clients.client_id')
@@ -127,15 +149,16 @@ class DashboardController extends Controller
             ->limit(5)
             ->get()
             ->map(function ($client) {
-                $client->display_name       = $client->display_name;
-                $client->client_type_label  = $client->client_type_label;
-                $client->person_type_label  = $client->person_type_label;
+                $client->display_name = $client->display_name;
+                $client->client_type_label = $client->client_type_label;
+                $client->person_type_label = $client->person_type_label;
+
                 return $client;
             });
 
         // ── Stock ─────────────────────────────────────────────────────────────
         $lowStockMaterials = $this->getLowStockMaterials();
-        $lowStockProducts  = $this->getLowStockProducts();
+        $lowStockProducts = $this->getLowStockProducts();
 
         $totalMaterialValue = StockMovementDetail::where('remaining_quantity', '>', 0)
             ->sum(DB::raw('remaining_quantity * unit_price'));
@@ -147,20 +170,29 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($order) {
                 $order->status_badge = $this->getProductionStatusBadge($order->status);
+
                 return $order;
             });
 
         // Production output sur la période sélectionnée
-        $periodQtyProduced = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])->sum('quantity_produced');
-        $periodVolumeM3    = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])->sum('total_volume_m3');
-        $periodDefective   = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])->sum('quantity_defective');
-        $productionYield   = $periodQtyProduced > 0
+        $productionPeriodTotals = ProductionOutput::whereBetween('production_date', [$periodStart, $periodEnd])
+            ->selectRaw('COALESCE(SUM(quantity_produced), 0) as quantity_produced, COALESCE(SUM(total_volume_m3), 0) as volume_m3, COALESCE(SUM(quantity_defective), 0) as quantity_defective')
+            ->first();
+        $periodQtyProduced = (float) $productionPeriodTotals->quantity_produced;
+        $periodVolumeM3 = (float) $productionPeriodTotals->volume_m3;
+        $periodDefective = (float) $productionPeriodTotals->quantity_defective;
+        $productionYield = $periodQtyProduced > 0
             ? round((($periodQtyProduced - $periodDefective) / $periodQtyProduced) * 100, 1)
             : 0;
 
+        $productionStatusAggregates = ProductionOrder::selectRaw('status, COUNT(*) as total_count, SUM(quantity_to_produce) as quantity_to_produce')
+            ->groupBy('status')
+            ->get()
+            ->keyBy('status');
+
         // Objective = total quantity to produce across in_progress orders
-        $productionObjective = ProductionOrder::where('status', 'in_progress')->sum('quantity_to_produce');
-        $productionProgress  = $productionObjective > 0
+        $productionObjective = (float) ($productionStatusAggregates->get('in_progress')->quantity_to_produce ?? 0);
+        $productionProgress = $productionObjective > 0
             ? min(100, round(($periodQtyProduced / $productionObjective) * 100))
             : 0;
 
@@ -177,26 +209,30 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($order) {
                 $order->status_badge = $this->getSalesStatusBadge($order->status);
+
                 return $order;
             });
 
-        $pendingSalesOrders = SalesOrder::where('payment_status', 'pending')->count();
+        $pendingSalesOrders = $paymentStatusStats['pending']['count'];
         $overdueSalesOrders = $paymentStatusStats['overdue']['count'];
 
         // ── Finance ───────────────────────────────────────────────────────────
         // Valeurs "aujourd'hui" (référence fixe)
-        $todaySales    = SalesOrder::whereDate('order_date', today())->sum('final_amount');
-        $todayExpenses = Expense::whereDate('expense_date', today())->sum('amount');
+        $todaySales = SalesOrder::whereBetween('order_date', [today()->startOfDay(), today()->endOfDay()])->sum('final_amount');
+        $todayExpenses = Expense::whereBetween('expense_date', [today()->startOfDay(), today()->endOfDay()])->sum('amount');
         // Valeurs de la période sélectionnée
-        $periodSales      = SalesOrder::whereBetween('order_date', [$periodStart, $periodEnd])->sum('final_amount');
-        $periodSalesCount = SalesOrder::whereBetween('order_date', [$periodStart, $periodEnd])->count();
-        $periodExpenses   = Expense::whereBetween('expense_date', [$periodStart, $periodEnd])->sum('amount');
-        $periodProfit     = $periodSales - $periodExpenses;
-        $periodMargin     = $periodSales > 0 ? round(($periodProfit / $periodSales) * 100, 1) : 0;
+        $periodSalesTotals = SalesOrder::whereBetween('order_date', [$periodStart, $periodEnd])
+            ->selectRaw('COALESCE(SUM(final_amount), 0) as total, COUNT(*) as total_count')
+            ->first();
+        $periodSales = (float) $periodSalesTotals->total;
+        $periodSalesCount = (int) $periodSalesTotals->total_count;
+        $periodExpenses = Expense::whereBetween('expense_date', [$periodStart, $periodEnd])->sum('amount');
+        $periodProfit = $periodSales - $periodExpenses;
+        $periodMargin = $periodSales > 0 ? round(($periodProfit / $periodSales) * 100, 1) : 0;
 
         // ── Machines ──────────────────────────────────────────────────────────
         $machinesBreakdown = Machine::where('status', '!=', 'active')->count();
-        $machinesInMaint   = Machine::where('status', 'maintenance')->with('documents')->get();
+        $machinesInMaint = Machine::where('status', 'maintenance')->with('documents')->get();
 
         // ═══════════════════════════════════════════════════════════════════════
         // ÉTAT DE TRÉSORERIE (Cash Flow Statement)
@@ -217,15 +253,14 @@ class DashboardController extends Controller
         // 1. CRÉDIT FOURNISSEUR (Supplier Credit - Amount we owe to suppliers)
         // Get all raw material purchases that are not fully paid
         $creditFournisseur = RawMaterialPurchase::whereBetween('purchase_date', [$periodStart, $periodEnd])
-            ->where(function($query) {
+            ->where(function ($query) {
                 $query->where('payment_status', 'pending')
                     ->orWhere('payment_status', 'partial');
             })
             ->sum(DB::raw('final_amount - paid_amount'));
 
         // 2. CHARGES FIXES (Fixed Expenses - All expenses + salaires employés)
-        $depensesMois = Expense::whereBetween('expense_date', [$periodStart, $periodEnd])
-            ->sum('amount');
+        $depensesMois = $periodExpenses;
 
         // Salaires payés de la période: heures pointées × taux horaire (même formule que la paie)
         $salairesEmployes = (float) Attendance::join('employees', 'employees.employee_id', '=', 'attendances.employee_id')
@@ -300,34 +335,52 @@ class DashboardController extends Controller
         // ═══════════════════════════════════════════════════════════════════════
 
         // 1. CHIFFRE D'AFFAIRES PAR JOUR (mois courant) — pour bascule Mois / Jour
-        $daysInMonth   = now()->daysInMonth;
-        $dailyLabels   = [];
-        $dailySalesData    = [];
+        $daysInMonth = now()->daysInMonth;
+        $dailyLabels = [];
+        $dailySalesData = [];
         $dailyExpensesData = [];
+        $monthStart = now()->startOfMonth();
+        $monthEnd = now()->endOfMonth();
+        $salesByDay = SalesOrder::whereBetween('order_date', [$monthStart, $monthEnd])
+            ->selectRaw('DAY(order_date) as day_number, SUM(final_amount) as total')
+            ->groupBy('day_number')
+            ->pluck('total', 'day_number');
+        $expensesByDay = Expense::whereBetween('expense_date', [$monthStart, $monthEnd])
+            ->selectRaw('DAY(expense_date) as day_number, SUM(amount) as total')
+            ->groupBy('day_number')
+            ->pluck('total', 'day_number');
         for ($d = 1; $d <= $daysInMonth; $d++) {
-            $day = now()->startOfMonth()->addDays($d - 1);
-            $dailyLabels[]        = $day->format('d');
-            $dailySalesData[]     = (float) SalesOrder::whereDate('order_date', $day)->sum('final_amount');
-            $dailyExpensesData[]  = (float) Expense::whereDate('expense_date', $day)->sum('amount');
+            $day = $monthStart->copy()->addDays($d - 1);
+            $dailyLabels[] = $day->format('d');
+            $dailySalesData[] = (float) ($salesByDay[$d] ?? 0);
+            $dailyExpensesData[] = (float) ($expensesByDay[$d] ?? 0);
         }
 
         // 2. RÈGLEMENTS PAR JOUR (7 derniers jours, par mode de paiement)
         $dailyPayments = [];
+        $paymentsStart = now()->subDays(6)->startOfDay();
+        $paymentsEnd = now()->endOfDay();
+        $paymentsByDayAndMethod = SalesOrderPayment::whereBetween('payment_date', [$paymentsStart, $paymentsEnd])
+            ->whereIn('payment_method', ['cash', 'check', 'traite', 'transfer'])
+            ->selectRaw('DATE(payment_date) as payment_day, payment_method, SUM(amount) as total')
+            ->groupBy('payment_day', 'payment_method')
+            ->get()
+            ->groupBy('payment_day');
         for ($i = 6; $i >= 0; $i--) {
-            $day  = now()->subDays($i);
-            $base = SalesOrderPayment::whereDate('payment_date', $day);
-            $cash     = (float) (clone $base)->where('payment_method', 'cash')->sum('amount');
-            $check    = (float) (clone $base)->where('payment_method', 'check')->sum('amount');
-            $traite   = (float) (clone $base)->where('payment_method', 'traite')->sum('amount');
-            $transfer = (float) (clone $base)->where('payment_method', 'transfer')->sum('amount');
+            $day = now()->subDays($i);
+            $dayPayments = $paymentsByDayAndMethod->get($day->toDateString(), collect())->keyBy('payment_method');
+            $cash = (float) ($dayPayments->get('cash')->total ?? 0);
+            $check = (float) ($dayPayments->get('check')->total ?? 0);
+            $traite = (float) ($dayPayments->get('traite')->total ?? 0);
+            $transfer = (float) ($dayPayments->get('transfer')->total ?? 0);
             $dailyPayments[] = [
-                'date'     => $day->format('d/m'),
+                'date' => $day->format('d/m'),
                 'is_today' => $day->isToday(),
-                'cash'     => $cash,
-                'check'    => $check,
-                'traite'   => $traite,
+                'cash' => $cash,
+                'check' => $check,
+                'traite' => $traite,
                 'transfer' => $transfer,
-                'total'    => $cash + $check + $traite + $transfer,
+                'total' => $cash + $check + $traite + $transfer,
             ];
         }
 
@@ -381,10 +434,11 @@ class DashboardController extends Controller
                 SUM(production_output.total_volume_m3) as volume_m3')
             ->get()
             ->map(function ($row) use ($typeLabels) {
-                $produced  = (float) $row->qty_produced;
+                $produced = (float) $row->qty_produced;
                 $defective = (float) $row->qty_defective;
                 $row->label = $typeLabels[$row->production_type] ?? $row->production_type;
                 $row->yield = $produced > 0 ? round((($produced - $defective) / $produced) * 100, 1) : 0;
+
                 return $row;
             });
 
@@ -399,12 +453,12 @@ class DashboardController extends Controller
                 $date = $check->clearing_date ?? $check->deposit_date ?? $check->issue_date;
                 $echeances->push([
                     'instrument' => 'Chèque',
-                    'sens'       => $check->check_type === 'client' ? 'Client' : 'Fournisseur',
-                    'party'      => $check->account_holder ?? $check->bank_name ?? '—',
-                    'reference'  => $check->check_number,
-                    'amount'     => (float) ($check->remaining_amount ?? $check->amount),
-                    'date'       => $date,
-                    'status'     => $check->status,
+                    'sens' => $check->check_type === 'client' ? 'Client' : 'Fournisseur',
+                    'party' => $check->account_holder ?? $check->bank_name ?? '—',
+                    'reference' => $check->check_number,
+                    'amount' => (float) ($check->remaining_amount ?? $check->amount),
+                    'date' => $date,
+                    'status' => $check->status,
                 ]);
             });
 
@@ -416,12 +470,12 @@ class DashboardController extends Controller
             ->each(function ($traite) use ($echeances) {
                 $echeances->push([
                     'instrument' => 'Traite',
-                    'sens'       => 'Client',
-                    'party'      => $traite->client->display_name ?? $traite->drawee ?? '—',
-                    'reference'  => $traite->traite_number,
-                    'amount'     => (float) $traite->amount,
-                    'date'       => $traite->due_date ?? $traite->issue_date,
-                    'status'     => $traite->status,
+                    'sens' => 'Client',
+                    'party' => $traite->client->display_name ?? $traite->drawee ?? '—',
+                    'reference' => $traite->traite_number,
+                    'amount' => (float) $traite->amount,
+                    'date' => $traite->due_date ?? $traite->issue_date,
+                    'status' => $traite->status,
                 ]);
             });
 
@@ -472,36 +526,36 @@ class DashboardController extends Controller
             $isRecovery = $type === 'type5';
 
             return [
-                'type'        => $type,
-                'label'       => $label,
-                'volume'      => $volume,
-                'produced'    => $produced,
+                'type' => $type,
+                'label' => $label,
+                'volume' => $volume,
+                'produced' => $produced,
                 'is_recovery' => $isRecovery,
-                'recovered'   => $isRecovery ? $chuteRevalorisee : 0,
+                'recovered' => $isRecovery ? $chuteRevalorisee : 0,
                 // Volume affiché : chute générée, ou chute rendue aux produits finis pour le type5
-                'value'       => $isRecovery ? $chuteRevalorisee : $volume,
+                'value' => $isRecovery ? $chuteRevalorisee : $volume,
                 // % affiché : taux de chute de l'étape, ou part de matière revalorisée pour le type5
-                'pct'         => $isRecovery
+                'pct' => $isRecovery
                     ? ($chuteMatiereEntree > 0 ? round($chuteRevalorisee / $chuteMatiereEntree * 100, 1) : 0)
                     : ($produced + $volume > 0 ? round($volume / ($produced + $volume) * 100, 1) : 0),
-                'pct_label'   => $isRecovery ? 'de la matière' : "de l'étape",
+                'pct_label' => $isRecovery ? 'de la matière' : "de l'étape",
             ];
         })->values();
 
         $chuteStats = [
-            'matiere_entree'    => round($chuteMatiereEntree, 2),
-            'production'        => round($chuteProduction, 2),
-            'revalorisee'       => round($chuteRevalorisee, 2),
-            'totale'            => round($chuteTotale, 2),
-            'perdue'            => round($chutePerdue, 4),
+            'matiere_entree' => round($chuteMatiereEntree, 2),
+            'production' => round($chuteProduction, 2),
+            'revalorisee' => round($chuteRevalorisee, 2),
+            'totale' => round($chuteTotale, 2),
+            'perdue' => round($chutePerdue, 4),
             // current_stock est un accesseur FIFO (StockMovementDetail) : il faut le modèle,
             // value() ne sélectionne pas material_id et renverrait 0.
-            'stock_dormant'     => (float) (RawMaterial::where('material_code', 'CHUTE-PRODUCTION')->first()?->current_stock ?? 0),
-            'pct_production'    => $chutePct($chuteProduction),
-            'pct_revalorisee'   => $chutePct($chuteRevalorisee),
-            'pct_totale'        => $chutePct($chuteTotale),
-            'pct_perdue'        => $chutePct($chutePerdue),
-            'by_type'           => $chuteByType,
+            'stock_dormant' => (float) (RawMaterial::where('material_code', 'CHUTE-PRODUCTION')->first()?->current_stock ?? 0),
+            'pct_production' => $chutePct($chuteProduction),
+            'pct_revalorisee' => $chutePct($chuteRevalorisee),
+            'pct_totale' => $chutePct($chuteTotale),
+            'pct_perdue' => $chutePct($chutePerdue),
+            'by_type' => $chuteByType,
         ];
 
         // ── Alerts ────────────────────────────────────────────────────────────
@@ -513,44 +567,46 @@ class DashboardController extends Controller
 
         // ── Stats compact ─────────────────────────────────────────────────────
         $stats = [
-            'user'                       => $user,
+            'user' => $user,
             // Clients
-            'total_clients'              => Client::count(),
-            'new_clients_this_month'     => Client::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count(),
-            'active_clients'             => Client::where('is_active', true)->count(),
+            'total_clients' => (int) $clientSummary->total_count,
+            'new_clients_this_month' => (int) $clientSummary->new_this_month,
+            'active_clients' => $totalClients,
             // Production
-            'total_production_orders'    => ProductionOrder::count(),
-            'in_progress_orders'         => ProductionOrder::where('status', 'in_progress')->count(),
-            'completed_production_orders'=> ProductionOrder::where('status', 'completed')->count(),
-            'pending_production_orders'  => ProductionOrder::whereIn('status', ['pending', 'approved'])->count(),
-            'late_production_orders'     => $lateProductionOrders,
-            'period_qty_produced'        => $periodQtyProduced,
-            'period_volume_m3'           => round($periodVolumeM3, 2),
-            'production_objective'       => $productionObjective,
-            'production_progress'        => $productionProgress,
-            'production_yield'           => $productionYield,
+            'total_production_orders' => (int) $productionStatusAggregates->sum('total_count'),
+            'in_progress_orders' => (int) ($productionStatusAggregates->get('in_progress')->total_count ?? 0),
+            'completed_production_orders' => (int) ($productionStatusAggregates->get('completed')->total_count ?? 0),
+            'pending_production_orders' => (int) collect(['pending', 'approved'])->sum(
+                fn ($status) => $productionStatusAggregates->get($status)->total_count ?? 0
+            ),
+            'late_production_orders' => $lateProductionOrders,
+            'period_qty_produced' => $periodQtyProduced,
+            'period_volume_m3' => round($periodVolumeM3, 2),
+            'production_objective' => $productionObjective,
+            'production_progress' => $productionProgress,
+            'production_yield' => $productionYield,
             // Sales
-            'total_sales_orders'         => SalesOrder::count(),
-            'total_sales_amount'         => SalesOrder::sum('final_amount'),
-            'pending_sales_orders'       => $pendingSalesOrders,
-            'overdue_sales_orders'       => $overdueSalesOrders,
+            'total_sales_orders' => (int) $paymentStatusAggregates->sum('total_count'),
+            'total_sales_amount' => (float) $paymentStatusAggregates->sum('total_amount'),
+            'pending_sales_orders' => $pendingSalesOrders,
+            'overdue_sales_orders' => $overdueSalesOrders,
             // Finance
-            'today_sales'                => (float) $todaySales,
-            'today_expenses'             => (float) $todayExpenses,
-            'period_sales'               => (float) $periodSales,
-            'period_sales_count'         => $periodSalesCount,
-            'period_expenses'            => (float) $periodExpenses,
-            'period_profit'              => (float) $periodProfit,
-            'period_margin_pct'          => $periodMargin,
-            'total_expenses'             => Expense::sum('amount'),
+            'today_sales' => (float) $todaySales,
+            'today_expenses' => (float) $todayExpenses,
+            'period_sales' => (float) $periodSales,
+            'period_sales_count' => $periodSalesCount,
+            'period_expenses' => (float) $periodExpenses,
+            'period_profit' => (float) $periodProfit,
+            'period_margin_pct' => $periodMargin,
+            'total_expenses' => Expense::sum('amount'),
             // Payments
             'completed_payments' => SalesOrderPayment::sum('amount'),
             // Machines
-            'machines_breakdown'         => $machinesBreakdown,
+            'machines_breakdown' => $machinesBreakdown,
             // Alerts
-            'total_alerts'               => $totalAlerts,
+            'total_alerts' => $totalAlerts,
             // Material stock value
-            'total_material_value'       => (float) $totalMaterialValue,
+            'total_material_value' => (float) $totalMaterialValue,
         ];
 
         return view('pages.dashboard.index', compact(
@@ -595,26 +651,27 @@ class DashboardController extends Controller
      * Filtres rapides: today, this_week, last_week, this_month, last_month, all_time, custom.
      * Par défaut: aujourd'hui.
      *
-     * @return array{0: \Carbon\Carbon, 1: \Carbon\Carbon, 2: string, 3: string}
+     * @return array{0: Carbon, 1: Carbon, 2: string, 3: string}
      */
     private function resolvePeriod(Request $request)
     {
         $quickFilter = $request->get('quick_filter');
         $isQuick = in_array($quickFilter, ['today', 'this_week', 'last_week', 'this_month', 'last_month', 'all_time'], true);
         $dateFrom = $request->get('date_from');
-        $dateTo   = $request->get('date_to');
+        $dateTo = $request->get('date_to');
 
         // Plage personnalisée si des dates valides sont fournies (sauf si un filtre rapide est cliqué)
-        if (!$isQuick && $dateFrom && $dateTo) {
+        if (! $isQuick && $dateFrom && $dateTo) {
             try {
                 $start = Carbon::parse($dateFrom)->startOfDay();
-                $end   = Carbon::parse($dateTo)->endOfDay();
+                $end = Carbon::parse($dateTo)->endOfDay();
                 if ($start->gt($end)) {
                     [$start, $end] = [$end->copy()->startOfDay(), $start->copy()->endOfDay()];
                 }
                 $label = $start->isSameDay($end)
                     ? $start->translatedFormat('d M Y')
-                    : $start->translatedFormat('d M Y') . ' — ' . $end->translatedFormat('d M Y');
+                    : $start->translatedFormat('d M Y').' — '.$end->translatedFormat('d M Y');
+
                 return [$start, $end, 'custom', $label];
             } catch (\Exception $e) {
                 // Retombe sur le filtre rapide en cas de dates invalides
@@ -716,79 +773,82 @@ class DashboardController extends Controller
         $totalValue = 0;
         $details = [];
 
-        // Products with families (variant stock)
-        // For these, we need to get the price from the pivot table
-        $familyStocks = ProductFamilleStock::with(['product', 'famille'])
-            ->where('current_quantity', '>', 0)
+        // Fetch family stock and its matching pivot price in one query.
+        $familyStocks = DB::table('product_famille_stock as stock')
+            ->join('products as product', 'product.product_id', '=', 'stock.product_id')
+            ->leftJoin('product_famille as pivot', function ($join) {
+                $join->on('pivot.product_id', '=', 'stock.product_id')
+                    ->on('pivot.famille_id', '=', 'stock.famille_id');
+            })
+            ->where('stock.current_quantity', '>', 0)
+            ->select([
+                'stock.product_id',
+                'stock.famille_id',
+                'stock.famille_name',
+                'stock.current_quantity',
+                'product.product_name',
+                'product.product_code',
+                'product.price_client as product_price_client',
+                'pivot.prix_client as family_price_client',
+            ])
             ->get();
 
         foreach ($familyStocks as $familyStock) {
-            if ($familyStock->product) {
-                $quantity = (float) $familyStock->current_quantity;
+            $quantity = (float) $familyStock->current_quantity;
+            $hasFamilyPrice = $familyStock->family_price_client !== null;
+            $unitPrice = (float) ($familyStock->family_price_client ?? $familyStock->product_price_client ?? 0);
+            $productValue = $quantity * $unitPrice;
+            $totalValue += $productValue;
 
-                // Get the price from the pivot table for this specific famille
-                $unitPrice = 0;
-                $priceType = 'prix_client'; // Default to client price
-
-                // Find the pivot relationship for this product and famille
-                // Specify the table name to avoid ambiguity
-                $pivot = $familyStock->product->familles()
-                    ->where('product_famille.famille_id', $familyStock->famille_id)
-                    ->first();
-
-                if ($pivot) {
-                    // Get price from pivot table
-                    $unitPrice = (float) ($pivot->pivot->prix_client ?? 0);
-                    $priceType = 'prix_client';
-                } else {
-                    // Fallback to product price if no pivot found
-                    $unitPrice = (float) ($familyStock->product->price_client ?? 0);
-                    $priceType = 'product_price_client';
-                }
-
-                $productValue = $quantity * $unitPrice;
-                $totalValue += $productValue;
-
-                $details[] = [
-                    'product_id' => $familyStock->product->product_id,
-                    'product_name' => $familyStock->product->product_name,
-                    'product_code' => $familyStock->product->product_code,
-                    'famille_id' => $familyStock->famille_id,
-                    'famille_name' => $familyStock->famille_name,
-                    'quantity' => $quantity,
-                    'unit_price' => $unitPrice,
-                    'price_type' => $priceType,
-                    'total_value' => $productValue,
-                    'type' => 'family_stock',
-                ];
-            }
+            $details[] = [
+                'product_id' => $familyStock->product_id,
+                'product_name' => $familyStock->product_name,
+                'product_code' => $familyStock->product_code,
+                'famille_id' => $familyStock->famille_id,
+                'famille_name' => $familyStock->famille_name,
+                'quantity' => $quantity,
+                'unit_price' => $unitPrice,
+                'price_type' => $hasFamilyPrice ? 'prix_client' : 'product_price_client',
+                'total_value' => $productValue,
+                'type' => 'family_stock',
+            ];
         }
 
-        // Products without families (simple stock)
-        // Use product.price_client directly
-        $productStocks = ProductStock::with('product')
-            ->where('current_quantity', '>', 0)
+        // Exclude products that have family variants without issuing one exists query per row.
+        $productStocks = DB::table('product_stock as stock')
+            ->join('products as product', 'product.product_id', '=', 'stock.product_id')
+            ->where('stock.current_quantity', '>', 0)
+            ->whereNotExists(function ($query) {
+                $query->selectRaw('1')
+                    ->from('product_famille')
+                    ->whereColumn('product_famille.product_id', 'stock.product_id');
+            })
+            ->select([
+                'stock.product_id',
+                'stock.current_quantity',
+                'product.product_name',
+                'product.product_code',
+                'product.price_client',
+            ])
             ->get();
 
         foreach ($productStocks as $productStock) {
-            if ($productStock->product && !$productStock->product->familles()->exists()) {
-                $quantity = (float) $productStock->current_quantity;
-                $unitPrice = (float) ($productStock->product->price_client ?? 0);
-                $productValue = $quantity * $unitPrice;
-                $totalValue += $productValue;
+            $quantity = (float) $productStock->current_quantity;
+            $unitPrice = (float) ($productStock->price_client ?? 0);
+            $productValue = $quantity * $unitPrice;
+            $totalValue += $productValue;
 
-                $details[] = [
-                    'product_id' => $productStock->product->product_id,
-                    'product_name' => $productStock->product->product_name,
-                    'product_code' => $productStock->product->product_code,
-                    'famille_name' => null,
-                    'quantity' => $quantity,
-                    'unit_price' => $unitPrice,
-                    'price_type' => 'product_price_client',
-                    'total_value' => $productValue,
-                    'type' => 'simple_stock',
-                ];
-            }
+            $details[] = [
+                'product_id' => $productStock->product_id,
+                'product_name' => $productStock->product_name,
+                'product_code' => $productStock->product_code,
+                'famille_name' => null,
+                'quantity' => $quantity,
+                'unit_price' => $unitPrice,
+                'price_type' => 'product_price_client',
+                'total_value' => $productValue,
+                'type' => 'simple_stock',
+            ];
         }
 
         return [
@@ -802,58 +862,81 @@ class DashboardController extends Controller
      */
     private function getCoverageRateClass($rate)
     {
-        if ($rate >= 70) return 'success';
-        if ($rate >= 50) return 'warning';
-        if ($rate >= 30) return 'info';
+        if ($rate >= 70) {
+            return 'success';
+        }
+        if ($rate >= 50) {
+            return 'warning';
+        }
+        if ($rate >= 30) {
+            return 'info';
+        }
+
         return 'danger';
     }
 
     private function getLowStockProducts()
     {
-        $products = Product::with(['familleStocks', 'stock'])->active()->get();
-        $lowStockProducts = collect();
+        $familyProducts = DB::table('product_famille_stock as stock')
+            ->join('products as product', 'product.product_id', '=', 'stock.product_id')
+            ->where('product.is_active', true)
+            ->whereColumn('stock.available_quantity', '<=', 'product.min_stock_level')
+            ->select([
+                'product.product_id',
+                'product.product_name',
+                'product.product_code',
+                'product.min_stock_level',
+                'stock.current_quantity as current_stock',
+                'stock.available_quantity as available_stock',
+                'stock.famille_name',
+                'stock.famille_id',
+            ])
+            ->get();
 
-        foreach ($products as $product) {
-            if ($product->familleStocks()->exists()) {
-                foreach ($product->familleStocks as $familleStock) {
-                    if ($familleStock->available_quantity <= $product->min_stock_level) {
-                        $copy = clone $product;
-                        $copy->current_stock   = $familleStock->current_quantity;
-                        $copy->available_stock = $familleStock->available_quantity;
-                        $copy->famille_name    = $familleStock->famille_name;
-                        $copy->famille_id      = $familleStock->famille_id;
-                        $lowStockProducts->push($copy);
-                    }
-                }
-            } else {
-                if ($product->stock && $product->stock->available_quantity <= $product->min_stock_level) {
-                    $product->current_stock   = $product->stock->current_quantity;
-                    $product->available_stock = $product->stock->available_quantity;
-                    $lowStockProducts->push($product);
-                }
-            }
-        }
+        $simpleProducts = DB::table('product_stock as stock')
+            ->join('products as product', 'product.product_id', '=', 'stock.product_id')
+            ->where('product.is_active', true)
+            ->whereColumn('stock.available_quantity', '<=', 'product.min_stock_level')
+            ->whereNotExists(function ($query) {
+                $query->selectRaw('1')
+                    ->from('product_famille')
+                    ->whereColumn('product_famille.product_id', 'stock.product_id');
+            })
+            ->select([
+                'product.product_id',
+                'product.product_name',
+                'product.product_code',
+                'product.min_stock_level',
+                'stock.current_quantity as current_stock',
+                'stock.available_quantity as available_stock',
+            ])
+            ->get();
 
-        return $lowStockProducts->sortBy('available_stock')->take(5);
+        return $familyProducts->concat($simpleProducts)->sortBy('available_stock')->take(5)->values();
     }
 
     private function getLowStockMaterials()
     {
-        $materials = RawMaterial::where('is_active', true)->get();
-        $lowStockMaterials = collect();
+        $stockTotals = DB::table('stock_movement_details')
+            ->selectRaw('material_id, SUM(remaining_quantity) as current_stock')
+            ->groupBy('material_id');
 
-        foreach ($materials as $material) {
-            $currentStock = StockMovementDetail::where('material_id', $material->material_id)
-                ->sum('remaining_quantity');
-            if ($currentStock <= $material->min_stock_level) {
-                $material->current_stock = $currentStock;
-                $lowStockMaterials->push($material);
-            }
-        }
-
-        return $lowStockMaterials->sortBy('current_stock')->take(5);
+        return DB::table('raw_materials as material')
+            ->leftJoinSub($stockTotals, 'stock', 'stock.material_id', '=', 'material.material_id')
+            ->where('material.is_active', true)
+            ->whereRaw('COALESCE(stock.current_stock, 0) <= material.min_stock_level')
+            ->orderByRaw('COALESCE(stock.current_stock, 0)')
+            ->limit(5)
+            ->select([
+                'material.material_id',
+                'material.material_name',
+                'material.material_code',
+                'material.unit_of_measure',
+                'material.min_stock_level',
+                DB::raw('COALESCE(stock.current_stock, 0) as current_stock'),
+            ])
+            ->get();
     }
-
 
     private function getProductSalesStats()
     {
@@ -868,63 +951,46 @@ class DashboardController extends Controller
             ->get();
     }
 
-    private function getTopSellingProducts($limit = 5)
+    private function getProductSalesRankings($limit = 5)
     {
         $stats = $this->getProductSalesStats();
 
         if ($stats->isEmpty()) {
-            return collect();
+            return [collect(), collect()];
         }
 
         $topProducts = $stats->sortByDesc('total_revenue')->take($limit);
-
-        // Enrich with product codes
-        $productIds = $stats->pluck('item_id')->unique()->toArray();
-        $products = Product::whereIn('product_id', $productIds)->get()->keyBy('product_id');
-
-        return $topProducts->map(function($item) use ($products) {
-            $product = $products->get($item->item_id);
-            $item->product_id = $item->item_id;
-            $item->product_name = $item->item_name;
-            $item->product_code = $product ? $product->product_code : $item->item_name;
-            return $item;
-        });
-    }
-
-    private function getLowSellingProducts($limit = 5)
-    {
-        $stats = $this->getProductSalesStats();
-
-        if ($stats->isEmpty()) {
-            return collect();
-        }
-
         $lowProducts = $stats->sortBy('total_revenue')->take($limit);
 
         // Enrich with product codes
         $productIds = $stats->pluck('item_id')->unique()->toArray();
         $products = Product::whereIn('product_id', $productIds)->get()->keyBy('product_id');
 
-        return $lowProducts->map(function($item) use ($products) {
+        $enrich = function ($item) use ($products) {
             $product = $products->get($item->item_id);
             $item->product_id = $item->item_id;
             $item->product_name = $item->item_name;
             $item->product_code = $product ? $product->product_code : $item->item_name;
+
             return $item;
-        });
+        };
+
+        return [$topProducts->map($enrich), $lowProducts->map($enrich)];
     }
 
     private function getProductionStatusBadge($status)
     {
         $badges = ['draft' => 'secondary', 'pending' => 'warning', 'approved' => 'info', 'in_progress' => 'primary', 'completed' => 'success', 'cancelled' => 'danger'];
         $labels = ['draft' => 'Brouillon', 'pending' => 'En attente', 'approved' => 'Approuvé', 'in_progress' => 'En cours', 'completed' => 'Terminé', 'cancelled' => 'Annulé'];
-        return '<span class="badge bg-' . ($badges[$status] ?? 'secondary') . '">' . ($labels[$status] ?? $status) . '</span>';
+
+        return '<span class="badge bg-'.($badges[$status] ?? 'secondary').'">'.($labels[$status] ?? $status).'</span>';
     }
 
     private function getSalesStatusBadge($status)
     {
         $badges = ['draft' => 'secondary', 'pending' => 'warning', 'confirmed' => 'info', 'processing' => 'primary', 'completed' => 'success', 'cancelled' => 'danger'];
         $labels = ['draft' => 'Brouillon', 'pending' => 'En attente', 'confirmed' => 'Confirmé', 'processing' => 'En traitement', 'completed' => 'Payé', 'cancelled' => 'Annulé'];
-        return '<span class="badge bg-' . ($badges[$status] ?? 'secondary') . '">' . ($labels[$status] ?? $status) . '</span>';
+
+        return '<span class="badge bg-'.($badges[$status] ?? 'secondary').'">'.($labels[$status] ?? $status).'</span>';
     }
 }

@@ -1234,6 +1234,10 @@
     </div>
 @endsection
 
+@push('vendor-scripts')
+    <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+@endpush
+
 @push('scripts')
     <script>
         $(document).ready(function() {
