@@ -111,7 +111,8 @@
                                             <thead>
                                                 <tr>
                                                     <th width="5%">#</th>
-                                                    <th width="45%">Article</th>
+                                                    <th width="30%">Article</th>
+                                                    <th width="15%">Unité</th>
                                                     <th width="10%">Quantité</th>
                                                     <th width="15%">Prix Unitaire (DH)</th>
                                                     <th width="15%">Total (DH)</th>
@@ -123,14 +124,14 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4" class="text-end"><strong>Sous-total:</strong></td>
+                                                    <td colspan="5" class="text-end"><strong>Sous-total:</strong></td>
                                                     <td><strong
                                                             id="subtotal">{{ number_format($quotation->total_amount, 2, ',', '.') }}
                                                             DH</strong></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="4" class="text-end"><strong>Remise:</strong></td>
+                                                    <td colspan="5" class="text-end"><strong>Remise:</strong></td>
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number"
@@ -143,7 +144,7 @@
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="4" class="text-end"><strong>Total TTC:</strong></td>
+                                                    <td colspan="5" class="text-end"><strong>Total TTC:</strong></td>
                                                     <td><strong
                                                             id="order-total">{{ number_format($quotation->final_amount, 2, ',', '.') }}
                                                             DH</strong></td>
@@ -224,6 +225,7 @@
 
             let itemCounter = 0;
             let existingItems = @json($quotation->items);
+            const units = @json($units);
 
             // Load existing items
             if (existingItems && existingItems.length > 0) {
@@ -249,6 +251,9 @@
             function addItemRow(item = null) {
                 let rowId = 'item_' + Date.now() + '_' + itemCounter;
                 let itemIndex = itemCounter;
+                let unitOptions = units.map(function(unit) {
+                    return $('<option>').val(unit).text(unit)[0].outerHTML;
+                }).join('');
 
                 let row = `
                 <tr id="${rowId}" data-index="${itemIndex}">
@@ -260,6 +265,11 @@
                         <input type="hidden" class="item-type-input" name="items[${itemIndex}][type]" value="finale">
                         <input type="hidden" class="family-id" name="items[${itemIndex}][family_id]">
                         <input type="hidden" class="family-name" name="items[${itemIndex}][family_name]">
+                    </td>
+                    <td>
+                        <select class="form-control item-unit" name="items[${itemIndex}][unit]" required>
+                            ${unitOptions}
+                        </select>
                     </td>
                     <td>
                         <input type="number" class="form-control item-quantity"
@@ -285,6 +295,7 @@
                 if (item) {
                     $(`#${rowId} .item-name`).val(item.item_name || '');
                 }
+                $(`#${rowId} .item-unit`).val(item && item.unit_of_measure ? item.unit_of_measure : 'piece');
 
                 $(`#${rowId} .item-select`).select2({
                     language: "fr",
@@ -557,6 +568,7 @@
                     $(this).find('.item-id').attr('name', `items[${index}][item_id]`);
                     $(this).find('.item-name').attr('name', `items[${index}][name]`);
                     $(this).find('.item-type-input').attr('name', `items[${index}][type]`);
+                    $(this).find('.item-unit').attr('name', `items[${index}][unit]`);
                     $(this).find('.item-quantity').attr('name', `items[${index}][quantity]`);
                     $(this).find('.item-price').attr('name', `items[${index}][unit_price]`);
                     $(this).find('.family-id').attr('name', `items[${index}][family_id]`);

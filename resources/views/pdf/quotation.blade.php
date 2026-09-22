@@ -308,6 +308,8 @@
                                 }
                             }
 
+                            $productUnit = $item->unit_of_measure ?: $productUnit;
+
                             // Round up unit price to nearest integer
                             $roundedUnitPrice = ceil($item->unit_price);
                             // Calculate rounded total price

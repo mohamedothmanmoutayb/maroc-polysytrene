@@ -163,6 +163,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Article</th>
+                                        <th>Unité</th>
                                         <th>Famille</th>
                                         <th class="text-center">Quantité</th>
                                         <th class="text-right">Prix Unitaire (DH)</th>
@@ -174,6 +175,7 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $item->item_name }}</td>
+                                            <td>{{ $item->unit_of_measure }}</td>
                                             <td>{{ $item->family_name ?? '-' }}</td>
                                             <td class="text-center">{{ number_format($item->quantity, 2, ',', '.') }}</td>
                                             <td class="text-right">{{ number_format($item->unit_price, 2, ',', '.') }}</td>
@@ -183,17 +185,17 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="5" class="text-end">Sous-total:</th>
+                                        <th colspan="6" class="text-end">Sous-total:</th>
                                         <th class="text-right">{{ number_format($quotation->total_amount, 2, ',', '.') }} DH</th>
                                     </tr>
                                     @if ($quotation->discount > 0)
                                         <tr>
-                                            <th colspan="5" class="text-end">Remise:</th>
+                                            <th colspan="6" class="text-end">Remise:</th>
                                             <th class="text-right">- {{ number_format($quotation->discount, 2, ',', '.') }} DH</th>
                                         </tr>
                                     @endif
                                     <tr>
-                                        <th colspan="5" class="text-end">Total TTC:</th>
+                                        <th colspan="6" class="text-end">Total TTC:</th>
                                         <th class="text-right">{{ number_format($quotation->final_amount, 2, ',', '.') }} DH</th>
                                     </tr>
                                 </tfoot>

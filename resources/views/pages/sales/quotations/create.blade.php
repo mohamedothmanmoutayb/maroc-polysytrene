@@ -104,7 +104,8 @@
                                             <thead>
                                                 <tr>
                                                     <th width="5%">#</th>
-                                                    <th width="45%">Article</th>
+                                                    <th width="30%">Article</th>
+                                                    <th width="15%">Unité</th>
                                                     <th width="10%">Quantité</th>
                                                     <th width="15%">Prix Unitaire (DH)</th>
                                                     <th width="15%">Total (DH)</th>
@@ -116,12 +117,12 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4" class="text-end"><strong>Sous-total:</strong></td>
+                                                    <td colspan="5" class="text-end"><strong>Sous-total:</strong></td>
                                                     <td><strong id="subtotal">0.00 DH</strong></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="4" class="text-end"><strong>Remise:</strong></td>
+                                                    <td colspan="5" class="text-end"><strong>Remise:</strong></td>
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number"
@@ -134,7 +135,7 @@
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="4" class="text-end"><strong>Total TTC:</strong></td>
+                                                    <td colspan="5" class="text-end"><strong>Total TTC:</strong></td>
                                                     <td><strong id="order-total">0.00 DH</strong></td>
                                                     <td></td>
                                                 </tr>
@@ -204,6 +205,7 @@
             });
 
             let itemCounter = 0;
+            const units = @json($units);
 
             // Add first item row automatically with "finale" type selected
             addItemRow();
@@ -222,6 +224,9 @@
             function addItemRow(item = null) {
                 let rowId = 'item_' + Date.now() + '_' + itemCounter;
                 let itemIndex = itemCounter;
+                let unitOptions = units.map(function(unit) {
+                    return $('<option>').val(unit).text(unit)[0].outerHTML;
+                }).join('');
 
                 let row = `
             <tr id="${rowId}" data-index="${itemIndex}">
@@ -233,6 +238,11 @@
                     <input type="hidden" class="item-type-input" name="items[${itemIndex}][type]" value="finale">
                     <input type="hidden" class="family-id" name="items[${itemIndex}][family_id]">
                     <input type="hidden" class="family-name" name="items[${itemIndex}][family_name]">
+                </td>
+                <td>
+                    <select class="form-control item-unit" name="items[${itemIndex}][unit]" required>
+                        ${unitOptions}
+                    </select>
                 </td>
                 <td>
                     <input type="number" class="form-control item-quantity"
@@ -252,6 +262,7 @@
         `;
 
                 $('#items-body').append(row);
+                $(`#${rowId} .item-unit`).val('piece');
 
                 // Initialize Select2 but keep it disabled
                 $(`#${rowId} .item-select`).select2({
@@ -639,6 +650,7 @@
                     $(this).find('.item-id').attr('name', `items[${index}][item_id]`);
                     $(this).find('.item-name').attr('name', `items[${index}][name]`);
                     $(this).find('.item-type-input').attr('name', `items[${index}][type]`);
+                    $(this).find('.item-unit').attr('name', `items[${index}][unit]`);
                     $(this).find('.item-quantity').attr('name', `items[${index}][quantity]`);
                     $(this).find('.item-price').attr('name', `items[${index}][unit_price]`);
                     $(this).find('.family-id').attr('name', `items[${index}][family_id]`);
