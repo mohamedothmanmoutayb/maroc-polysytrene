@@ -104,8 +104,7 @@
                                             <thead>
                                                 <tr>
                                                     <th width="5%">#</th>
-                                                    <th width="20%">Type</th>
-                                                    <th width="25%">Article</th>
+                                                    <th width="45%">Article</th>
                                                     <th width="10%">Quantité</th>
                                                     <th width="15%">Prix Unitaire (DH)</th>
                                                     <th width="15%">Total (DH)</th>
@@ -117,12 +116,12 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="5" class="text-end"><strong>Sous-total:</strong></td>
+                                                    <td colspan="4" class="text-end"><strong>Sous-total:</strong></td>
                                                     <td><strong id="subtotal">0.00 DH</strong></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5" class="text-end"><strong>Remise:</strong></td>
+                                                    <td colspan="4" class="text-end"><strong>Remise:</strong></td>
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number"
@@ -135,7 +134,7 @@
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total TTC:</strong></td>
+                                                    <td colspan="4" class="text-end"><strong>Total TTC:</strong></td>
                                                     <td><strong id="order-total">0.00 DH</strong></td>
                                                     <td></td>
                                                 </tr>
@@ -224,39 +223,24 @@
                 let rowId = 'item_' + Date.now() + '_' + itemCounter;
                 let itemIndex = itemCounter;
 
-                let typeOptions = `
-            <option value="">Sélectionner</option>
-            <option value="raw_material">Matière Première</option>
-            <option value="production">Production</option>
-            <option value="decoupage">Découpage</option>
-            <option value="finale" selected>Vente</option>
-        `;
-
                 let row = `
             <tr id="${rowId}" data-index="${itemIndex}">
                 <td>${itemCounter + 1}</td>
                 <td>
-                    <select class="form-control item-type" data-row="${rowId}" required>
-                        ${typeOptions}
-                    </select>
-                </td>
-                <td>
-                    <select class="form-control item-select" data-row="${rowId}" style="width:100%;" required disabled>
-                        <option value="">Chargement des produits...</option>
-                    </select>
+                    <input type="text" class="form-control item-name"
+                        name="items[${itemIndex}][name]" placeholder="Saisir l'article" required>
                     <input type="hidden" class="item-id" name="items[${itemIndex}][item_id]">
-                    <input type="hidden" class="item-name" name="items[${itemIndex}][name]">
-                    <input type="hidden" class="item-type-input" name="items[${itemIndex}][type]">
+                    <input type="hidden" class="item-type-input" name="items[${itemIndex}][type]" value="finale">
                     <input type="hidden" class="family-id" name="items[${itemIndex}][family_id]">
                     <input type="hidden" class="family-name" name="items[${itemIndex}][family_name]">
                 </td>
                 <td>
                     <input type="number" class="form-control item-quantity"
-                        name="items[${itemIndex}][quantity]" min="0.0001" step="any" value="1" required disabled>
+                        name="items[${itemIndex}][quantity]" min="0.0001" step="any" value="1" required>
                 </td>
                 <td>
                     <input type="number" class="form-control item-price"
-                        name="items[${itemIndex}][unit_price]" min="0" step="any" value="0" required disabled>
+                        name="items[${itemIndex}][unit_price]" min="0" step="any" value="0" required>
                 </td>
                 <td class="item-total">0.00 DH</td>
                 <td>
@@ -376,17 +360,6 @@
                     updateOrderTotal();
                 });
 
-                // Load products for "finale" type by default (since it's selected)
-                let clientId = $('#client_id').val();
-                if (clientId) {
-                    loadItemsForType('finale', rowId);
-                } else {
-                    // If no client selected, show message and keep disabled
-                    $(`#${rowId} .item-select`).empty().append(
-                        '<option value="">Veuillez d\'abord sélectionner un client</option>');
-                    $(`#${rowId} .item-select`).prop('disabled', true);
-                }
-
                 itemCounter++;
             }
 
@@ -488,6 +461,8 @@
             }
 
             $('#client_id').change(function() {
+                // Article descriptions and prices are entered manually.
+                return;
                 let clientId = $(this).val();
                 let clientType = $(this).find(':selected').data('client-type') || 'client';
 
@@ -716,8 +691,8 @@
                 // Validate each item has required fields
                 let valid = true;
                 $('#items-body tr').each(function() {
-                    if (!$(this).find('.item-id').val()) {
-                        showToast('error', 'Veuillez sélectionner un article pour chaque ligne');
+                    if (!$(this).find('.item-name').val().trim()) {
+                        showToast('error', 'Veuillez saisir un article pour chaque ligne');
                         valid = false;
                         return false;
                     }

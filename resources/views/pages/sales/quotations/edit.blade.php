@@ -111,8 +111,7 @@
                                             <thead>
                                                 <tr>
                                                     <th width="5%">#</th>
-                                                    <th width="20%">Type</th>
-                                                    <th width="25%">Article</th>
+                                                    <th width="45%">Article</th>
                                                     <th width="10%">Quantité</th>
                                                     <th width="15%">Prix Unitaire (DH)</th>
                                                     <th width="15%">Total (DH)</th>
@@ -124,14 +123,14 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="5" class="text-end"><strong>Sous-total:</strong></td>
+                                                    <td colspan="4" class="text-end"><strong>Sous-total:</strong></td>
                                                     <td><strong
                                                             id="subtotal">{{ number_format($quotation->total_amount, 2, ',', '.') }}
                                                             DH</strong></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5" class="text-end"><strong>Remise:</strong></td>
+                                                    <td colspan="4" class="text-end"><strong>Remise:</strong></td>
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number"
@@ -144,7 +143,7 @@
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total TTC:</strong></td>
+                                                    <td colspan="4" class="text-end"><strong>Total TTC:</strong></td>
                                                     <td><strong
                                                             id="order-total">{{ number_format($quotation->final_amount, 2, ',', '.') }}
                                                             DH</strong></td>
@@ -251,43 +250,26 @@
                 let rowId = 'item_' + Date.now() + '_' + itemCounter;
                 let itemIndex = itemCounter;
 
-                let typeOptions = `
-                <option value="">Sélectionner</option>
-                <option value="raw_material">Matière Première</option>
-                <option value="production">Production</option>
-                <option value="decoupage">Découpage</option>
-                <option value="finale" selected>Vente</option>
-            `;
-
-                let selectedType = item ? item.item_type : 'finale';
-
                 let row = `
                 <tr id="${rowId}" data-index="${itemIndex}">
                     <td>${itemCounter + 1}</td>
                     <td>
-                        <select class="form-control item-type" data-row="${rowId}" required>
-                            ${typeOptions.replace('value="'+selectedType+'"', 'value="'+selectedType+'" selected')}
-                        </select>
-                    </td>
-                    <td>
-                        <select class="form-control item-select" data-row="${rowId}" style="width:100%;" required>
-                            <option value="">Sélectionner un article</option>
-                        </select>
-                        <input type="hidden" class="item-id" name="items[${itemIndex}][item_id]" value="${item ? item.item_id : ''}">
-                        <input type="hidden" class="item-name" name="items[${itemIndex}][name]" value="${item ? item.item_name : ''}">
-                        <input type="hidden" class="item-type-input" name="items[${itemIndex}][type]" value="${item ? item.item_type : ''}">
-                        <input type="hidden" class="family-id" name="items[${itemIndex}][family_id]" value="${item ? item.family_id || '' : ''}">
-                        <input type="hidden" class="family-name" name="items[${itemIndex}][family_name]" value="${item ? item.family_name || '' : ''}">
+                        <input type="text" class="form-control item-name"
+                            name="items[${itemIndex}][name]" placeholder="Saisir l'article" required>
+                        <input type="hidden" class="item-id" name="items[${itemIndex}][item_id]">
+                        <input type="hidden" class="item-type-input" name="items[${itemIndex}][type]" value="finale">
+                        <input type="hidden" class="family-id" name="items[${itemIndex}][family_id]">
+                        <input type="hidden" class="family-name" name="items[${itemIndex}][family_name]">
                     </td>
                     <td>
                         <input type="number" class="form-control item-quantity"
                             name="items[${itemIndex}][quantity]" min="0.0001" step="any"
-                            value="${item ? item.quantity : 1}" required ${item ? '' : 'disabled'}>
+                            value="${item ? item.quantity : 1}" required>
                     </td>
                     <td>
                         <input type="number" class="form-control item-price"
                             name="items[${itemIndex}][unit_price]" min="0" step="any"
-                            value="${item ? item.unit_price : 0}" required ${item ? '' : 'disabled'}>
+                            value="${item ? item.unit_price : 0}" required>
                     </td>
                     <td class="item-total">${item ? (item.quantity * item.unit_price).toFixed(2) : '0.00'} DH</td>
                     <td>
@@ -299,6 +281,10 @@
             `;
 
                 $('#items-body').append(row);
+
+                if (item) {
+                    $(`#${rowId} .item-name`).val(item.item_name || '');
+                }
 
                 $(`#${rowId} .item-select`).select2({
                     language: "fr",
@@ -365,9 +351,6 @@
                     updateItemIndices();
                     updateOrderTotal();
                 });
-
-                // Load items for the type
-                loadItemsForType(selectedType, rowId, item);
 
                 itemCounter++;
             }
@@ -624,8 +607,8 @@
                 // Validate each item has required fields
                 let valid = true;
                 $('#items-body tr').each(function() {
-                    if (!$(this).find('.item-id').val()) {
-                        showToast('error', 'Veuillez sélectionner un article pour chaque ligne');
+                    if (!$(this).find('.item-name').val().trim()) {
+                        showToast('error', 'Veuillez saisir un article pour chaque ligne');
                         valid = false;
                         return false;
                     }

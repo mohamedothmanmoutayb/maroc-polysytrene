@@ -112,13 +112,11 @@ class QuotationController extends Controller
     public function create()
     {
         $clients = Client::where('is_active', true)->get();
-        $products = Product::where('is_active', true)->with(['familles'])->get();
-        $rawMaterials = RawMaterial::where('is_active', true)->get();
 
         // Generate quote number with format YYYY-001
         $nextQuoteNumber = Quotation::generateQuoteNumber();
 
-        return view('pages.sales.quotations.create', compact('clients', 'products', 'rawMaterials', 'nextQuoteNumber'));
+        return view('pages.sales.quotations.create', compact('clients', 'nextQuoteNumber'));
     }
 
     public function store(Request $request)
@@ -129,9 +127,9 @@ class QuotationController extends Controller
             'quote_date' => 'required|date',
             'valid_until' => 'nullable|date',
             'items' => 'required|array|min:1',
-            'items.*.type' => 'required|in:raw_material,production,decoupage,finale',
-            'items.*.item_id' => 'required',
-            'items.*.name' => 'required',
+            'items.*.type' => 'nullable|in:raw_material,production,decoupage,finale',
+            'items.*.item_id' => 'nullable',
+            'items.*.name' => 'required|string|max:255',
             'items.*.quantity' => 'required|numeric|min:0.0001',
             'items.*.unit_price' => 'required|numeric|min:0',
             'items.*.family_id' => 'nullable',
@@ -153,9 +151,9 @@ class QuotationController extends Controller
                 $totalAmount += $itemTotal;
 
                 $itemsData[] = [
-                    'item_type' => $itemData['type'],
-                    'item_id' => $itemData['item_id'],
-                    'item_name' => $itemData['name'],
+                    'item_type' => $itemData['type'] ?? 'finale',
+                    'item_id' => $itemData['item_id'] ?? null,
+                    'item_name' => trim($itemData['name']),
                     'quantity' => $quantity,
                     'unit_price' => $unitPrice,
                     'total_price' => $itemTotal,
@@ -220,10 +218,8 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::with('items')->findOrFail($id);
         $clients = Client::where('is_active', true)->get();
-        $products = Product::where('is_active', true)->with(['familles'])->get();
-        $rawMaterials = RawMaterial::where('is_active', true)->get();
 
-        return view('pages.sales.quotations.edit', compact('quotation', 'clients', 'products', 'rawMaterials'));
+        return view('pages.sales.quotations.edit', compact('quotation', 'clients'));
     }
 
     public function show($id)
@@ -245,9 +241,9 @@ class QuotationController extends Controller
             'quote_date' => 'required|date',
             'valid_until' => 'nullable|date',
             'items' => 'required|array|min:1',
-            'items.*.type' => 'required|in:raw_material,production,decoupage,finale',
-            'items.*.item_id' => 'required',
-            'items.*.name' => 'required',
+            'items.*.type' => 'nullable|in:raw_material,production,decoupage,finale',
+            'items.*.item_id' => 'nullable',
+            'items.*.name' => 'required|string|max:255',
             'items.*.quantity' => 'required|numeric|min:0.0001',
             'items.*.unit_price' => 'required|numeric|min:0',
             'items.*.family_id' => 'nullable',
@@ -271,9 +267,9 @@ class QuotationController extends Controller
                 $totalAmount += $itemTotal;
 
                 $itemsData[] = [
-                    'item_type' => $itemData['type'],
-                    'item_id' => $itemData['item_id'],
-                    'item_name' => $itemData['name'],
+                    'item_type' => $itemData['type'] ?? 'finale',
+                    'item_id' => $itemData['item_id'] ?? null,
+                    'item_name' => trim($itemData['name']),
                     'quantity' => $quantity,
                     'unit_price' => $unitPrice,
                     'total_price' => $itemTotal,
