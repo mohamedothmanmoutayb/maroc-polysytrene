@@ -30,6 +30,13 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
+        if (! $user->isSuperAdmin()) {
+            return view('pages.dashboard.simple', [
+                'displayName' => $user->employee->full_name ?? $user->username,
+                'roleLabel' => $user->getRoleNames()->first() ?? $user->role,
+            ]);
+        }
+
         // ── Période sélectionnée (filtres de dates) ──────────────────────────
         [$periodStart, $periodEnd, $quickFilter, $periodLabel] = $this->resolvePeriod($request);
 

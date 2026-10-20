@@ -529,11 +529,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/{id}/create-user', [EmployeeController::class, 'createUser'])->name('employees.create-user')->middleware(['admin']);
 
     // Expense Routes
-    Route::resource('expenses', ExpenseController::class)->middleware(['admin']);
-    Route::post('/expenses/approve/{id}', [ExpenseController::class, 'approve'])->name('expenses.approve')->middleware(['admin']);
+    // Access is controlled by expense permissions in ExpenseController
+    Route::resource('expenses', ExpenseController::class);
+    Route::post('/expenses/approve/{id}', [ExpenseController::class, 'approve'])->name('expenses.approve');
 
     // Expense Categories Routes
-    Route::resource('expense-categories', ExpenseCategoryController::class)->except(['show'])->middleware(['admin']);
+    Route::resource('expense-categories', ExpenseCategoryController::class)->except(['show']);
 
     Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 

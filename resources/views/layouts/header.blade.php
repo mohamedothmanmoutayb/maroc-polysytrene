@@ -10,54 +10,66 @@
                 </li>
 
                 <!-- NEW ACTION BUTTONS - Vertical Header (Desktop) -->
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('sales.orders.index') }}"
-                        class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:cart-bold-duotone" class="fs-6"></iconify-icon>
-                        <span>Liste de Vente</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('production-orders.create') }}"
-                        class="btn btn-info btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="material-symbols-light:factory-outline" class="fs-6"></iconify-icon>
-                        <span>Ordre de Production</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('expenses.index') }}"
-                        class="btn btn-warning btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:download-square-line-duotone" class="fs-6"></iconify-icon>
-                        <span>Dépense</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('sales.orders.create') }}"
-                        class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:cart-check-bold-duotone" class="fs-6"></iconify-icon>
-                        <span>Nouvelle Vente</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('attendance.index') }}"
-                        class="btn btn-success btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:check-read-outline" class="fs-6"></iconify-icon>
-                        <span>Présence du Jour</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('raw-material-purchases.index') }}"
-                        class="btn btn-secondary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:bag-bold-duotone" class="fs-6"></iconify-icon>
-                        <span>Les Achats</span>
-                    </a>
-                </li>
+                @can('view_sales_orders')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('sales.orders.index') }}"
+                            class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:cart-bold-duotone" class="fs-6"></iconify-icon>
+                            <span>Liste de Vente</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('create_production_orders')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('production-orders.create') }}"
+                            class="btn btn-info btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="material-symbols-light:factory-outline" class="fs-6"></iconify-icon>
+                            <span>Ordre de Production</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view_expenses')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('expenses.index') }}"
+                            class="btn btn-warning btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:download-square-line-duotone" class="fs-6"></iconify-icon>
+                            <span>Dépense</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('create_sales_orders')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('sales.orders.create') }}"
+                            class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:cart-check-bold-duotone" class="fs-6"></iconify-icon>
+                            <span>Nouvelle Vente</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view_attendance')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('attendance.index') }}"
+                            class="btn btn-success btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:check-read-outline" class="fs-6"></iconify-icon>
+                            <span>Présence du Jour</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view_raw_material_purchases')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('raw-material-purchases.index') }}"
+                            class="btn btn-secondary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:bag-bold-duotone" class="fs-6"></iconify-icon>
+                            <span>Les Achats</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
 
             <div class="d-block d-lg-none py-9 py-xl-0">
@@ -366,54 +378,66 @@
                     </a>
                 </li>
                 <!-- Horizontal Header -->
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('sales.orders.index') }}"
-                        class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:cart-bold-duotone" class="fs-6"></iconify-icon>
-                        <span>Liste de Vente</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('production-orders.create') }}"
-                        class="btn btn-info btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="material-symbols-light:factory-outline" class="fs-6"></iconify-icon>
-                        <span>Ordre de Production</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('expenses.index') }}"
-                        class="btn btn-warning btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:download-square-line-duotone" class="fs-6"></iconify-icon>
-                        <span>Dépense</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('sales.orders.create') }}"
-                        class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:cart-check-bold-duotone" class="fs-6"></iconify-icon>
-                        <span>Nouvelle Vente</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('attendance.index') }}"
-                        class="btn btn-success btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:check-read-outline" class="fs-6"></iconify-icon>
-                        <span>Présence du Jour</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-flex align-items-center mx-1">
-                    <a href="{{ route('raw-material-purchases.index') }}"
-                        class="btn btn-secondary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
-                        style="height: 38px;">
-                        <iconify-icon icon="solar:bag-bold-duotone" class="fs-6"></iconify-icon>
-                        <span>Les Achats</span>
-                    </a>
-                </li>
+                @can('view_sales_orders')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('sales.orders.index') }}"
+                            class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:cart-bold-duotone" class="fs-6"></iconify-icon>
+                            <span>Liste de Vente</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('create_production_orders')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('production-orders.create') }}"
+                            class="btn btn-info btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="material-symbols-light:factory-outline" class="fs-6"></iconify-icon>
+                            <span>Ordre de Production</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view_expenses')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('expenses.index') }}"
+                            class="btn btn-warning btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:download-square-line-duotone" class="fs-6"></iconify-icon>
+                            <span>Dépense</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('create_sales_orders')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('sales.orders.create') }}"
+                            class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:cart-check-bold-duotone" class="fs-6"></iconify-icon>
+                            <span>Nouvelle Vente</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view_attendance')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('attendance.index') }}"
+                            class="btn btn-success btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:check-read-outline" class="fs-6"></iconify-icon>
+                            <span>Présence du Jour</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view_raw_material_purchases')
+                    <li class="nav-item d-none d-lg-flex align-items-center mx-1">
+                        <a href="{{ route('raw-material-purchases.index') }}"
+                            class="btn btn-secondary btn-sm rounded-pill px-3 d-flex align-items-center gap-2"
+                            style="height: 38px;">
+                            <iconify-icon icon="solar:bag-bold-duotone" class="fs-6"></iconify-icon>
+                            <span>Les Achats</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
             <div class="d-block d-xl-none">
                 <a href="{{ route('dashboard') }}" class="text-nowrap nav-link">

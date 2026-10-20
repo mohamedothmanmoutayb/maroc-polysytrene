@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class ExpenseCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:view_expenses')->only(['index', 'getCategories']);
+        $this->middleware('can:create_expenses')->only(['create', 'store']);
+        $this->middleware('can:edit_expenses')->only(['edit', 'update']);
+        $this->middleware('can:delete_expenses')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
