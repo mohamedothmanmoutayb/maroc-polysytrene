@@ -11,7 +11,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-4 mb-sm-0 card-title">Modifier Devis</h4>
                         <div class="d-flex align-items-center gap-3">
-                            <span class="badge bg-primary p-2">N° {{ $quotation->quote_number }}</span>
+                            <span class="badge bg-primary p-2" id="quote-number-badge">N° {{ $quotation->quote_number }}</span>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item d-flex align-items-center">
@@ -104,6 +104,13 @@
                             </div>
 
                             <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="quote_number" class="form-label">N° Devis *</label>
+                                        <input type="text" class="form-control" id="quote_number" name="quote_number"
+                                            value="{{ $quotation->quote_number }}" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="status" class="form-label">Statut *</label>
@@ -246,11 +253,15 @@
                 allowClear: true
             });
 
+            // Keep the header badge in sync with the (editable) quote number
+            $('#quote_number').on('input', function() {
+                $('#quote-number-badge').text('N° ' + $(this).val());
+            });
+
             // Toggle between selecting an existing client and typing a name manually
             $('.client-mode').change(function() {
                 toggleClientMode();
             });
-
             function toggleClientMode() {
                 if ($('input[name="client_mode"]:checked').val() === 'manual') {
                     $('#clientSelectWrapper').hide();

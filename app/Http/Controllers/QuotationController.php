@@ -241,6 +241,7 @@ class QuotationController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'quote_number' => 'required|max:50|unique:quotations,quote_number,' . $id . ',quote_id',
             'client_id' => 'nullable|exists:clients,client_id',
             'client_name' => 'nullable|string|max:255|required_without:client_id',
             'quote_date' => 'required|date',
@@ -290,6 +291,7 @@ class QuotationController extends Controller
 
             // Update quotation
             $quotation->update([
+                'quote_number' => $request->quote_number,
                 'client_id' => $request->filled('client_id') ? $request->client_id : null,
                 'client_name' => $request->filled('client_name') ? $request->client_name : null,
                 'quote_date' => $request->quote_date,

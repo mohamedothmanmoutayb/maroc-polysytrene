@@ -11,7 +11,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-4 mb-sm-0 card-title">Nouveau Devis</h4>
                         <div class="d-flex align-items-center gap-3">
-                            <span class="badge bg-primary p-2">N° {{ $nextQuoteNumber }}</span>
+                            <span class="badge bg-primary p-2" id="quote-number-badge">N° {{ $nextQuoteNumber }}</span>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item d-flex align-items-center">
@@ -49,7 +49,6 @@
                     <div class="card-body">
                         <form id="quotationForm">
                             @csrf
-                            <input type="hidden" id="quote_number" name="quote_number" value="{{ $nextQuoteNumber }}">
 
                             <!-- Basic Info Section -->
                             <div class="row mb-4">
@@ -99,6 +98,13 @@
                             </div>
 
                             <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="quote_number" class="form-label">N° Devis *</label>
+                                        <input type="text" class="form-control" id="quote_number" name="quote_number"
+                                            value="{{ $nextQuoteNumber }}" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="status" class="form-label">Statut *</label>
@@ -222,6 +228,11 @@
                 language: "fr",
                 placeholder: "Sélectionner...",
                 allowClear: true
+            });
+
+            // Keep the header badge in sync with the (editable) quote number
+            $('#quote_number').on('input', function() {
+                $('#quote-number-badge').text('N° ' + $(this).val());
             });
 
             // Toggle between selecting an existing client and typing a name manually
