@@ -250,7 +250,7 @@
                         </div>
 
                         <!-- SOURCE PRODUCTS & FINAL PRODUCTS (Type 2 / Type 3 / Type 5) -->
-                        @if (in_array($order->production_type, ['type2', 'type3', 'type5']))
+                        @if (in_array($order->production_type, ['type2', 'type3', 'type4', 'type5']))
                             <div class="row mb-4">
                                 <!-- Source Products / Chutes Utilisées -->
                                 <div class="col-md-6">
@@ -293,7 +293,7 @@
                                                             <tr>
                                                                 <td><span class="badge bg-secondary">{{ $sp['product_code'] ?: '—' }}</span></td>
                                                                 <td>{{ $sp['product_name'] }}</td>
-                                                                <td class="text-end">{{ number_format($sp['quantity'], 0, ',', ' ') }}</td>
+                                                                <td class="text-end">{{ rtrim(rtrim(number_format($sp['quantity'], 2, ",", " "), "0"), ",") }}</td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
@@ -338,15 +338,15 @@
                                                             <tr>
                                                                 <td><span class="badge bg-secondary">{{ $sp['product_code'] ?? $sp->product_code ?? '—' }}</span></td>
                                                                 <td>{{ $sp['product_name'] ?? $sp->product_name ?? '—' }}</td>
-                                                                <td class="text-end">{{ number_format($planned) }}</td>
+                                                                <td class="text-end">{{ rtrim(rtrim(number_format($planned, 2, ",", " "), "0"), ",") }}</td>
                                                                 <td class="text-end">
                                                                     <span class="{{ $produced >= $planned ? 'text-success fw-bold' : '' }}">
-                                                                        {{ number_format($produced) }}
+                                                                        {{ rtrim(rtrim(number_format($produced, 2, ",", " "), "0"), ",") }}
                                                                     </span>
                                                                 </td>
                                                                 <td class="text-end">
                                                                     <span class="{{ $remaining > 0 ? 'text-danger' : 'text-success' }}">
-                                                                        {{ number_format($remaining) }}
+                                                                        {{ rtrim(rtrim(number_format($remaining, 2, ",", " "), "0"), ",") }}
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -483,12 +483,12 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Pièces Bonnes:</th>
-                                                                    <td><strong>{{ number_format($qualityMetrics['quality']['total_good_quantity'] ?? 0) }}</strong>
+                                                                    <td><strong>{{ rtrim(rtrim(number_format($qualityMetrics['quality']['total_good_quantity'] ?? 0, 2, ",", " "), "0"), ",") }}</strong>
                                                                         unités</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Pièces Défectueuses:</th>
-                                                                    <td><strong>{{ number_format($qualityMetrics['quality']['total_defective_quantity'] ?? 0) }}</strong>
+                                                                    <td><strong>{{ rtrim(rtrim(number_format($qualityMetrics['quality']['total_defective_quantity'] ?? 0, 2, ",", " "), "0"), ",") }}</strong>
                                                                         unités</td>
                                                                 </tr>
                                                                 <tr>
@@ -729,11 +729,11 @@
                                                                 <td>{{ $output['date'] }}</td>
                                                                 <td>{{ $output['famille'] ?? 'N/A' }}</td>
                                                                 <td class="text-end">
-                                                                    {{ number_format($output['quantity_produced']) }}</td>
+                                                                    {{ rtrim(rtrim(number_format($output['quantity_produced'], 2, ",", " "), "0"), ",") }}</td>
                                                                 <td class="text-end">
-                                                                    {{ number_format($output['quantity_defective']) }}</td>
+                                                                    {{ rtrim(rtrim(number_format($output['quantity_defective'], 2, ",", " "), "0"), ",") }}</td>
                                                                 <td class="text-end">
-                                                                    {{ number_format($output['good_quantity']) }}</td>
+                                                                    {{ rtrim(rtrim(number_format($output['good_quantity'], 2, ",", " "), "0"), ",") }}</td>
                                                                 <td class="text-end">
                                                                     <span
                                                                         class="badge @if ($output['defect_rate'] <= 2) bg-success

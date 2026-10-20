@@ -182,7 +182,7 @@
             <td class="label">Annulés</td>
             <td class="value">{{ $cancelledOrders }}</td>
             <td class="label">Qté à produire</td>
-            <td class="value">{{ number_format($totalQuantityToProduce, 0, ',', ' ') }}</td>
+            <td class="value">{{ rtrim(rtrim(number_format($totalQuantityToProduce, 2, ",", " "), "0"), ",") }}</td>
             <td class="label">Qté Produite</td>
             <td class="value">{{ number_format($totalProduced, 0, ',', ' ') }}</td>
             <td class="label">Qté Défect.</td>
@@ -250,9 +250,9 @@
                     <td class="left">{{ $order->product->product_name ?? $order->product_name ?? 'N/A' }}</td>
                     <td>{{ $typeLabels[$order->production_type] ?? $order->production_type }}</td>
                     <td>{{ $statusLabels[$order->status] ?? $order->status }}</td>
-                    <td class="right">{{ number_format($order->quantity_to_produce, 0, ',', ' ') }}</td>
-                    <td class="right">{{ number_format($order->produced_qty, 0, ',', ' ') }}</td>
-                    <td class="right">{{ number_format($order->defective_qty, 0, ',', ' ') }}</td>
+                    <td class="right">{{ rtrim(rtrim(number_format($order->quantity_to_produce, 2, ",", " "), "0"), ",") }}</td>
+                    <td class="right">{{ rtrim(rtrim(number_format($order->produced_qty, 2, ",", " "), "0"), ",") }}</td>
+                    <td class="right">{{ rtrim(rtrim(number_format($order->defective_qty, 2, ",", " "), "0"), ",") }}</td>
                     <td>
                         {{ number_format($progress, 0) }}%
                     </td>

@@ -24,7 +24,7 @@
                                     </a>
                                 </li>
                                 <li class="breadcrumb-item" aria-current="page">
-                                    <span class="badge fw-medium fs-2 bg-primary text-primary">
+                                    <span class="badge fw-medium fs-2 bg-primary">
                                         Nouveau
                                     </span>
                                 </li>
@@ -418,50 +418,28 @@
 
                                 <!-- Type 4: Vente -> Vente (Transformation) -->
                                 <div class="col-md-12 d-none" id="type4Section">
+                                    <!-- Multiple Produits Sources -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label fw-semibold">Produits Sources (Vente) *</label>
+                                                <button type="button" class="btn btn-sm btn-success mb-2 ms-2"
+                                                    id="addType4Source">
+                                                    <i class="fas fa-plus me-1"></i> Ajouter un Produit Source
+                                                </button>
+                                                <div id="type4SourceProductsContainer">
+                                                    <div class="alert alert-info" id="noType4SourceProductsMessage">
+                                                        Cliquez sur "Ajouter un Produit Source" pour ajouter des produits vente à transformer
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="type4_source_product_id" value="">
+                                                <input type="hidden" id="type4_total_units" name="type4_total_units"
+                                                    value="0">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="type4_source_product_id" class="form-label">Produit Source
-                                                    (Vente) *</label>
-                                                <select class="form-control select2" id="type4_source_product_id"
-                                                    name="source_product_id">
-                                                    <option value="">Sélectionner un produit source</option>
-                                                    @foreach ($salesProducts as $product)
-                                                        @if ($product->product_type === 'finale' || $product->product_type === 'both')
-                                                            <option value="{{ $product->product_id }}"
-                                                                data-has-familles="{{ $product->has_familles }}">
-                                                                {{ $product->product_code }} -
-                                                                {{ $product->product_name }}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                                <small class="form-text text-muted">Produit vente à transformer</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="type4_total_units" class="form-label">Total Unités Requises
-                                                    *</label>
-                                                <input type="number" class="form-control" id="type4_total_units"
-                                                    name="type4_total_units" min="0.01" step="0.01"
-                                                    value="1">
-                                                <small class="form-text text-muted">Nombre d'unités source à
-                                                    transformer</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label class="form-label">Volume/Unité Source</label>
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control" id="type4_source_volume"
-                                                        step="0.0001" min="0" readonly>
-                                                    <span class="input-group-text">m³</span>
-                                                </div>
-                                                <small class="form-text text-muted" id="type4_source_volume_info"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="form-label">Volume Total Source</label>
                                                 <div class="input-group">
@@ -3526,8 +3504,8 @@
                         <div class="form-group">
                             <label class="form-label">Quantité à Utiliser *</label>
                             <input type="number" class="form-control type4-source-quantity"
-                                name="type4_source_products[${index}][quantity_to_use]"
-                                value="${productData ? productData.quantity_to_use : '1'}"
+                                name="type4_source_products[${index}][quantity]"
+                                value="${productData ? productData.quantity : '1'}"
                                 min="0.01" step="0.01" required>
                         </div>
                     </div>
@@ -3740,39 +3718,64 @@
             }
 
             // Update Type 4 source details
-            function updateType4SourceDetails() {
-                const productId = $('#type4_source_product_id').val();
-                const totalUnits = parseFloat($('#type4_total_units').val()) || 0;
+            // Sums the source rows into the hidden/readonly totals used by the rest of Type 4
+            function getType4SourceTotals() {
+                let totalUnits = 0;
+                let totalSourceVolume = 0;
+                let firstProductId = '';
 
-                if (productId) {
-                    getProductDetails(productId).then(product => {
-                        if (product) {
-                            const volumePerUnit = product.volume_per_unit;
-                            const totalVolume = volumePerUnit * totalUnits;
+                $('.type4-source-row').each(function(i) {
+                    const productId = $(this).find('.type4-source-select').val();
+                    const qty = parseFloat($(this).find('.type4-source-quantity').val()) || 0;
+                    const volume = parseFloat($(this).find('.type4-source-volume').val()) || 0;
 
-                            $('#type4_source_volume').val(volumePerUnit.toFixed(4));
-                            $('#type4_source_volume_info').text(
-                                `${product.display_volume} (${product.dimensions})`);
-                            $('#type4_total_source_volume').val(totalVolume.toFixed(4));
+                    if (productId && !firstProductId) {
+                        firstProductId = productId;
+                    }
+                    totalUnits += qty;
+                    totalSourceVolume += qty * volume;
+                });
 
-                            updateType4Calculation();
-                            checkType4StockAvailability();
-                        }
-                    });
-                }
+                $('#type4_source_product_id').val(firstProductId);
+                $('#type4_total_units').val(totalUnits);
+                $('#type4_total_source_volume').val(totalSourceVolume.toFixed(4));
+
+                return {
+                    totalUnits,
+                    totalSourceVolume,
+                    firstProductId
+                };
             }
 
             $(document).on('input', '.type4-quantity', function() {
                 updateType4Calculation();
             });
 
-            $('#type4_source_product_id').on('change', function() {
-                updateType4SourceDetails();
-                loadType4Familles();
+            $('#addType4Source').on('click', function() {
+                addType4SourceRow();
             });
 
-            $('#type4_total_units').on('input', function() {
-                updateType4SourceDetails();
+            $(document).on('click', '.remove-type4-source', function() {
+                const index = $(this).data('index');
+                $(`.type4-source-row[data-index="${index}"]`).remove();
+
+                $('.type4-source-row').each(function(newIndex) {
+                    $(this).attr('data-index', newIndex);
+                    $(this).find('.type4-source-select').attr('name',
+                        `type4_source_products[${newIndex}][product_id]`).data('index', newIndex);
+                    $(this).find('.type4-source-quantity').attr('name',
+                        `type4_source_products[${newIndex}][quantity]`);
+                    $(this).find('.type4-source-volume').attr('data-index', newIndex);
+                    $(this).find('.type4-source-info').attr('data-index', newIndex);
+                    $(this).find('.remove-type4-source').data('index', newIndex);
+                });
+
+                if ($('.type4-source-row').length === 0) {
+                    $('#noType4SourceProductsMessage').removeClass('d-none');
+                }
+
+                updateType4Calculation();
+                loadType4Familles();
                 checkType4StockAvailability();
             });
 
@@ -3804,7 +3807,7 @@
             });
 
             function loadType4Familles() {
-                const sourceProductId = $('#type4_source_product_id').val();
+                const sourceProductId = getType4SourceTotals().firstProductId;
 
                 if (sourceProductId) {
                     $.ajax({
@@ -3843,31 +3846,41 @@
                 }
             }
             async function checkType4StockAvailability() {
-                const sourceProductId = $('#type4_source_product_id').val();
-                const sourceQuantity = parseFloat($('#type4_total_units').val()) || 0;
                 const familleId = $('#type4_famille_id').val();
 
-                if (!sourceProductId || sourceQuantity === 0) {
+                // Aggregate requested quantity per source product
+                const requested = {};
+                $('.type4-source-row').each(function() {
+                    const productId = $(this).find('.type4-source-select').val();
+                    const qty = parseFloat($(this).find('.type4-source-quantity').val()) || 0;
+                    if (productId && qty > 0) {
+                        requested[productId] = (requested[productId] || 0) + qty;
+                    }
+                });
+
+                const productIds = Object.keys(requested);
+                if (productIds.length === 0) {
                     $('#type4InsufficientStockAlert').addClass('d-none');
                     return;
                 }
 
-                const stockInfo = await getStockInfo(sourceProductId, familleId);
-                const isSufficient = stockInfo.available >= sourceQuantity;
+                const lines = [];
+                for (const productId of productIds) {
+                    const stockInfo = await getStockInfo(productId, familleId);
+                    const name = $(`.type4-source-select option[value="${productId}"]:selected`).first().text()
+                        .trim() || 'Produit source';
 
-                if (!isSufficient && stockInfo.available > 0) {
-                    $('#type4InsufficientStockList').html(`
-            <ul class="mb-0 mt-2">
-                <li>Produit source: Requis ${sourceQuantity} unités, Disponible ${stockInfo.available} unités</li>
-            </ul>
-        `);
-                    $('#type4InsufficientStockAlert').removeClass('d-none');
-                } else if (stockInfo.available === 0 && sourceQuantity > 0) {
-                    $('#type4InsufficientStockList').html(`
-            <ul class="mb-0 mt-2">
-                <li>Produit source: Stock vide (0 unités disponible)</li>
-            </ul>
-        `);
+                    if (stockInfo.available === 0) {
+                        lines.push(`<li>${name}: Stock vide (0 unités disponible)</li>`);
+                    } else if (stockInfo.available < requested[productId]) {
+                        lines.push(
+                            `<li>${name}: Requis ${requested[productId]} unités, Disponible ${stockInfo.available} unités</li>`
+                        );
+                    }
+                }
+
+                if (lines.length) {
+                    $('#type4InsufficientStockList').html(`<ul class="mb-0 mt-2">${lines.join('')}</ul>`);
                     $('#type4InsufficientStockAlert').removeClass('d-none');
                 } else {
                     $('#type4InsufficientStockAlert').addClass('d-none');
@@ -3876,10 +3889,10 @@
 
             // Update Type 4 calculation
             function updateType4Calculation() {
-                const sourceProductId = $('#type4_source_product_id').val();
-                const totalUnitsRequired = parseFloat($('#type4_total_units').val()) || 0;
-                const sourceVolumePerUnit = parseFloat($('#type4_source_volume').val()) || 0;
-                const totalSourceVolume = totalUnitsRequired * sourceVolumePerUnit;
+                const sourceTotals = getType4SourceTotals();
+                const sourceProductId = sourceTotals.firstProductId;
+                const totalUnitsRequired = sourceTotals.totalUnits;
+                const totalSourceVolume = sourceTotals.totalSourceVolume;
                 const familleId = $('#type4_famille_id').val();
 
                 let totalFinalProducts = 0;
@@ -3933,27 +3946,7 @@
                 $('#actual_required_quantity').val(totalUnitsRequired);
 
                 if (sourceProductId && familleId) {
-                    getStockInfo(sourceProductId, familleId).then(stockInfo => {
-                        const isSufficient = stockInfo.available >= totalUnitsRequired;
-
-                        if (!isSufficient && stockInfo.available > 0) {
-                            $('#type4InsufficientStockList').html(`
-                    <ul class="mb-0 mt-2">
-                        <li>Produit source: Requis ${totalUnitsRequired} unités, Disponible ${stockInfo.available} unités</li>
-                    </ul>
-                `);
-                            $('#type4InsufficientStockAlert').removeClass('d-none');
-                        } else if (stockInfo.available === 0 && totalUnitsRequired > 0) {
-                            $('#type4InsufficientStockList').html(`
-                    <ul class="mb-0 mt-2">
-                        <li>Produit source: Stock vide (0 unités disponible)</li>
-                    </ul>
-                `);
-                            $('#type4InsufficientStockAlert').removeClass('d-none');
-                        } else {
-                            $('#type4InsufficientStockAlert').addClass('d-none');
-                        }
-                    });
+                    checkType4StockAvailability();
                 }
             }
 
@@ -3973,8 +3966,19 @@
                                 `${product.display_volume} (${product.dimensions})`
                             );
                             updateType4Calculation();
+                            checkType4StockAvailability();
                         }
                     });
+                } else {
+                    $(`.type4-source-volume[data-index="${index}"]`).val('');
+                    $(`.type4-source-info[data-index="${index}"]`).text(
+                        'Sélectionnez un produit pour voir ses dimensions');
+                    updateType4Calculation();
+                }
+
+                // Familles come from the first source product only
+                if (index === 0) {
+                    loadType4Familles();
                 }
             });
 
@@ -4004,6 +4008,9 @@
 
             $(document).on('input', '.type4-source-quantity, .type4-target-quantity', function() {
                 updateType4Calculation();
+                if ($(this).hasClass('type4-source-quantity')) {
+                    checkType4StockAvailability();
+                }
             });
 
             $(document).on('input', '.type4-target-quantity', function() {
@@ -4257,12 +4264,10 @@
                     `);
 
                     $('.type4-product-row').remove();
+                    $('.type4-source-row').remove();
+                    $('#noType4SourceProductsMessage').removeClass('d-none');
+                    addType4SourceRow();
                     addType4ProductRow();
-
-                    if ($('#type4_source_product_id').val()) {
-                        updateType4SourceDetails();
-                        loadType4Familles();
-                    }
 
                     updateType4Calculation();
 
@@ -4505,10 +4510,12 @@
                         }
                     });
                 } else if (productionType === 'type4') {
-                    const sourceProductId = $('#type4_source_product_id').val();
-                    const totalUnitsRequired = $('#type4_total_units').val();
+                    const sourceTotals = getType4SourceTotals();
+                    const sourceProductId = sourceTotals.firstProductId;
+                    const totalUnitsRequired = sourceTotals.totalUnits;
                     const familleId = $('#type4_famille_id').val();
                     const productRows = $('.type4-product-row');
+                    const sourceRows = $('.type4-source-row');
 
                     const totalVolume = parseFloat($('#type4_total_volume').val()) || 0;
                     const totalSourceVolume = parseFloat($('#type4_total_source_volume').val()) || 0;
@@ -4531,6 +4538,19 @@
                         showToast('error', 'Veuillez saisir le nombre total d\'unités requis');
                         hasValidationError = true;
                     }
+
+                    sourceRows.each(function(index) {
+                        if (!$(this).find('.type4-source-select').val()) {
+                            showToast('error', 'Veuillez sélectionner un produit source pour la ligne ' +
+                                (index + 1));
+                            hasValidationError = true;
+                        }
+                        if (parseFloat($(this).find('.type4-source-quantity').val()) < 0.01) {
+                            showToast('error',
+                                'Veuillez saisir une quantité source valide pour la ligne ' + (index + 1));
+                            hasValidationError = true;
+                        }
+                    });
 
                     if (!familleId) {
                         showToast('error', 'Veuillez sélectionner une famille');

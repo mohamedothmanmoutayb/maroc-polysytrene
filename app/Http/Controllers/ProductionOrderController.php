@@ -403,8 +403,9 @@ class ProductionOrderController extends Controller
             ]);
        } elseif ($request->production_type === 'type4') {
             $request->validate([
-                'source_product_id' => 'required|exists:products,product_id',
-                'type4_total_units' => 'required|numeric|min:0.01',
+                'type4_source_products' => 'required|array|min:1',
+                'type4_source_products.*.product_id' => 'required|exists:products,product_id',
+                'type4_source_products.*.quantity' => 'required|numeric|min:0.01',
                 'type4_products' => 'required|array|min:1',
                 'type4_products.*.product_id' => 'required|exists:products,product_id',
                 'type4_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
@@ -744,19 +745,37 @@ class ProductionOrderController extends Controller
                     break;
 
                 case 'type4':
-                    if (!$request->source_product_id) {
-                        throw new \Exception("Le produit source est requis pour la transformation.");
+                    // Multiple produits sources (vente) → multiple produits finaux
+                    $totalUnitsRequired = 0;
+                    $totalSourceVolume = 0;
+                    $sourceProduct = null;
+                    $resolvedSourceProducts = [];
+
+                    foreach ($request->type4_source_products as $spIndex => $spData) {
+                        $spProduct = Product::findOrFail($spData['product_id']);
+
+                        if (!$spProduct->isFinaleProduct() && $spProduct->product_type !== 'both') {
+                            throw new \Exception("Le produit source #" . ($spIndex + 1) . " doit être de type vente (finale) pour la transformation.");
+                        }
+
+                        $spQty = (float) $spData['quantity'];
+                        $totalSourceVolume += $this->calculateProductVolume($spProduct) * $spQty;
+                        $totalUnitsRequired += $spQty;
+
+                        $resolvedSourceProducts[] = [
+                            'product_id' => $spProduct->product_id,
+                            'product_name' => $spProduct->product_name,
+                            'product_code' => $spProduct->product_code,
+                            'quantity' => $spQty,
+                        ];
+
+                        if ($sourceProduct === null) {
+                            $sourceProduct = $spProduct;
+                        }
                     }
 
-                    $sourceProduct = Product::findOrFail($request->source_product_id);
-
-                    if (!$sourceProduct->isFinaleProduct() && $sourceProduct->product_type !== 'both') {
-                        throw new \Exception("Le produit source doit être de type vente (finale) pour la transformation.");
-                    }
-
-                    $sourceVolumePerUnit = $this->calculateProductVolume($sourceProduct);
-                    $totalUnitsRequired = (float) $request->type4_total_units;
-                    $totalSourceVolume = $totalUnitsRequired * $sourceVolumePerUnit;
+                    $sourceVolumePerUnit = $totalUnitsRequired > 0 ? $totalSourceVolume / $totalUnitsRequired : 0;
+                    $request->merge(['source_product_id' => $sourceProduct->product_id]);
 
                     $totalQuantityToProduce = 0;
                     $totalVolume = 0;
@@ -815,8 +834,10 @@ class ProductionOrderController extends Controller
 
                     $requiredQuantity = $totalUnitsRequired;
 
-                    $this->checkSourceProductStock($sourceProduct, $requiredQuantity,
-                        $finalFamille ? $finalFamille->famille_id : null);
+                    foreach ($resolvedSourceProducts as $spResolved) {
+                        $this->checkSourceProductStock(Product::findOrFail($spResolved['product_id']),
+                            $spResolved['quantity'], $finalFamille ? $finalFamille->famille_id : null);
+                    }
 
                     $request->merge(['quantity_to_produce' => $totalQuantityToProduce]);
                     $request->merge(['required_quantity' => $totalUnitsRequired]);
@@ -1288,6 +1309,22 @@ class ProductionOrderController extends Controller
                 'products_count' => count($productsData),
                 'source_products' => $resolvedSourceProducts ?? $request->type3_source_products ?? [],
                 'total_sous_blocs_required' => $request->required_quantity ?? 0,
+                'products_summary' => array_map(function($product) {
+                    return [
+                        'product_id' => $product['product_id'],
+                        'product_name' => $product['product']->product_name,
+                        'quantity_to_produce' => $product['quantity_to_produce'],
+                    ];
+                }, $productsData)
+            ]);
+        }
+
+        if ($request->production_type === 'type4' && !empty($productsData)) {
+            return json_encode([
+                'multiple_products' => true,
+                'products_count' => count($productsData),
+                'source_products' => $resolvedSourceProducts ?? [],
+                'total_units_required' => $request->required_quantity ?? 0,
                 'products_summary' => array_map(function($product) {
                     return [
                         'product_id' => $product['product_id'],
@@ -2015,7 +2052,7 @@ class ProductionOrderController extends Controller
         // Build source products and sub-products lists for type2/type3
         $sourceProducts = [];
         $subProducts = collect();
-        if (in_array($order->production_type, ['type2', 'type3', 'type5'])) {
+        if (in_array($order->production_type, ['type2', 'type3', 'type4', 'type5'])) {
             $additionalData = is_array($order->additional_data)
                 ? $order->additional_data
                 : json_decode($order->additional_data ?? '{}', true);
@@ -2055,6 +2092,8 @@ class ProductionOrderController extends Controller
                 $subProducts = collect($order->getType2ProductionSummary());
             } elseif ($order->production_type === 'type3') {
                 $subProducts = collect($order->getType3ProductionSummary());
+            } elseif ($order->production_type === 'type4') {
+                $subProducts = collect($order->getType4ProductionSummary());
             } else {
                 $subProducts = collect($order->getType5ProductionSummary());
             }
@@ -3275,7 +3314,7 @@ class ProductionOrderController extends Controller
 
         // Source articles for type3 (stored in additional_data)
         $sourceProducts = collect();
-        if ($order->production_type === 'type3') {
+        if (in_array($order->production_type, ['type3', 'type4'])) {
             $additionalData = json_decode($order->additional_data ?? '', true);
             $sourceProducts = collect($additionalData['source_products'] ?? []);
             if ($sourceProducts->isEmpty() && $order->source_product_id) {
@@ -3394,8 +3433,9 @@ class ProductionOrderController extends Controller
             ]);
         } elseif ($order->production_type === 'type4') {
             $request->validate([
-                'source_product_id' => 'required|exists:products,product_id',
-                'type4_total_units' => 'required|numeric|min:0.01',
+                'type4_source_products' => 'required|array|min:1',
+                'type4_source_products.*.product_id' => 'required|exists:products,product_id',
+                'type4_source_products.*.quantity' => 'required|numeric|min:0.01',
                 'type4_products' => 'required|array|min:1',
                 'type4_products.*.product_id' => 'required|exists:products,product_id',
                 'type4_products.*.quantity_to_produce' => 'required|numeric|min:0.01',
@@ -3722,19 +3762,37 @@ class ProductionOrderController extends Controller
                     break;
 
                 case 'type4':
-                    if (!$request->source_product_id) {
-                        throw new \Exception("Le produit source est requis pour la transformation.");
+                    // Multiple produits sources (vente) → multiple produits finaux
+                    $totalUnitsRequired = 0;
+                    $totalSourceVolume = 0;
+                    $sourceProduct = null;
+                    $resolvedSourceProducts = [];
+
+                    foreach ($request->type4_source_products as $spIndex => $spData) {
+                        $spProduct = Product::findOrFail($spData['product_id']);
+
+                        if (!$spProduct->isFinaleProduct() && $spProduct->product_type !== 'both') {
+                            throw new \Exception("Le produit source #" . ($spIndex + 1) . " doit être de type vente (finale) pour la transformation.");
+                        }
+
+                        $spQty = (float) $spData['quantity'];
+                        $totalSourceVolume += $this->calculateProductVolume($spProduct) * $spQty;
+                        $totalUnitsRequired += $spQty;
+
+                        $resolvedSourceProducts[] = [
+                            'product_id' => $spProduct->product_id,
+                            'product_name' => $spProduct->product_name,
+                            'product_code' => $spProduct->product_code,
+                            'quantity' => $spQty,
+                        ];
+
+                        if ($sourceProduct === null) {
+                            $sourceProduct = $spProduct;
+                        }
                     }
 
-                    $sourceProduct = Product::findOrFail($request->source_product_id);
-
-                    if (!$sourceProduct->isFinaleProduct() && $sourceProduct->product_type !== 'both') {
-                        throw new \Exception("Le produit source doit être de type vente (finale) pour la transformation.");
-                    }
-
-                    $sourceVolumePerUnit = $this->calculateProductVolume($sourceProduct);
-                    $totalUnitsRequired = (float) $request->type4_total_units;
-                    $totalSourceVolume = $totalUnitsRequired * $sourceVolumePerUnit;
+                    $sourceVolumePerUnit = $totalUnitsRequired > 0 ? $totalSourceVolume / $totalUnitsRequired : 0;
+                    $request->merge(['source_product_id' => $sourceProduct->product_id]);
 
                     $totalQuantityToProduce = 0;
                     $totalVolume = 0;
@@ -3785,8 +3843,13 @@ class ProductionOrderController extends Controller
 
                     $requiredQuantity = $totalUnitsRequired;
 
-                    $this->checkSourceProductStock($sourceProduct, $requiredQuantity,
-                        $finalFamille ? $finalFamille->famille_id : null);
+                    foreach ($resolvedSourceProducts as $spResolved) {
+                        $this->checkSourceProductStock(Product::findOrFail($spResolved['product_id']),
+                            $spResolved['quantity'], $finalFamille ? $finalFamille->famille_id : null);
+                    }
+
+                    $request->merge(['quantity_to_produce' => $totalQuantityToProduce]);
+                    $request->merge(['required_quantity' => $totalUnitsRequired]);
 
                     $sourceVolume = $sourceVolumePerUnit;
                     $finalVolume = 0;

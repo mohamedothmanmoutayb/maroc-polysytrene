@@ -327,14 +327,20 @@
             function displayOrderInfo(order) {
                 const sourceProduct = order.sourceProduct || {};
                 const conversionDetails = order.conversion_details || {};
-                console.log(order)
+                const sourceProducts = {!! json_encode($sourceProducts ?? []) !!};
+                const sourcesHtml = sourceProducts.map(sp =>
+                    `<div class="d-flex justify-content-between py-1 border-bottom">
+                        <span>${sp.product_name}</span>
+                        <span class="badge bg-secondary">${parseFloat(sp.quantity)} u</span>
+                    </div>`
+                ).join('');
 
                 let html = `
                     <div class="order-info-card">
                         <h6 class="mb-3"><i class="fas fa-box me-2"></i>${order.order_number || 'N/A'}</h6>
-                        <div class="order-info-row">
-                            <span class="order-info-label">Produit Source:</span>
-                            <span class="order-info-value"><strong>${conversionDetails.source_product_name || sourceProduct.product_name || 'N/A'}</strong></span>
+                        <div class="mb-2">
+                            <span class="order-info-label">Produits Sources:</span>
+                            ${sourcesHtml || `<div><strong>${conversionDetails.source_product_name || sourceProduct.product_name || 'N/A'}</strong></div>`}
                         </div>
                         <div class="order-info-row">
                             <span class="order-info-label">Famille Source:</span>

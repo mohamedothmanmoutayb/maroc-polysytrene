@@ -82,7 +82,6 @@
         /* Badges with better contrast */
         .badge {
             background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff !important;
             border: 1px solid rgba(255, 255, 255, 0.2);
             font-weight: 500;
         }

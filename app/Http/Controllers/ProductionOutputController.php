@@ -767,7 +767,28 @@ class ProductionOutputController extends Controller
                 'products_count' => count($products)
             ]);
 
-            return view('pages.production-output.type4-create', compact('order', 'products'));
+            $additionalData = is_array($order->additional_data)
+                ? $order->additional_data
+                : json_decode($order->additional_data ?? '{}', true);
+
+            $sourceProducts = [];
+            foreach (($additionalData['source_products'] ?? []) as $sp) {
+                $name = $sp['product_name'] ?? null;
+                if (!$name) {
+                    $found = Product::find($sp['product_id'] ?? null);
+                    $name = $found ? $found->product_name : 'Inconnu';
+                }
+                $sourceProducts[] = ['product_name' => $name, 'quantity' => $sp['quantity'] ?? 0];
+            }
+            // Orders created before multi-source support
+            if (empty($sourceProducts) && $order->sourceProduct) {
+                $sourceProducts[] = [
+                    'product_name' => $order->sourceProduct->product_name,
+                    'quantity' => $order->required_quantity,
+                ];
+            }
+
+            return view('pages.production-output.type4-create', compact('order', 'products', 'sourceProducts'));
 
         } catch (\Exception $e) {
             Log::error('Error in createType4', [

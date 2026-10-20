@@ -334,7 +334,7 @@
     </table>
 
     {{-- Source products / Final products (type2, type3, type5) --}}
-    @if (in_array($order->production_type, ['type2', 'type3', 'type5']))
+    @if (in_array($order->production_type, ['type2', 'type3', 'type4', 'type5']))
         <div class="section-title">{{ $order->production_type === 'type5' ? 'Chutes Utilisées & Produits à Produire' : 'Produits Sources & Produits à Produire' }}</div>
         <table class="two-col">
             <tr>
@@ -371,7 +371,7 @@
                                     <tr>
                                         <td>{{ $sp['product_code'] ?: '—' }}</td>
                                         <td>{{ $sp['product_name'] }}</td>
-                                        <td class="text-right">{{ number_format($sp['quantity'], 0, ',', ' ') }}</td>
+                                        <td class="text-right">{{ rtrim(rtrim(number_format($sp['quantity'], 2, ",", " "), "0"), ",") }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -404,9 +404,9 @@
                                     <tr>
                                         <td>{{ $sp['product_code'] ?? $sp->product_code ?? '—' }}</td>
                                         <td>{{ $sp['product_name'] ?? $sp->product_name ?? '—' }}</td>
-                                        <td class="text-right">{{ number_format($planned) }}</td>
-                                        <td class="text-right">{{ number_format($produced) }}</td>
-                                        <td class="text-right">{{ number_format($remaining) }}</td>
+                                        <td class="text-right">{{ rtrim(rtrim(number_format($planned, 2, ",", " "), "0"), ",") }}</td>
+                                        <td class="text-right">{{ rtrim(rtrim(number_format($produced, 2, ",", " "), "0"), ",") }}</td>
+                                        <td class="text-right">{{ rtrim(rtrim(number_format($remaining, 2, ",", " "), "0"), ",") }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -458,8 +458,8 @@
             <tr>
                 <td class="label">Quantité bonne / défectueuse</td>
                 <td colspan="3">
-                    {{ number_format($qualityMetrics['quality']['total_good_quantity'] ?? 0) }} bonnes /
-                    {{ number_format($qualityMetrics['quality']['total_defective_quantity'] ?? 0) }} défectueuses
+                    {{ rtrim(rtrim(number_format($qualityMetrics['quality']['total_good_quantity'] ?? 0, 2, ",", " "), "0"), ",") }} bonnes /
+                    {{ rtrim(rtrim(number_format($qualityMetrics['quality']['total_defective_quantity'] ?? 0, 2, ",", " "), "0"), ",") }} défectueuses
                 </td>
             </tr>
             @if ($qualityMetrics['quality']['quality_notes'])

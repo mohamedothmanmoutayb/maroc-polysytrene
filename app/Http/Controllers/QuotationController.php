@@ -72,7 +72,7 @@ class QuotationController extends Controller
                     return $btn;
                 })
                 ->addColumn('client_name', function($row){
-                    return $row->client->display_name;
+                    return $row->client_name ?: ($row->client ? $row->client->display_name : 'N/A');
                 })
                 ->addColumn('status_badge', function($row){
                     $badges = [
@@ -112,26 +112,26 @@ class QuotationController extends Controller
     public function create()
     {
         $clients = Client::where('is_active', true)->get();
-        $units = ['kg', 'meter', 'piece', 'liter', 'roll', 'sheet'];
 
         // Generate quote number with format YYYY-001
         $nextQuoteNumber = Quotation::generateQuoteNumber();
 
-        return view('pages.sales.quotations.create', compact('clients', 'units', 'nextQuoteNumber'));
+        return view('pages.sales.quotations.create', compact('clients', 'nextQuoteNumber'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'quote_number' => 'required|unique:quotations|max:50',
-            'client_id' => 'required|exists:clients,client_id',
+            'client_id' => 'nullable|exists:clients,client_id',
+            'client_name' => 'nullable|string|max:255|required_without:client_id',
             'quote_date' => 'required|date',
             'valid_until' => 'nullable|date',
             'items' => 'required|array|min:1',
             'items.*.type' => 'nullable|in:raw_material,production,decoupage,finale',
             'items.*.item_id' => 'nullable',
             'items.*.name' => 'required|string|max:255',
-            'items.*.unit' => 'required|in:kg,meter,piece,liter,roll,sheet',
+            'items.*.unit' => 'required|string|max:50',
             'items.*.quantity' => 'required|numeric|min:0.0001',
             'items.*.unit_price' => 'required|numeric|min:0',
             'items.*.family_id' => 'nullable',
@@ -170,7 +170,8 @@ class QuotationController extends Controller
 
             $quotation = Quotation::create([
                 'quote_number' => $request->quote_number,
-                'client_id' => $request->client_id,
+                'client_id' => $request->filled('client_id') ? $request->client_id : null,
+                'client_name' => $request->filled('client_name') ? $request->client_name : null,
                 'quote_date' => $request->quote_date,
                 'valid_until' => $request->valid_until,
                 'total_amount' => $totalAmount,
@@ -221,9 +222,8 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::with('items')->findOrFail($id);
         $clients = Client::where('is_active', true)->get();
-        $units = ['kg', 'meter', 'piece', 'liter', 'roll', 'sheet'];
 
-        return view('pages.sales.quotations.edit', compact('quotation', 'clients', 'units'));
+        return view('pages.sales.quotations.edit', compact('quotation', 'clients'));
     }
 
     public function show($id)
@@ -241,14 +241,15 @@ class QuotationController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'client_id' => 'required|exists:clients,client_id',
+            'client_id' => 'nullable|exists:clients,client_id',
+            'client_name' => 'nullable|string|max:255|required_without:client_id',
             'quote_date' => 'required|date',
             'valid_until' => 'nullable|date',
             'items' => 'required|array|min:1',
             'items.*.type' => 'nullable|in:raw_material,production,decoupage,finale',
             'items.*.item_id' => 'nullable',
             'items.*.name' => 'required|string|max:255',
-            'items.*.unit' => 'required|in:kg,meter,piece,liter,roll,sheet',
+            'items.*.unit' => 'required|string|max:50',
             'items.*.quantity' => 'required|numeric|min:0.0001',
             'items.*.unit_price' => 'required|numeric|min:0',
             'items.*.family_id' => 'nullable',
@@ -289,7 +290,8 @@ class QuotationController extends Controller
 
             // Update quotation
             $quotation->update([
-                'client_id' => $request->client_id,
+                'client_id' => $request->filled('client_id') ? $request->client_id : null,
+                'client_name' => $request->filled('client_name') ? $request->client_name : null,
                 'quote_date' => $request->quote_date,
                 'valid_until' => $request->valid_until,
                 'total_amount' => $totalAmount,
@@ -541,6 +543,7 @@ class QuotationController extends Controller
             $quotation = Quotation::with(['client', 'items'])->findOrFail($id);
             $showPrices = $request->query('show_prices', 1);
             $showLogo = $request->query('show_logo', 1);
+            $showCacher = $request->query('show_cacher', 1);
             $displayType = $request->query('display_type', 'unite');
             // Label only: switches the wording TTC/HT on the PDF, the amounts
             // themselves are never recalculated.
@@ -576,12 +579,21 @@ class QuotationController extends Controller
                 }
             // }
 
+            $cacherBase64 = '';
+            $cacherPath = public_path('assets/images/logos/cacher.png');
+
+            if (file_exists($cacherPath)) {
+                $cacherContent = file_get_contents($cacherPath);
+                $cacherBase64 = 'data:image/png;base64,' . base64_encode($cacherContent);
+            }
+
             $data = [
                 'quotation' => $quotation,
                 'client' => $quotation->client,
                 'items' => $quotation->items,
                 'showPrices' => (bool) $showPrices,
                 'showLogo' => (bool) $showLogo,
+                'showCacher' => (bool) $showCacher,
                 'displayType' => $displayType,
                 'priceType' => $priceType,
                 'totalVolume' => $totalVolume,
@@ -591,6 +603,7 @@ class QuotationController extends Controller
                 'username' => auth()->user()->name ?? auth()->user()->username,
                 'totalQuantity' => $totalQuantity,
                 'enteteBase64' => $enteteBase64,
+                'cacherBase64' => $cacherBase64,
                 'numberToFrench' => function($number) {
                         return $this->numberToFrench($number);
                     }

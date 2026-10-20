@@ -106,22 +106,25 @@
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h6 class="card-title text-primary">Informations Client</h6>
+                                        @php
+                                            $client = $quotation->client;
+                                        @endphp
                                         <table class="table table-sm">
                                             <tr>
                                                 <th width="40%">Nom:</th>
-                                                <td>{{ $quotation->client->display_name }}</td>
+                                                <td>{{ $quotation->client_name ?: ($client ? $client->display_name : '-') }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Téléphone:</th>
-                                                <td>{{ $quotation->client->phone }}</td>
+                                                <td>{{ $client->phone ?? '-' }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Email:</th>
-                                                <td>{{ $quotation->client->email ?? '-' }}</td>
+                                                <td>{{ $client->email ?? '-' }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Adresse:</th>
-                                                <td>{{ $quotation->client->address ?? '-' }}</td>
+                                                <td>{{ $client->address ?? '-' }}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -302,6 +305,29 @@
                                 Change uniquement le libellé imprimé, les montants restent identiques.
                             </small>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cachet / Signature</label>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="show_cacher"
+                                            id="showCacherYes" value="1" checked>
+                                        <label class="form-check-label" for="showCacherYes">
+                                            <i class="fas fa-stamp text-info me-1"></i>Avec cachet
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="show_cacher"
+                                            id="showCacherNo" value="0">
+                                        <label class="form-check-label" for="showCacherNo">
+                                            <i class="fas fa-ban text-secondary me-1"></i>Sans cachet
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -373,9 +399,10 @@
                 const showLogo = $('#showLogo').val();
                 const displayType = $('#displayType').val();
                 const priceType = $('#priceType').val();
+                const showCacher = $('input[name="show_cacher"]:checked').val();
 
                 const url =
-                    `/sales/quotations/${quoteId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}&price_type=${priceType}`;
+                    `/sales/quotations/${quoteId}/pdf?show_prices=${showPrices}&show_logo=${showLogo}&display_type=${displayType}&price_type=${priceType}&show_cacher=${showCacher}`;
 
                 const printWindow = window.open(url, '_blank', 'width=800,height=600');
 

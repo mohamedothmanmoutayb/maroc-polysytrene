@@ -157,12 +157,20 @@ class CreditNote extends Model
      */
     public static function generateNumber()
     {
-        $year = date('Y');
-        $month = date('m');
-        $last = self::whereYear('created_at', $year)
-            ->whereMonth('created_at', $month)
-            ->count();
+        $prefix = date('Y') . date('m') . '-';
 
-        return $year . $month . '-' . str_pad($last + 1, 4, '0', STR_PAD_LEFT);
+        // Cherche le plus grand numéro déjà utilisé ce mois-ci, y compris les
+        // avoirs supprimés (soft delete), pour ne jamais réutiliser un numéro.
+        $lastSequence = self::withTrashed()
+            ->where('credit_note_number', 'like', $prefix . '%')
+            ->pluck('credit_note_number')
+            ->map(function ($number) use ($prefix) {
+                return (int) substr($number, strlen($prefix));
+            })
+            ->max();
+
+        $next = ($lastSequence ?? 0) + 1;
+
+        return $prefix . str_pad($next, 4, '0', STR_PAD_LEFT);
     }
 }

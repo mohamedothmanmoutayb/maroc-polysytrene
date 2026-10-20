@@ -195,6 +195,12 @@
             flex-shrink: 0;
         }
 
+        .signature-section {
+            margin-top: 10px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
         .price-column {
             text-align: right;
             font-weight: normal;
@@ -202,16 +208,20 @@
 
         /* Column widths */
         .col-quantity {
-            width: 15%;
+            width: 10%;
         }
 
         .col-designation {
-            width: 55%;
+            width: 45%;
             text-align: left;
         }
 
         .col-unit {
-            width: 15%;
+            width: 12%;
+        }
+
+        .col-price {
+            width: 18%;
         }
 
         .col-total {
@@ -259,8 +269,8 @@
                 <div class="date-info">
                     <p class="underline-with-border">Agadir le : {{ $date }}</p>
                     <div class="client-info">
-                        <p>{{ $client->display_name }}</p>
-                        @if ($client->ice)
+                        <p>{{ $client ? $client->display_name : ($quotation->client_name ?: '') }}</p>
+                        @if ($client && $client->ice)
                             <p class="client-ice">ICE : {{ $client->ice }}</p>
                         @endif
                     </div>
@@ -286,6 +296,7 @@
                         @else
                             <th class="col-unit">UNITE</th>
                         @endif
+                        <th class="col-price">PRIX UNITAIRE</th>
                         <th class="col-total">TOTAL {{ ($priceType ?? 'ttc') === 'ht' ? 'HT' : 'TTC' }}</th>
                     </tr>
                 </thead>
@@ -310,10 +321,9 @@
 
                             $productUnit = $item->unit_of_measure ?: $productUnit;
 
-                            // Round up unit price to nearest integer
-                            $roundedUnitPrice = ceil($item->unit_price);
-                            // Calculate rounded total price
-                            $roundedTotalPrice = $roundedUnitPrice * $item->quantity;
+                            // Prix conservés tels que saisis (aucun arrondi supérieur).
+                            $unitPriceFormatted = rtrim(rtrim(number_format((float) $item->unit_price, 2, '.', ''), '0'), '.');
+                            $totalPriceFormatted = rtrim(rtrim(number_format((float) $item->total_price, 2, '.', ''), '0'), '.');
                         @endphp
                         <tr>
                             <td class="text-center">
@@ -332,7 +342,10 @@
                                 </td>
                             @endif
                             <td class="text-right price-column">
-                                <strong>{{ number_format($roundedTotalPrice, 0) }} DH</strong>
+                                {{ $unitPriceFormatted }} DH
+                            </td>
+                            <td class="text-right price-column">
+                                <strong>{{ $totalPriceFormatted }} DH</strong>
                             </td>
                         </tr>
                     @endforeach
@@ -353,6 +366,15 @@
                 <strong>Conditions :</strong> {{ $quotation->terms_conditions }}
             </div>
         @endif
+
+        <!-- Cachet / Signature -->
+        <div class="signature-section">
+            @if ($showCacher && $cacherBase64)
+                <img src="{{ $cacherBase64 }}" alt="Cachet"
+                    style="height: 180px; width: auto; max-width: 180px; object-fit: contain;"
+                    onerror="this.style.display='none'">
+            @endif
+        </div>
     </div>
 </body>
 

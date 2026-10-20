@@ -17,6 +17,7 @@ class Quotation extends Model
     protected $fillable = [
         'quote_number',
         'client_id',
+        'client_name',
         'quote_date',
         'valid_until',
         'total_amount',

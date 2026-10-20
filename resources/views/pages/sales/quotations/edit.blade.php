@@ -64,18 +64,41 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="client_id" class="form-label">Client *</label>
-                                        <select class="form-control select2" id="client_id" name="client_id" required>
-                                            <option value="">Sélectionner un client</option>
-                                            @foreach ($clients as $client)
-                                                <option value="{{ $client->client_id }}"
-                                                    data-client-type="{{ $client->client_type }}"
-                                                    {{ $quotation->client_id == $client->client_id ? 'selected' : '' }}>
-                                                    {{ $client->display_name }} ({{ $client->phone }}) -
-                                                    {{ $client->client_type_label }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <label class="form-label mb-0 me-3">Client *</label>
+                                            <div class="form-check form-check-inline mb-0">
+                                                <input class="form-check-input client-mode" type="radio"
+                                                    name="client_mode" id="clientModeSelect" value="select"
+                                                    {{ !$quotation->client_id ? '' : 'checked' }}>
+                                                <label class="form-check-label" for="clientModeSelect">Sélectionner un
+                                                    client</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mb-0">
+                                                <input class="form-check-input client-mode" type="radio"
+                                                    name="client_mode" id="clientModeManual" value="manual"
+                                                    {{ !$quotation->client_id ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="clientModeManual">Saisir
+                                                    manuellement</label>
+                                            </div>
+                                        </div>
+                                        <div id="clientSelectWrapper" style="{{ $quotation->client_id ? '' : 'display:none;' }}">
+                                            <select class="form-control select2" id="client_id" name="client_id">
+                                                <option value="">Sélectionner un client</option>
+                                                @foreach ($clients as $client)
+                                                    <option value="{{ $client->client_id }}"
+                                                        data-client-type="{{ $client->client_type }}"
+                                                        {{ $quotation->client_id == $client->client_id ? 'selected' : '' }}>
+                                                        {{ $client->display_name }} ({{ $client->phone }}) -
+                                                        {{ $client->client_type_label }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div id="clientManualWrapper" style="{{ $quotation->client_id ? 'display:none;' : '' }}">
+                                            <input type="text" class="form-control" id="client_name" name="client_name"
+                                                placeholder="Nom du client"
+                                                value="{{ $quotation->client_name }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -223,9 +246,25 @@
                 allowClear: true
             });
 
+            // Toggle between selecting an existing client and typing a name manually
+            $('.client-mode').change(function() {
+                toggleClientMode();
+            });
+
+            function toggleClientMode() {
+                if ($('input[name="client_mode"]:checked').val() === 'manual') {
+                    $('#clientSelectWrapper').hide();
+                    $('#clientManualWrapper').show();
+                    $('#client_id').val(null).trigger('change');
+                } else {
+                    $('#clientSelectWrapper').show();
+                    $('#clientManualWrapper').hide();
+                    $('#client_name').val('');
+                }
+            }
+
             let itemCounter = 0;
             let existingItems = @json($quotation->items);
-            const units = @json($units);
 
             // Load existing items
             if (existingItems && existingItems.length > 0) {
@@ -251,9 +290,6 @@
             function addItemRow(item = null) {
                 let rowId = 'item_' + Date.now() + '_' + itemCounter;
                 let itemIndex = itemCounter;
-                let unitOptions = units.map(function(unit) {
-                    return $('<option>').val(unit).text(unit)[0].outerHTML;
-                }).join('');
 
                 let row = `
                 <tr id="${rowId}" data-index="${itemIndex}">
@@ -267,9 +303,9 @@
                         <input type="hidden" class="family-name" name="items[${itemIndex}][family_name]">
                     </td>
                     <td>
-                        <select class="form-control item-unit" name="items[${itemIndex}][unit]" required>
-                            ${unitOptions}
-                        </select>
+                        <input type="text" class="form-control item-unit"
+                            name="items[${itemIndex}][unit]"
+                            value="piece" placeholder="Unité" required>
                     </td>
                     <td>
                         <input type="number" class="form-control item-quantity"
@@ -294,8 +330,8 @@
 
                 if (item) {
                     $(`#${rowId} .item-name`).val(item.item_name || '');
+                    $(`#${rowId} .item-unit`).val(item.unit_of_measure || 'piece');
                 }
-                $(`#${rowId} .item-unit`).val(item && item.unit_of_measure ? item.unit_of_measure : 'piece');
 
                 $(`#${rowId} .item-select`).select2({
                     language: "fr",
@@ -610,8 +646,13 @@
                 }
 
                 // Validate client
-                let clientId = $('#client_id').val();
-                if (!clientId) {
+                let clientMode = $('input[name="client_mode"]:checked').val();
+                if (clientMode === 'manual') {
+                    if (!$('#client_name').val().trim()) {
+                        showToast('error', 'Veuillez saisir le nom du client');
+                        return;
+                    }
+                } else if (!$('#client_id').val()) {
                     showToast('error', 'Veuillez sélectionner un client');
                     return;
                 }
