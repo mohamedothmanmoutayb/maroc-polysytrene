@@ -87,6 +87,7 @@
                                                 @foreach ($clients as $client)
                                                     <option value="{{ $client->client_id }}"
                                                         data-client-type="{{ $client->client_type }}"
+                                                        data-ice="{{ $client->ice }}"
                                                         {{ $quotation->client_id == $client->client_id ? 'selected' : '' }}>
                                                         {{ $client->display_name }} ({{ $client->phone }}) -
                                                         {{ $client->client_type_label }}
@@ -98,6 +99,12 @@
                                             <input type="text" class="form-control" id="client_name" name="client_name"
                                                 placeholder="Nom du client"
                                                 value="{{ $quotation->client_name }}">
+                                        </div>
+                                        <div class="mt-2">
+                                            <label for="client_ice" class="form-label">ICE</label>
+                                            <input type="text" class="form-control" id="client_ice" name="client_ice"
+                                                placeholder="ICE du client"
+                                                value="{{ $quotation->client_ice }}">
                                         </div>
                                     </div>
                                 </div>
@@ -508,6 +515,7 @@
             $('#client_id').change(function() {
                 let clientId = $(this).val();
                 let clientType = $(this).find(':selected').data('client-type') || 'client';
+                $('#client_ice').val($(this).find(':selected').data('ice') || '');
 
                 if (clientId) {
                     $('#items-body tr').each(function() {

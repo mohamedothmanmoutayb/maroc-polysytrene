@@ -270,8 +270,9 @@
                     <p class="underline-with-border">Agadir le : {{ $date }}</p>
                     <div class="client-info">
                         <p>{{ $client ? $client->display_name : ($quotation->client_name ?: '') }}</p>
-                        @if ($client && $client->ice)
-                            <p class="client-ice">ICE : {{ $client->ice }}</p>
+                        @php $clientIce = $quotation->client_ice ?: ($client->ice ?? null); @endphp
+                        @if ($clientIce)
+                            <p class="client-ice">ICE : {{ $clientIce }}</p>
                         @endif
                     </div>
                 </div>

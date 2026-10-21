@@ -82,7 +82,8 @@
                                                 <option value="">Sélectionner un client</option>
                                                 @foreach ($clients as $client)
                                                     <option value="{{ $client->client_id }}"
-                                                        data-client-type="{{ $client->client_type }}">
+                                                        data-client-type="{{ $client->client_type }}"
+                                                        data-ice="{{ $client->ice }}">
                                                         {{ $client->display_name }} ({{ $client->phone }}) -
                                                         {{ $client->client_type_label }}
                                                     </option>
@@ -92,6 +93,11 @@
                                         <div id="clientManualWrapper" style="display:none;">
                                             <input type="text" class="form-control" id="client_name" name="client_name"
                                                 placeholder="Nom du client">
+                                        </div>
+                                        <div class="mt-2">
+                                            <label for="client_ice" class="form-label">ICE</label>
+                                            <input type="text" class="form-control" id="client_ice" name="client_ice"
+                                                placeholder="ICE du client">
                                         </div>
                                     </div>
                                 </div>
@@ -514,6 +520,8 @@
             }
 
             $('#client_id').change(function() {
+                let selected = $(this).find(':selected');
+                $('#client_ice').val(selected.data('ice') || '');
                 // Article descriptions and prices are entered manually.
                 return;
                 let clientId = $(this).val();

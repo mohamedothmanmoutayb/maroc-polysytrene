@@ -18,6 +18,7 @@ class Quotation extends Model
         'quote_number',
         'client_id',
         'client_name',
+        'client_ice',
         'quote_date',
         'valid_until',
         'total_amount',
