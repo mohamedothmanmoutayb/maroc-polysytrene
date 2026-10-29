@@ -9,6 +9,9 @@ use App\Models\SalesOrder;
 use App\Models\SalesOrderItem;
 use App\Models\SalesOrderPayment;
 use App\Models\ProductFamilleStock;
+use App\Models\RawMaterial;
+use App\Models\RawMaterialStockMovement;
+use App\Models\StockMovementDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -795,7 +798,9 @@ class CreditNoteController extends Controller
         // rien à reprendre de ce côté.
         if ($creditNote->status === 'processed') {
             foreach ($creditNote->items as $item) {
-                if ($item->item_type !== 'raw_material' && !empty($item->family_id)) {
+                if ($item->item_type === 'raw_material') {
+                    $this->reverseRawMaterialReturn($item, $creditNote);
+                } elseif (!empty($item->family_id)) {
                     $this->updateProductStock($item, false);
                 }
             }
@@ -857,7 +862,9 @@ class CreditNoteController extends Controller
 
             // Update stock for each item (add back to stock)
             foreach ($creditNote->items as $item) {
-                if ($item->item_type !== 'raw_material' && !empty($item->family_id)) {
+                if ($item->item_type === 'raw_material') {
+                    $this->returnRawMaterialToStock($item, $creditNote);
+                } elseif (!empty($item->family_id)) {
                     $this->updateProductStock($item, true);
                 }
             }
@@ -926,6 +933,97 @@ class CreditNoteController extends Controller
                 'message' => 'Erreur lors du traitement de l\'avoir: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Remet une matière première retournée en stock: nouvelle couche FIFO + mouvement "return".
+     */
+    private function returnRawMaterialToStock($item, CreditNote $creditNote)
+    {
+        $material = RawMaterial::find($item->item_id);
+        $quantity = (float) $item->quantity;
+
+        if (!$material || $quantity <= 0) {
+            return;
+        }
+
+        $previousStock = (float) $material->current_stock;
+        $newStock = $previousStock + $quantity;
+
+        $lastLayer = StockMovementDetail::where('material_id', $material->material_id)
+            ->where('unit_price', '>', 0)
+            ->orderByDesc('stock_movement_id')
+            ->first();
+        $unitCost = $lastLayer ? (float) $lastLayer->unit_price : 0;
+
+        $movement = RawMaterialStockMovement::create([
+            'material_id' => $material->material_id,
+            'movement_type' => 'return',
+            'quantity' => $quantity,
+            'previous_stock' => $previousStock,
+            'new_stock' => $newStock,
+            'reference_type' => 'credit_note',
+            'reference_id' => $creditNote->credit_note_id,
+            'reference_number' => $creditNote->credit_note_number,
+            'performed_by' => Auth::id(),
+            'notes' => 'Retour MP - Avoir N°' . $creditNote->credit_note_number,
+        ]);
+
+        StockMovementDetail::create([
+            'stock_movement_id' => $movement->movement_id,
+            'material_id' => $material->material_id,
+            'quantity' => $quantity,
+            'unit_price' => $unitCost,
+            'total_price' => $quantity * $unitCost,
+            'remaining_quantity' => $quantity,
+        ]);
+
+        $material->current_stock = $newStock;
+        $material->save();
+    }
+
+    /**
+     * Reprend le stock matière première remis par returnRawMaterialToStock().
+     */
+    private function reverseRawMaterialReturn($item, CreditNote $creditNote)
+    {
+        $material = RawMaterial::find($item->item_id);
+        $quantity = (float) $item->quantity;
+
+        if (!$material || $quantity <= 0) {
+            return;
+        }
+
+        $returnMovement = RawMaterialStockMovement::where('reference_type', 'credit_note')
+            ->where('reference_id', $creditNote->credit_note_id)
+            ->where('material_id', $material->material_id)
+            ->where('movement_type', 'return')
+            ->latest('movement_id')
+            ->first();
+
+        if ($returnMovement) {
+            StockMovementDetail::where('stock_movement_id', $returnMovement->movement_id)
+                ->update(['remaining_quantity' => 0]);
+        }
+
+        $previousStock = (float) $material->current_stock;
+        $newStock = $previousStock - $quantity;
+
+        RawMaterialStockMovement::create([
+            'material_id' => $material->material_id,
+            'movement_type' => 'cancellation',
+            'quantity' => -$quantity,
+            'previous_stock' => $previousStock,
+            'new_stock' => $newStock,
+            'reference_type' => 'credit_note',
+            'reference_id' => $creditNote->credit_note_id,
+            'reference_number' => $creditNote->credit_note_number,
+            'performed_by' => Auth::id(),
+            'notes' => 'Annulation retour MP - Avoir N°' . $creditNote->credit_note_number,
+        ]);
+
+        $material->current_stock = $newStock;
+        $material->save();
     }
 
     /**
