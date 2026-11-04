@@ -337,6 +337,7 @@
                                                     <span class="input-group-text">m³</span>
                                                 </div>
                                                 <small class="form-text text-muted" id="type2_waste_info"></small>
+                                                <div id="type2SousBlocWarning" class="alert alert-warning d-none mt-2 mb-0 py-2 px-3 small" role="alert"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -411,6 +412,7 @@
                                                     <span class="input-group-text">m³</span>
                                                 </div>
                                                 <small class="form-text text-muted" id="type3_waste_info"></small>
+                                                <div id="type3SousBlocWarning" class="alert alert-warning d-none mt-2 mb-0 py-2 px-3 small" role="alert"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1755,6 +1757,37 @@
 
             // Replace the updateType2Calculation function with this:
 
+            // ── Seuil de chute : le taux de chute ne doit pas dépasser 10 % ──
+            const SOUS_BLOC_WASTE_LIMIT = 10;
+
+            // Avertit (sans bloquer) quand la chute estimée dépasse le seuil et
+            // propose deux leviers : réduire le volume source, ou ajouter des produits.
+            function renderWasteLimitWarning(selector, sourceVolume, producedVolume, unitVolume, unitName) {
+                const $box = $(selector);
+                if (sourceVolume <= 0 || producedVolume <= 0 || producedVolume > sourceVolume) {
+                    $box.addClass('d-none').empty();
+                    return;
+                }
+                const waste = sourceVolume - producedVolume;
+                const rate = waste / sourceVolume * 100;
+                if (rate <= SOUS_BLOC_WASTE_LIMIT) {
+                    $box.addClass('d-none').empty();
+                    return;
+                }
+                const maxSource = producedVolume / (1 - SOUS_BLOC_WASTE_LIMIT / 100);
+                const reduceBy = sourceVolume - maxSource;
+                const addVolume = sourceVolume * (1 - SOUS_BLOC_WASTE_LIMIT / 100) - producedVolume;
+                const addUnits = unitVolume > 0 ? Math.ceil(addVolume / unitVolume) : 0;
+                $box.html(`
+                    <strong><i class="fas fa-exclamation-triangle me-1"></i>Taux de chute trop élevé : ${rate.toFixed(2)} %
+                    (maximum recommandé ${SOUS_BLOC_WASTE_LIMIT} %)</strong>
+                    <ul class="mb-0 mt-1 ps-3">
+                        <li>Réduire le volume source d'au moins <strong>${reduceBy.toFixed(4)} m³</strong>
+                            (soit un maximum de ${maxSource.toFixed(4)} m³).</li>
+                        <li>Ou produire <strong>${addVolume.toFixed(4)} m³</strong> de plus${addUnits > 0 ? ` (≈ ${addUnits} × ${unitName || 'dernier produit'})` : ''}.</li>
+                    </ul>`).removeClass('d-none');
+            }
+
             function updateType2Calculation() {
                 const sourceProductId = $('#type2_source_product_id').val();
                 const familleId = getFamilleId();
@@ -1823,12 +1856,14 @@
                     <br>Veuillez réduire la quantité à produire ou augmenter le nombre de blocs.
                 `);
                             $('#type2VolumeExceedAlert').removeClass('d-none');
+                            $('#type2SousBlocWarning').addClass('d-none').empty();
                             $('#type2_waste_volume').val('');
                             $('#type2_waste_info').html(
                                 '<span class="text-danger">❌ Volume source insuffisant!</span>');
                         } else {
                             $('#type2VolumeExceedAlert').addClass('d-none');
                             const wasteVolumePositive = wasteVolume;
+                            renderWasteLimitWarning('#type2SousBlocWarning', totalSourceVolume, totalVolume, 0, '');
                             $('#type2_waste_volume').val(wasteVolumePositive.toFixed(4));
 
                             if (wasteVolumePositive > 0) {
@@ -1934,10 +1969,15 @@
                         <br>Veuillez réduire la quantité ou ajouter des sous-blocs.
                     `);
                     $('#type3VolumeExceedAlert').removeClass('d-none');
+                    $('#type3SousBlocWarning').addClass('d-none').empty();
                     $('#type3_waste_volume').val('');
                     $('#type3_waste_info').html('<span class="text-danger">❌ Volume source insuffisant!</span>');
                 } else {
                     $('#type3VolumeExceedAlert').addClass('d-none');
+                    const $lastRow = $('.type3-product-row').filter(function() { return $(this).find('.type3-product-select').val(); }).last();
+                    renderWasteLimitWarning('#type3SousBlocWarning', totalSourceVolume, totalVolume,
+                        parseFloat($lastRow.find('.type3-volume').val()) || 0,
+                        $lastRow.find('.type3-product-select option:selected').text().trim());
                     $('#type3_waste_volume').val(wasteVolume >= 0 ? wasteVolume.toFixed(4) : '0.0000');
 
                     if (wasteVolume > 0 && totalSourceVolume > 0) {
@@ -4111,6 +4151,7 @@
                 $('#noBomAlert').addClass('d-none');
                 $('#type2VolumeExceedAlert').addClass('d-none');
                 $('#type3VolumeExceedAlert').addClass('d-none');
+                $('#type2SousBlocWarning, #type3SousBlocWarning').addClass('d-none').empty();
                 $('#type4VolumeExceedAlert').addClass('d-none');
                 $('#type4InsufficientStockAlert').addClass('d-none');
                 $('#type5VolumeExceedAlert').addClass('d-none');

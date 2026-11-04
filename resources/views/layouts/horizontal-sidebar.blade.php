@@ -534,6 +534,37 @@
                         </li>
                     @endcan
 
+                    @can('view_checks')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <iconify-icon icon="solar:printer-bold-duotone"></iconify-icon>
+                                <span class="hide-menu">Chèques à imprimer</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('printed-cheques.index') }}">
+                                        <iconify-icon icon="solar:list-line-duotone" class="icon-small"></iconify-icon>
+                                        <span class="hide-menu">Liste</span>
+                                    </a>
+                                </li>
+                                @can('create_checks')
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="{{ route('printed-cheques.create') }}">
+                                            <iconify-icon icon="solar:plus-circle-line-duotone" class="icon-small"></iconify-icon>
+                                            <span class="hide-menu">Nouveau chèque</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="{{ route('cheque-banks.index') }}">
+                                            <iconify-icon icon="solar:buildings-2-line-duotone" class="icon-small"></iconify-icon>
+                                            <span class="hide-menu">Banques &amp; dimensions</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+
                     @can('view_traites')
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">

@@ -111,6 +111,35 @@
                                 <input type="date" class="form-control form-control-sm" id="dateTo">
                             </div>
                             <div class="col-md-3">
+                                <label class="form-label small text-muted mb-1">Famille</label>
+                                <select class="form-select form-select-sm" id="filterFamille">
+                                    <option value="">Toutes les familles</option>
+                                    @foreach ($familles as $f)
+                                        <option value="{{ $f->famille_id }}">{{ $f->famille_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label small text-muted mb-1">Article</label>
+                                <select class="form-select form-select-sm" id="filterArticle">
+                                    <option value="">Tous les articles</option>
+                                    <optgroup label="Produits">
+                                        @foreach ($filterProducts as $p)
+                                            <option value="p:{{ $p->product_id }}">{{ $p->product_name }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup label="Matières premières">
+                                        @foreach ($filterRawMaterials as $r)
+                                            <option value="r:{{ $r->material_id }}">{{ $r->material_name }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="small text-muted mb-1">Total des factures <span id="totalFilterHint"></span></div>
+                                <div class="fw-bold fs-5" id="table-total-amount">0,00 DH</div>
+                            </div>
+                            <div class="col-md-3">
                                 <button type="button" class="btn btn-sm btn-primary me-1" id="applyFilter">
                                     <i class="fas fa-filter me-1"></i> Appliquer
                                 </button>
@@ -406,12 +435,15 @@
                     data: function(d) {
                         d.date_from = $('#dateFrom').val();
                         d.date_to = $('#dateTo').val();
+                        d.famille_id = $('#filterFamille').val();
+                        d.article = $('#filterArticle').val();
                     }
                 },
                 drawCallback: function() {
                     var json = this.api().ajax.json();
                     if (json && json.total_amount !== undefined) {
                         $('#table-total-amount').text(formatCurrency(json.total_amount));
+                        $('#totalFilterHint').text(($('#filterFamille').val() || $('#filterArticle').val()) ? '(lignes filtrées)' : '');
                     }
                 },
                 columns: [{
@@ -482,6 +514,7 @@
                 const today = new Date().toISOString().split('T')[0];
                 $('#dateFrom').val(today);
                 $('#dateTo').val(today);
+                $('#filterFamille, #filterArticle').val('');
                 table.ajax.reload();
             });
 

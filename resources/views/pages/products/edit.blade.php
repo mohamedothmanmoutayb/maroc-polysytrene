@@ -173,6 +173,14 @@
                                             placeholder="Ex: 25.50">
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="cost_price" class="form-label">Prix de revient (DH)</label>
+                                        <input type="number" class="form-control" id="cost_price" name="cost_price"
+                                            min="0" step="0.01" placeholder="Ex: 120.00" value="{{ $product->cost_price }}">
+                                        <small class="form-text text-muted">Sert au calcul de la marge</small>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Stock Levels -->

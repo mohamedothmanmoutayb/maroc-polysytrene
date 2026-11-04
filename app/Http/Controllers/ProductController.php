@@ -329,6 +329,7 @@ class ProductController extends Controller
             'width_m' => 'nullable|numeric|min:0',
             'depth_m' => 'nullable|numeric|min:0',
             'weight_kg' => 'nullable|numeric|min:0',
+            'cost_price' => 'nullable|numeric|min:0',
 
             // Stock levels
             'min_stock_level' => 'nullable|numeric|min:0',
@@ -379,6 +380,7 @@ class ProductController extends Controller
             }
 
             $productData['is_active'] = $request->has('is_active');
+            $productData['cost_price'] = $request->input('cost_price') ?? 0;
 
             unset($productData['production_time_days']);
             unset($productData['material_type']);
@@ -1054,6 +1056,7 @@ class ProductController extends Controller
             'width_m' => 'nullable|numeric|min:0',
             'depth_m' => 'nullable|numeric|min:0',
             'weight_kg' => 'nullable|numeric|min:0',
+            'cost_price' => 'nullable|numeric|min:0',
 
             // Stock levels
             'min_stock_level' => 'nullable|numeric|min:0',
@@ -1108,6 +1111,9 @@ class ProductController extends Controller
 
             // Handle boolean fields
             $productData['is_active'] = $request->boolean('is_active');
+            if ($request->input('cost_price') === null) {
+                unset($productData['cost_price']); // champ vide : on conserve le prix de revient actuel
+            }
 
             // Remove any fields that shouldn't be in the products table
             unset($productData['production_time_days']);

@@ -38,7 +38,29 @@ class InvoiceController extends Controller
                 $query->whereDate('invoice_date', '<=', $request->date_to);
             }
 
-            $totalAmount = (clone $query)->sum('final_amount');
+            // Filtre famille / article : on ne garde que les factures contenant
+            // la ligne, et le total ne somme que les lignes correspondantes.
+            $familleId = $request->input('famille_id');
+            $article = $request->input('article'); // "p:ID" (produit) ou "r:ID" (matière première)
+            $lineFilter = function ($q) use ($familleId, $article) {
+                if ($familleId) {
+                    $q->where('family_id', $familleId);
+                }
+                if ($article && preg_match('/^([pr]):(\d+)$/', $article, $m)) {
+                    $m[1] === 'r'
+                        ? $q->where('item_type', 'raw_material')->where('item_id', $m[2])
+                        : $q->where('item_type', '!=', 'raw_material')->where('item_id', $m[2]);
+                }
+            };
+            $hasLineFilter = $familleId || $article;
+            if ($hasLineFilter) {
+                $query->whereHas('items', $lineFilter);
+            }
+
+            $totalAmount = $hasLineFilter
+                ? InvoiceItem::whereIn('invoice_id', (clone $query)->reorder()->select('invoices.invoice_id'))
+                    ->where($lineFilter)->sum('total_price')
+                : (clone $query)->sum('final_amount');
 
             $invoices = $query;
 
@@ -81,7 +103,11 @@ class InvoiceController extends Controller
                 ->make(true);
         }
 
-        return view('pages.sales.invoices.index');
+        return view('pages.sales.invoices.index', [
+            'familles' => \App\Models\Famille::orderBy('famille_name')->get(['famille_id', 'famille_name']),
+            'filterProducts' => Product::orderBy('product_name')->get(['product_id', 'product_name']),
+            'filterRawMaterials' => RawMaterial::orderBy('material_name')->get(['material_id', 'material_name']),
+        ]);
     }
 
     public function create()

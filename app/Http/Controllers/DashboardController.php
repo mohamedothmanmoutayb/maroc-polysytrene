@@ -616,7 +616,11 @@ class DashboardController extends Controller
             'total_material_value' => (float) $totalMaterialValue,
         ];
 
+        // ── Indicateurs commerciaux (admin uniquement) ────────────────────────
+        $adminInsights = $user->isAdmin() ? $this->buildAdminInsights($periodStart, $periodEnd) : null;
+
         return view('pages.dashboard.index', compact(
+            'adminInsights',
             'stats',
             'periodStart',
             'periodEnd',
@@ -660,6 +664,97 @@ class DashboardController extends Controller
      *
      * @return array{0: Carbon, 1: Carbon, 2: string, 3: string}
      */
+    /**
+     * Marges, crédit client et classements commerciaux (réservé aux admins).
+     * Coût = products.cost_price × quantité ; les lignes sans coût connu (matières
+     * premières, produit sans cost_price) sont comptées comme « coût manquant ».
+     */
+    private function buildAdminInsights($periodStart, $periodEnd): array
+    {
+        $productTypes = ['production', 'decoupage', 'finale'];
+
+        $lines = DB::table('sales_order_items as soi')
+            ->join('sales_orders as so', 'so.order_id', '=', 'soi.order_id')
+            ->leftJoin('products as p', function ($join) use ($productTypes) {
+                $join->on('p.product_id', '=', 'soi.item_id')->whereIn('soi.item_type', $productTypes);
+            })
+            ->whereBetween('so.order_date', [$periodStart, $periodEnd])
+            ->select(
+                'so.order_id', 'so.order_number', 'so.order_date', 'so.client_id',
+                'soi.item_id', 'soi.item_name', 'soi.quantity', 'soi.total_price',
+                DB::raw('COALESCE(p.cost_price, 0) as cost_price')
+            )
+            ->get()
+            ->map(function ($l) {
+                $l->cost = (float) $l->quantity * (float) $l->cost_price;
+                $l->missing_cost = (float) $l->cost_price <= 0;
+
+                return $l;
+            });
+
+        $clientNames = Client::whereIn('client_id', $lines->pluck('client_id')->unique())->get()
+            ->keyBy('client_id')->map->display_name;
+
+        $summarize = function ($group) {
+            $revenue = (float) $group->sum('total_price');
+            $cost = (float) $group->sum('cost');
+            $margin = $revenue - $cost;
+
+            return [
+                'revenue' => $revenue,
+                'cost' => $cost,
+                'margin' => $margin,
+                'margin_pct' => $revenue > 0 ? round($margin / $revenue * 100, 1) : 0,
+                'missing_cost' => $group->where('missing_cost', true)->count(),
+            ];
+        };
+
+        $bySale = $lines->groupBy('order_id')->map(function ($g) use ($summarize, $clientNames) {
+            $first = $g->first();
+
+            return $summarize($g) + [
+                'order_number' => $first->order_number,
+                'order_date' => Carbon::parse($first->order_date),
+                'client' => $clientNames[$first->client_id] ?? 'N/A',
+            ];
+        })->sortByDesc('order_date')->values();
+
+        $byClient = $lines->groupBy('client_id')->map(function ($g, $clientId) use ($summarize, $clientNames) {
+            $topItems = $g->groupBy('item_id')->map(fn ($i) => [
+                'name' => $i->first()->item_name,
+                'revenue' => (float) $i->sum('total_price'),
+                'quantity' => (float) $i->sum('quantity'),
+            ])->sortByDesc('revenue')->take(3)->values();
+
+            return $summarize($g) + [
+                'client' => $clientNames[$clientId] ?? 'N/A',
+                'top_items' => $topItems,
+            ];
+        })->sortByDesc('revenue')->values();
+
+        $topItems = $lines->groupBy('item_id')->map(fn ($g) => [
+            'name' => $g->first()->item_name,
+            'quantity' => (float) $g->sum('quantity'),
+        ] + $summarize($g))->sortByDesc('revenue')->take(10)->values();
+
+        // Crédit client total (toute la période d'activité, pas seulement le filtre)
+        $allSales = (float) SalesOrder::sum('final_amount');
+        $allUnpaid = (float) SalesOrder::sum(DB::raw('GREATEST(final_amount - paid_amount, 0)'));
+
+        return [
+            'total' => $summarize($lines),
+            'by_sale' => $bySale->take(15),
+            'by_client' => $byClient,
+            'top_client' => $byClient->sortByDesc('revenue')->first(),
+            'top_items' => $topItems,
+            'credit' => [
+                'unpaid' => $allUnpaid,
+                'sales' => $allSales,
+                'rate' => $allSales > 0 ? round($allUnpaid / $allSales * 100, 1) : 0,
+            ],
+        ];
+    }
+
     private function resolvePeriod(Request $request)
     {
         $quickFilter = $request->get('quick_filter');

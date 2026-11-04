@@ -682,6 +682,145 @@
         </div>
 
         {{-- ═══════════════════════════════════════════════════════════════════════
+             2b. INDICATEURS COMMERCIAUX (admin uniquement)
+        ═══════════════════════════════════════════════════════════════════════ --}}
+        @if (auth()->user()->isAdmin() && !empty($adminInsights))
+            @php
+                $ai = $adminInsights;
+                $fmt = fn($v) => number_format($v, 2, ',', ' ') . ' DH';
+                $creditAlert = $ai['credit']['rate'] > 30;
+            @endphp
+            <p class="section-title">Marges &amp; Crédit client <small class="text-muted">· {{ $periodLabel }}</small></p>
+            <div class="row g-2 g-md-3 mb-3 mb-md-4">
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100"><div class="card-body p-3">
+                        <div class="text-muted small">Marge bénéficiaire</div>
+                        <h4 class="mb-0 {{ $ai['total']['margin'] < 0 ? 'text-danger' : 'text-success' }}">{{ $fmt($ai['total']['margin']) }}</h4>
+                        <small class="text-muted">{{ $ai['total']['margin_pct'] }} % du CA ({{ $fmt($ai['total']['revenue']) }})</small>
+                        @if ($ai['total']['missing_cost'] > 0)
+                            <div class="small text-warning mt-1" title="Produits sans prix de revient (cost_price)">
+                                {{ $ai['total']['missing_cost'] }} ligne(s) sans coût</div>
+                        @endif
+                    </div></div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100"><div class="card-body p-3">
+                        <div class="text-muted small">Taux crédit client total</div>
+                        <h4 class="mb-0 {{ $creditAlert ? 'text-danger' : '' }}">{{ $ai['credit']['rate'] }} %</h4>
+                        <small class="text-muted">{{ $fmt($ai['credit']['unpaid']) }} impayés sur {{ $fmt($ai['credit']['sales']) }}</small>
+                    </div></div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100"><div class="card-body p-3">
+                        <div class="text-muted small">Top client</div>
+                        @if ($ai['top_client'])
+                            <h5 class="mb-0 text-truncate">{{ $ai['top_client']['client'] }}</h5>
+                            <small class="text-muted">{{ $fmt($ai['top_client']['revenue']) }} · marge {{ $ai['top_client']['margin_pct'] }} %</small>
+                        @else
+                            <h5 class="mb-0">—</h5>
+                        @endif
+                    </div></div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card h-100"><div class="card-body p-3">
+                        <div class="text-muted small">Top article vendu</div>
+                        @if ($ai['top_items']->isNotEmpty())
+                            <h5 class="mb-0 text-truncate">{{ $ai['top_items'][0]['name'] }}</h5>
+                            <small class="text-muted">{{ number_format($ai['top_items'][0]['quantity'], 2, ',', ' ') }} u · {{ $fmt($ai['top_items'][0]['revenue']) }}</small>
+                        @else
+                            <h5 class="mb-0">—</h5>
+                        @endif
+                    </div></div>
+                </div>
+            </div>
+
+            <div class="row g-2 g-md-3 mb-3 mb-md-4">
+                <div class="col-lg-5">
+                    <div class="card h-100"><div class="card-body p-2 p-md-3">
+                        <h5 class="card-title mb-2">Marge par vente</h5>
+                        <div class="table-responsive" style="max-height:380px;">
+                            <table class="table table-sm align-middle mb-0" style="font-size:.78rem;">
+                                <thead><tr><th>Vente</th><th>Client</th><th class="text-end">CA</th><th class="text-end">Marge</th><th class="text-end">%</th></tr></thead>
+                                <tbody>
+                                @forelse ($ai['by_sale'] as $row)
+                                    <tr>
+                                        <td class="text-nowrap">{{ $row['order_number'] }}<br><small class="text-muted">{{ $row['order_date']->format('d/m/Y') }}</small></td>
+                                        <td class="text-truncate" style="max-width:110px;">{{ $row['client'] }}</td>
+                                        <td class="text-end text-nowrap">{{ number_format($row['revenue'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap {{ $row['margin'] < 0 ? 'text-danger' : 'text-success' }}">{{ number_format($row['margin'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap">{{ $row['margin_pct'] }}@if ($row['missing_cost'] > 0) <span class="text-warning" title="Coût manquant">*</span>@endif</td>
+                                    </tr>
+                                @empty
+                                    <tr><td colspan="5" class="text-center text-muted">Aucune vente sur la période</td></tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card h-100"><div class="card-body p-2 p-md-3">
+                        <h5 class="card-title mb-2">Classement des clients <small class="text-muted fw-normal">· par CA, avec leurs top articles</small></h5>
+                        <div class="table-responsive" style="max-height:380px;">
+                            <table class="table table-sm align-top mb-0" style="font-size:.78rem;">
+                                <thead><tr><th>#</th><th>Client</th><th>Top articles</th><th class="text-end">CA</th><th class="text-end">Marge</th><th class="text-end">%</th></tr></thead>
+                                <tbody>
+                                @forelse ($ai['by_client'] as $row)
+                                    <tr>
+                                        <td class="fw-bold">{{ $loop->iteration }}</td>
+                                        <td style="max-width:140px;">{{ $row['client'] }}</td>
+                                        <td>
+                                            @foreach ($row['top_items'] as $it)
+                                                <div class="text-truncate" style="max-width:230px;" title="{{ $it['name'] }}">
+                                                    <span class="text-muted">{{ $loop->iteration }}.</span> {{ $it['name'] }}
+                                                    <small class="text-muted">· {{ number_format($it['revenue'], 2, ',', ' ') }}</small>
+                                                </div>
+                                            @endforeach
+                                        </td>
+                                        <td class="text-end text-nowrap">{{ number_format($row['revenue'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap {{ $row['margin'] < 0 ? 'text-danger' : 'text-success' }}">{{ number_format($row['margin'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap">{{ $row['margin_pct'] }}@if ($row['missing_cost'] > 0) <span class="text-warning" title="Coût manquant">*</span>@endif</td>
+                                    </tr>
+                                @empty
+                                    <tr><td colspan="6" class="text-center text-muted">Aucune donnée</td></tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                        <small class="text-muted"><span class="text-warning">*</span> au moins une ligne sans prix de revient : marge surestimée.</small>
+                    </div></div>
+                </div>
+            </div>
+
+            <div class="row g-2 g-md-3 mb-3 mb-md-4">
+                <div class="col-12">
+                    <div class="card h-100"><div class="card-body p-2 p-md-3">
+                        <h5 class="card-title mb-2">Classement des articles vendus <small class="text-muted fw-normal">· par CA</small></h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm align-middle mb-0" style="font-size:.78rem;">
+                                <thead><tr><th>#</th><th>Article</th><th class="text-end">Quantité</th><th class="text-end">CA</th><th class="text-end">Marge</th><th class="text-end">%</th></tr></thead>
+                                <tbody>
+                                @forelse ($ai['top_items'] as $it)
+                                    <tr>
+                                        <td class="fw-bold">{{ $loop->iteration }}</td>
+                                        <td>{{ $it['name'] }}</td>
+                                        <td class="text-end text-nowrap">{{ number_format($it['quantity'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap">{{ number_format($it['revenue'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap {{ $it['margin'] < 0 ? 'text-danger' : 'text-success' }}">{{ number_format($it['margin'], 2, ',', ' ') }}</td>
+                                        <td class="text-end text-nowrap">{{ $it['margin_pct'] }}@if ($it['missing_cost'] > 0) <span class="text-warning" title="Coût manquant">*</span>@endif</td>
+                                    </tr>
+                                @empty
+                                    <tr><td colspan="6" class="text-center text-muted">Aucune donnée</td></tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+        @endif
+
+        {{-- ═══════════════════════════════════════════════════════════════════════
              3. GRAPHIQUE VENTES + RÉSUMÉ FINANCE - Mobile Responsive Charts
         ═══════════════════════════════════════════════════════════════════════ --}}
         <p class="section-title">Finance</p>

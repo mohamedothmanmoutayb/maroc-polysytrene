@@ -26,6 +26,9 @@ class Product extends Model
         'volume_m3',
         'weight_kg',
 
+        // Prix de revient (utilisé pour la marge)
+        'cost_price',
+
         // Stock levels
         'min_stock_level',
         'max_stock_level',

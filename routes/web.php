@@ -34,6 +34,8 @@ use App\Http\Controllers\RawMaterialController;
 use App\Http\Controllers\RawMaterialPurchaseController;
 use App\Http\Controllers\RechargePartController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\PrintedChequeController;
+use App\Http\Controllers\ChequeBankController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\SituationController;
 use App\Http\Controllers\SupplierController;
@@ -475,6 +477,29 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/product/{productId}/families', [InventoryController::class, 'getProductFamilies'])->name('product-families');
         Route::get('/raw-material/{id}/details', [InventoryController::class, 'getMaterialDetails'])->name('raw-material-details');
         Route::post('/raw-material/adjust-direct', [InventoryController::class, 'directAdjustRawMaterial'])->name('raw-material-adjust-direct');
+    });
+
+    // Chèques à imprimer (chèques émis) + banques / dimensions
+    Route::prefix('cheques-imprimes')->group(function () {
+        Route::get('/', [PrintedChequeController::class, 'index'])->name('printed-cheques.index');
+        Route::get('/nouveau', [PrintedChequeController::class, 'create'])->name('printed-cheques.create')->middleware('can:create_checks');
+        Route::post('/', [PrintedChequeController::class, 'store'])->name('printed-cheques.store')->middleware('can:create_checks');
+        Route::post('/montant-en-lettres', [PrintedChequeController::class, 'words'])->name('printed-cheques.words');
+
+        Route::get('/banques', [ChequeBankController::class, 'index'])->name('cheque-banks.index');
+        Route::post('/banques', [ChequeBankController::class, 'store'])->name('cheque-banks.store');
+        Route::get('/banques/{bank}', [ChequeBankController::class, 'edit'])->name('cheque-banks.edit');
+        Route::put('/banques/{bank}', [ChequeBankController::class, 'update'])->name('cheque-banks.update');
+        Route::delete('/banques/{bank}/calibrage', [ChequeBankController::class, 'reset'])->name('cheque-banks.reset');
+        Route::delete('/banques/{bank}', [ChequeBankController::class, 'destroy'])->name('cheque-banks.destroy');
+        Route::get('/banques/{bank}/test-impression', [PrintedChequeController::class, 'test'])->name('cheque-banks.test');
+
+        Route::get('/{printedCheque}/modifier', [PrintedChequeController::class, 'edit'])->name('printed-cheques.edit')->middleware('can:create_checks');
+        Route::put('/{printedCheque}', [PrintedChequeController::class, 'update'])->name('printed-cheques.update')->middleware('can:create_checks');
+        Route::delete('/{printedCheque}', [PrintedChequeController::class, 'destroy'])->name('printed-cheques.destroy')->middleware('can:create_checks');
+        Route::patch('/{printedCheque}/statut', [PrintedChequeController::class, 'status'])->name('printed-cheques.status')->middleware('can:create_checks');
+        Route::get('/{printedCheque}/impression', [PrintedChequeController::class, 'print'])->name('printed-cheques.print');
+        Route::post('/{printedCheque}/impression', [PrintedChequeController::class, 'confirmPrint'])->name('printed-cheques.print.confirm');
     });
 
     // Checks
