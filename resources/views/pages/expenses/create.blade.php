@@ -156,12 +156,12 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Initialize Select2

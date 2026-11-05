@@ -207,9 +207,9 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap4.min.css') }}">
     <style>
         .nav-tabs .nav-link {
             font-weight: 500;
@@ -229,15 +229,15 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/sweetalert2@11.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Common DataTable configuration

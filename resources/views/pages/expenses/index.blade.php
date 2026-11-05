@@ -194,20 +194,20 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Initialize Select2

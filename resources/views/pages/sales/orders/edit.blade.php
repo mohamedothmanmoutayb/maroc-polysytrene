@@ -565,7 +565,7 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
     <style>
         .duplicate-item-highlight {
             animation: duplicateItemPulse 1.4s ease;
@@ -654,8 +654,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Initialize Select2 for client
@@ -933,6 +933,7 @@
                                             .attr('data-family-price-special', family
                                                 .prix_special || 0)
                                             .attr('data-volume', product.volume || 0)
+                                            .attr('data-stock', family.stock ?? 0)
                                             .attr('data-code', product.code || '')
                                             .text(text);
 
@@ -952,6 +953,7 @@
                                         .attr('data-price-commercial', product.prix_commercial || 0)
                                         .attr('data-price-special', product.prix_special || 0)
                                         .attr('data-volume', product.volume || 0)
+                                        .attr('data-stock', product.current_stock ?? product.stock ?? 0)
                                         .attr('data-product-name', product.name)
                                         .attr('data-product-code', product.code || '')
                                         .text(text);

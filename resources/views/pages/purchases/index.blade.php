@@ -530,7 +530,7 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css') }}">
     <style>
         .card-header-custom { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         #modal-payments-table td { vertical-align: middle; }
@@ -538,8 +538,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
     <script>
     function formatCurrency(amount) {
@@ -619,7 +619,7 @@
                 { data: 'total_remaining_fmt', name: 'total_remaining_fmt', orderable: false, searchable: false, className: 'text-end' },
                 { data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center' },
             ],
-            language: { url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json" },
+            language: { url: "{{ asset('assets/vendor/cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json') }}" },
             order: [],
             responsive: true, paging: false,
             drawCallback: function (settings) {

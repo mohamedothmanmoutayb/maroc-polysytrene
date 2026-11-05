@@ -7,7 +7,7 @@
 @endpush
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css') }}">
     <style>
         /* ── Loader AJAX du tableau de bord ─────────────────────────────────── */
         #dashboard-loader {
@@ -2274,8 +2274,8 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js') }}"></script>
     {{-- Script persistant: chargement AJAX du tableau de bord (ne se ré-exécute pas) --}}
     <script>
         (function() {

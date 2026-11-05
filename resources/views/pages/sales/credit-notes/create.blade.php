@@ -258,7 +258,7 @@
 @endsection
 
 @push('stylesheets')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}" rel="stylesheet" />
     <style>
         .bg-gradients {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -275,8 +275,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
     $(document).ready(function () {
 

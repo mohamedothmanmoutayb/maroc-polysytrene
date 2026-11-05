@@ -704,7 +704,7 @@ class InvoiceController extends Controller
         try {
             $products = Product::where('is_active', true)
                 ->where('product_type', $type)
-                ->with(['familles'])
+                ->with(['familles', 'stock', 'familleStocks'])
                 ->get()
                 ->map(function ($product) {
                     $data = [
@@ -716,6 +716,7 @@ class InvoiceController extends Controller
                         'price_commercial' => $product->price_commercial,
                         'price_special' => $product->price_special,
                         'has_families' => $product->familles->count() > 0,
+                        'stock' => (float) ($product->stock->current_quantity ?? 0),
                     ];
 
                     if ($product->familles->count() > 0) {
@@ -729,6 +730,7 @@ class InvoiceController extends Controller
                                 'prix_commercial' => $famille->pivot->prix_commercial ?? $product->price_commercial ?? $product->price_client,
                                 'prix_special' => $famille->pivot->prix_special ?? $product->price_special ?? $product->price_client,
                                 'quantity_per_unit' => $famille->pivot->quantity_per_unit ?? 1,
+                                'stock' => (float) ($product->familleStocks->firstWhere('famille_id', $famille->famille_id)->current_quantity ?? 0),
                             ];
                         });
                     }
@@ -759,6 +761,7 @@ class InvoiceController extends Controller
                         'name' => $material->material_name,
                         'code' => $material->material_code,
                         'price' => 0,
+                        'stock' => (float) $material->current_stock,
                         'unit' => $material->unit_of_measure,
                     ];
                 });

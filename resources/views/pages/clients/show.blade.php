@@ -736,7 +736,7 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/chart.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Filter orders by status

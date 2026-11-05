@@ -209,7 +209,7 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
     <style>
         .select2-container--default .select2-selection--single {
             height: 38px;
@@ -233,8 +233,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
         const SEARCH_URL = "{{ route('products.search') }}";
 

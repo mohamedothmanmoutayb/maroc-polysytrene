@@ -547,7 +547,7 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
     <style>
         .duplicate-item-highlight {
             animation: duplicateItemPulse 1.4s ease;
@@ -666,8 +666,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
         $(document).ready(function() {
 
@@ -1429,6 +1429,7 @@
                                         .attr('data-price-special', item.prix_special || 0)
                                         .attr('data-volume', item.volume || 0)
                                         .attr('data-has-families', false)
+                                        .attr('data-stock', item.current_stock ?? item.stock ?? 0)
                                         .attr('data-type', type)
                                         .text(item.name + (item.code ? ' (' + item.code + ')' :
                                                 '') +
@@ -1461,6 +1462,7 @@
                                                 .prix_special || 0)
                                             .attr('data-volume', item.volume || 0)
                                             .attr('data-has-families', true)
+                                            .attr('data-stock', family.stock ?? 0)
                                             .text(displayName + (item.code ? ' (' + item
                                                 .code + ')' : ''));
 

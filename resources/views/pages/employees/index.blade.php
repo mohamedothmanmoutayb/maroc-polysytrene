@@ -274,8 +274,8 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css') }}">
     <style>
         .table td {
             vertical-align: middle;
@@ -293,9 +293,9 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {

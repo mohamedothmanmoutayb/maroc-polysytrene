@@ -2099,7 +2099,70 @@ class ProductionOrderController extends Controller
             }
         }
 
-        return compact('order', 'totalProduced', 'totalDefective', 'progress', 'qualityMetrics', 'sourceProducts', 'subProducts');
+        $cuttingConfig = $this->buildCuttingConfig($order, $sourceProducts, $subProducts);
+
+        return compact('order', 'totalProduced', 'totalDefective', 'progress', 'qualityMetrics', 'sourceProducts', 'subProducts', 'cuttingConfig');
+    }
+
+    /**
+     * Data for the 3D cutting-plan optimizer: source blocks and the pieces to
+     * cut from them, with their dimensions in centimetres.
+     * Returns null for order types that involve no cutting.
+     */
+    private function buildCuttingConfig(ProductionOrder $order, array $sourceProducts, $subProducts): ?array
+    {
+        if (!in_array($order->production_type, ['type2', 'type3', 'type4'], true) || empty($sourceProducts)) {
+            return null;
+        }
+
+        $dims = function ($product) {
+            if (!$product) {
+                return [0, 0, 0];
+            }
+            return [
+                round((float) $product->width_m * 100, 2),
+                round((float) $product->height_m * 100, 2),
+                round((float) $product->depth_m * 100, 2),
+            ];
+        };
+
+        $products = \App\Models\Product::whereIn('product_id', array_filter(array_merge(
+            array_column($sourceProducts, 'product_id'),
+            collect($subProducts)->map(fn ($sp) => $sp['product_id'] ?? $sp->product_id ?? null)->all()
+        )))->get()->keyBy('product_id');
+
+        $sources = [];
+        foreach ($sourceProducts as $sp) {
+            $product = $products->get($sp['product_id']);
+            [$w, $h, $d] = $dims($product);
+            $sources[] = [
+                'id' => $sp['product_id'],
+                'name' => $sp['product_name'],
+                'code' => $sp['product_code'],
+                'w' => $w, 'h' => $h, 'd' => $d,
+                'qty' => max(1, (int) ceil((float) $sp['quantity'])),
+            ];
+        }
+
+        $pieces = [];
+        foreach ($subProducts as $sp) {
+            $id = $sp['product_id'] ?? $sp->product_id ?? null;
+            $product = $products->get($id);
+            [$w, $h, $d] = $dims($product);
+            $qty = (float) ($sp['planned_quantity'] ?? $sp->quantity_to_produce ?? 0);
+            if ($qty <= 0) {
+                continue;
+            }
+            $pieces[] = [
+                'id' => $id,
+                'name' => $sp['product_name'] ?? $sp->product_name ?? ('Produit #' . $id),
+                'code' => $sp['product_code'] ?? $sp->product_code ?? '',
+                'w' => $w, 'h' => $h, 'd' => $d,
+                'qty' => (int) ceil($qty),
+            ];
+        }
+
+        return empty($pieces) ? null : ['sources' => $sources, 'pieces' => $pieces, 'mode' => $order->production_type];
     }
 
     /**

@@ -364,6 +364,11 @@
                             </div>
                         @endif
 
+                        <!-- PLAN DE DÉCOUPE 3D (types 2 / 3 / 4) -->
+                        @if (!empty($cuttingConfig))
+                            @include('pages.production-orders.partials.cutting-optimizer', ['cuttingConfig' => $cuttingConfig])
+                        @endif
+
                         <!-- QUALITY SECTION (Only for Type 1) -->
                         @if ($order->production_type === 'type1' && isset($qualityMetrics))
                             <div class="row mb-4">

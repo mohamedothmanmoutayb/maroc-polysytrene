@@ -230,9 +230,9 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        href="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css') }}" />
     <style>
         .loading-overlay {
             position: fixed;
@@ -348,8 +348,8 @@
 @endpush    
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Initialize Select2
@@ -987,6 +987,7 @@
                                         .attr('data-price', family.prix_client || item
                                             .price || 0)
                                         .attr('data-has-families', true)
+                                        .attr('data-stock', family.stock ?? 0)
                                         .text(displayName + (item.code ? ' (' + item
                                             .code + ')' : ''));
 
@@ -1005,6 +1006,7 @@
                                     .attr('data-code', item.code || '')
                                     .attr('data-price', item.price || 0)
                                     .attr('data-has-families', false)
+                                    .attr('data-stock', item.current_stock ?? item.stock ?? 0)
                                     .text(item.name + (item.code ? ' (' + item.code + ')' :
                                         ''));
 

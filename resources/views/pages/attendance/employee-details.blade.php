@@ -347,7 +347,7 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css') }}">
     <style>
         .bg-gradient-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -407,8 +407,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         let historyTable;
 
@@ -563,7 +563,7 @@
             // Initialize DataTable
             historyTable = $('#history-table').DataTable({ paging: false, lengthChange: false, 
                 language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json"
+                    url: "{{ asset('assets/vendor/cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json') }}"
                 },
                 pageLength: 25,
                 order: [

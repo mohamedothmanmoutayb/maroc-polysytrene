@@ -374,12 +374,12 @@
     </div>
 
     @push('stylesheets')
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css') }}">
     @endpush
 
     @push('scripts')
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js') }}"></script>
         <script>
         $(document).ready(function () {
             $('#products-table').DataTable({ paging: false, lengthChange: false, 
@@ -400,7 +400,7 @@
                     { data: 'current_quantity',name: 'pfs.current_quantity',className: 'text-end', orderable: false },
                     { data: 'action',          name: 'action',             orderable: false, searchable: false, className: 'text-center' },
                 ],
-                language: { url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json" },
+                language: { url: "{{ asset('assets/vendor/cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json') }}" },
                 order: [[1, 'asc']],
                 pageLength: 25,
                 lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],

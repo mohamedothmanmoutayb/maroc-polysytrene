@@ -130,20 +130,20 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -210,7 +210,7 @@
                     }
                 ],
                 language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json"
+                    url: "{{ asset('assets/vendor/cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json') }}"
                 },
                 order: [
                     [1, 'desc']

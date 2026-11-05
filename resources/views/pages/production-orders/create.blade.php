@@ -610,6 +610,8 @@
                                 </div>
                             </div>
 
+                            @include('pages.production-orders.partials.cutting-optimizer-live')
+
                             <!-- Famille Selection Section -->
                             <div class="row mb-4" id="familleSection">
                                 <div class="col-md-12">
@@ -986,8 +988,8 @@
 @endsection
 
 @push('stylesheets')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/sweetalert2@11.js') }}/dist/sweetalert2.min.css">
     <style>
         .form-check .card {
             cursor: pointer;
@@ -1085,9 +1087,9 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/sweetalert2@11.js') }}"></script>
     <script>
         $(document).ready(function() {
             let rawMaterialsList = [];

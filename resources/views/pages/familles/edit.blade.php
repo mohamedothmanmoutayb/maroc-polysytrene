@@ -285,8 +285,8 @@
 @endsection
 
 @push('styles')
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
     <style>
         .card-header-custom { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-bottom: 0; }
         .price-input:focus { border-color: #ffc107; box-shadow: 0 0 0 0.2rem rgba(255,193,7,.25); }
@@ -296,10 +296,10 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/fr.js') }}"></script>
     <script>
     const FAMILLE_ID   = {{ $famille->famille_id }};
     const PRODUCTS_URL = "{{ route('familles.products-data', $famille->famille_id) }}";
@@ -325,7 +325,7 @@
                 { data: 'current_quantity',name: 'pfs.current_quantity',className: 'text-end', orderable: false },
                 { data: 'action',          name: 'action',             orderable: false, searchable: false, className: 'text-center' },
             ],
-            language: { url: 'https://cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json' },
+            language: { url: '{{ asset('assets/vendor/cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json') }}' },
             order: [[1, 'asc']],
             pageLength: 10,
             lengthMenu: [[10, 25, 50], [10, 25, 50]],

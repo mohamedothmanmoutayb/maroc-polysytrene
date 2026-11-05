@@ -253,8 +253,8 @@
 @endsection
 
 @push('stylesheets')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+    <link href="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css') }}"
         rel="stylesheet" />
     <style>
         .select2-container--bootstrap-5 .select2-selection {
@@ -269,8 +269,8 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/fr.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/fr.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Initialize Select2

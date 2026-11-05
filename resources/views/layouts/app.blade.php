@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/prismjs/themes/prism-okaidia.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}">
     <!-- Icon Kits -->
-    <script src="https://kit.fontawesome.com/f20b560d29.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/v4-shims.min.css') }}" />
     @stack('stylesheets')
 
     <style>
@@ -287,7 +288,8 @@
     <script src="{{ asset('assets/js/theme/sidebarmenu-default.js') }}"></script>
 
     <!-- solar icons -->
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/iconify-offline.js') }}"></script>
     @stack('vendor-scripts')
     <script>
         $(document).ready(function() {
@@ -795,6 +797,7 @@
         })();
     </script>
 
+    <script src="{{ asset('assets/js/faux-guard.js') }}"></script>
     @stack('scripts')
 </body>
 

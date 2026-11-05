@@ -384,7 +384,7 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('assets/vendor/cdn.jsdelivr.net/npm/sweetalert2@11.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Mark as Paid
