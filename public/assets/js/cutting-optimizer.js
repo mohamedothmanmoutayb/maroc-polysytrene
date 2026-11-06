@@ -369,6 +369,15 @@
             w_oversize: function (p) { return '« ' + p.name + ' » (' + p.dims + ' cm) ne rentre dans aucun bloc source (non planifié : ' + p.n + ').'; },
             w_unplaced: function (p) { return 'Impossible de placer ' + p.n + ' pièce(s).'; }, w_err: function (p) { return 'Erreur de calcul : ' + p.m; },
             hint: 'Choisissez le bloc source et les produits à produire : le plan de découpe 3D se calcule ici automatiquement.',
+            flow_title: 'Ce que donne la découpe', flow_blocks: function (p) { return p.n + ' bloc' + (p.n > 1 ? 's' : ''); },
+            flow_scrap_rec: 'Chutes à garder', flow_scrap_loss: 'Perte',
+            this_gives: 'Ce que donne ce bloc',
+            step_title: 'Étapes de découpe', step_overview: 'Vue d\'ensemble', step_n: function (p) { return 'Étape ' + p.k + ' / ' + p.n; },
+            step_hint: 'Appuyez sur ▶ pour voir les coupes une par une, dans l\'ordre.',
+            step_play: 'Lecture', step_pause: 'Pause', step_prev: 'Étape précédente', step_next: 'Étape suivante', step_first: 'Vue d\'ensemble',
+            cut_k: function (p) { return 'Coupe ' + p.k; }, from_edge: function (p) { return 'à ' + p.at + ' du bord'; },
+            view_face: 'Vue de face', view_top: 'Vue de dessus', step_done: 'Déjà coupé', step_now: 'À couper', step_zone: 'Zone de travail',
+            axes_t: 'Sens de mesure',
             why_title: function (p) { return 'Pourquoi ' + p.n + ' bloc' + (p.n > 1 ? 's' : '') + ' ?'; },
             y_need: function (p) { return 'À produire : <b>' + p.pcs + ' pièce' + (p.pcs > 1 ? 's' : '') + '</b> (volume utile ' + p.v + ' m³).'; },
             y_cap: function (p) { return 'Un bloc « <b>' + p.sname + '</b> » (' + p.sdims + ' cm, ' + p.sv + ' m³) peut contenir au maximum <b>' + p.cap + ' × « ' + p.pname + ' »</b> (' + p.pdims + ' cm, ' + p.pv + ' m³).'; },
@@ -396,7 +405,11 @@
                 ['Chutes / Filaire / Rotation auto', 'Afficher ou cacher les chutes, rendre les pièces transparentes, faire tourner la vue automatiquement. Recentrer remet la caméra par défaut.'],
                 ['Couleurs', 'Chaque produit a sa couleur (voir la légende sous la vue). Bleu transparent = chute récupérable. Rouge transparent = perte.'],
                 ['Blocs utilisés', 'Une ligne par bloc : nombre de pièces, rendement et chute en m³. Cliquez une ligne pour l\'afficher en 3D.'],
-                ['Détail de découpe', '« Ce que contient ce bloc » liste les pièces et leur orientation. « Chutes à récupérer » liste les plus gros restes. « Ordre des coupes » donne, pièce par pièce, où couper (en cm depuis le bord du bloc).']
+                ['Ce que donne la découpe', 'Résumé en images : les blocs utilisés → les pièces obtenues (chaque petite boîte respecte les proportions réelles) + les chutes à garder (bleu) et la perte (rouge).'],
+                ['Étapes de découpe (▶)', 'Lecture pas à pas : ▶ montre chaque coupe dans l\'ordre. La pièce à couper est en couleur vive avec un contour jaune, les pièces déjà coupées sont atténuées, la zone de travail est en jaune. Les plans de coupe sont colorés selon le sens.'],
+                ['Couleurs des sens', 'Orange = Longueur (gauche → droite), Vert = Hauteur (bas → haut), Violet = Profondeur (avant → arrière). Les barres de couleur sur les arêtes du bloc et les plans de coupe suivent les mêmes couleurs.'],
+                ['Vue de face / de dessus', 'Deux petits plans du bloc : la zone jaune est la zone de travail, la pièce colorée est celle à obtenir, les traits pointillés sont les coupes à faire. Cliquez une étape de la liste pour la voir.'],
+                ['Détail de découpe', '« Ce que donne ce bloc » liste les pièces obtenues et leur répartition. « Chutes à récupérer » liste les plus gros restes. « Étapes de découpe » donne, pièce par pièce, où couper (en cm depuis le bord du bloc).']
             ]
         },
         ar: {
@@ -432,6 +445,15 @@
             w_oversize: function (p) { return '« ' + p.name + ' » (' + p.dims + ' سم) لا تدخل في أي كتلة مصدر: تم تجاهل ' + p.n + ' قطعة.'; },
             w_unplaced: function (p) { return 'تعذّر وضع ' + p.n + ' قطعة.'; }, w_err: function (p) { return 'خطأ في الحساب: ' + p.m; },
             hint: 'اختر الكتلة المصدر والمنتجات المطلوب إنتاجها: تُحسب خطة القصّ ثلاثية الأبعاد هنا تلقائيًا.',
+            flow_title: 'ما تعطيه عملية القصّ', flow_blocks: function (p) { return p.n + ' ' + (p.n > 2 && p.n < 11 ? 'كتل' : 'كتلة'); },
+            flow_scrap_rec: 'قصاصات للاحتفاظ بها', flow_scrap_loss: 'خسارة',
+            this_gives: 'ما تعطيه هذه الكتلة',
+            step_title: 'مراحل القصّ', step_overview: 'نظرة عامة', step_n: function (p) { return 'المرحلة ' + p.k + ' / ' + p.n; },
+            step_hint: 'اضغط ▶ لرؤية عمليات القصّ واحدة تلو الأخرى بالترتيب.',
+            step_play: 'تشغيل', step_pause: 'إيقاف مؤقت', step_prev: 'المرحلة السابقة', step_next: 'المرحلة التالية', step_first: 'نظرة عامة',
+            cut_k: function (p) { return 'القصّ ' + p.k; }, from_edge: function (p) { return 'على بُعد ' + p.at + ' من الحافة'; },
+            view_face: 'منظر أمامي', view_top: 'منظر علوي', step_done: 'تم قصّه', step_now: 'المطلوب قصّه', step_zone: 'منطقة العمل',
+            axes_t: 'اتجاه القياس',
             why_title: function (p) { return 'لماذا ' + p.n + ' ' + (p.n > 2 && p.n < 11 ? 'كتل' : 'كتلة') + ' ؟'; },
             y_need: function (p) { return 'المطلوب إنتاجه: <b>' + p.pcs + ' قطعة</b> (الحجم المفيد ' + p.v + ' م³).'; },
             y_cap: function (p) { return 'الكتلة « <b>' + p.sname + '</b> » (' + p.sdims + ' سم، ' + p.sv + ' م³) تتسع على الأكثر لـ <b>' + p.cap + ' × « ' + p.pname + ' »</b> (' + p.pdims + ' سم، ' + p.pv + ' م³).'; },
@@ -459,7 +481,11 @@
                 ['القصاصات / هيكل شفاف / دوران تلقائي', 'إظهار القصاصات أو إخفاؤها، جعل القطع شفافة، تدوير العرض تلقائيًا. "إعادة التمركز" تعيد الكاميرا إلى وضعها الافتراضي.'],
                 ['الألوان', 'لكل منتج لونه (انظر المفتاح أسفل العرض). الأزرق الشفاف = قصاصة قابلة للاسترجاع. الأحمر الشفاف = خسارة.'],
                 ['الكتل المستعملة', 'سطر لكل كتلة: عدد القطع والمردودية والقصاصات بالمتر المكعب. انقر على سطر لعرضه بالأبعاد الثلاثة.'],
-                ['تفاصيل القصّ', '«ما تحتويه هذه الكتلة» يعرض القطع واتجاهها. «القصاصات الواجب استرجاعها» يعرض أكبر البقايا. «ترتيب القصّ» يحدد لكل قطعة أين يجب القصّ (بالسنتيمتر من حافة الكتلة).']
+                ['ما تعطيه عملية القصّ', 'ملخص بالصور: الكتل المستعملة ← القطع الناتجة (كل صندوق صغير يحترم النسب الحقيقية) + القصاصات التي يجب الاحتفاظ بها (أزرق) والخسارة (أحمر).'],
+                ['مراحل القصّ (▶)', 'عرض خطوة بخطوة: ▶ يعرض كل عملية قصّ بالترتيب. القطعة المطلوب قصّها بلون ساطع وإطار أصفر، والقطع المقصوصة سابقًا باهتة، ومنطقة العمل بالأصفر. مستويات القصّ ملوّنة حسب الاتجاه.'],
+                ['ألوان الاتجاهات', 'برتقالي = الطول (يسار ← يمين)، أخضر = الارتفاع (أسفل ← أعلى)، بنفسجي = العمق (أمام ← خلف). أشرطة الألوان على حواف الكتلة ومستويات القصّ تتبع نفس الألوان.'],
+                ['منظر أمامي / علوي', 'مخططان صغيران للكتلة: المنطقة الصفراء هي منطقة العمل، والقطعة الملوّنة هي المطلوب الحصول عليها، والخطوط المتقطعة هي عمليات القصّ. انقر على مرحلة من القائمة لعرضها.'],
+                ['تفاصيل القصّ', '«ما تعطيه هذه الكتلة» يعرض القطع الناتجة وتوزيعها. «القصاصات الواجب استرجاعها» يعرض أكبر البقايا. «مراحل القصّ» يحدد لكل قطعة أين يجب القصّ (بالسنتيمتر من حافة الكتلة).']
             ]
         }
     };
@@ -512,7 +538,117 @@
     /* Interface                                                           */
     /* ------------------------------------------------------------------ */
 
+    /* ------------------------- Aides visuelles ------------------------- */
+
+    // Une couleur par sens : Longueur (X) orange, Hauteur (Y) vert, Profondeur (Z) violet.
+    var AXC = ['#ff8c00', '#16a34a', '#7c3aed'];
+    var AXH = [0xff8c00, 0x16a34a, 0x7c3aed];
+
+    function shade(hex, f) {
+        var n = parseInt(String(hex).replace('#', ''), 16), t = f < 0 ? 0 : 255, a = Math.abs(f);
+        var c = [n >> 16, (n >> 8) & 255, n & 255].map(function (v) { return Math.round((t - v) * a + v); });
+        return 'rgb(' + c.join(',') + ')';
+    }
+
+    /** Petite boîte isométrique aux proportions réelles (L × H × P). */
+    function isoBox(dims, color, px) {
+        var w = dims[0], h = dims[1], d = dims[2], fl = Math.max(w, h, d) * 0.08;
+        w = Math.max(w, fl); h = Math.max(h, fl); d = Math.max(d, fl);
+        var dx = d * 0.45, dy = d * 0.26, vw = w + dx, vh = h + dy;
+        var front = '0,' + dy + ' ' + w + ',' + dy + ' ' + w + ',' + (h + dy) + ' 0,' + (h + dy);
+        var top = '0,' + dy + ' ' + dx + ',0 ' + vw + ',0 ' + w + ',' + dy;
+        var side = w + ',' + dy + ' ' + vw + ',0 ' + vw + ',' + h + ' ' + w + ',' + (h + dy);
+        var st = ' stroke="rgba(15,23,42,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"';
+        return '<svg class="co-iso" viewBox="0 0 ' + vw + ' ' + vh + '" style="width:' + (px || 64) + 'px;height:' + Math.round((px || 64) * 0.78) + 'px" aria-hidden="true">' +
+            '<polygon points="' + front + '" fill="' + color + '"' + st + '/><polygon points="' + top + '" fill="' + shade(color, 0.45) + '"' + st + '/>' +
+            '<polygon points="' + side + '" fill="' + shade(color, -0.3) + '"' + st + '/></svg>';
+    }
+
+    /** Barre empilée : pièces (couleur du produit) · chute récupérable (bleu) · perte (rouge). */
+    function stackBar(blocks, r) {
+        var V = 0, used = 0, rec = 0, byT = {};
+        blocks.forEach(function (b) {
+            V += vol(b.dims); used += b.used;
+            b.placed.forEach(function (p) { byT[p.t] = (byT[p.t] || 0) + p.w * p.h * p.d; });
+            b.remnants.forEach(function (x) { if (x.recoverable) rec += vol(x.s); });
+        });
+        if (!V) return '';
+        var segs = Object.keys(byT).map(function (t) { return { c: r.types[t].color, v: byT[t] }; });
+        segs.push({ c: '#60a5fa', v: rec });
+        segs.push({ c: '#ef4444', v: Math.max(0, V - used - rec) });
+        return '<div class="co-sbar" dir="ltr">' + segs.filter(function (s) { return s.v > 0; }).map(function (s) {
+            return '<i style="width:' + (s.v / V * 100).toFixed(2) + '%;background:' + s.c + '"></i>';
+        }).join('') + '</div>';
+    }
+
+    /**
+     * Mini plan 2D d'une étape. view = 'face' (Longueur × Hauteur) ou 'top' (Longueur × Profondeur).
+     * Montre : bloc, pièces déjà coupées (pâles), zone de travail (jaune), pièce à couper, traits de coupe.
+     */
+    function planSvg(b, k, r, view) {
+        var A = view === 'face' ? [0, 1] : [0, 2], BW = b.dims[A[0]], BH = b.dims[A[1]];
+        var pad = Math.max(BW, BH) * 0.03;
+        var NS = ' vector-effect="non-scaling-stroke"';
+        function rc(pos, size, extra) {
+            var y = view === 'face' ? BH - pos[1] - size[1] : pos[A[1]];
+            return '<rect x="' + pos[A[0]] + '" y="' + y + '" width="' + size[A[0]] + '" height="' + size[A[1]] + '"' + NS + ' ' + extra + '/>';
+        }
+        var cur = b.placed[k], out = '';
+        out += '<rect x="0" y="0" width="' + BW + '" height="' + BH + '" fill="#f8fafc" stroke="#475569" stroke-width="1.5"' + NS + '/>';
+        for (var i = 0; i < k; i++) {
+            var q = b.placed[i];
+            out += rc([q.x, q.y, q.z], [q.w, q.h, q.d], 'fill="' + r.types[q.t].color + '" fill-opacity=".28" stroke="' + r.types[q.t].color + '" stroke-width="1" stroke-opacity=".6"');
+        }
+        out += rc(cur.box.p, cur.box.s, 'fill="#facc15" fill-opacity=".22" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="5 3"');
+        out += rc([cur.x, cur.y, cur.z], [cur.w, cur.h, cur.d], 'fill="' + r.types[cur.t].color + '" fill-opacity=".95" stroke="#0f172a" stroke-width="1.6"');
+        cur.cuts.forEach(function (c) {
+            var line = '';
+            if (c.axis === A[0]) {
+                var y1 = view === 'face' ? BH - cur.box.p[1] - cur.box.s[1] : cur.box.p[A[1]], y2 = y1 + cur.box.s[A[1]];
+                line = '<line x1="' + c.at + '" y1="' + y1 + '" x2="' + c.at + '" y2="' + y2 + '"';
+            } else if (c.axis === A[1]) {
+                var yy = view === 'face' ? BH - c.at : c.at;
+                line = '<line x1="' + cur.box.p[A[0]] + '" y1="' + yy + '" x2="' + (cur.box.p[A[0]] + cur.box.s[A[0]]) + '" y2="' + yy + '"';
+            }
+            if (line) out += line + ' stroke="' + AXC[c.axis] + '" stroke-width="3" stroke-dasharray="7 4"' + NS + '/>';
+        });
+        return '<svg class="co-plan" viewBox="' + (-pad) + ' ' + (-pad) + ' ' + (BW + 2 * pad) + ' ' + (BH + 2 * pad) + '" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' + out + '</svg>';
+    }
+
     var CSS = '' +
+        '.co-flow{border:1px solid #bfdbfe;background:linear-gradient(180deg,#f8fbff,#eef5ff);border-radius:12px;padding:12px 14px;margin-bottom:14px}' +
+        '.co-flow:empty{display:none}.co-flow-t{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#1e3a8a!important;margin-bottom:8px}' +
+        '.co-flow-row{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}.co-flow-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px;color:#2563eb!important;min-width:40px}' +
+        '.co-flow-arrow small{font-size:11px;font-weight:700}.co-rtl .co-flow-arrow i{transform:scaleX(-1)}' +
+        '.co-cards{display:flex;flex-wrap:wrap;gap:8px;flex:1}' +
+        '.co-card{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #dbe4f0;border-radius:10px;padding:6px 10px;min-width:150px}' +
+        '.co-card.src{border-color:#94a3b8;background:#f8fafc}' +
+        '.co-card-t b{display:block;font-size:18px;line-height:1.1}.co-card-t span{display:block;font-size:12px;font-weight:700;line-height:1.3}.co-card-t small{display:block;font-size:11px;color:#475569!important;direction:ltr;unicode-bidi:isolate}' +
+        '.co-card .co-ico{width:44px;height:34px;border-radius:6px;flex:none}.co-ico.rec{background:repeating-linear-gradient(45deg,rgba(96,165,250,.35),rgba(96,165,250,.35) 5px,rgba(96,165,250,.7) 5px,rgba(96,165,250,.7) 8px);border:2px solid #2563eb}' +
+        '.co-ico.loss{background:repeating-linear-gradient(45deg,rgba(239,68,68,.3),rgba(239,68,68,.3) 5px,rgba(239,68,68,.65) 5px,rgba(239,68,68,.65) 8px);border:2px solid #dc2626}' +
+        '.co-sbar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:#e2e8f0;border:1px solid #cbd5e1;min-width:90px}.co-sbar i{display:block;height:100%}' +
+        '.co-flow .co-sbar{height:16px;margin-top:10px}' +
+        '.co-axes{position:absolute;top:8px;inset-inline-start:8px;display:flex;flex-direction:column;gap:3px;z-index:4;pointer-events:none}' +
+        '.co-axchip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid #cbd5e1;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700;width:max-content}' +
+        '.co-axchip i{display:inline-block;width:16px;height:5px;border-radius:3px}.co-axchip span{direction:ltr;unicode-bidi:isolate}' +
+        '.co-player{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 10px;background:#fff;border-top:1px solid #e2e8f0}' +
+        '.co-player .btn{min-width:34px;padding:2px 8px}.co-player input[type=range]{flex:1;min-width:120px;direction:ltr}' +
+        '.co-slabel{font-weight:800;min-width:96px;text-align:center;white-space:nowrap}' +
+        '.co-sc{display:none;gap:12px;flex-wrap:wrap;padding:10px;background:#fffdf3;border-top:1px solid #fde68a}.co-sc.on{display:flex}' +
+        '.co-sc-hint{padding:8px 12px;font-size:13px;background:#f8fafc;border-top:1px solid #e2e8f0;color:#475569!important}' +
+        '.co-sc figure{margin:0;width:200px;max-width:100%;text-align:center}.co-sc figcaption{font-size:11px;font-weight:700;color:#475569!important;margin-top:2px}' +
+        '.co-plan{width:100%;height:auto;max-height:150px;display:block;background:#fff;border:1px solid #e2e8f0;border-radius:6px}' +
+        '.co-sc-info{flex:1;min-width:200px;display:flex;flex-direction:column;gap:8px;justify-content:center}' +
+        '.co-sc-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15px}.co-sc-title small{direction:ltr;unicode-bidi:isolate;color:#475569!important}' +
+        '.co-chips{display:flex;flex-wrap:wrap;gap:6px}' +
+        '.co-chip{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid;border-radius:20px;padding:3px 11px;font-size:13px;font-weight:700}.co-chip em{font-style:normal;direction:ltr;unicode-bidi:isolate}' +
+        '.co-key{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:#475569!important}.co-key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px;vertical-align:-1px}' +
+        '.co-slist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;max-height:420px;overflow:auto;padding:2px}' +
+        '.co-sitem{display:flex;flex-direction:column;gap:5px;border:2px solid #e2e8f0;border-radius:10px;padding:6px 8px;background:#fff;cursor:pointer}' +
+        '.co-sitem:hover{border-color:#93c5fd}.co-sitem.on{border-color:#2563eb;background:#eff6ff}' +
+        '.co-sitem-h{display:flex;align-items:center;gap:6px;font-size:13px}.co-sitem-h b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
+        '.co-sitem .co-chips{gap:4px}.co-sitem .co-chip{padding:1px 8px;font-size:11px;border-width:1.5px}' +
+        '.co-whyt{cursor:pointer;user-select:none}.co-whyt:after{content:" ▾";float:inline-end}.co-why.shut .co-body{display:none}.co-why.shut .co-whyt:after{content:" ▸"}' +
         '.co-wrap{font-size:14px}.co-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:16px}' +
         '@media(max-width:1100px){.co-grid{grid-template-columns:1fr}}' +
         '.co-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.co-top .co-sp{flex:1}' +
@@ -577,7 +713,7 @@
         this.result = null;
         this.warns = [];
         this.current = 0;
-        this.state = { explode: 0, clip: 100, showRemnants: true, wire: false, rotate: false };
+        this.state = { explode: 0, clip: 100, showRemnants: true, wire: false, rotate: false, step: 0 };
         try { this.lang = localStorage.getItem('co_lang') === 'ar' ? 'ar' : 'fr'; } catch (e) { this.lang = 'fr'; }
         injectCss();
         this.data = { sources: this.config.sources || [], pieces: this.config.pieces || [] };
@@ -622,6 +758,7 @@
             '<div class="co-top"><button type="button" class="btn btn-sm btn-outline-primary co-help-btn"><i class="fas fa-circle-question me-1"></i>' + i('help_btn') + '</button><span class="co-sp"></span>' +
             '<div class="co-lang"><button type="button" data-lang="fr">FR</button><button type="button" data-lang="ar">العربية</button></div></div>' +
             '<div class="co-helpbox"></div>' +
+            '<div class="co-flow"></div>' +
             '<div class="co-grid"><div>' +
             '<div class="co-viewer"><div class="co-toolbar">' +
             '<button type="button" class="btn btn-sm btn-outline-secondary co-prev">‹</button>' +
@@ -633,7 +770,14 @@
             '<label><input type="checkbox" class="co-wire"> ' + i('wire') + '</label>' +
             '<label><input type="checkbox" class="co-spin"> ' + i('spin') + '</label>' +
             '<button type="button" class="btn btn-sm btn-outline-secondary co-reset">' + i('reset') + '</button></div>' +
-            '<div style="position:relative"><div class="co-canvas"></div><div class="co-tip"></div><div class="co-busy"></div></div>' +
+            '<div style="position:relative"><div class="co-canvas"></div><div class="co-axes"></div><div class="co-tip"></div><div class="co-busy"></div></div>' +
+            '<div class="co-player" dir="ltr">' +
+            '<button type="button" class="btn btn-sm btn-outline-secondary co-sfirst" data-i18n-title="step_first">⏮</button>' +
+            '<button type="button" class="btn btn-sm btn-outline-secondary co-sprev" data-i18n-title="step_prev">◀</button>' +
+            '<button type="button" class="btn btn-sm btn-primary co-play" data-i18n-title="step_play">▶</button>' +
+            '<button type="button" class="btn btn-sm btn-outline-secondary co-snext" data-i18n-title="step_next">▶|</button>' +
+            '<input type="range" class="co-slider" min="0" max="0" value="0"><span class="co-slabel"></span></div>' +
+            '<div class="co-sc-hint"></div><div class="co-sc"></div>' +
             '<div class="co-legend"></div></div>' +
             '<div class="co-panel mt-3"><h6>' + i('blocks_used') + '</h6><div class="co-body p-0"><div class="table-responsive"><table class="table table-sm mb-0 co-blocks"><thead><tr>' +
             '<th>' + i('th_num') + '</th><th>' + i('th_block') + '</th><th class="text-end">' + i('th_pieces') + '</th><th>' + i('th_eff') + '</th><th class="text-end">' + i('th_chute') + '</th></tr></thead><tbody></tbody></table></div></div></div>' +
@@ -650,15 +794,28 @@
             '<div class="co-panel"><h6>' + i('pc_title') + '</h6><div class="co-body"><table class="co-tbl co-pc-tbl">' + head + '<tbody>' +
             (cfg.pieces || []).map(function (p) { return self.rowPiece(p); }).join('') + '</tbody></table></div></div>' +
             '</div></div>' +
-            '<div class="co-panel co-why mt-3" style="display:none"><h6 class="co-why-t"></h6><div class="co-body"><ul class="co-why-b"></ul></div></div>' +
+            '<div class="co-panel co-why shut mt-3" style="display:none"><h6 class="co-why-t co-whyt"></h6><div class="co-body"><ul class="co-why-b"></ul></div></div>' +
             '<div class="co-panel mt-3"><h6>' + i('detail_title') + '</h6><div class="co-body co-detail"></div></div></div>';
 
         var q = function (s) { return self.root.querySelector(s); };
         this.el = {
             canvas: q('.co-canvas'), tip: q('.co-tip'), busy: q('.co-busy'), legend: q('.co-legend'),
             kpis: q('.co-kpis'), warnings: q('.co-warnings'), blocks: q('.co-blocks tbody'), detail: q('.co-detail'),
-            select: q('.co-block-select'), why: q('.co-why'), whyT: q('.co-why-t'), whyB: q('.co-why-b'), help: q('.co-helpbox'), wrap: q('.co-wrap')
+            select: q('.co-block-select'), why: q('.co-why'), whyT: q('.co-why-t'), whyB: q('.co-why-b'), help: q('.co-helpbox'), wrap: q('.co-wrap'),
+            flow: q('.co-flow'), axes: q('.co-axes'), player: q('.co-player'), slider: q('.co-slider'), slabel: q('.co-slabel'), play: q('.co-play'),
+            sc: q('.co-sc'), schint: q('.co-sc-hint')
         };
+
+        q('.co-sfirst').addEventListener('click', function () { self.setStep(0); });
+        q('.co-sprev').addEventListener('click', function () { self.setStep(self.state.step - 1); });
+        q('.co-snext').addEventListener('click', function () { self.setStep(self.state.step + 1); });
+        this.el.play.addEventListener('click', function () { self.togglePlay(); });
+        this.el.slider.addEventListener('input', function () { self.setStep(parseInt(this.value, 10)); });
+        this.el.whyT.addEventListener('click', function () { self.el.why.classList.toggle('shut'); });
+        this.el.detail.addEventListener('click', function (e) {
+            var it = e.target.closest('[data-step]');
+            if (it) { self.setStep(parseInt(it.getAttribute('data-step'), 10)); self.el.canvas.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+        });
 
         q('.co-run').addEventListener('click', function () { self.optimize(); });
         q('.co-prev').addEventListener('click', function () { self.show(self.current - 1); });
@@ -690,6 +847,7 @@
         this.el.wrap.classList.toggle('co-rtl', this.lang === 'ar');
         this.el.wrap.setAttribute('dir', this.lang === 'ar' ? 'rtl' : 'ltr');
         this.root.querySelectorAll('[data-i18n]').forEach(function (n) { n.textContent = self.t(n.getAttribute('data-i18n')); });
+        this.root.querySelectorAll('[data-i18n-title]').forEach(function (n) { n.title = self.t(n.getAttribute('data-i18n-title')); });
         this.root.querySelectorAll('.co-lang button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-lang') === self.lang); });
         this.el.help.innerHTML = '<div class="co-h">' + this.t('h_title') + '</div><dl>' +
             this.t('h').map(function (x) { return '<dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd>'; }).join('') + '</dl>';
@@ -775,7 +933,8 @@
 
         if (!r) {
             el.kpis.innerHTML = ''; el.blocks.innerHTML = ''; el.legend.innerHTML = ''; el.select.innerHTML = '';
-            el.why.style.display = 'none';
+            el.why.style.display = 'none'; el.flow.innerHTML = ''; el.axes.innerHTML = '';
+            this.stopPlay(); this.state.step = 0; this.syncPlayer();
             el.detail.innerHTML = this.hintOnly ? '<div class="co-hint">' + esc(t('hint')) + '</div>' : '';
             this.buildScene();
             return;
@@ -805,10 +964,11 @@
             return '<tr data-i="' + i + '"><td>' + (i + 1) + '</td><td>' + esc((r.sources[b.src] || {}).name || 'Bloc') + ' <small class="text-muted">' + b.dims.join('×') + '</small>' +
                 (b.extra ? ' <span class="badge bg-danger">' + t('badge_extra') + '</span>' : '') + '</td>' +
                 '<td class="text-end">' + b.placed.length + '</td>' +
-                '<td><div class="co-bar"><i style="width:' + eff.toFixed(1) + '%"></i></div><small>' + fmt(eff, 1) + ' %</small></td>' +
+                '<td>' + stackBar([b], r) + '<small>' + fmt(eff, 1) + ' %</small></td>' +
                 '<td class="text-end">' + fmt(m3(vol(b.dims) - b.used), 3) + ' ' + UM + '</td></tr>';
         }).join('');
 
+        this.renderFlow();
         this.renderWhy();
         if (keepCurrent) {
             this.show(this.current, true);
@@ -842,57 +1002,171 @@
         var r = this.result;
         if (!r || !r.blocks.length) { this.buildScene(); return; }
         this.current = Math.max(0, Math.min(r.blocks.length - 1, i));
+        if (!keep) { this.stopPlay(); this.state.step = 0; }
         this.el.select.value = this.current;
         var rows = this.el.blocks.querySelectorAll('tr');
         rows.forEach(function (tr, k) { tr.classList.toggle('active', k === this.current); }, this);
         this.renderDetail();
+        this.syncPlayer();
         this.buildScene();
         if (!keep) this.fitCamera();
+    };
+
+    /* ------------------- Résumé visuel + lecteur d'étapes ------------------- */
+
+    CuttingPlanner.prototype.card = function (icon, big, name, sub, cls) {
+        return '<div class="co-card ' + (cls || '') + '">' + icon + '<div class="co-card-t"><b>' + big + '</b><span>' + esc(name) + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>';
+    };
+
+    /** Cartes : [blocs sources] → [pièces obtenues] + chutes + perte, pour une liste de blocs. */
+    CuttingPlanner.prototype.cardsFor = function (blocks, withSources) {
+        var self = this, r = this.result, t = function (k, p) { return self.t(k, p); }, UM = t('u_m3');
+        var dimTxt = function (d) { return d.map(function (v) { return fmt(v, 1); }).join(' × ') + ' ' + t('u_cm'); };
+        var srcN = {}, pcN = {}, V = 0, used = 0, rec = 0;
+        blocks.forEach(function (b) {
+            srcN[b.src] = (srcN[b.src] || 0) + 1; V += vol(b.dims); used += b.used;
+            b.placed.forEach(function (p) { pcN[p.t] = (pcN[p.t] || 0) + 1; });
+            b.remnants.forEach(function (x) { if (x.recoverable) rec += vol(x.s); });
+        });
+        var loss = Math.max(0, V - used - rec), html = {};
+        html.src = Object.keys(srcN).map(function (si) {
+            var s = r.sources[si];
+            return self.card(isoBox([s.w, s.h, s.d], '#94a3b8', 70), t('flow_blocks', { n: srcN[si] }), s.name, '<span dir="ltr">' + dimTxt([s.w, s.h, s.d]) + '</span>', 'src');
+        }).join('');
+        html.pieces = Object.keys(pcN).map(function (ti) {
+            var ty = r.types[ti];
+            return self.card(isoBox(ty.dims, ty.color, 62), '× ' + fmt(pcN[ti], 0), ty.name, '<span dir="ltr">' + dimTxt(ty.dims) + '</span>');
+        }).join('');
+        html.scrap = (rec > 0 ? self.card('<div class="co-ico rec"></div>', fmt(m3(rec), 3) + ' ' + UM, t('flow_scrap_rec'), fmt(V ? rec / V * 100 : 0, 1) + ' %') : '') +
+            (loss > 0 ? self.card('<div class="co-ico loss"></div>', fmt(m3(loss), 3) + ' ' + UM, t('flow_scrap_loss'), fmt(V ? loss / V * 100 : 0, 1) + ' %') : '');
+        return html;
+    };
+
+    CuttingPlanner.prototype.renderFlow = function () {
+        var r = this.result, t = this.t.bind(this);
+        if (!r || !r.blocks.length) { this.el.flow.innerHTML = ''; return; }
+        var c = this.cardsFor(r.blocks);
+        this.el.flow.innerHTML = '<div class="co-flow-t"><i class="fas fa-diagram-project me-1"></i>' + esc(t('flow_title')) + '</div>' +
+            '<div class="co-flow-row"><div class="co-cards">' + c.src + '</div>' +
+            '<div class="co-flow-arrow"><i class="fas fa-scissors"></i><i class="fas fa-arrow-right"></i></div>' +
+            '<div class="co-cards" style="flex:3">' + c.pieces + c.scrap + '</div></div>' + stackBar(r.blocks, r);
+    };
+
+    CuttingPlanner.prototype.axisKey = function () {
+        var self = this;
+        return '<div class="co-key">' + [0, 1, 2].map(function (a) { return '<span><i style="background:' + AXC[a] + '"></i>' + esc(self.t('side' + a)) + '</span>'; }).join('') + '</div>';
+    };
+
+    CuttingPlanner.prototype.chips = function (p) {
+        var self = this, UC = this.t('u_cm');
+        return p.cuts.map(function (c, k) {
+            return '<span class="co-chip" style="border-color:' + AXC[c.axis] + '">✂ ' + esc(self.t('cut_k', { k: k + 1 })) + ' · <span style="color:' + AXC[c.axis] + '!important">' + esc(self.t('side' + c.axis)) + '</span> · ' +
+                esc(self.t('from_edge', { at: '⁦' + fmt(c.at, 1) + ' ' + UC + '⁩' })) + '</span>';
+        }).join('') || '<span class="co-sub">' + esc(this.t('d_nocut')) + '</span>';
     };
 
     CuttingPlanner.prototype.renderDetail = function () {
         var self = this, r = this.result, b = r.blocks[this.current], t = function (k, p) { return self.t(k, p); };
         var UC = t('u_cm'), UM = t('u_m3');
-        var cm = function (v) { return fmt(v, 1) + ' ' + UC; };
         var dimTxt = function (d) { return d.map(function (v) { return fmt(v, 1); }).join(' × ') + ' ' + UC; };
         var sw = function (ti) { return '<i class="co-sw" style="background:' + r.types[ti].color + '"></i>'; };
         var ltr = function (s) { return '<span dir="ltr">' + s + '</span>'; };
 
-        var groups = {};
-        b.placed.forEach(function (p) {
-            var key = p.t + '|' + p.w + 'x' + p.h + 'x' + p.d;
-            groups[key] = groups[key] || { t: p.t, dims: [p.w, p.h, p.d], n: 0 };
-            groups[key].n++;
-        });
-        var summary = Object.keys(groups).map(function (k) {
-            var g = groups[k];
-            return '<li class="co-line"><b>' + t('d_piece_n', { n: g.n }) + '</b> ' + sw(g.t) + esc(r.types[g.t].name) +
-                '<div class="co-sub">' + t('d_cut_with') + ' : ' + t('side0') + ' <b>' + ltr(cm(g.dims[0])) + '</b> · ' + t('side1') + ' <b>' + ltr(cm(g.dims[1])) +
-                '</b> · ' + t('side2') + ' <b>' + ltr(cm(g.dims[2])) + '</b></div></li>';
-        }).join('');
-
+        var c = this.cardsFor([b]);
         var recover = b.remnants.filter(function (x) { return x.recoverable; }).sort(function (x, y) { return vol(y.s) - vol(x.s); });
         var remHtml = recover.slice(0, 8).map(function (x) {
-            return '<li class="co-line">' + ltr(dimTxt(x.s)) + ' <span class="co-sub" style="display:inline">(' + fmt(m3(vol(x.s)), 3) + ' ' + UM + ')</span></li>';
+            return self.card('<div class="co-ico rec"></div>', ltr(dimTxt(x.s)), t('flow_scrap_rec'), fmt(m3(vol(x.s)), 3) + ' ' + UM);
         }).join('');
 
-        var steps = b.placed.slice(0, 80).map(function (p, n) {
-            var cuts = p.cuts.map(function (c, k) {
-                return '<div class="co-cut">' + t('d_cut', { k: k + 1, at: ltr(cm(c.at)), side: t('side' + c.axis) }) + '</div>';
-            }).join('') || '<div class="co-cut">' + t('d_nocut') + '</div>';
-            return '<li class="co-step"><div class="co-step-h"><span class="co-num">' + (n + 1) + '</span>' + sw(p.t) +
-                '<b>' + esc(r.types[p.t].name) + '</b> <span class="co-sub" style="display:inline">(' + ltr(dimTxt([p.w, p.h, p.d])) + ')</span></div>' +
-                '<div class="co-sub">' + t('d_zone') + ' : ' + ltr(dimTxt(p.box.s)) + ' — ' + t('d_start') + ' ' + ltr(cm(p.box.p[0])) + ' ' + t('unit_len') + ', ' +
-                ltr(cm(p.box.p[1])) + ' ' + t('unit_h') + ', ' + ltr(cm(p.box.p[2])) + ' ' + t('unit_d') + '</div>' + cuts + '</li>';
+        var LIMIT = 300;
+        var steps = b.placed.slice(0, LIMIT).map(function (p, n) {
+            return '<div class="co-sitem" data-step="' + (n + 1) + '"><div class="co-sitem-h"><span class="co-num">' + (n + 1) + '</span>' + sw(p.t) +
+                '<b>' + esc(r.types[p.t].name) + '</b> <small class="co-sub" dir="ltr">' + dimTxt([p.w, p.h, p.d]) + '</small></div>' +
+                '<div class="co-chips">' + self.chips(p) + '</div></div>';
         }).join('');
 
         this.el.detail.innerHTML =
-            '<div class="row"><div class="col-lg-5">' +
-            '<div class="co-h">' + t('d_contains') + '</div><ul class="co-list">' + summary + '</ul>' +
-            '<div class="co-h">' + t('d_rec_title') + '</div><ul class="co-list">' + (remHtml || '<li class="co-line">' + t('d_rec_none') + '</li>') + '</ul></div>' +
-            '<div class="col-lg-7"><div class="co-h">' + t('d_steps') + '</div>' +
-            '<ol class="co-steps">' + steps + (b.placed.length > 80 ? '<li class="co-line">' + t('d_more', { n: b.placed.length - 80 }) + '</li>' : '') + '</ol>' +
-            '<div class="co-help">' + t('d_read') + '</div></div></div>';
+            '<div class="co-h">' + t('this_gives') + '</div>' +
+            '<div class="co-cards mb-3">' + c.pieces + c.scrap + '</div>' + stackBar([b], r) +
+            (remHtml ? '<div class="co-h mt-3">' + t('d_rec_title') + '</div><div class="co-cards mb-3">' + remHtml + '</div>' : '') +
+            '<div class="co-h mt-3">' + t('step_title') + '</div>' + this.axisKey() +
+            '<div class="co-slist mt-2">' + steps + (b.placed.length > LIMIT ? '<div class="co-line">' + t('d_more', { n: b.placed.length - LIMIT }) + '</div>' : '') + '</div>';
+        this.markStep();
+    };
+
+    CuttingPlanner.prototype.markStep = function () {
+        var s = this.state.step, list = this.el.detail.querySelector('.co-slist');
+        this.el.detail.querySelectorAll('.co-sitem').forEach(function (n) {
+            var on = parseInt(n.getAttribute('data-step'), 10) === s;
+            n.classList.toggle('on', on);
+            if (on && list) list.scrollTop = n.offsetTop - list.offsetTop - 6;
+        });
+    };
+
+    /** Carte de l'étape courante : plans face + dessus, pièce, coupes. */
+    CuttingPlanner.prototype.renderStepCard = function () {
+        var r = this.result, b = r && r.blocks[this.current], s = this.state.step, el = this.el, t = this.t.bind(this);
+        if (!b || s < 1) {
+            el.sc.className = 'co-sc'; el.sc.innerHTML = '';
+            el.schint.style.display = b ? '' : 'none'; el.schint.textContent = t('step_hint');
+            return;
+        }
+        var p = b.placed[s - 1], k = s - 1, ty = r.types[p.t];
+        var dimTxt = [p.w, p.h, p.d].map(function (v) { return fmt(v, 1); }).join(' × ') + ' ' + t('u_cm');
+        el.schint.style.display = 'none';
+        el.sc.className = 'co-sc on';
+        el.sc.innerHTML =
+            '<figure dir="ltr">' + planSvg(b, k, r, 'face') + '<figcaption>' + esc(t('view_face')) + '</figcaption></figure>' +
+            '<figure dir="ltr">' + planSvg(b, k, r, 'top') + '<figcaption>' + esc(t('view_top')) + '</figcaption></figure>' +
+            '<div class="co-sc-info"><div class="co-sc-title"><span class="co-num">' + s + '</span>' + isoBox([p.w, p.h, p.d], ty.color, 46) +
+            '<b>' + esc(ty.name) + '</b><small dir="ltr">' + dimTxt + '</small></div>' +
+            '<div class="co-chips">' + this.chips(p) + '</div>' + this.axisKey() + '</div>';
+    };
+
+    CuttingPlanner.prototype.syncPlayer = function () {
+        var r = this.result, b = r && r.blocks[this.current], el = this.el, N = b ? b.placed.length : 0;
+        el.player.style.display = b ? '' : 'none';
+        el.slider.max = N; el.slider.value = this.state.step;
+        el.slabel.textContent = !b ? '' : this.state.step ? this.t('step_n', { k: this.state.step, n: N }) : this.t('step_overview');
+        el.play.textContent = this._play ? '⏸' : '▶';
+        el.play.title = this.t(this._play ? 'step_pause' : 'step_play');
+        this.renderStepCard();
+        if (b) this.markStep();
+    };
+
+    CuttingPlanner.prototype.setStep = function (n) {
+        var r = this.result, b = r && r.blocks[this.current];
+        if (!b) return;
+        this.state.step = Math.max(0, Math.min(b.placed.length, n | 0));
+        if (this.state.step >= b.placed.length) this.stopPlay();
+        this.syncPlayer();
+        this.buildScene();
+    };
+
+    CuttingPlanner.prototype.stopPlay = function () {
+        if (this._timer) { clearInterval(this._timer); this._timer = null; }
+        this._play = false;
+        if (this.el && this.el.play) { this.el.play.textContent = '▶'; this.el.play.title = this.t('step_play'); }
+    };
+
+    CuttingPlanner.prototype.togglePlay = function () {
+        var self = this, r = this.result, b = r && r.blocks[this.current];
+        if (!b) return;
+        if (this._play) { this.stopPlay(); return; }
+        if (this.state.step >= b.placed.length) this.state.step = 0;
+        this._play = true;
+        this.el.play.textContent = '⏸';
+        var tickStep = function () {
+            if (!self.root.isConnected) { self.stopPlay(); return; }
+            var rb = self.result && self.result.blocks[self.current];
+            if (!rb) { self.stopPlay(); return; }
+            self.state.step++;
+            if (self.state.step >= rb.placed.length) { self.state.step = rb.placed.length; self.stopPlay(); }
+            self.syncPlayer();
+            self.buildScene();
+        };
+        tickStep();
+        if (this._play) this._timer = setInterval(tickStep, b.placed.length > 60 ? 350 : 1100);
     };
 
     /* ---------------------------- 3D ---------------------------------- */
@@ -985,22 +1259,52 @@
             mesh.position.set(mx * spread, my * spread, mz * spread);
             var edges = new T.LineSegments(new T.EdgesGeometry(geo), new T.LineBasicMaterial({ color: edgeColor }));
             mesh.add(edges);
-            mesh.userData = meta;
+            mesh.userData = meta || {};
             group.add(mesh);
             if (meta) self_pick.push(mesh);
         }
         var self_pick = this.pickables;
 
-        b.placed.forEach(function (p) {
+        // Barres de couleur sur les 3 arêtes du coin d'origine : Longueur / Hauteur / Profondeur.
+        var th = Math.max.apply(null, b.dims) * 0.012;
+        [0, 1, 2].forEach(function (a) {
+            var sz = [th, th, th], ps = [-cx, -cy, -cz];
+            sz[a] = b.dims[a]; ps[a] = 0;
+            var bar = new T.Mesh(new T.BoxGeometry(sz[0], sz[1], sz[2]), new T.MeshBasicMaterial({ color: AXH[a] }));
+            bar.position.set(ps[0], ps[1], ps[2]);
+            group.add(bar);
+        });
+        var UC = this.t('u_cm'), self = this;
+        this.el.axes.innerHTML = [0, 1, 2].map(function (a) {
+            return '<div class="co-axchip"><i style="background:' + AXC[a] + '"></i>' + esc(self.t('side' + a)) + ' <span>' + fmt(b.dims[a], 1) + ' ' + UC + '</span></div>';
+        }).join('');
+
+        var step = st.step || 0, N = b.placed.length;
+        b.placed.forEach(function (p, idx) {
             if (p.y > clipY + EPS) return;
+            if (step > 0 && idx > step - 1) return;            // pas encore coupée
             var ty = r.types[p.t];
+            var cur = step > 0 && idx === step - 1, done = step > 0 && idx < step - 1;
             var mat = new T.MeshLambertMaterial({
-                color: ty.color, transparent: true, opacity: st.wire ? 0.12 : 0.94, wireframe: false
+                color: ty.color, transparent: true, opacity: cur ? 1 : done ? 0.4 : (st.wire ? 0.12 : 0.94),
+                emissive: new T.Color(cur ? ty.color : 0x000000), emissiveIntensity: cur ? 0.35 : 1
             });
-            add(p.x, p.y, p.z, p.w, p.h, p.d, mat, 0x0f172a, { kind: 'piece', name: ty.name, dims: [p.w, p.h, p.d] });
+            add(p.x, p.y, p.z, p.w, p.h, p.d, mat, cur ? 0xfacc15 : 0x0f172a, { kind: 'piece', name: ty.name, dims: [p.w, p.h, p.d] });
+            if (cur) {
+                // zone de travail (jaune) + plans de coupe colorés selon le sens
+                add(p.box.p[0], p.box.p[1], p.box.p[2], p.box.s[0], p.box.s[1], p.box.s[2],
+                    new T.MeshBasicMaterial({ color: 0xfacc15, transparent: true, opacity: 0.12, depthWrite: false }), 0xca8a04, null);
+                var ct = Math.max.apply(null, b.dims) * 0.006;
+                p.cuts.forEach(function (c) {
+                    var sz = p.box.s.slice(), ps = p.box.p.slice();
+                    sz[c.axis] = ct; ps[c.axis] = c.at - ct / 2;
+                    add(ps[0], ps[1], ps[2], sz[0], sz[1], sz[2],
+                        new T.MeshBasicMaterial({ color: AXH[c.axis], transparent: true, opacity: 0.55, depthWrite: false, side: T.DoubleSide }), AXH[c.axis], null);
+                });
+            }
         });
 
-        if (st.showRemnants) {
+        if (st.showRemnants && (step === 0 || step >= N)) {
             b.remnants.forEach(function (rm) {
                 if (rm.p[1] > clipY + EPS) return;
                 var mat = new T.MeshBasicMaterial({ color: rm.recoverable ? 0x3b82f6 : 0xef4444, transparent: true, opacity: rm.recoverable ? 0.38 : 0.5, depthWrite: false });
