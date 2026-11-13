@@ -1,0 +1,6472 @@
+# Fiches produits — isolation bâtiment [famille déduite du code/nom par l'analyste, non présente dans l'ERP] (308 articles)
+
+Source : ERP uniquement. « NON RENSEIGNÉ » = absent de l'ERP.
+
+## PLAQUE EN EPS 100CM*70CM*60CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : **PL 100*70*60
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++ (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.7 × 0.6 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.42
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 100CM*70CM*60CM » (code **PL 100*70*60), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## **PLV 200*100*6
+- **Famille** : isolation bâtiment
+- **Code article ERP** : **PLV 200*100*6
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++ (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.1 × 0.06 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.132
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « **PLV 200*100*6 » (code **PLV 200*100*6), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (200×100×6 cm) ≠ champs dimensions ERP (200×110×6 cm) | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## *PL 2*60*100
+- **Famille** : isolation bâtiment
+- **Code article ERP** : *PL 2*60*100 HD
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 1 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0136
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « *PL 2*60*100 » (code *PL 2*60*100 HD), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (2×60×100 cm) ≠ champs dimensions ERP (2×100×68 cm) | Poids NON RENSEIGNÉ | Nom « 2*60*100 » vs dimensions 0,02 × 1,00 × 0,68 : largeur 0,68 ≠ 0,60 du nom | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 75CM*40CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : *PL 75*40 HD
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.75 × 0.4 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 75CM*40CM*200CM » (code *PL 75*40 HD), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## HOURDIS 50*16*100cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : HOURDIS 50*16*100
+- **Type de produit (déduit du code/nom)** : Hourdis
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.16 × 0.5 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.08
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « HOURDIS 50*16*100cm » (code HOURDIS 50*16*100), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  100*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.64
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*32cm*200cm » (code PL  100*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  100*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.72
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*36cm*200cm » (code PL  100*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PL 15 CM BTP
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  100CM*50CM*15CM
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.15 × 0.5 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.075
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 15 CM BTP » (code PL  100CM*50CM*15CM), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*14 cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  136*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3808
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*14 cm*200cm » (code PL  136*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*16 cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  136*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4352
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*16 cm*200cm » (code PL  136*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*17 cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  136*17
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.17 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*17 cm*200cm » (code PL  136*17), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*18 cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  136*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.37 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4914
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*18 cm*200cm » (code PL  136*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (136×18×200 cm) ≠ champs dimensions ERP (200×137×18 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*20 cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  136*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.544
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*20 cm*200cm » (code PL  136*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 30*26*16cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  30*26*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.18 × 0.3 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0162
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 30*26*16cm » (code PL  30*26*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (30×26×16 cm) ≠ champs dimensions ERP (18×30×30 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*14cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  55*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.154
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*14cm*200cm » (code PL  55*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*14cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  68*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.1904
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*14cm*200cm » (code PL  68*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  68*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4352
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*32cm*200cm » (code PL  68*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS75*40*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  75*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS75*40*200cm » (code PL  75*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  85*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.408
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*24cm*200cm » (code PL  85*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL  90*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.72
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*40cm*200cm » (code PL  90*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 02*70*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 02*70*200
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.02 × 0.75 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.03
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 02*70*200cm » (code PL 02*70*200), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (2×70×200 cm) ≠ champs dimensions ERP (200×2×75 cm) | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 06*50*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 06*50*200
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.06 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0696
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 06*50*200cm » (code PL 06*50*200), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (6×50×200 cm) ≠ champs dimensions ERP (200×6×58 cm) | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 10 CM BTP
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 10
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 10 CM BTP » (code PL 10), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*04cm*140cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*04*140
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.4 × 0.04 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.056
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*04cm*140cm » (code PL 100*04*140), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*10*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*10*200cm » (code PL 100*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## Plaque en eps 100cm*100cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : Pl 100*100*2cm
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 1 × 0.02 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.02
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « Plaque en eps 100cm*100cm*2cm » (code Pl 100*100*2cm), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*12*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*12
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.12 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.24
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*12*200cm » (code PL 100*12), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*14*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.28
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*14*200cm » (code PL 100*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*15*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*15
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.15 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*15*200cm » (code PL 100*15), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.32
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*16cm*200cm » (code PL 100*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.36
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*18cm*200cm » (code PL 100*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*20cm*200cm » (code PL 100*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*20*15cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*20*15
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.2 × 0.15 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.03
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*20*15cm » (code PL 100*20*15), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.44
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*22cm*200cm » (code PL 100*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*23*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*23
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.23 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.46
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*23*200cm » (code PL 100*23), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.48
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*24cm*200cm » (code PL 100*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100*26*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.52
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100*26*200cm » (code PL 100*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.56
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*28cm*200cm » (code PL 100*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*30cm*200cm » (code PL 100*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.68
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*34cm*200cm » (code PL 100*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.76
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*38cm*200cm » (code PL 100*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.8
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*40cm*200cm » (code PL 100*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*44cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.88
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*44cm*200cm » (code PL 100*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 100CM*50CM*40CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*50*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.5 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 100CM*50CM*40CM » (code PL 100*50*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*55cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*55*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.55 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.011
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*55cm*2cm » (code PL 100*55*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×55×2 cm) ≠ champs dimensions ERP (20×55×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 100CM*55CM*66CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*55*66
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.66 × 0.55 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.363
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 100CM*55CM*66CM » (code PL 100*55*66), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*60cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*60*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.6 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.012
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*60cm*2cm » (code PL 100*60*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×60×2 cm) ≠ champs dimensions ERP (20×60×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS100cm*65cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*65*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.65 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.013
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS100cm*65cm*2cm » (code PL 100*65*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×65×2 cm) ≠ champs dimensions ERP (20×65×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*70cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*70*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.7 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.014
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*70cm*2cm » (code PL 100*70*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×70×2 cm) ≠ champs dimensions ERP (20×70×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*75cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*75*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.75 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.015
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*75cm*2cm » (code PL 100*75*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×75×2 cm) ≠ champs dimensions ERP (20×75×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*80cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*80*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.8 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.016
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*80cm*2cm » (code PL 100*80*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×80×2 cm) ≠ champs dimensions ERP (20×80×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS100*85*02cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*85*02
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 0.85 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.017
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS100*85*02cm » (code PL 100*85*02), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*80cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*85*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.85 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.017
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*80cm*2cm » (code PL 100*85*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×80×2 cm) ≠ champs dimensions ERP (20×85×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*90cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 100*90*2
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.9 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.018
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*90cm*2cm » (code PL 100*90*2), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×90×2 cm) ≠ champs dimensions ERP (20×90×10 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 100cm*04cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*04*200
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.04 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.096
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 100cm*04cm*200cm » (code PL 120*04*200), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (100×4×200 cm) ≠ champs dimensions ERP (200×4×120 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 120CM*100CM*15CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*100*15
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.2 × 1 × 0.15 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.18
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 120CM*100CM*15CM » (code PL 120*100*15), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.16 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.384
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120cm*16cm*200cm » (code PL 120*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.18 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.432
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120cm*18cm*200cm » (code PL 120*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120*20*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.48
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120*20*200cm » (code PL 120*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.528
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120cm*22cm*200cm » (code PL 120*22), type ERP « finale », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120*36*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.2 × 0.36 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.864
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120*36*200cm » (code PL 120*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 120*40*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.2 × 0.4 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.96
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 120*40*200CM » (code PL 120*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120*44*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*44*200
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.056
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120*44*200cm » (code PL 120*44*200), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120*50*50cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*50*50
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.2 × 0.5 × 0.5 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120*50*50cm » (code PL 120*50*50), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120cm*70cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*70
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.7 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.68
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120cm*70cm*200cm » (code PL 120*70), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN POLYSTYRENE 120*75*200 CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : Pl 120*75
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.2 × 2 × 0.75 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.8
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN POLYSTYRENE 120*75*200 CM » (code Pl 120*75), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120*80*02 CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*80*02
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 0.8 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0192
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120*80*02 CM » (code PL 120*80*02), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 120cm*90cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 120*90
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.9 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.16
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 120cm*90cm*200cm » (code PL 120*90), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*19cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 136*19
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.19 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5168
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*19cm*200cm » (code PL 136*19), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 136*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5984
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*22cm*200cm » (code PL 136*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 136*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6528
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*24cm*200cm » (code PL 136*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 136cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 136*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.088
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 136cm*40cm*200cm » (code PL 136*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PL 136*60*200
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 136*60
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.632
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 136*60*200 » (code PL 136*60), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.38 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4968
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138cm*18cm*200cm » (code PL 138*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138CM*22CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.22 × 1.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6072
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138CM*22CM*200CM » (code PL 138*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138CM*24CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.38 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138CM*24CM*200CM » (code PL 138*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138*26*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.38 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.7176
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138*26*200cm » (code PL 138*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.28 × 1.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.7728
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138cm*28cm*200cm » (code PL 138*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.3 × 1.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.828
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138cm*30cm*200cm » (code PL 138*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.34 × 1.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.9384
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138cm*34cm*200cm » (code PL 138*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS138*36*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.38 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.9936
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS138*36*200cm » (code PL 138*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.38 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.0488
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138cm*38cm*200cm » (code PL 138*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 138*40*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 138*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.38 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.104
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 138*40*200cm » (code PL 138*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 15cm*28cm*03cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 15*28*03
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.04 × 0.2 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0024
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 15cm*28cm*03cm » (code PL 15*28*03), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (15×28×3 cm) ≠ champs dimensions ERP (4×20×30 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 156*16*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 156*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.56 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4992
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 156*16*200cm » (code PL 156*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUES EPS 156cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 156*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.56 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5616
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUES EPS 156cm*18cm*200cm » (code PL 156*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 156cm*20 cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 156*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.56 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 156cm*20 cm*200cm » (code PL 156*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 156cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 156*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.56 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.7488
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 156cm*24cm*200cm » (code PL 156*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 156cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 156*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.56 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.0608
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 156cm*34cm*200cm » (code PL 156*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 160*18*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 160*18*200
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.6 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.576
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 160*18*200cm » (code PL 160*18*200), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 2 CM BTP
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 2
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.5 × 1 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 2 CM BTP » (code PL 2), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 2CM*20CM*100CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 2*20*100
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 0.2 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.004
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 2CM*20CM*100CM » (code PL 2*20*100), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 2*50*70
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 2*50*70
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.7 × 0.5 × 0.02 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.007
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 2*50*70 » (code PL 2*50*70), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PL 3 CM BTP
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 3
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.5 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 3 CM BTP » (code PL 3), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 4 CM BTP
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 4
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 4 CM BTP » (code PL 4), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 15*02*180cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 4*15*180
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.04 × 0.15 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.012
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 15*02*180cm » (code PL 4*15*180), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (15×2×180 cm) ≠ champs dimensions ERP (200×4×15 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 5 CM BTP
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 5
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.5 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 5 CM BTP » (code PL 5), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 50*10*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 50*10*200cm » (code PL 50*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50*16*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.16 × 0.5 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.16
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50*16*200cm » (code PL 50*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.18
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*18cm*200cm » (code PL 50*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.2 × 0.5 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*20cm*200cm » (code PL 50*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.24
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*24cm*200cm » (code PL 50*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50*25*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*25
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.25 × 0.5 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.25
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50*25*200cm » (code PL 50*25), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*30cm*200cm » (code PL 50*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.34
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*34cm*200cm » (code PL 50*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.36
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*36cm*200cm » (code PL 50*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (58×36×200 cm) ≠ champs dimensions ERP (200×50×36 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.38
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*38cm*200cm » (code PL 50*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*40cm*200cm » (code PL 50*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50cm*45cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*45
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.45 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.45
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50cm*45cm*200cm » (code PL 50*45), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 50*80*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 50*80
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.5 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.8
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 50*80*200cm » (code PL 50*80), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*02cm*55cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*02*55
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.58 × 0.2 × 0.55 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0638
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*02cm*55cm » (code PL 55*02*55), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (55×2×55 cm) ≠ champs dimensions ERP (58×20×55 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*10cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.11
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*10cm*200cm » (code PL 55*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*12cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*12
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.12 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.132
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*12cm*200cm » (code PL 55*12), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.176
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*16cm*200cm » (code PL 55*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*17cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*17
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.17 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.187
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*17cm*200cm » (code PL 55*17), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.198
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*18cm*200cm » (code PL 55*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.22
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*20cm*200cm » (code PL 55*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.242
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*22cm*200cm » (code PL 55*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.264
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*24cm*200cm » (code PL 55*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*26cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.286
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*26cm*200cm » (code PL 55*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.308
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*28cm*200cm » (code PL 55*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.33
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*30cm*200cm » (code PL 55*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.352
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*32cm*200cm » (code PL 55*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.374
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*34cm*200cm » (code PL 55*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.396
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*36cm*200cm » (code PL 55*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.418
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*38cm*200cm » (code PL 55*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.44
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55cm*40cm*200cm » (code PL 55*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PL 55*40*02CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*40*02CM
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 0.4 × 0.55 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0044
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 55*40*02CM » (code PL 55*40*02CM), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 55*44*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 55*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.55 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.484
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 55*44*200cm » (code PL 55*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 56cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 56*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.56 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4256
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 56cm*38cm*200cm » (code PL 56*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 56*40*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 56*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.56 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.448
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 56*40*200cm » (code PL 56*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 57*72*02 cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 57*72*02
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 0.75 × 0.6 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.009
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 57*72*02 cm » (code PL 57*72*02), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (57×72×2 cm) ≠ champs dimensions ERP (2×75×60 cm) | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*10cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.1 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.116
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*10cm*200cm » (code PL 58*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*14cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.1624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*14cm*200cm » (code PL 58*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.1856
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*16cm*200cm » (code PL 58*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*17cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*17
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.17 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.1972
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*17cm*200cm » (code PL 58*17), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2088
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*18cm*200cm » (code PL 58*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.232
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*20cm*200cm » (code PL 58*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58*20*04cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*20*04 CM
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.04 × 0.2 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0046
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58*20*04cm » (code PL 58*20*04 CM), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2552
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*22cm*200cm » (code PL 58*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2784
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*24cm*200cm » (code PL 58*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*26cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3016
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*26cm*200cm » (code PL 58*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58*27*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*27
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.27 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3132
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58*27*200cm » (code PL 58*27), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3248
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*28cm*200cm » (code PL 58*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.348
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*30cm*200cm » (code PL 58*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3712
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*32cm*200cm » (code PL 58*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3944
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*34cm*200cm » (code PL 58*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*35cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*35
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.35 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.406
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*35cm*200cm » (code PL 58*35), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4176
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*36cm*200cm » (code PL 58*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4408
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*38cm*200cm » (code PL 58*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.464
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*40cm*200cm » (code PL 58*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*42cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*42
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.42 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4872
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*42cm*200cm » (code PL 58*42), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*43cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*43
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.43 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4988
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*43cm*200cm » (code PL 58*43), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*44cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5104
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*44cm*200cm » (code PL 58*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*45cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*45
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.45 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.612
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*45cm*2cm » (code PL 58*45), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (68×45×2 cm) ≠ champs dimensions ERP (200×68×45 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58*46*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*46
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.46 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5336
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58*46*200cm » (code PL 58*46), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58*47*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*47
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.47 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5452
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58*47*200cm » (code PL 58*47), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 58cm*48cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 58*48
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.58 × 0.48 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5568
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 58cm*48cm*200cm » (code PL 58*48), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PL 6 CM BTP 2EME
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 6 2EME
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : NON RENSEIGNÉ
+- **Dimensions standard** : 1 × 0.5 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 6 CM BTP 2EME » (code PL 6 2EME), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Aucune famille de densité (HD+++/HD/HR/2EME) associée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PL 6 CM BTP HD
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 6 HD
+- **Type de produit (déduit du code/nom)** : Plaque (conditionnée au m³, BTP)
+- **Unité ERP** : M3
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.5 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PL 6 CM BTP HD » (code PL 6 HD), type ERP « finale », unité « M3 ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60cm*12cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*12
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.12 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.144
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60cm*12cm*200cm » (code PL 60*12), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.216
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60cm*18cm*200cm » (code PL 60*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.24 × 0.6 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.288
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60cm*24cm*200cm » (code PL 60*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.408
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60cm*34cm*200cm » (code PL 60*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.432
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60cm*36cm*200cm » (code PL 60*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60*38*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.456
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60*38*200cm » (code PL 60*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.48
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60cm*40cm*200cm » (code PL 60*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60*42*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*42
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.42 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.504
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60*42*200cm » (code PL 60*42), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 60*44*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 60*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.6 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.528
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 60*44*200cm » (code PL 60*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*10cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.1 × 0.65 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.13
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*10cm*200cm » (code PL 65*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*14cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.182
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*14cm*200cm » (code PL 65*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.208
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*16cm*200cm » (code PL 65*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*17cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*17
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.17 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.221
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*17cm*200cm » (code PL 65*17), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.234
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*18cm*200cm » (code PL 65*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.26
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*20cm*200cm » (code PL 65*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.286
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*22cm*200cm » (code PL 65*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*23cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*23
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.23 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.299
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*23cm*200cm » (code PL 65*23), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.312
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*24cm*200cm » (code PL 65*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65*25*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*25
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.25 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.325
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65*25*200cm » (code PL 65*25), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*26cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.338
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*26cm*200cm » (code PL 65*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.364
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*28cm*200cm » (code PL 65*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.39
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*30cm*200cm » (code PL 65*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.416
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*32cm*200cm » (code PL 65*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.442
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*34cm*200cm » (code PL 65*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.468
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*36cm*200cm » (code PL 65*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.494
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*38cm*200cm » (code PL 65*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.52
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*40cm*200cm » (code PL 65*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*42cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*42
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.42 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.546
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*42cm*200cm » (code PL 65*42), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65*44*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.572
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65*44*200cm » (code PL 65*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 65cm*46cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*46
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.46 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.598
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 65cm*46cm*200cm » (code PL 65*46), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 65CM*48CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 65*48
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 0.48 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 65CM*48CM*200CM » (code PL 65*48), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2376
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*18cm*200cm » (code PL 66*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66*23*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*23
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.23 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3036
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66*23*200cm » (code PL 66*23), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3168
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*24cm*200cm » (code PL 66*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.28 × 0.66 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3696
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*28cm*200cm » (code PL 66*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66*32*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4224
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66*32*200cm » (code PL 66*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4488
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*34cm*200cm » (code PL 66*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4752
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*36cm*200cm » (code PL 66*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*37cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*37
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.37 × 0.66 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4884
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*37cm*200cm » (code PL 66*37), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.66 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5016
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*38cm*200cm » (code PL 66*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 66cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 66*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.4 × 0.66 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.528
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 66cm*40cm*200cm » (code PL 66*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*10cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.136
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*10cm*200cm » (code PL 68*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*12cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*12
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.12 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.1632
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*12cm*200cm » (code PL 68*12), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68*120*150cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*120*150
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.5 × 1.2 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.224
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68*120*150cm » (code PL 68*120*150), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2176
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*16cm*200cm » (code PL 68*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*17cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*17
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.17 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2312
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*17cm*200cm » (code PL 68*17), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2448
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*18cm*200cm » (code PL 68*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*19cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*19
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.19 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2584
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*19cm*200cm » (code PL 68*19), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.272
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*20cm*200cm » (code PL 68*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2992
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*22cm*200cm » (code PL 68*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68*23*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*23
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.23 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3128
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68*23*200cm » (code PL 68*23), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3264
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*24cm*200cm » (code PL 68*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*25cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*25
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.25 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.34
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*25cm*200cm » (code PL 68*25), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*26cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3536
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*26cm*200cm » (code PL 68*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*27cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*27
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.27 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3672
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*27cm*200cm » (code PL 68*27), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3808
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*28cm*200cm » (code PL 68*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.408
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*30cm*200cm » (code PL 68*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*34cm*200cm » (code PL 68*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*35cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*35
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.35 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.476
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*35cm*200cm » (code PL 68*35), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4896
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*36cm*200cm » (code PL 68*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5168
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*38cm*200cm » (code PL 68*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.544
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*40cm*200cm » (code PL 68*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*42cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*42
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.42 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5712
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*42cm*200cm » (code PL 68*42), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*43cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*43
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.43 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5848
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*43cm*200cm » (code PL 68*43), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*44cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5984
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*44cm*200cm » (code PL 68*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*45cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*45
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.45 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.612
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*45cm*200cm » (code PL 68*45), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68*46*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*46
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.46 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6256
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68*46*200cm » (code PL 68*46), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*47cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*47
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.47 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6392
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*47cm*200cm » (code PL 68*47), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68cm*48cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*48
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.48 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6528
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68cm*48cm*200cm » (code PL 68*48), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 68*50*04cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 68*50*04
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.04 × 0.5 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0136
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 68*50*04cm » (code PL 68*50*04), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 70cm*10cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.7 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.14
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 70cm*10cm*200cm » (code PL 70*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 70cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.7 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.224
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 70cm*16cm*200cm » (code PL 70*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 70cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.7 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.252
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 70cm*18cm*200cm » (code PL 70*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 70cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.7 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.28
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 70cm*20cm*200cm » (code PL 70*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 70cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.7 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.336
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 70cm*24cm*200cm » (code PL 70*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 70CM*30CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.7 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.42
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 70CM*30CM*200CM » (code PL 70*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 70cm*50cm*2cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*50*02
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.02 × 0.5 × 0.7 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.007
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 70cm*50cm*2cm » (code PL 70*50*02), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 70*50*4CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 70*50*04
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.7 × 0.52 × 0.04 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0146
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 70*50*4CM » (code PL 70*50*04), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (70×50×4 cm) ≠ champs dimensions ERP (70×52×4 cm) | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 71cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 71*20*02
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.71 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.284
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 71cm*20cm*200cm » (code PL 71*20*02), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 71cm*28cm*02cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 71*28*02
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.28 × 0.71 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3976
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 71cm*28cm*02cm » (code PL 71*28*02), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (71×28×2 cm) ≠ champs dimensions ERP (200×28×71 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 71CM*56CM*4CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 71*56*4CM
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.72 × 0.58 × 0.04 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0167
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 71CM*56CM*4CM » (code PL 71*56*4CM), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (71×56×4 cm) ≠ champs dimensions ERP (72×58×4 cm) | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 72*30*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 72*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.72 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.432
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 72*30*200cm » (code PL 72*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*13cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*13
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.13 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.195
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*13cm*200cm » (code PL 75*13), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 75CM*16CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.24
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 75CM*16CM*200CM » (code PL 75*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75*18*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.18 × 0.75 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.27
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75*18*200cm » (code PL 75*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.2 × 0.75 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*20cm*200cm » (code PL 75*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 75CM*22CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.08 × 0.22 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0352
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 75CM*22CM*200CM » (code PL 75*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (75×22×200 cm) ≠ champs dimensions ERP (8×22×200 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.24 × 0.75 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.36
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*24cm*200cm » (code PL 75*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.45
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*30cm*200cm » (code PL 75*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.48
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*32cm*200cm » (code PL 75*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.75 × 0.34 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.51
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*34cm*200cm » (code PL 75*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 75*36*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.75 × 0.36 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.54
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 75*36*200CM » (code PL 75*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 75*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.57
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*38cm*200cm » (code PL 75*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 75cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 76*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.54
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 75cm*36cm*200cm » (code PL 76*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 78CM*10CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.156
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 78CM*10CM*200CM » (code PL 78*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.16 × 0.78 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2496
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*16cm*200cm » (code PL 78*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.2808
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*18cm*200cm » (code PL 78*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.312
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*20cm*200cm » (code PL 78*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78*22*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3432
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78*22*200cm » (code PL 78*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.3744
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*24cm*200cm » (code PL 78*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*26cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4056
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*26cm*200cm » (code PL 78*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*28cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4368
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*28cm*200cm » (code PL 78*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.468
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*30cm*200cm » (code PL 78*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.34 × 0.78 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5304
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*34cm*200cm » (code PL 78*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5616
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*36cm*200cm » (code PL 78*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5928
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm38cm*200cm » (code PL 78*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 78cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 78*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.78 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 78cm*40cm*200cm » (code PL 78*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.8 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.288
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*18cm*200cm » (code PL 80*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.2 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.32
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*20cm*200cm » (code PL 80*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.22 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.352
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*22cm*200cm » (code PL 80*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*26cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*26
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.8 × 0.26 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.416
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*26cm*200cm » (code PL 80*26), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.34 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.544
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*34cm*200cm » (code PL 80*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 80CM*35CM*3CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*35*3CM
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.8 × 0.35 × 0.03 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0084
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 80CM*35CM*3CM » (code PL 80*35*3CM), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80*36*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.36 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.576
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80*36*200cm » (code PL 80*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.38 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.608
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*38cm*200cm » (code PL 80*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 80cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 80*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.4 × 0.8 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.64
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 80cm*40cm*200cm » (code PL 80*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*03cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*03
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.03 × 0.9 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.054
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*03cm*200cm » (code PL 85*03), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (85×3×200 cm) ≠ champs dimensions ERP (200×3×90 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85*10*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.1 × 0.85 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.17
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85*10*200cm » (code PL 85*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*14cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*14
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.14 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.238
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*14cm*200cm » (code PL 85*14), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.272
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*16cm*200cm » (code PL 85*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 85CM*17CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*17
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.17 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.289
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 85CM*17CM*200CM » (code PL 85*17), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 85CM*18CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.306
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 85CM*18CM*200CM » (code PL 85*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 85CM*20CM*200CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.34
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 85CM*20CM*200CM » (code PL 85*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.374
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*22cm*200cm » (code PL 85*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85*28*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*28
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.28 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.476
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85*28*200cm » (code PL 85*28), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.51
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*30cm*200cm » (code PL 85*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*32cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.32 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.544
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*32cm*200cm » (code PL 85*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUES EPS 85cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.578
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUES EPS 85cm*34cm*200cm » (code PL 85*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.612
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*36cm*200cm » (code PL 85*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.85 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.646
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*38cm*200cm » (code PL 85*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 85cm*40cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 85*40
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.4 × 0.85 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.68
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 85cm*40cm*200cm » (code PL 85*40), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 88cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 88*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.88 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.6688
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 88cm*38cm*200cm » (code PL 88*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*10cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*10
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.1 × 0.9 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.18
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*10cm*200cm » (code PL 90*10), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*12cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*12
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.12 × 0.9 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.216
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*12cm*200cm » (code PL 90*12), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*16cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*16
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.16 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.288
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*16cm*200cm » (code PL 90*16), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*18cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*18
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.18 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.324
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*18cm*200cm » (code PL 90*18), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*20cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*20
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.36
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*20cm*200cm » (code PL 90*20), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*22cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*22
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.22 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.396
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*22cm*200cm » (code PL 90*22), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*24cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*24
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.432
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*24cm*200cm » (code PL 90*24), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*30cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*30
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.3 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.54
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*30cm*200cm » (code PL 90*30), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90*32*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*32
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.32 × 0.9 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.576
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90*32*200cm » (code PL 90*32), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*34cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*34
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.612
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*34cm*200cm » (code PL 90*34), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*36cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*36
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.648
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*36cm*200cm » (code PL 90*36), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*38cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*38
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.38 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.684
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*38cm*200cm » (code PL 90*38), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*42cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*42
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.42 × 0.9 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.756
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*42cm*200cm » (code PL 90*42), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*44cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*44
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.44 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.792
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*44cm*200cm » (code PL 90*44), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 90cm*45cm*200cm
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PL 90*45
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.9 × 0.45 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.81
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 90cm*45cm*200cm » (code PL 90*45), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EN EPS 06CM*100CM*300CM
+- **Famille** : isolation bâtiment
+- **Code article ERP** : PLAQUE EN EPS 06CM*100CM*300CM
+- **Type de produit (déduit du code/nom)** : Plaque EPS
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 3 × 0.06 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.18
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EN EPS 06CM*100CM*300CM » (code PLAQUE EN EPS 06CM*100CM*300CM), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+

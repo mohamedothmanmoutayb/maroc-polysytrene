@@ -1301,7 +1301,7 @@
                                         <td class="text-end fw-bold text-danger">
                                             {{ number_format($cashFlowData['credit_fournisseur'], 2, ',', '.') }}
                                         </td>
-                                        <td class="text-muted small">Achats du mois non encore payés</td>
+                                        <td class="text-muted small">Dettes cumulées envers les fournisseurs (achats non payés / solde)</td>
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 30px;">

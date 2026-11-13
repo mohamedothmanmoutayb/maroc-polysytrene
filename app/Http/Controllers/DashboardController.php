@@ -259,12 +259,20 @@ class DashboardController extends Controller
 
         // 1. CRÉDIT FOURNISSEUR (Supplier Credit - Amount we owe to suppliers)
         // Get all raw material purchases that are not fully paid
-        $creditFournisseur = RawMaterialPurchase::whereBetween('purchase_date', [$periodStart, $periodEnd])
-            ->where(function ($query) {
-                $query->where('payment_status', 'pending')
-                    ->orWhere('payment_status', 'partial');
-            })
-            ->sum(DB::raw('final_amount - paid_amount'));
+        // Même règle que la liste des fournisseurs: pour chaque fournisseur, le plus grand entre
+        // les achats non réglés et le solde positif (dette). Dette cumulée, non limitée à la période.
+        $creditFournisseur = (float) DB::table('suppliers')
+            ->leftJoinSub(
+                DB::table('raw_material_purchases')
+                    ->select('supplier_id', DB::raw('SUM(final_amount - paid_amount) as unpaid'))
+                    ->where('payment_status', '!=', 'paid')
+                    ->groupBy('supplier_id'),
+                'u',
+                'u.supplier_id',
+                '=',
+                'suppliers.supplier_id'
+            )
+            ->sum(DB::raw('GREATEST(COALESCE(u.unpaid, 0), GREATEST(COALESCE(suppliers.balance, 0), 0))'));
 
         // 2. CHARGES FIXES (Fixed Expenses - All expenses + salaires employés)
         $depensesMois = $periodExpenses;

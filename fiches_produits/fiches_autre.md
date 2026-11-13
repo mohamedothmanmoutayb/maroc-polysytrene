@@ -1,0 +1,1138 @@
+# Fiches produits — autre [famille déduite du code/nom par l'analyste, non présente dans l'ERP] (54 articles)
+
+Source : ERP uniquement. « NON RENSEIGNÉ » = absent de l'ERP.
+
+## BLOC 136*120*400 2EME
+- **Famille** : autre
+- **Code article ERP** : BLOC 136*120*400 2EME
+- **Type de produit (déduit du code/nom)** : Bloc EPS
+- **Unité ERP** : bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 4 × 1.36 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 6.528
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de production (moulage/bloc) ; méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « BLOC 136*120*400 2EME » (code BLOC 136*120*400 2EME), type ERP « production », unité « bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Nomenclature : quantité de matière première très faible par rapport au volume du bloc (valeurs à vérifier ; aucune densité n'en est déduite) | Données techniques absentes de l'ERP (voir liste).
+
+## BLOC 138*120*400HD
+- **Famille** : autre
+- **Code article ERP** : BLOC 138*120*400 HD
+- **Type de produit (déduit du code/nom)** : Bloc EPS
+- **Unité ERP** : bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, HR (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 4 × 1.38 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 6.624
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de production (moulage/bloc) ; méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « BLOC 138*120*400HD » (code BLOC 138*120*400 HD), type ERP « production », unité « bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD, HR : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Nomenclature : quantité de matière première très faible par rapport au volume du bloc (valeurs à vérifier ; aucune densité n'en est déduite) | Données techniques absentes de l'ERP (voir liste).
+
+## BILLES EPS
+- **Famille** : autre
+- **Code article ERP** : EPS BILLES
+- **Type de produit (déduit du code/nom)** : Billes EPS (matière)
+- **Unité ERP** : KG
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.2 × 0.21 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.084
+- **Poids (kg)** : 1
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « BILLES EPS » (code EPS BILLES), type ERP « finale », unité « KG ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Billes EPS : matière première, pas un produit fini destiné au site ; dimensions saisies (2,00×0,20×0,21) incohérentes avec un article au kg | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 100*136*100CM
+- **Famille** : autre
+- **Code article ERP** : S.B  100*136*100
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 1.36 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.36
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 100*136*100CM » (code S.B  100*136*100), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 136cm*34cm*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B  34*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.34 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.9248
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 136cm*34cm*200cm » (code S.B  34*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 40*120*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B  40*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.4 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.96
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 40*120*200CM » (code S.B  40*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 40*136*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B  40*136
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.088
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 40*136*200cm » (code S.B  40*136), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 55*120cm*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B  55*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.55 × 1.2 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.32
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 55*120cm*200cm » (code S.B  55*120*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 60*136*100CM
+- **Famille** : autre
+- **Code article ERP** : S.B  60*136*100
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 0.6 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.816
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 60*136*100CM » (code S.B  60*136*100), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 68*136*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B  68*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.68 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.8496
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 68*136*200cm » (code S.B  68*136*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 72*75*120 CM
+- **Famille** : autre
+- **Code article ERP** : S.B  72*57*120
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.72 × 0.58 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.5011
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 72*75*120 CM » (code S.B  72*57*120), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (72×75×120 cm) ≠ champs dimensions ERP (72×58×120 cm) | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 100*120*136cm
+- **Famille** : autre
+- **Code article ERP** : S.B 100*120*136
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 1.2 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.632
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 100*120*136cm » (code S.B 100*120*136), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 100*120*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 100*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.4
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 100*120*200cm » (code S.B 100*120*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 120*136*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B 120*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 1.2 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 3.264
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 120*136*200CM » (code S.B 120*136*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 120cm*24cm*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 120*24*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.24 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.576
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 120cm*24cm*200cm » (code S.B 120*24*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 136*100*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 136*100*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.72
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 136*100*200cm » (code S.B 136*100*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 136*120*100
+- **Famille** : autre
+- **Code article ERP** : S.B 136*120*100
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 1.36 × 1.19 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.6184
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 136*120*100 » (code S.B 136*120*100), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (136×120×100 cm) ≠ champs dimensions ERP (100×136×119 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## PLAQUE EPS 20cm*136cm*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 20*136
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.544
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « PLAQUE EPS 20cm*136cm*200cm » (code S.B 20*136), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL 20*136*400 CM
+- **Famille** : autre
+- **Code article ERP** : S.B 20*136*400
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 0.2 × 4 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.088
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL 20*136*400 CM » (code S.B 20*136*400), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 24*120*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B 24*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.24 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.576
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 24*120*200CM » (code S.B 24*120*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 30*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 30*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 0.3 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.816
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 30*136*200 » (code S.B 30*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL 32*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 32*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 0.32 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.8704
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL 32*136*200 » (code S.B 32*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL36*120*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B 36*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.36 × 1.2 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.864
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL36*120*200CM » (code S.B 36*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 36*136*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B 36*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.36 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.9792
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 36*136*200CM » (code S.B 36*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 38*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 38*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.36 × 1.36 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.9792
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 38*136*200 » (code S.B 38*136*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (38×136×200 cm) ≠ champs dimensions ERP (36×136×200 cm) | Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 44*136*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 44*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.44 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.1968
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 44*136*200cm » (code S.B 44*136*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 50*136*100
+- **Famille** : autre
+- **Code article ERP** : S.B 50*100*136
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.5 × 1.34 × 1 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.67
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 50*136*100 » (code S.B 50*100*136), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (50×136×100 cm) ≠ champs dimensions ERP (50×134×100 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 55*100*136cm
+- **Famille** : autre
+- **Code article ERP** : S.B 55*100*136
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 1 × 0.55 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.748
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 55*100*136cm » (code S.B 55*100*136), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 55*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 55*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.55 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.496
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 55*136*200 » (code S.B 55*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 56*136*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 56*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.56 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.5232
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 56*136*200cm » (code S.B 56*136*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 58*120*200
+- **Famille** : autre
+- **Code article ERP** : S.B 58*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.392
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 58*120*200 » (code S.B 58*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 58*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 58*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.37 × 0.58 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.5892
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 58*136*200 » (code S.B 58*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (58×136×200 cm) ≠ champs dimensions ERP (200×137×58 cm) | Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 65*120*200
+- **Famille** : autre
+- **Code article ERP** : S.B 65*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.65 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.56
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 65*120*200 » (code S.B 65*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 65*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 65*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.65 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.768
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 65*136*200 » (code S.B 65*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 66*120*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B 66*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.66 × 1.2 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.584
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 66*120*200CM » (code S.B 66*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 68*120*200
+- **Famille** : autre
+- **Code article ERP** : S.B 68*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 1.19 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.6184
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 68*120*200 » (code S.B 68*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Dimensions du nom (68×120×200 cm) ≠ champs dimensions ERP (200×68×119 cm) | Associé simultanément aux familles HD+++, HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL 68*20*200
+- **Famille** : autre
+- **Code article ERP** : S.B 68*20*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.2 × 0.68 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.272
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL 68*20*200 » (code S.B 68*20*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 68*50*120CM
+- **Famille** : autre
+- **Code article ERP** : S.B 68*50*120
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.2 × 0.68 × 0.5 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.408
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 68*50*120CM » (code S.B 68*50*120), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL70*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 70*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 0.7 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.904
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL70*136*200 » (code S.B 70*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## Sous bloc 71cm*56cm*120cm
+- **Famille** : autre
+- **Code article ERP** : S.b 71*56*120
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.71 × 0.56 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.4771
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « Sous bloc 71cm*56cm*120cm » (code S.b 71*56*120), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 75*120*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 75*120
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 1.8
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 75*120*200cm » (code S.B 75*120), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 75*136*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B 75*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.75 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.04
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 75*136*200cm » (code S.B 75*136*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## Sous bloc 80*35*120cm
+- **Famille** : autre
+- **Code article ERP** : S.b 80*35*120
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : Sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.8 × 0.35 × 1.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.336
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « Sous bloc 80*35*120cm » (code S.b 80*35*120), type ERP « decoupage », unité « Sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 85*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 85*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD+++, HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.85 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.312
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 85*136*200 » (code S.B 85*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD+++, HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL90*120*200 CM
+- **Famille** : autre
+- **Code article ERP** : S.B 90*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 0.9 × 1.2 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.16
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL90*120*200 CM » (code S.B 90*120*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL 90*136*200
+- **Famille** : autre
+- **Code article ERP** : S.B 90*136*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1.36 × 0.9 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.448
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL 90*136*200 » (code S.B 90*136*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL 120*100*200 CM
+- **Famille** : autre
+- **Code article ERP** : S.B PL 120*100
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 1 × 1.2 × 2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 2.4
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL 120*100*200 CM » (code S.B PL 120*100), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 136*16*400cm
+- **Famille** : autre
+- **Code article ERP** : S.B PL 136*16*400
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 4 × 0.16 × 1.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.8704
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 136*16*400cm » (code S.B PL 136*16*400), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 20*120*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B PL 20*120*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.2 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.48
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 20*120*200cm » (code S.B PL 20*120*200), type ERP « decoupage », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 68*02*200CM
+- **Famille** : autre
+- **Code article ERP** : S.B PL 68*02*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 0.68 × 0.02 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.0272
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 68*02*200CM » (code S.B PL 68*02*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC PL 120*04*200
+- **Famille** : autre
+- **Code article ERP** : S.B.PL 120*04*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : sous bloc
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.2 × 0.04 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.096
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Produit issu de découpe (méthode et tolérances NON RENSEIGNÉ)
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC PL 120*04*200 » (code S.B.PL 120*04*200), type ERP « decoupage », unité « sous bloc ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SOUS BLOC 136*36*200cm
+- **Famille** : autre
+- **Code article ERP** : S.B136*36*200
+- **Type de produit (déduit du code/nom)** : Sous-bloc
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD, HR, 2EME (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : 2 × 1.36 × 0.36 m (champs ERP hauteur/largeur/profondeur)
+- **Volume unitaire (m³)** : 0.9792
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SOUS BLOC 136*36*200cm » (code S.B136*36*200), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Associé simultanément aux familles HD, HR, 2EME : la qualité/densité propre à cet article est indéterminée | Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## SAC
+- **Famille** : autre
+- **Code article ERP** : SAC
+- **Type de produit (déduit du code/nom)** : Autre
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : NON RENSEIGNÉ
+- **Volume unitaire (m³)** : NON RENSEIGNÉ
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « SAC » (code SAC), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Données techniques absentes de l'ERP (voir liste).
+
+## TRANSPORT
+- **Famille** : autre
+- **Code article ERP** : TRANSPORT
+- **Type de produit (déduit du code/nom)** : Hors produit (service)
+- **Unité ERP** : pièce
+- **Type de matière** : NON RENSEIGNÉ
+- **Densités disponibles (kg/m³)** : HD (libellés de qualité, sans valeur en kg/m³)
+- **Dimensions standard** : NON RENSEIGNÉ
+- **Volume unitaire (m³)** : NON RENSEIGNÉ
+- **Poids (kg)** : NON RENSEIGNÉ
+- **Fabrication sur mesure / découpe** : Découpe/ méthode NON RENSEIGNÉ
+- **Épaisseurs disponibles (mm)** : NON RENSEIGNÉ (l'ERP n'a pas de champ épaisseur ; les champs hauteur/largeur/profondeur sont saisis de façon incohérente)
+- **Caractéristiques techniques** : λ : NON RENSEIGNÉ ; R : NON RENSEIGNÉ ; compression : NON RENSEIGNÉ ; Euroclasse : NON RENSEIGNÉ ; absorption d'eau : NON RENSEIGNÉ ; contact alimentaire : NON RENSEIGNÉ
+- **Conditionnement** : NON RENSEIGNÉ
+- **Applications** : NON RENSEIGNÉ
+- **Délai fabrication** : NON RENSEIGNÉ
+- **Quantité minimale** : NON RENSEIGNÉ
+- **Normes** : NON RENSEIGNÉ
+- **Description factuelle** : Article « TRANSPORT » (code TRANSPORT), type ERP « finale », unité « pièce ». Aucune description commerciale n'est saisie dans l'ERP.
+- **Alertes** : Poids NON RENSEIGNÉ | Lié à la famille « MP BOX » : signification non documentée dans l'ERP | Ce n'est pas un produit PSE (service de transport) : à exclure des fiches publiques | Données techniques absentes de l'ERP (voir liste).
+
